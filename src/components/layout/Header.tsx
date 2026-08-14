@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { HeaderSelect } from './HeaderSelect'
+import { HeaderSidebar } from './HeaderSidebar'
 import Link from 'next/link'
 import { Bell, ChevronDown, Heart, User } from 'lucide-react'
 
@@ -11,13 +12,14 @@ import { Bell, ChevronDown, Heart, User } from 'lucide-react'
 export const Header = () => {
 
     const [exploreOpen, setExploreOpen] = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(false)
 
     return (
-        <header className="fixed top-2 left-0 right-0 z-20 px-10  ">
+        <header className="fixed top-2 left-0 right-0 z-50 px-10  ">
             <div className="bg-white py-3 px-5 rounded-full shadow-2xl justify-between flex gap-4 items-center ">
                 <div className="flex items-center gap-4">
                     <Image
-                        src="/logo.png"
+                        src="/layout/logo.png"
                         alt="AmbrHomes"
                         width={80}
                         sizes="(max-width: 768px) 100vw, 33vw"
@@ -64,15 +66,16 @@ export const Header = () => {
                             <Bell className="h-6 w-6 text-primary" />
                             <span className="right-1 absolute top-[-2] bg-red-400 text-white text-xs rounded-full w-2 h-2"></span>
                         </Link>
-                        <Link href="/login" className="text-primary bg-blue-100 p-[6px] rounded-3xl text-sm">
+                        <button onClick={() => setSidebarOpen(true)} className="text-primary bg-blue-100 p-[6px] rounded-3xl text-sm">
                             <User className="h-5 w-5 text-primary" />
-                        </Link>
+                        </button>
                         <Link href="/login" className="text-white text-sm flex items-center gap-1 bg-gradient-to-r from-primary to-secondary px-3 py-1.5 rounded-full">
-                            <Image width={14} height={14} src="/ai_icon.png" alt="Post Property" />  <span>Post Property</span> <span className="ml-1 bg-white text-primary py-1 rounded-4xl px-2 font-medium text-xs">Free</span>
+                            <Image width={14} height={14} src="/icon/ai_icon.png" alt="Post Property" />  <span>Post Property</span> <span className="ml-1 bg-white text-primary py-1 rounded-4xl px-2 font-medium text-xs">Free</span>
                         </Link>
                     </div>
                 </div>
             </div>
+            <HeaderSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         </header>
     )
 }

@@ -12,7 +12,7 @@ import "swiper/css/effect-fade";
 const slides = [
   {
     image:
-      "/banner.png",
+      "/layout/banner.png",
     title: "Find Your Dream Home",
     subtitle: "Explore luxury properties in the most desirable locations.",
   },

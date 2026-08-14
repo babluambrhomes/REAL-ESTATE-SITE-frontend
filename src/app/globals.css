@@ -3,6 +3,7 @@
 @theme {
   --color-primary: #2563EB;
   --color-secondary: #22BC90;
+  --color-gold: #C99732;
   --color-white: #FFFFFF;
   --color-black: #000000;
   --font-sans: var(--font-poppins), sans-serif;
@@ -11,4 +12,41 @@
 
 body {
   font-family: var(--font-poppins), sans-serif;
+}
+
+.thumbs-swiper .swiper-slide {
+  opacity: 0.55;
+}
+
+.thumbs-swiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.thumbs-swiper .swiper-slide-thumb-active > div {
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.otp-input {
+  width: 2.75rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #111827;
+  background-color: #fff;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.otp-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
 }

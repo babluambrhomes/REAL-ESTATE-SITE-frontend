@@ -13,21 +13,21 @@ const chips: Chip[] = [
   {
     title: "Buy a Home",
     subtitle: "200+ properties ready for you",
-    image: "/chip_agent.png",
+    image: "/common/chip_agent.png",
     color: "#2563EB",
     lightColor:'#D5DAFF'
   },
   {
     title: "Rent Property",
     subtitle: "Furnished & unfurnished options",
-    image: "/chip_property.png",
+    image: "/common/chip_property.png",
     color: "#22BC90",
     lightColor:'#D9FFF7'
   },
   {
     title: "New Projects",
     subtitle: "Latest launches across NCR",
-    image: "/chip_builder.png",
+    image: "/common/chip_builder.png",
     color: "#9333EA",
     lightColor:'#FEE9DC'
   },

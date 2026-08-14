@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { AgentCard } from "./AgentCard";
+import { AgentCard } from "@/components/card/AgentCard";
 
 import "swiper/css";
 

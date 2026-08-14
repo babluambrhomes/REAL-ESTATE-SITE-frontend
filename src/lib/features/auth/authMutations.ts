@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { authApi } from "./authApi";
-import { setAuth, setRequiresOtp, setOtpState, clearAuth } from "./authSlice";
-import { useAppDispatch } from "@/lib/redux/hooks";
+import { setAuth, setRequiresOtp, setOtpState, clearAuth } from "@/store/slice/authSlice";
+import { useAppDispatch } from "@/store/hooks";
 import type { AuthSuccessResponse, OtpSentResponse, ApiError } from "./types";
 import type {
   RegisterRequest,
@@ -49,8 +49,17 @@ export function useRegisterMutation() {
 
   return useMutation({
     mutationFn: (data: RegisterRequest) => authApi.register(data),
-    onSuccess: (result) => {
-      dispatch(setAuth(result.data));
+    onSuccess: (result, variables) => {
+      if (result.data === null) {
+        const purpose = variables.phone
+          ? "PHONE_VERIFICATION"
+          : "EMAIL_VERIFICATION";
+        const identifier = variables.phone || variables.email || "";
+        dispatch(setOtpState({ identifier, purpose }));
+        dispatch(setRequiresOtp(true));
+      } else {
+        dispatch(setAuth(result.data));
+      }
     },
     onError: (error) => {
       toast.error(getErrorMessage(error, "Registration failed"));

@@ -6,7 +6,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { Heading } from "./Heading";
-import { PropertyCard } from "./PropertyCard";
+import { PropertyCard } from "@/components/card/PropertyCard";
 
 import "swiper/css";
 
@@ -95,12 +95,12 @@ export const FeaturedProperties = () => {
           modules={[Autoplay]}
           loop
           speed={600}
-          spaceBetween={20}
+          spaceBetween={10}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           slidesPerView={1}
           breakpoints={{
             640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            1024: { slidesPerView: 4.2 },
           }}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;

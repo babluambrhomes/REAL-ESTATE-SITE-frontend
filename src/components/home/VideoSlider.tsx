@@ -6,7 +6,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { Heading } from "./Heading";
-import { VideoCard } from "./VideoCard";
+import { VideoCard } from "@/components/card/VideoCard";
 
 import "swiper/css";
 
