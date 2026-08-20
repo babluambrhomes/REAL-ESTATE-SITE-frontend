@@ -1,4 +1,4 @@
-import { Header } from "@/components/layout/Header";
+import { SearchHeader } from "@/components/layout/SearchHeader";
 import { SubHero } from "@/components/common/SubHero";
 import { PropertyListingsClient } from "@/app/properties/PropertyListingsClient";
 
@@ -6,7 +6,7 @@ import { PropertyListingsClient } from "@/app/properties/PropertyListingsClient"
 export default function PropertiesPage() {
   return (
     <>
-      <Header />
+      <SearchHeader />
       <SubHero
         title="Property Listing"
       />

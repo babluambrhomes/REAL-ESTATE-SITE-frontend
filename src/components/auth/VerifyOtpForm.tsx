@@ -6,22 +6,12 @@ import OtpInput from "react-otp-input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { verifyOtpSchema, type VerifyOtpForm as VerifyOtpFormType } from "@/lib/features/auth/schemas";
-import type { VerifyOtpRequest } from "@/lib/features/auth/types";
+import type { VerifyOtpRequest, VerifyOtpFormProps } from "@/types";
 import { axiosInstance } from "@/lib/axios";
 import toast from "react-hot-toast";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 
 const DEFAULT_RESEND_DELAY = 30;
-
-type VerifyOtpFormProps = {
-  identifier: string;
-  purpose: string;
-  apiUrl: string;
-  onSuccess?: () => void;
-  onResend?: () => Promise<void> | void;
-  resendDelay?: number;
-  imgUrl:string
-};
 
 function getPurposeLabel(purpose: string): string {
   switch (purpose) {

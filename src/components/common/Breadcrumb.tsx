@@ -1,15 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-
-type Crumb = {
-  label: string;
-  href?: string;
-};
-
-type BreadcrumbProps = {
-  items: Crumb[];
-  separatorIcon?: boolean;
-};
+import type { Crumb, BreadcrumbProps } from "@/types";
 
 export const Breadcrumb = ({
   items,

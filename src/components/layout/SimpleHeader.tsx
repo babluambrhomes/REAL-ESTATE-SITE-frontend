@@ -9,7 +9,7 @@ import { Bell, ChevronDown, Heart, User } from 'lucide-react'
 
 
 
-export const Header = () => {
+export const SimpleHeader = () => {
 
     const [exploreOpen, setExploreOpen] = useState(false)
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -18,15 +18,18 @@ export const Header = () => {
         <header className="fixed top-2 left-0 right-0 z-50 px-10  ">
             <div className="bg-white py-3 px-5 rounded-full shadow-2xl justify-between flex gap-4 items-center ">
                 <div className="flex items-center gap-4">
-                    <Image
+                    {/* <Image
                         src="/layout/logo.png"
                         alt="AmbrHomes"
                         width={80}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         height={50}
-                    />
-                    
-                    <HeaderSelect />
+                    /> */}
+                    Hello
+                    <div className='h-9 border-l-2 border-primary'></div>
+                    <div className='border border-gray-300 rounded-lg hover:border-gray-100'>
+                        <HeaderSelect />
+                    </div>
                 </div>
                 <div className="flex gap-6 text-sm items-center">
                     <div
@@ -69,7 +72,7 @@ export const Header = () => {
                         <button onClick={() => setSidebarOpen(true)} className="text-primary bg-blue-100 p-[6px] rounded-3xl text-sm">
                             <User className="h-5 w-5 text-primary" />
                         </button>
-                        <Link href="/login" className="text-white text-sm flex items-center gap-1 bg-gradient-to-r from-primary to-secondary px-3 py-1.5 rounded-full">
+                       <Link href="/login" className="text-white text-sm flex items-center justify-center gap-1 bg-gradient-to-r from-primary to-secondary w-[190px] px-3 py-1.5 rounded-full">
                             <Image width={14} height={14} src="/icon/ai_icon.png" alt="Post Property" />  <span>Post Property</span> <span className="ml-1 bg-white text-primary py-1 rounded-4xl px-2 font-medium text-xs">Free</span>
                         </Link>
                     </div>

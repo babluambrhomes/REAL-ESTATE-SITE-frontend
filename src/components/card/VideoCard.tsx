@@ -4,14 +4,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { MapPin, Maximize, X } from "lucide-react";
-
-type VideoCardProps = {
-  image: string;
-  title: string;
-  location: string;
-  duration?: string;
-  videoId?: string;
-};
+import type { VideoCardProps } from "@/types";
 
 export const VideoCard = ({
   image,

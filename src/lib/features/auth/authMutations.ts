@@ -3,14 +3,14 @@ import type { AxiosError } from "axios";
 import { authApi } from "./authApi";
 import { setAuth, setRequiresOtp, setOtpState, clearAuth } from "@/store/slice/authSlice";
 import { useAppDispatch } from "@/store/hooks";
-import type { AuthSuccessResponse, OtpSentResponse, ApiError } from "./types";
+import type { AuthSuccessResponse, OtpSentResponse, ApiError } from "@/types";
 import type {
   RegisterRequest,
   LoginRequest,
   VerifyOtpRequest,
   ForgotPasswordRequest,
   ResetPasswordRequest,
-} from "./types";
+} from "@/types";
 import toast from "react-hot-toast";
 
 function getErrorMessage(error: unknown, fallback: string): string {

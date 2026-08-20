@@ -1,14 +1,6 @@
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-type PaginationProps = {
-  currentPage: number;
-  totalPages: number;
-  onChange: (page: number) => void;
-  totalItems?: number;
-  perPage?: number;
-  text?: string;
-};
+import type { PaginationProps } from "@/types";
 
 const getPageWindow = (currentPage: number, totalPages: number) => {
   const pages: (number | "ellipsis")[] = [];

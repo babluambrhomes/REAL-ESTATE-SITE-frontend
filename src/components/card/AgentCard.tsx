@@ -2,15 +2,7 @@ import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import { Eye, Play, UserPlus } from "lucide-react";
 import Link from "next/link";
-
-type AgentCardProps = {
-  image: string;
-  name: string;
-  designation: string;
-  followers: number;
-  views: number;
-  videos: number;
-};
+import type { AgentCardProps } from "@/types";
 
 const Stat = ({
   Icon,

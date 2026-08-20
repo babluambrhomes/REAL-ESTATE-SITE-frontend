@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import { BlogSection } from "@/components/home/BlogSection";
 import { FeaturedProperties } from "@/components/home/FeaturedProperties";
 import { HappyClients } from "@/components/home/HappyClients";
@@ -8,17 +11,45 @@ import { SearchBox } from "@/components/home/SearchBox";
 import { TopAgents } from "@/components/home/TopAgents";
 import { VideoSlider } from "@/components/home/VideoSlider";
 import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
+import { SimpleHeader } from "@/components/layout/SimpleHeader";
+import { SearchHeader } from "@/components/layout/SearchHeader";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+  const searchBoxRef = useRef<HTMLDivElement>(null)
+  const [showSearchHeader, setShowSearchHeader] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!searchBoxRef.current) return
+      const rect = searchBoxRef.current.getBoundingClientRect()
+      setShowSearchHeader(rect.bottom <= 0)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+    
+  }, [])
+
   return (
     <>
-      <Header />
+      <div className={`transition-opacity duration-300 ${showSearchHeader ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <SimpleHeader />
+      </div>
+      <div className={`transition-opacity duration-300 ${showSearchHeader ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <SearchHeader />
+      </div>
+
       <main>
         <HeroSlider />
-        <SearchBox />
+        <SearchBox ref={searchBoxRef} />
         <HomeChip />
         <Link href='' className="w-full inline-block px-6 py-12 sm:px-10">
           <Image src="/banner/roofin-banner.png" sizes="100vw" alt="roofing-banner" width={100} height={100} className="w-full h-full object-contain" />
@@ -32,7 +63,6 @@ export default function Home() {
         <Heading
           title1="Latest"
           title2="View"
-        // subtitle="Discover our curated selection of featured properties"
         />
         <FeaturedProperties />
         <Heading
@@ -60,6 +90,7 @@ export default function Home() {
         />
         <BlogSection />
       </main>
+      
       <Footer />
     </>
   );

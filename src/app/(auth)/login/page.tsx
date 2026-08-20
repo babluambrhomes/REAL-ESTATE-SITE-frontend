@@ -24,9 +24,8 @@ import { GoogleAuth } from "@/components/auth/GoogleAuth";
 import { WhatsAppButton } from "@/components/auth/WhatsAppButton";
 import { VerifyOtpForm } from "@/components/auth/VerifyOtpForm";
 import { ChangePasswordSuccess } from "@/components/auth/ChangePasswordSuccess";
+import type { LoginMode } from "@/types";
 
-
-type LoginMode = "email" | "phone";
 
 const COUNTRY_CODES = ["+91", "+1", "+44", "+971", "+65", "+61", "+49", "+33"];
 

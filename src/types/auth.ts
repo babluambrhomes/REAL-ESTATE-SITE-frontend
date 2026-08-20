@@ -128,3 +128,20 @@ export interface ApiError {
   success: false;
   code?: string;
 }
+
+export type LoginMode = "email" | "phone";
+export type RegisterMode = "email" | "phone";
+
+export interface GoogleAuthProps {
+  AuthType: "LOGIN" | "REGISTER";
+}
+
+export interface VerifyOtpFormProps {
+  identifier: string;
+  purpose: string;
+  apiUrl: string;
+  onSuccess?: () => void;
+  onResend?: () => Promise<void> | void;
+  resendDelay?: number;
+  imgUrl: string;
+}

@@ -1,11 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-
-type BlogCardProps = {
-  image: string;
-  date: string;
-  title: string;
-};
+import type { BlogCardProps } from "@/types";
 
 export const BlogCard = ({ image, date, title }: BlogCardProps) => {
   return (

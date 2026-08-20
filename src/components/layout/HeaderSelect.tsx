@@ -6,19 +6,20 @@ import Select, {
     type GroupBase,
     type ValueContainerProps,
 } from 'react-select';
-
-type OptionType = { value: string; label: string };
+import type { OptionType } from '@/types';
 
 const selectStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
     control: (base, state) => ({
         ...base,
         minHeight: '2.2rem',
+        color:'red',
         width: '100%',
         maxWidth: '200px',
         backgroundColor: 'transparent',
         borderRadius: '10px',
-        boxShadow: state.isFocused ? '0 0 0 2px #2563EB' : 'none',
+        boxShadow: 'transparent',
         cursor: 'pointer',
+        borderColor:'transparent',
         '&:hover': { borderColor: 'transparent' },
     }),
     valueContainer: () => ({}),
@@ -48,17 +49,13 @@ const selectStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
     option: (base, state) => ({
         ...base,
         borderRadius: '0.5rem',
-        padding: '0.5rem 0.75rem',
+        padding: '0.3rem 0.75rem',
         cursor: 'pointer',
         fontSize: '0.875rem',
         fontWeight: 500,
-        backgroundColor: state.isSelected
-            ? '#2563EB'
-            : state.isFocused
-                ? 'rgba(37, 99, 235, 0.1)'
-                : 'transparent',
-        color: state.isSelected ? '#FFFFFF' : '#111827',
-        '&:active': { backgroundColor: 'rgba(37, 99, 235, 0.2)' },
+        backgroundColor:'transparent',
+        color: '111827',
+        '&:hover':{backgroundColor: 'rgba(37, 99, 235, 0.2)'}
     }),
     indicatorSeparator: () => ({ display: 'none' }),
     dropdownIndicator: (base, state) => ({
@@ -107,8 +104,7 @@ export const HeaderSelect = () => {
 
     
     return (
-       <div className="pl-4 border-l-2 border-primary ">
-                    <Select
+        <Select
                         defaultValue={selectedOption}
                         onChange={setSelectedOption}
                         options={options}
@@ -117,6 +113,5 @@ export const HeaderSelect = () => {
                         placeholder="Select city..."
                         isSearchable={false}
                     />
-                </div>
     )
 }

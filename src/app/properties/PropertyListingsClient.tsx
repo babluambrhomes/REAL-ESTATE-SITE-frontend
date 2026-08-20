@@ -10,8 +10,9 @@ import { PropertyCard } from "@/components/card/PropertyCard";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { cn } from "@/lib/utils";
 import { Pagination } from "@/components/common/Pagination";
-
-type OptionType = { value: string; label: string };
+import ViewMap from "@/components/common/ViewMap";
+import type { OptionType } from "@/types";
+import { properties } from "@/data/properties";
 
 const sortOptions: OptionType[] = [
   { value: "newest", label: "Newest First" },
@@ -91,203 +92,7 @@ const selectStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
   indicatorSeparator: () => ({ display: "none" }),
 };
 
-type Property = {
-  image: string;
-  verifiedText: string;
-  chips: string[];
-  title: string;
-  phone: string;
-  location: string;
-  price: string;
-  originalPrice: string;
-  priceValue: number;
-  city: string;
-  type: string;
-  beds: string;
-};
 
-const properties: Property[] = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["3, 2 BHK", "2 Bath"],
-    title: "Luxury 3BHK in Sector 150",
-    phone: "+91 98765 43210",
-    location: "Sector 150, Noida",
-    price: "₹1.25 Cr",
-    originalPrice: "₹1.35 Cr",
-    priceValue: 125,
-    city: "Noida",
-    type: "Apartment",
-    beds: "3",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["2 BHK", "2 Bath"],
-    title: "Modern 2BHK Apartment",
-    phone: "+91 98765 43210",
-    location: "Golf Course Extension, Gurgaon",
-    price: "₹85 L",
-    originalPrice: "₹95 L",
-    priceValue: 85,
-    city: "Gurgaon",
-    type: "Apartment",
-    beds: "2",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["4 BHK", "3 Bath"],
-    title: "Premium Villa with Garden",
-    phone: "+91 98765 43210",
-    location: "Greater Noida West",
-    price: "₹2.4 Cr",
-    originalPrice: "₹2.8 Cr",
-    priceValue: 240,
-    city: "Greater Noida",
-    type: "Villa",
-    beds: "4",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["3 BHK", "2 Bath"],
-    title: "Skyline 3BHK High-Rise",
-    phone: "+91 98765 43210",
-    location: "Indirapuram, Ghaziabad",
-    price: "₹1.1 Cr",
-    originalPrice: "₹1.3 Cr",
-    priceValue: 110,
-    city: "Ghaziabad",
-    type: "Apartment",
-    beds: "3",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["2 BHK", "1 Bath"],
-    title: "Cozy 2BHK Near Metro",
-    phone: "+91 98765 43210",
-    location: "Vaishali, Ghaziabad",
-    price: "₹65 L",
-    originalPrice: "₹72 L",
-    priceValue: 65,
-    city: "Ghaziabad",
-    type: "Apartment",
-    beds: "2",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600584524347-0d93d2dc85c9?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["5 BHK", "4 Bath"],
-    title: "Grand Villa with Pool",
-    phone: "+91 98765 43210",
-    location: "DLF Phase 5, Gurgaon",
-    price: "₹3.2 Cr",
-    originalPrice: "₹3.8 Cr",
-    priceValue: 320,
-    city: "Gurgaon",
-    type: "Villa",
-    beds: "5+",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600047509352-9439a4b8d9d0?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "New Launch",
-    chips: ["1 BHK", "1 Bath"],
-    title: "Affordable 1BHK in Sector 62",
-    phone: "+91 98765 43210",
-    location: "Sector 62, Noida",
-    price: "₹45 L",
-    originalPrice: "₹50 L",
-    priceValue: 45,
-    city: "Noida",
-    type: "Apartment",
-    beds: "1",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["3 BHK", "2 Bath"],
-    title: "Builder Floor in Safdarjung",
-    phone: "+91 98765 43210",
-    location: "Safdarjung, Delhi",
-    price: "₹1.75 Cr",
-    originalPrice: "₹1.9 Cr",
-    priceValue: 175,
-    city: "Delhi",
-    type: "Builder Floor",
-    beds: "3",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600585144340-9f7a7c0b8c2a?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["Plot", "200 Sq.Yd"],
-    title: "Residential Plot in Sector 150",
-    phone: "+91 98765 43210",
-    location: "Sector 150, Noida",
-    price: "₹90 L",
-    originalPrice: "₹1 Cr",
-    priceValue: 90,
-    city: "Noida",
-    type: "Plot",
-    beds: "-",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "New Launch",
-    chips: ["5 BHK", "4 Bath"],
-    title: "Farm Villa with Lawn",
-    phone: "+91 98765 43210",
-    location: "Greater Noida",
-    price: "₹2.8 Cr",
-    originalPrice: "₹3.2 Cr",
-    priceValue: 280,
-    city: "Greater Noida",
-    type: "Villa",
-    beds: "5+",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "Verified Deal",
-    chips: ["4 BHK", "4 Bath"],
-    title: "Skyline Penthouse",
-    phone: "+91 98765 43210",
-    location: "Golf Course Road, Gurgaon",
-    price: "₹3.6 Cr",
-    originalPrice: "₹4 Cr",
-    priceValue: 360,
-    city: "Gurgaon",
-    type: "Apartment",
-    beds: "4",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
-    verifiedText: "New Launch",
-    chips: ["1 BHK", "1 Bath"],
-    title: "Studio Apartment in DLF",
-    phone: "+91 98765 43210",
-    location: "DLF Phase 1, Gurgaon",
-    price: "₹58 L",
-    originalPrice: "₹64 L",
-    priceValue: 58,
-    city: "Gurgaon",
-    type: "Apartment",
-    beds: "1",
-  },
-];
 
 const PER_PAGE = 9;
 
@@ -369,7 +174,7 @@ export const PropertyListingsClient = () => {
             <div className="mb-4">
               <div
                 className={cn(
-                  "grid gap-6",
+                  "grid gap-3",
                   view === "grid"
                     ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3"
                     : "grid-cols-1"
@@ -381,6 +186,11 @@ export const PropertyListingsClient = () => {
                     {...property}
                     layout={view === "grid" ? "vertical" : "horizontal"}
                   />
+                  //  <PropertyCard
+                  //   key={property.title}
+                  //   {...property}
+                  //   layout='mapcard'
+                  // />
                 ))}
               </div>
 
@@ -389,7 +199,7 @@ export const PropertyListingsClient = () => {
           ) }
         </div>
         <div>
-
+        <ViewMap height="500px" properties={properties} />
         </div>
         </div>
          <Pagination

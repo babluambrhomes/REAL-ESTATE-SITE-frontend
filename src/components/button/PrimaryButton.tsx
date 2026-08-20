@@ -1,10 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-
-type PrimaryButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  pending?: boolean;
-  pendingLabel?: string;
-};
+import type { PrimaryButtonProps } from "@/types";
 
 export function PrimaryButton({
   pending = false,

@@ -2,10 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import toast from "react-hot-toast";
-
-interface GoogleAuthProps {
-  AuthType: "LOGIN" | "REGISTER";
-}
+import type { GoogleAuthProps } from "@/types";
 
 export function GoogleAuth({ AuthType }: GoogleAuthProps) {
   const handleGoogleRegister = () => {

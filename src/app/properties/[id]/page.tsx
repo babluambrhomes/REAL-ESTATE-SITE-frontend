@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/layout/Header";
+import { SimpleHeader as Header } from "@/components/layout/SimpleHeader";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { cn } from "@/lib/utils";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
@@ -37,34 +37,40 @@ import {
   Zap,
   MessageSquare,
   Phone,
+  Star,
+  UserRound,
+  ThumbsUp,
+  ThumbsDown,
+  ArrowBigDown,
+  ArrowBigUp,
+  CirclePlus,
+  ScanSearch,
 } from "lucide-react";
 import Image from "next/image";
-import MapComponent from "@/components/common/MapCard";
+import ViewMap from "@/components/common/ViewMap";
+import Select from "react-select";
+import { properties } from "@/data/properties";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
-const property = {
-  image:
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-  verifiedText: "Verified Deal",
-  chips: ["3, 2 BHK", "2 Bath"],
-  title: "Luxury 3BHK in Sector 150",
-  phone: "+91 98765 43210",
-  location: "Sector 150, Noida",
-  price: "₹1.25 Cr",
-  originalPrice: "₹1.35 Cr",
-};
-
-const gallery = [
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80",
+const countryCodeOptions = [
+  { value: "+91", label: "IND (+91)" },
+  { value: "+1", label: "US (+1)" },
+  { value: "+44", label: "UK (+44)" },
+  { value: "+971", label: "UAE (+971)" },
+  { value: "+61", label: "AUS (+61)" },
 ];
+
+const property = properties[0];
+
+const gallery = property.images;
 
 const faqs = [
   {
@@ -89,41 +95,61 @@ const faqs = [
   },
 ];
 
-const suggestedProperties = [
+const reviews = [
   {
-    image: gallery[1],
-    name: "The Terraces at Max Estate",
-    location: "Sector 150, Noida",
-    bhk: ["3 BHK", "4 BHK"],
-    price: "₹1.25 Cr",
-    originalPrice: "₹1.35 Cr",
+    name: "Ritik Singh",
+    rating: 5,
+    date: "10 Jul 2026",
+    time: "01:10 AM",
+    review:
+      "The property is really nice. I'm staying here now, and my experience has been great. The rooms are clean, the surroundings are peaceful, and everything is well maintained.",
   },
   {
-    image: gallery[2],
-    name: "Skyline Residency",
-    location: "Sector 120, Noida",
-    bhk: ["4 BHK", "3 BHK"],
-    price: "₹1.85 Cr",
-    originalPrice: "₹2.00 Cr",
+    name: "Aman Verma",
+    rating: 4,
+    date: "02 Jul 2026",
+    time: "06:45 PM",
+    review:
+      "Great location and value for money. The society is well maintained and the amenities are exactly as promised. Highly recommended for families.",
   },
   {
-    image: gallery[3],
-    name: "Green Valley Heights",
-    location: "Sector 128, Noida",
-    bhk: ["3 BHK", "4 BHK"],
-    price: "₹95 L",
-    originalPrice: "₹1.05 Cr",
+    name: "Priya Sharma",
+    rating: 5,
+    date: "28 Jun 2026",
+    time: "11:30 AM",
+    review:
+      "Excellent property with a peaceful environment. The neighbours are friendly and the security is top notch. Definitely worth the investment.",
+  },
+  {
+    name: "Mohit Gupta",
+    rating: 3,
+    date: "15 Jun 2026",
+    time: "09:00 PM",
+    review:
+      "Decent property overall. The interiors are good but the maintenance could be improved. Location advantages make up for the minor issues.",
   },
 ];
+
+const avgRating = (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
+
+const ratingDistribution = [5, 4, 3, 2, 1].map((star) => {
+  const count = reviews.filter((r) => r.rating === star).length;
+  return {
+    star,
+    percentage: Math.round((count / reviews.length) * 100),
+  };
+});
 
 export default function PropertyDetailsPage() {
   const [liked, setLiked] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-  const { verifiedText, chips, title, phone, location, price, originalPrice } = property;
+  const { price, originalPrice, title, chips } = property;
   const [currentSlide, setCurrentSlide] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [showAboutMore, setShowAboutMore] = useState(false)
   const [openFaq, setOpenFaq] = useState(0);
+  const [enquiryType, setEnquiryType] = useState("Individual");
+  const [countryCode, setCountryCode] = useState<{ value: string; label: string } | null>(countryCodeOptions[0]);
 
 
   const tocItems = [
@@ -383,7 +409,7 @@ export default function PropertyDetailsPage() {
 
           <div className="flex gap-4">
             <div className="flex w-full shrink-0 flex-col overflow-hidden lg:w-[60%]">
-              <div className="relative h-[70vh] overflow-hidden rounded-3xl">
+              <div className="relative h-[90vh] overflow-hidden rounded-3xl">
                 <Swiper
                   modules={[Thumbs]}
                   thumbs={{
@@ -623,13 +649,11 @@ export default function PropertyDetailsPage() {
                 </button>
               </div>
 
-              <div className="mt-4">
-                {/* <MapComponent
-                  latitude={20.5937}
-                  longitude={78.9629}
-                  zoom={5}
-                  className="h-[600px]"
-                /> */}
+              <div className="mt-4 p-3 border border-red-400 rounded-xl">
+                <ViewMap
+                  height="250px"
+                  properties={properties}
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
@@ -638,8 +662,6 @@ export default function PropertyDetailsPage() {
                 <button className="border relative overflow-hidden text-primary flex justify-center items-center gap-2 border-primary shadow-sm  p-3 rounded-lg"><Image src='/icon/schedule.png' width={25} height={25} alt="" />  <span className="text-lg font-medium">Schedule Vist</span></button>
 
                 <button className="border relative overflow-hidden text-secondary flex justify-center items-center gap-2 border-secondary shadow-sm  p-3 rounded-lg"><Image src='/icon/whatsapp.png' width={25} height={25} alt="" />  <span className="text-lg font-medium">WhatsApp</span></button>
-
-
               </div>
 
 
@@ -801,6 +823,58 @@ export default function PropertyDetailsPage() {
         </div>
 
         <div className="border border-gray-400 w-full" />
+
+        <div className="py-10">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="max-w-3xl border-l-2 border-secondary pl-2">
+              <h2 className="flex gap-1  text-lg font-semibold text-primary uppercase ">
+                Floor Plan
+              </h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+            <div className="flex justify-center md:justify-start">
+              <div className="relative w-full rounded-xl flex justify-center items-center overflow-hidden border border-gray-200 ">
+                <Image src='/common/floor_plan.png' width={300} height={300} alt="floor_plan" className="object-cover" />
+              </div>
+            </div>
+            <div className="flex flex-col justify-start">
+              <h2 className="text-lg font-bold text-gray-900 mb-1">3 BHK - 1350 sq.ft.</h2>
+              <p className="text-sm text-gray-500 mb-4 leading-relaxed">Smartly designed layout with spacious rooms and efficient space utilization.</p>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <span className="relative flex items-center justify-center w-3 h-3 rounded-full bg-gray-500">
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                  </span>
+                  1 Living & Dining
+                </li>
+                <li className="flex items-center gap-2 text-sm text-gray-700">
+                  <span className="relative flex items-center justify-center w-3 h-3 rounded-full bg-gray-500">
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                  </span>
+                  1 Modular Kitchen
+                </li>
+              </ul>
+            </div>
+            <div className=" bg-[#F4F7FC] p-4  rounded-md">
+              <div className="relative overflow-hidden  flex justify-center items-center ">
+                <Image src='/common/floor_plan.png' width={200} height={200} alt="floor_plan" className="object-cover" />
+              </div>
+              <div className="w-full pt-10  grid grid-cols-2 gap-4 divide-x divide-gray-300">
+                <div className="">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">3D Walkthrough</h3>
+                  <p className="text-xs text-gray-500 mb-3">Experience the property virtually before you visit.</p>
+                </div>
+                <div className="flex justify-between items-center w-full">
+                  <button className="inline-flex items-center gap-3 px-4 py-2 text-xs font-semibold text-primary border border-primary rounded-md ">
+                  <ScanSearch className="w-5 h-5" />
+                  <span className="font-normal">View 3D Tour</span>
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="py-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -970,14 +1044,220 @@ export default function PropertyDetailsPage() {
         <div className="py-10">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="max-w-3xl border-l-2 border-secondary pl-2">
-              <h2 className="flex gap-1 text-lg font-semibold text-primary uppercase ">
+              <h2 className="flex gap-1 text-lg font-semibold text-primary uppercase">
                 Price Trends
               </h2>
-
             </div>
-
           </div>
 
+
+
+          <div className="mt-6">
+            <p className="pb-6 text-[12px] text-gray-500">The graph shows the quarterly average rates of properties. </p>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-base font-semibold text-gray-800">AVG. PROPERTY RATE</h3>
+              </div>
+              <div className="w-44">
+                <Select
+                  options={[
+                    { value: "5years", label: "Last 5 Years" },
+                    { value: "2years", label: "Last 2 Years" },
+                    { value: "1year", label: "Last 1 Year" },
+                  ]}
+                  defaultValue={{ value: "5years", label: "Last 5 Years" }}
+                  className="text-xs"
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      border: "none",
+                      boxShadow: "none",
+                      background: "transparent",
+                    }),
+                    dropdownIndicator: (base) => ({
+                      ...base,
+                      padding: 0,
+                    }),
+                    option: (base) => ({
+                      ...base,
+                      fontSize: "12px",
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      fontSize: "12px",
+                    }),
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="w-full h-[400px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={[
+                    { year: "2021", sec103: 32000, sec87: 28000 },
+                    { year: "2022", sec103: 38000, sec87: 35000 },
+                    { year: "2023", sec103: 44000, sec87: 42000 },
+                    { year: "2024", sec103: 52000, sec87: 48000 },
+                    { year: "2025", sec103: 58000, sec87: 54000 },
+                    { year: "2026", sec103: 64000, sec87: 60000 },
+                  ]}
+                  margin={{ top: 10, right: 30, left: 10, bottom: 0 }}
+                >
+                  <defs>
+                    <linearGradient id="gradientSec103" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#2563EB" stopOpacity={0.3} />
+                      <stop offset="100%" stopColor="#2563EB" stopOpacity={0.02} />
+                    </linearGradient>
+                    <linearGradient id="gradientSec87" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#22BC90" stopOpacity={0.3} />
+                      <stop offset="100%" stopColor="#22BC90" stopOpacity={0.02} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis
+                    dataKey="year"
+                    tick={{ fontSize: 12, fill: "#6b7280" }}
+                    axisLine={{ stroke: "#d1d5db" }}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    tick={{ fontSize: 12, fill: "#6b7280" }}
+                    axisLine={{ stroke: "#d1d5db" }}
+                    tickLine={false}
+                    tickFormatter={(value) => `₹${value / 1000}K`}
+                    domain={[0, 68000]}
+                  />
+                  <Tooltip
+                    content={({ active, payload, label }) => {
+                      if (!active || !payload?.length) return null;
+                      return (
+                        <div className="bg-white rounded-lg border border-gray-200 shadow-lg p-3 text-xs">
+                          <p className="font-semibold text-gray-700 mb-2">{label}</p>
+                          {payload.map((entry) => (
+                            <div key={String(entry.dataKey)} className="flex items-center gap-2 mb-1">
+                              <span
+                                className="w-2.5 h-2.5 rounded-full"
+                                style={{ backgroundColor: entry.color }}
+                              />
+                              <span className="text-gray-600">
+                                {entry.dataKey === "sec103" ? "SEC 103, Noida" : "SEC 87, Noida"}
+                              </span>
+                              <span className="font-semibold text-gray-800 ml-auto">
+                                ₹{Number(entry.value).toLocaleString()}/ sqft
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    }}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="sec103"
+                    stroke="#22BC90"
+                    strokeWidth={2.5}
+                    fill="url(#gradientSec103)"
+                    // dot={{ r: 4, fill: "#6366f1" }}
+                    activeDot={{ r: 6 }}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="sec87"
+                    stroke="#2563EB"
+                    strokeWidth={2.5}
+                    fill="url(#gradientSec87)"
+                    // dot={{ r: 4, fill: "#f59e0b" }}
+                    activeDot={{ r: 6 }}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center py-4">
+            <h3 className="text-base uppercase font-medium">currently comparing</h3>
+            <div className="flex items-center justify-center gap-3">
+              <button className="flex justify-center gap-1 items-center text-primary">
+                <CirclePlus className="w-4 h-4" />
+                <span className="text-sm">
+                  Compare with other Locailty
+                </span>
+              </button>
+              <span className="h-5 bg-gray-400 w-[1px]" />
+              <button className="flex justify-center gap-1 items-center text-primary">
+                <CirclePlus className="w-4 h-4" />
+                <span className="text-sm">
+                  Compare with other Societies
+                </span>
+              </button>
+            </div>
+          </div>
+
+
+          <div className="overflow-hidden mt-4 md:rounded-2xl border border-gray-300">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="text-left py-3 px-4 font-semibold text-gray-700 border border-gray-300">With Locality</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700 border border-gray-300">Current Price</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700 border border-gray-300">Last 1 Year</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700 border border-gray-300">Last 2 Years</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-700 border border-gray-300">Last 5 Years</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="py-3 px-4 font-medium text-gray-700 border border-gray-300">Sec 87 Noida</td>
+                    <td className="text-center py-3 px-4 border border-gray-300">₹ 11,850/Sqft</td>
+                    <td className="text-center py-3 px-4 border border-gray-300">
+                      <span className="text-red-600 font-semibold inline-flex items-center gap-1"><ArrowBigDown className="w-4 h-4" /> 4.4%</span>
+                    </td>
+                    <td className="text-center py-3 px-4 border border-gray-300">
+                      <span className="text-green-600 font-semibold inline-flex items-center gap-1"><ArrowBigUp className="w-4 h-4" /> 89.6%</span>
+                    </td>
+                    <td className="text-center py-3 px-4 border border-gray-300">
+                      <span className="text-green-600 font-semibold inline-flex items-center gap-1"><ArrowBigUp className="w-4 h-4" /> 130.1%</span>
+                    </td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="py-3 px-4 font-medium text-gray-700 border border-gray-300">Sector 137 Noida</td>
+                    <td className="text-center py-3 px-4 border border-gray-300">₹ 10,900/Sqft</td>
+                    <td className="text-center py-3 px-4 border border-gray-300">
+                      <span className="text-green-600 font-semibold inline-flex items-center gap-1"><ArrowBigUp className="w-4 h-4" /> 10.1%</span>
+                    </td>
+                    <td className="text-center py-3 px-4 border border-gray-300">
+                      <span className="text-green-600 font-semibold inline-flex items-center gap-1"><ArrowBigUp className="w-4 h-4" /> 94.6%</span>
+                    </td>
+                    <td className="text-center py-3 px-4 border border-gray-300">
+                      <span className="text-green-600 font-semibold inline-flex items-center gap-1"><ArrowBigUp className="w-4 h-4" /> 134.4%</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="flex mt-2 flex-wrap justify-between items-center mt-4 gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-500 font-medium">Is this helpful?</span>
+              <div className="flex items-center gap-2">
+                <button className="inline-flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium ">
+                  <ThumbsUp className="w-3.5 h-3.5" />
+                  Yes
+                </button>
+                <button className="inline-flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium    ">
+                  <ThumbsDown className="w-3.5 h-3.5" />
+                  No
+                </button>
+              </div>
+            </div>
+            <Link href="/" className="inline-flex px-3 py-1.5 rounded-sm  items-center gap-1.5 text-[12px] font-medium text-primary border border-primary">
+              Click for More Price Details
+
+            </Link>
+          </div>
           <div className="mt-6 p-6 gap-5 bg-center bg-cover rounded-md" style={{
             backgroundImage: "url('/banner/price_trends.png')",
           }}>
@@ -1010,45 +1290,195 @@ export default function PropertyDetailsPage() {
           </div>
 
           <div className="mt-6 p-6 gap-5 border border-gray-300 rounded-md" >
-            <div className="grid grid-3 grid-cols-4 divide-x">
-              <div>
-                <Image src='/icon/user_picture.png' alt='' width={180} height={200} />
-                <span>Properties Listed 35</span>
-              </div>
-              <div className="col-span-2">
-                <div>
-                  <div>
-                    <h1>Jitendera Singh</h1>
-                    <span><CheckCheck /> <small>Verified</small></span>
-                  </div>
-                  <p>Director Sales</p>
+            <div className="grid grid-cols-4 divide-x divide-gray-200">
+              <div className="flex flex-col items-center gap-3 pr-6">
+                <div className="overflow-hidden ">
+                  <Image src='/icon/user_picture.png' alt='' width={180} height={200} />
                 </div>
-                <div>
+                <span className=" px-3 py-1 text-base font-semibold text-primary">Properties Listed 35</span>
+              </div>
+              <div className="col-span-2 flex flex-col gap-4 pl-6">
+                <div className=" gap-4">
+                  <div className="flex gap-2 items-center">
+                    <h1 className="bg-gradient-to-b from-primary to-secondary bg-clip-text text-2xl font-bold text-transparent">
+                      Jitendera Singh
+                    </h1>
+                    <span className=" inline-flex items-center gap-1 rounded-full bg-secondary/10 px-2 py-0.5 text-[10px] font-semibold text-secondary">
+                      <CheckCheck className="h-4 w-4" /> Verified
+                    </span>
+                  </div>
+                  <p className="text-base font-medium text-gray-500">Director Sales</p>
+                </div>
+                <div className="pt-5">
                   <div>
-                    <b>Localities</b>
-                    <p>Localities:
-                      Sector 128 Noida, Sector 120 Noida, Sector 119 Noida</p>
+                    <b className="text-sm font-semibold text-gray-900">Localities</b>
+                    <p className="text-xs leading-relaxed text-gray-700">
+                      Deals in all exclusive properties across Noida.
+                    </p>
                   </div>
                   <div>
-                    <b>Localities</b>
-                    <p>Localities:
-                      Sector 128 Noida, Sector 120 Noida, Sector 119 Noida</p>
+                    <b className="text-sm font-semibold text-gray-900">About Terraces</b>
+                    <p className="text-xs leading-relaxed text-gray-700">
+                      Deals in all exclusive properties across Noida.
+                    </p>
                   </div>
                   <div>
-                    <b>Localities</b>
-                    <p>Localities:
-                      Sector 128 Noida, Sector 120 Noida, Sector 119 Noida</p>
+                    <b className="text-sm font-semibold text-gray-900">Address</b>
+                    <p className="text-xs leading-relaxed text-gray-700">
+                      401, RG Residency, Noida Sec-120, Greater Noida
+                    </p>
                   </div>
+                </div>
+              </div>
 
+              <div className="flex flex-col pl-5">
+                <h3 className="text-base font-semibold text-primary">Send Enquiry</h3>
+                <div className="mt-2 flex flex-col gap-1.5">
+                  <div>
+                    <div className="mt-1 text-sm flex items-center gap-4">
+                      You are
+                      {["Individual", "Dealer"].map((type) => (
+                        <div key={type} className="flex justify-center items-center">
+                          <input
+                            type="radio"
+                            name="enquiryType"
+                            value={type}
+                            id={type}
+                            checked={enquiryType === type}
+                            onChange={() => setEnquiryType(type)}
+                            className="h-3.5 w-3.5 accent-primary"
+                          />
+                          <label
+                            htmlFor={type}
+                            className={`flex flex-1 cursor-pointer items-center justify-center gap-2 px-1 py-1.5 text-xs font-medium transition-colors `}
+                          >
+
+                            {type}
+                          </label>
+                        </div>
+
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-800 outline-none transition-colors placeholder:text-gray-400 focus:border-primary"
+                    />
+                  </div>
+                  <div>
+
+                    <div className="mt-1 flex rounded-md border border-gray-300 transition-colors focus-within:border-primary">
+                      <Select
+                        instanceId="country-code"
+                        options={countryCodeOptions}
+                        value={countryCode}
+                        onChange={(option) => setCountryCode(option)}
+                        isSearchable={false}
+                        menuShouldBlockScroll={false}
+                        className="w-[130px] shrink-0 border-r border-gray-300"
+                        styles={{
+                          control: (base) => ({
+                            ...base,
+                            minHeight: "36px",
+                            height: "36px",
+                            border: "none",
+                            boxShadow: "none",
+                            background: "#f3f4f6",
+                            borderRadius: "4px 0 0 4px",
+                            cursor: "pointer",
+                          }),
+                          indicatorSeparator: () => ({ display: "none" }),
+                          dropdownIndicator: (base) => ({ ...base, padding: "0 6px", color: "#4b5563" }),
+                          singleValue: (base) => ({ ...base, fontSize: "11px", fontWeight: 500, color: "#4b5563" }),
+                          menu: (base) => ({ ...base, fontSize: "11px", zIndex: 50, marginTop: "4px", width: "max-content", minWidth: "120px" }),
+                          option: (base) => ({ ...base, cursor: "pointer", padding: "6px 10px" }),
+                        }}
+                      />
+                      <input
+                        type="tel"
+                        placeholder="Phone Number"
+                        className="w-full px-3 py-2 text-sm text-gray-800 outline-none placeholder:text-gray-400"
+                      />
+                    </div>
+                  </div>
+                  <div>
+
+                    <textarea
+                      rows={3}
+                      placeholder="I am interested in this property..."
+                      className="mt-1 w-full resize-none  rounded-md border border-gray-300 px-3 py-1.5 text-sm text-gray-800 outline-none transition-colors placeholder:text-gray-400 focus:border-primary"
+                    />
+                  </div>
+                  <label className="flex items-start gap-2 text-[10px] leading-relaxed text-gray-500">
+                    <input type="checkbox" className="mt-0.5 accent-primary" />
+                    <span>
+                      I agree to the <a href="#" className="text-primary">Terms &amp; Conditions</a> and{" "}
+                      <a href="#" className="text-primary">Privacy Policy</a>
+                    </span>
+                  </label>
+                  <button
+                    type="button"
+                    className="max-w-[160px] rounded-sm bg-primary py-2 text-[12px] font-medium text-white transition-opacity hover:opacity-90"
+                  >
+                    SEND EMAILS &amp; SMS
+                  </button>
                 </div>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
 
+        <div className="border border-gray-400 w-full" />
 
+        <div className="py-10">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="max-w-3xl border-l-2 border-secondary pl-2">
+              <h2 className="flex gap-1 text-lg font-semibold text-primary uppercase ">
+                About Builder
+              </h2>
+            </div>
+          </div>
 
+          <div className="pt-8" >
+            <div className="flex gap-5 justify-start items-center divide-x divide-gray-200">
+              <div className="overflow-hidden rounded-full h-28 w-28">
+                <Image src='/icon/user_picture.png' alt='' width={180} height={200} />
+              </div>
+              <div className="h-20 w-[1px] bg-gray-300" />
+              <div className="flex-1">
+                <h2 className="text-lg font-semibold uppercase">GM Multiventures</h2>
+                <p className="text-gray-500 text-[12px]">GM Multiventures Group is one of India’s Leading real state in Greater Noida</p>
+                <div className="grid grid-cols-4 gap-8 divide-x divide-gray-300 mt-2 max-w-4xl">
+
+                  <div className="flex flex-col ">
+                    <span className="text-base font-semibold text-black">271+</span>
+                    <span className="text-[12px] font-medium text-gray-700 ">projects</span>
+                  </div>
+                  <div className="flex flex-col ">
+                    <span className="text-base font-semibold text-black">271+</span>
+                    <span className="text-[12px] font-medium text-gray-700 ">projects</span>
+                  </div>
+                  <div className="flex flex-col ">
+                    <span className="text-base font-semibold text-black">271+</span>
+                    <span className="text-[12px] font-medium text-gray-700 ">projects</span>
+                  </div>
+                  <div className="flex flex-col ">
+                    <span className="text-base font-semibold text-black">271+</span>
+                    <span className="text-[12px] font-medium text-gray-700 ">projects</span>
+                  </div>
+
+                </div>
+                <div className="flex item-center justify-end">
+                  <Link href='/' className="flex text-[12px] items-center text-primary "><ChevronLeft className="h-5 w-5" /> <span>View Builder Project details</span></Link>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
 
         <div className="py-10">
@@ -1069,55 +1499,86 @@ export default function PropertyDetailsPage() {
 
           <div className="mt-8 p-6 border rounded-md border-gray-400 ">
             <div className="flex gap-6 divide-x divide-gray-300">
-              <div className="w-[30%]" >
-                 
+              <div className="w-[30%] flex justify-center flex-col items-center " >
+                <div className="flex items-baseline mb-2 gap-1">
+                  <b className="text-4xl font-bold text-primary">{avgRating}</b>
+                  <span className="text-gray-400">/5</span>
+                </div>
+                <div className="mt-1 flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-4 w-4 ${i < Math.round(Number(avgRating)) ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
+                    />
+                  ))}
+                </div>
+                <h3 className="my-1 text-sm font-semibold uppercase text-gray-700">Good rating</h3>
+                <p className="capitalize text-[10px] text-gray-500">({reviews.length} Total Reviews)</p>
 
-              
+                <div className="mt-4  flex justify-center flex-col items-center  space-y-1 ">
+                  {ratingDistribution.map(({ star, percentage }) => (
+                    <div key={star} className="flex min-w-[400px] items-center gap-2">
+                      <div className="h-1 w-[85%] overflow-hidden rounded-full bg-gray-200">
+                        <div
+                          className="h-full rounded-full bg-primary"
+                          style={{ width: `${percentage}%` }}
+                        />
+                      </div>
+                      <span className="  text-[10px] wra font-medium text-gray-600">{star} Star</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="w-[70%]">
-                <div>
-                  <span>All Reviews (2)</span>
-                  <span>View All</span>
+                <div className="flex justify-between pb-1 text-sm font-medium text-primary">
+                  <span>All Reviews ({reviews.length})</span>
+                  <span className="cursor-pointer hover:underline">View All</span>
                 </div>
-                <div>
-  {faqs.map((faq, index) => {
-                  const isOpen = openFaq === index;
-                  return (
-                    <div key={faq.question} className="border border-gray-300 rounded-md ">
-                      <button
-                        type="button"
-                        onClick={() => setOpenFaq(isOpen ? -1 : index)}
-                        className="flex w-full items-center justify-between gap-4 p-3 text-left hover:bg-gray-50"
-                      >
-                        <h3 className={`text-base font-medium ${isOpen ? "text-primary" : "text-black"}`}>
-                          {faq.question}
-                        </h3>
-                        <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border transition-all ${isOpen ? "border-primary bg-primary text-white" : "border-gray-300 text-gray-500"}`}>
-                          <Plus className="h-4 w-4" />
-                        </span>
-                      </button>
-                      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-40 pb-4" : "max-h-0"}`}>
-                        <p className="px-4 text-sm text-gray-600">{faq.answer}</p>
+                <div className="space-y-1 overflow-x-auto max-h-56">
+                  {reviews.map((review) => (
+                    <div
+                      key={review.name}
+                      className="py-3 "
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-secondary text-white">
+                          <UserRound className="h-6 w-6" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between gap-2">
+                            <h3 className="text-base font-semibold text-gray-900">
+                              {review.name}
+                            </h3>
+                          </div>
+                          <div className="mt-0.5 flex items-center gap-2 text-[10px] text-gray-400">
+                            <div className="flex gap-0.5">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`h-3 w-3 ${i < review.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
+                                />
+                              ))}
+                            </div>
+                            <span className="h-3 w-px bg-gray-300" />
+                            <span>{review.date}</span>
+                            <span className="h-3 w-px bg-gray-300" />
+                            <span>{review.time}</span>
+                          </div>
+                          <p className="mt-2 text-[12px] leading-relaxed text-black">
+                            {review.review}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  );
-                })}
+                  ))}
                 </div>
-
-              </div>
               </div>
             </div>
-
-
           </div>
 
-        
 
-
-
-
-
+        </div>
 
 
         <div className="py-10">
@@ -1189,8 +1650,8 @@ export default function PropertyDetailsPage() {
               }}
               className="!px-1"
             >
-              {suggestedProperties.map((item) => (
-                <SwiperSlide key={item.name} className="!h-auto !py-2">
+              {properties.map((item) => (
+                <SwiperSlide key={item.title} className="!h-auto !py-2">
                   <div
                     className="group relative h-full border border-gray-200 rounded-2xl  bg-white   py-3 px-6"
                   >
@@ -1201,23 +1662,23 @@ export default function PropertyDetailsPage() {
                       <span className='absolute -left-6 -top-[1px] rotate-45 bg-white h-7 w-8'></span>
                     </div>
                     <div className="flex flex-wrap pb-1 gap-2">
-                      {item.bhk.map((bhk, index) => (
+                      {item.chips.map((chip, index) => (
                         <span
-                          key={bhk}
+                          key={chip}
                           className={`rounded-full border border-primary px-3 py-[2px] text-xs font-semibold ${index === 0 ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}
                         >
-                          {bhk}
+                          {chip}
                         </span>
                       ))}
                     </div>
                     <h3 className=" text-lg font-medium  text-gray-900 line-clamp-1">
-                      {item.name}
+                      {item.title}
                     </h3>
                     <div className="grid pt-1 grid-cols-3 gap-3">
-                      <div className="overflow-hidden rounded-lg col-span-1">
+                      <div className="overflow-hidden rounded-lg col-span-1 max-h-[100px]">
                         <Image
-                          src={item.image}
-                          alt={item.name}
+                          src={item.images[0]}
+                          alt={item.title}
                           width={400}
                           height={300}
                           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -1289,6 +1750,7 @@ export default function PropertyDetailsPage() {
 
           </div>
         </div>
+
       </section>
     </>
   );

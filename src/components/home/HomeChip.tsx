@@ -1,13 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-
-type Chip = {
-  title: string;
-  subtitle: string;
-  image: string;
-  color: string;
-  lightColor:string
-};
+import type { Chip } from "@/types";
 
 const chips: Chip[] = [
   {

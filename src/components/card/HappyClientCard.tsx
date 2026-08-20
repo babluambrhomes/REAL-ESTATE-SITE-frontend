@@ -1,13 +1,6 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
-
-type HappyClientCardProps = {
-  image: string;
-  name: string;
-  role: string;
-  rating: number;
-  review: string;
-};
+import type { HappyClientCardProps } from "@/types";
 
 const imgarr = ['/icon/happy_c_v_icon1.png','/icon/happy_c_v_icon2.png','/icon/happy_c_v_icon3.png',];
 

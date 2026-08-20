@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import {
   BedDouble,
   Building,
@@ -17,8 +17,7 @@ import Select, {
   type StylesConfig,
 } from "react-select";
 import { cn } from "@/lib/utils";
-
-type OptionType = { value: string; label: string };
+import type { OptionType } from "@/types";
 
 const tabs = [
   { label: "Buy", value: "buy", Icon: Home },
@@ -142,11 +141,11 @@ const selectStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
   }),
 };
 
-export const SearchBox = () => {
+export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
   const [activeTab, setActiveTab] = useState("buy");
 
   return (
-    <section className="relative z-10 mx-auto -mt-28 w-full max-w-5xl px-6 sm:px-10">
+    <section ref={ref} className="relative z-10 mx-auto -mt-28 w-full max-w-5xl px-6 sm:px-10">
       <div className="rounded-2xl bg-white p-5 shadow-2xl ring-1 ring-black/5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           {tabs.map((tab) => (
@@ -250,4 +249,4 @@ export const SearchBox = () => {
       </div>
     </section>
   );
-};
+});

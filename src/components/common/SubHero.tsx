@@ -1,11 +1,5 @@
 import Image from "next/image";
-
-
-
-type SubHeroProps = {
-  title: string;
-  image?: string;
-};
+import type { SubHeroProps } from "@/types";
 
 export const SubHero = ({
   title,

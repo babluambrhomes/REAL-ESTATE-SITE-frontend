@@ -12,7 +12,7 @@ import type {
   OtpSentResponse,
   MessageResponse,
   RefreshResponse,
-} from "./types";
+} from "@/types";
 
 export const authApi = {
   register: (data: RegisterRequest) =>

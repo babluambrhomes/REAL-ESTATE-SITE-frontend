@@ -1,15 +1,6 @@
 import Link from "next/link";
 import { MoveUpRight } from "lucide-react";
-
-type HeadingProps = {
-  title1?: string;
-  title2?: string;
-  title1Color?: string;
-  title2Color?: string;
-  subtitle?: string;
-  viewAllText?: string;
-  viewAllHref?: string;
-};
+import type { HeadingProps } from "@/types";
 
 export const Heading = ({
   title1,

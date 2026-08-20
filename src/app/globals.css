@@ -50,3 +50,29 @@ body {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
 }
+
+.mapcard-swiper .swiper-pagination-bullet {
+  background: rgba(156, 163, 175, 0.7);
+  width: 8px;
+  height: 8px;
+}
+
+.mapcard-swiper .swiper-pagination-bullet-active {
+  background: #ffffff;
+}
+
+/* Custom thin scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

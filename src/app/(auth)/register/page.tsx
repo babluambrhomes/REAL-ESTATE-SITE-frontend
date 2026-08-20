@@ -21,9 +21,8 @@ import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { GoogleAuth } from "@/components/auth/GoogleAuth";
 import { WhatsAppButton } from "@/components/auth/WhatsAppButton";
 import { VerifyOtpForm } from "@/components/auth/VerifyOtpForm";
+import type { RegisterMode } from "@/types";
 
-
-type RegisterMode = "email" | "phone";
 
 const COUNTRY_CODES = ["+91", "+1", "+44", "+971", "+65", "+61", "+49", "+33"];
 
