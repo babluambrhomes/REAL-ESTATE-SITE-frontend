@@ -49,6 +49,7 @@ import {
 import Image from "next/image";
 import ViewMap from "@/components/common/ViewMap";
 import Select from "react-select";
+import { chartYearSelectStyles, countryCodeSelectStyles } from "@/lib/selectStyles";
 import { properties } from "@/data/properties";
 import {
   AreaChart,
@@ -59,6 +60,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { SearchHeader } from "@/components/layout/SearchHeader";
 
 const countryCodeOptions = [
   { value: "+91", label: "IND (+91)" },
@@ -325,7 +327,7 @@ export default function PropertyDetailsPage() {
 
   return (
     <>
-      <Header />
+      <SearchHeader />
       <div className="mx-auto w-full px-6 pt-6 sm:px-10">
         <div className="h-20 w-full border-b-[1px] border-gray-300 mb-3"></div>
         <ul className="flex gap-2 sm:flex-row sm:flex-wrap sm:items-center">
@@ -1068,26 +1070,7 @@ export default function PropertyDetailsPage() {
                   ]}
                   defaultValue={{ value: "5years", label: "Last 5 Years" }}
                   className="text-xs"
-                  styles={{
-                    control: (base) => ({
-                      ...base,
-                      border: "none",
-                      boxShadow: "none",
-                      background: "transparent",
-                    }),
-                    dropdownIndicator: (base) => ({
-                      ...base,
-                      padding: 0,
-                    }),
-                    option: (base) => ({
-                      ...base,
-                      fontSize: "12px",
-                    }),
-                    menu: (base) => ({
-                      ...base,
-                      fontSize: "12px",
-                    }),
-                  }}
+                  styles={chartYearSelectStyles}
                 />
               </div>
             </div>
@@ -1379,23 +1362,7 @@ export default function PropertyDetailsPage() {
                         isSearchable={false}
                         menuShouldBlockScroll={false}
                         className="w-[130px] shrink-0 border-r border-gray-300"
-                        styles={{
-                          control: (base) => ({
-                            ...base,
-                            minHeight: "36px",
-                            height: "36px",
-                            border: "none",
-                            boxShadow: "none",
-                            background: "#f3f4f6",
-                            borderRadius: "4px 0 0 4px",
-                            cursor: "pointer",
-                          }),
-                          indicatorSeparator: () => ({ display: "none" }),
-                          dropdownIndicator: (base) => ({ ...base, padding: "0 6px", color: "#4b5563" }),
-                          singleValue: (base) => ({ ...base, fontSize: "11px", fontWeight: 500, color: "#4b5563" }),
-                          menu: (base) => ({ ...base, fontSize: "11px", zIndex: 50, marginTop: "4px", width: "max-content", minWidth: "120px" }),
-                          option: (base) => ({ ...base, cursor: "pointer", padding: "6px 10px" }),
-                        }}
+                        styles={countryCodeSelectStyles}
                       />
                       <input
                         type="tel"

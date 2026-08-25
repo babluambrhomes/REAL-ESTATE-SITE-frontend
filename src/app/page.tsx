@@ -15,10 +15,14 @@ import { SimpleHeader } from "@/components/layout/SimpleHeader";
 import { SearchHeader } from "@/components/layout/SearchHeader";
 import Image from "next/image";
 import Link from "next/link";
+import { useAppSelector } from '@/store/hooks';
+
 
 export default function Home() {
   const searchBoxRef = useRef<HTMLDivElement>(null)
   const [showSearchHeader, setShowSearchHeader] = useState(false)
+     const location_query = useAppSelector((state) => state.location.coordinates);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +41,10 @@ export default function Home() {
     }
     
   }, [])
+
+
+
+     console.log(location_query,'location_query')
 
   return (
     <>

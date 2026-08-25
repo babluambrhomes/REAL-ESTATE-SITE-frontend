@@ -1,18 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { HeaderSelect } from './HeaderSelect'
 import { HeaderSidebar } from './HeaderSidebar'
 import Link from 'next/link'
 import { Bell, ChevronDown, Heart, User } from 'lucide-react'
+import { SIMPLE_HEADER } from '@/data/headerData'
 
-
+const { exploreItems: EXPLORE_ITEMS } = SIMPLE_HEADER
 
 export const SimpleHeader = () => {
 
     const [exploreOpen, setExploreOpen] = useState(false)
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const exploreRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (!exploreOpen) return
+        const handleClickOutside = (e: MouseEvent) => {
+            if (exploreRef.current && !exploreRef.current.contains(e.target as Node)) {
+                setExploreOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [exploreOpen])
 
     return (
         <header className="fixed top-2 left-0 right-0 z-50 px-10  ">
@@ -32,8 +45,7 @@ export const SimpleHeader = () => {
                     </div>
                 </div>
                 <div className="flex gap-6 text-sm items-center">
-                    <div
-                        className="relative">
+                    <div ref={exploreRef} className="relative">
                         <div
                             className="flex items-center select-none gap-1 text-sm text-primary cursor-pointer"
                             onClick={() => setExploreOpen((prev) => !prev)}>
@@ -42,17 +54,18 @@ export const SimpleHeader = () => {
                                 className={`h-4 w-4 text-primary transition-transform duration-200 ${exploreOpen ? 'rotate-180' : ''}`} />
                         </div>
                         {exploreOpen && (
-                            <ul className="absolute right-0 mt-1 min-w-40 bg-white shadow-2xl rounded-lg py-2 px-4">
-                                <li>
-                                    <Link href="/properties">Properties</Link>
-                                </li>
-                                <li>
-                                    <Link href="/agents">Agents</Link>
-                                </li>
-                                <li>
-                                    <Link href="/about">About</Link>
-                                </li>
-                            </ul>
+                            <div className="absolute top-full left-0 mt-2 w-44 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 py-2 overflow-hidden">
+                                {EXPLORE_ITEMS.map((item) => (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        onClick={() => setExploreOpen(false)}
+                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors font-light"
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </div>
                         )}
                     </div>
                     <Link href="/contact" className="text-primary text-sm">

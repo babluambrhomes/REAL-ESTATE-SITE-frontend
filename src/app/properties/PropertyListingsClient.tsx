@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Select, {
-  type GroupBase,
-  type StylesConfig,
-} from "react-select";
+import Select from "react-select";
 import { Blocks, Logs, MapPinned } from "lucide-react";
 import { PropertyCard } from "@/components/card/PropertyCard";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
@@ -13,6 +10,7 @@ import { Pagination } from "@/components/common/Pagination";
 import ViewMap from "@/components/common/ViewMap";
 import type { OptionType } from "@/types";
 import { properties } from "@/data/properties";
+import { listingSelectStyles } from "@/lib/selectStyles";
 
 const sortOptions: OptionType[] = [
   { value: "newest", label: "Newest First" },
@@ -20,77 +18,6 @@ const sortOptions: OptionType[] = [
   { value: "price-low", label: "Price: Low to High" },
   { value: "price-high", label: "Price: High to Low" },
 ];
-
-const selectStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
-  control: (base, state) => ({
-    ...base,
-    minHeight: "2rem",
-    height: "2rem",
-    width: "100%",
-    border: state.isFocused ? "1.5px solid #2563EB" : "1px solid #E5E7EB",
-    backgroundColor: "#FFFFFF",
-    borderRadius: "5rem",
-    boxShadow: state.isFocused ? "0 0 0 3px rgba(37, 99, 235, 0.15)" : "none",
-    cursor: "pointer",
-    "&:hover": { borderColor: "#2563EB" },
-  }),
-  valueContainer: (base) => ({
-    ...base,
-    paddingLeft: "0.75rem",
-    paddingTop: "0.1rem",
-    paddingBottom: "0.1rem",
-  }),
-  placeholder: (base) => ({
-    ...base,
-    color: "#6B7280",
-    fontWeight: 500,
-    fontSize: "0.8rem",
-    whiteSpace: "nowrap",
-  }),
-  singleValue: (base) => ({
-    ...base,
-    color: "#111827",
-    fontWeight: 500,
-    fontSize: "0.8rem",
-    whiteSpace: "nowrap",
-  }),
-  dropdownIndicator: (base, state) => ({
-    ...base,
-    padding: "0 0.5rem",
-    color: state.isFocused ? "#2563EB" : "#6B7280",
-    cursor: "pointer",
-    "&:hover": { color: "#2563EB" },
-  }),
-  menu: (base) => ({
-    ...base,
-    borderRadius: "0.75rem",
-    overflow: "hidden",
-    boxShadow:
-      "0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)",
-    marginTop: "0.5rem",
-    zIndex: 40,
-  }),
-  menuList: (base) => ({
-    ...base,
-    padding: "0.25rem",
-  }),
-  option: (base, state) => ({
-    ...base,
-    borderRadius: "0.5rem",
-    padding: "0.4rem 0.6rem",
-    cursor: "pointer",
-    fontSize: "0.8rem",
-    fontWeight: 500,
-    backgroundColor: state.isSelected
-      ? "#2563EB"
-      : state.isFocused
-        ? "rgba(37, 99, 235, 0.1)"
-        : "transparent",
-    color: state.isSelected ? "#FFFFFF" : "#111827",
-    "&:active": { backgroundColor: "rgba(37, 99, 235, 0.2)" },
-  }),
-  indicatorSeparator: () => ({ display: "none" }),
-};
 
 
 
@@ -124,7 +51,7 @@ export const PropertyListingsClient = () => {
         <div className="w-44 sm:w-48">
           <Select<OptionType, false>
             options={sortOptions}
-            styles={selectStyles}
+            styles={listingSelectStyles}
             placeholder="Sort by"
             isSearchable={false}
             defaultValue={sortOptions[0]}

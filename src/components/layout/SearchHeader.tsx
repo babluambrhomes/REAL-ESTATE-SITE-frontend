@@ -6,24 +6,22 @@ import { HeaderSelect } from './HeaderSelect'
 import { HeaderSidebar } from './HeaderSidebar'
 import Link from 'next/link'
 import { Bell, Heart, Logs, User, Search, SlidersHorizontal, X, CircleX, TextAlignEnd } from 'lucide-react'
+import { LocationButton } from './LocationButton'
+import { SEARCH_HEADER } from '@/data/headerData'
 
-const LOCATIONS = ['Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Jaipur', 'Ahmedabad', 'Gurgaon', 'Noida']
-const BHK = ['1 BHK', '2 BHK', '3 BHK', '4 BHK', '5+ BHK']
-const CONSTRUCTION_STATUS = ['Under Construction', 'Ready to Move', 'New Launch', 'Resale']
-const POSTED_BY = ['Owner', 'Builder', 'Agent']
-const PROPERTY_TYPES = ['Apartment', 'Villa', 'Independent House', 'Plot', 'Commercial', 'Farmhouse']
-const AMENITIES = ['Gym', 'Swimming Pool', 'Parking', 'Garden', 'Security', 'Lift', 'Club House', 'Kids Play Area']
-
-const MENU_ITEMS = [
-    { label: 'Agent Pro', href: '#' },
-    { label: 'Builder Pro', href: '#' },
-    { label: 'For Rent', href: '#' },
-    { label: 'About Us', href: '#' },
-    { label: 'Contact Us', href: '#' },
-    { label: 'Articles & News', href: '#' },
-    { label: 'Get Help', href: '#' },
-    { label: 'Download App', href: '#' },
-]
+const {
+    locations: LOCATIONS,
+    bhkOptions: BHK,
+    constructionStatus: CONSTRUCTION_STATUS,
+    postedBy: POSTED_BY,
+    propertyTypes: PROPERTY_TYPES,
+    amenities: AMENITIES,
+    menuItems: MENU_ITEMS,
+    budgetMin: BUDGET_MIN,
+    budgetMax: BUDGET_MAX,
+    budgetStep: BUDGET_STEP,
+    searchPlaceholder: SEARCH_PLACEHOLDER,
+} = SEARCH_HEADER
 
 interface FilterState {
     locations: string[]
@@ -35,9 +33,6 @@ interface FilterState {
     budgetMin: number
     budgetMax: number
 }
-
-const BUDGET_MIN = 0
-const BUDGET_MAX = 50000000
 
 const formatBudget = (val: number) => {
     if (val >= 10000000) return `₹${(val / 10000000).toFixed(1)}Cr`
@@ -89,14 +84,6 @@ export const SearchHeader = () => {
         })
     }, [])
 
-    const activeFilterCount =
-        filters.locations.length +
-        filters.bhk.length +
-        filters.constructionStatus.length +
-        filters.postedBy.length +
-        filters.propertyTypes.length +
-        filters.amenities.length +
-        (filters.budgetMin !== BUDGET_MIN || filters.budgetMax !== BUDGET_MAX ? 1 : 0)
 
     useEffect(() => {
         if (!budgetOpen) return
@@ -161,21 +148,24 @@ export const SearchHeader = () => {
                         <div className="rounded-full border border-gray-300 flex items-center hover:border-gray-400 transition-colors">
                             <HeaderSelect />
                             <div className="pl-4 border-l border-gray-300 h-6 my-auto" />
-                            <div className="flex-1 px-1">
+                            <div className="flex-1 px-1 relative">
                                 {/* <label className=' text-[10px] text-gray-400 font-light capitalize'></label> */}
                                 <input
                                     type="text"
-                                    placeholder="Find your Dream Home"
+                                    placeholder={SEARCH_PLACEHOLDER}
+                                    onChange={(e) => console.log(e.target.value)}
                                     className="w-full outline-none text-sm capitalize text-gray-700 placeholder-gray-600 bg-transparent"
                                 />
+
                             </div>
+                            <LocationButton />
                             <div className=" border-l border-gray-300 h-6 my-auto" />
                             <button
                                 onClick={() => setBudgetOpen(prev => !prev)}
                                 className={` items-start  px-4  flex flex-col transition-colors cursor-pointer rounded-full text-gray-600 hover:text-gray-800`}
                             >
-                                <p className=' text-[10px] text-gray-400 font-light capitalize'>Budget</p>
-                                <span className='text-gray-700 text-[12px]'>Find Budget</span>
+                                <p className=' text-[10px] text-gray-400 font-light capitalize'>Filter</p>
+                                <span className='text-gray-700 text-[12px]'>Your Dream</span>
 
                             </button>
                             <button className=" bg-primary  text-white flex rounded-full px-6 py-2.5   items-center gap-2 hover:shadow-sm transition-shadow cursor-pointer ">
@@ -254,7 +244,7 @@ export const SearchHeader = () => {
                                                 type="range"
                                                 min={BUDGET_MIN}
                                                 max={BUDGET_MAX}
-                                                step={100000}
+                                                step={BUDGET_STEP}
                                                 value={filters.budgetMin}
                                                 onChange={e => {
                                                     const val = Number(e.target.value)
@@ -266,7 +256,7 @@ export const SearchHeader = () => {
                                                 type="range"
                                                 min={BUDGET_MIN}
                                                 max={BUDGET_MAX}
-                                                step={100000}
+                                                step={BUDGET_STEP}
                                                 value={filters.budgetMax}
                                                 onChange={e => {
                                                     const val = Number(e.target.value)

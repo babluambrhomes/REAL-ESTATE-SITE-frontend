@@ -23,6 +23,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { cn, formatPropertyChip } from "@/lib/utils";
 import type { Property } from "@/types";
+import Link from "next/link";
 
 export const PropertyCard = ({
   images,
@@ -214,13 +215,13 @@ export const PropertyCard = ({
                 </div>
               </div>
 
-              <button
-                type="button"
+              <Link
+                href={`/properties/${title}`}
                 className="flex items-center gap-1 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-white shadow-md transition-transform hover:scale-105"
               >
                 View Details
                 <ArrowRight className="h-3.5 w-3.5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -301,13 +302,13 @@ export const PropertyCard = ({
             {location}
           </p>
 
-          <div className="mt-3 rounded-xl border border-gray-200 p-3">
+          <div className="mt-3 rounded-xl border border-gray-200 p-2">
             <div className="grid grid-cols-3 divide-x divide-gray-200">
               {infoChips?.map((item) => (
                 <div key={item.label} className="px-1 flex text-center items-center justify-center gap-2 first:pl-0 last:pr-0">
                   <Image src={item.Icon} alt={item.label} width={20} height={20} sizes="100vw" className=" w-5 h-6" />
                   <div className="flex flex-col items-start">
-                    <p className="text-sm font-semibold text-primary">{item.value}</p>
+                    <p className="text-[12px] font-semibold  text-primary">{item.value}</p>
                     <span className="block text-[10px] text-gray-500">
                       {item.label}
                     </span>
@@ -336,13 +337,13 @@ export const PropertyCard = ({
               </div>
             </div>
 
-            <button
-              type="button"
+            <Link
+              href={`/properties/${title}`}
               className="flex items-center gap-1 rounded-lg bg-primary  px-4 py-2 text-xs font-semibold text-white shadow-md transition-transform hover:scale-105"
             >
-              View Details
+              Details
               <ArrowRight className="h-3.5 w-3.5" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -404,13 +405,13 @@ export const PropertyCard = ({
           </div>
 
           <div className="mt-2">
-            <button
-              type="button"
+            <Link
+              href={`/properties/${title}`}
               className="flex w-full justify-center items-center gap-1 rounded-sm bg-primary px-2 py-1 text-xs font-normal text-white transition-transform"
             >
               <span className="text-[10px]">View Details</span>
               <ArrowRight className="h-3.5 w-3.5" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
