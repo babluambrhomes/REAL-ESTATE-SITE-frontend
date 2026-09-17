@@ -5,7 +5,7 @@ import { Plus, UserPlus, UserCheck, Share2, Users, Ellipsis, MapPin, PhoneCall, 
 import Image from "next/image";
 import { useState } from "react";
 
-export default function BrokerProfilePage() {
+export default function PropertyOwnerProfilePage() {
 
 
   return (

@@ -5,7 +5,7 @@ import { Plus, Share2, Users, MapPin, PhoneCall, Star } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function BrokerProfilePage() {
+export default function UserProfilePage() {
 
 
   return (
