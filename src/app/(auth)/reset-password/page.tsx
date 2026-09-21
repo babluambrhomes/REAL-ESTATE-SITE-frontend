@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import Image from "next/image";
-
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -16,8 +16,16 @@ import {
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 import toast from "react-hot-toast";
 
-export default function ResetPasswordForm() {
-  
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
+  );
+}
+
+ function ResetPasswordForm() {
  
   const resetMutation = useResetPasswordMutation();
   const router = useRouter();
