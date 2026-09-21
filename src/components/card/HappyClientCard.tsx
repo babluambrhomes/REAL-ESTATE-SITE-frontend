@@ -15,7 +15,7 @@ export const HappyClientCard = ({
     <div className="flex h-full flex-col overflow-hidden relative  bg-white p-6 shadow-md ring-1 ring-black/5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl">
 
       <Image
-          src={imgarr[Math.floor(Math.random() * imgarr.length)]}
+          src={imgarr[name.length % imgarr.length]}
           alt="roofing-banner"
           width={100}
           height={100}
@@ -49,6 +49,7 @@ export const HappyClientCard = ({
         </div>
         <div>
           <h3 className="text-sm font-normal text-gray-900">{name}</h3>
+          <p className="text-xs text-gray-500">{role}</p>
            <div className="flex items-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star

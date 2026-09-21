@@ -19,7 +19,7 @@ import {
 import toast from "react-hot-toast";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { GoogleAuth } from "@/components/auth/GoogleAuth";
-import { WhatsAppButton } from "@/components/auth/WhatsAppButton";
+
 import { VerifyOtpForm } from "@/components/auth/VerifyOtpForm";
 import type { RegisterMode } from "@/types";
 
@@ -117,7 +117,7 @@ export default function RegisterForm() {
             </p>
           </div>
 
-       <WhatsAppButton />
+    
 
           {mode === "email" && (
             <form

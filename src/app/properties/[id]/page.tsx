@@ -893,7 +893,7 @@ export default function PropertyDetailsPage() {
                 {
                   keyHighlights.map((item, i) => {
                     return (
-                      <li className="flex gap-1 text-sm font-normal text-black"> <Check className="text-secondary h-5 w-5" /> {item.description}</li>
+                      <li key={i} className="flex gap-1 text-sm font-normal text-black"> <Check className="text-secondary h-5 w-5" /> {item.description}</li>
                     )
                   })
                 }

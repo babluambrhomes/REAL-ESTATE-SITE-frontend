@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { useResetPasswordMutation } from "@/lib/features/auth/authMutations";
 import {
@@ -13,11 +14,15 @@ import {
   type ResetPasswordForm as ResetPasswordFormType,
 } from "@/lib/features/auth/schemas";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
+import toast from "react-hot-toast";
 
 export default function ResetPasswordForm() {
   
  
   const resetMutation = useResetPasswordMutation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token") ?? "";
 
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -27,7 +32,19 @@ export default function ResetPasswordForm() {
   });
 
   const onSubmit = (data: ResetPasswordFormType) => {
-
+    if (!token) {
+      toast.error("Invalid or missing reset token");
+      return;
+    }
+    resetMutation.mutate(
+      { token, newPassword: data.newPassword },
+      {
+        onSuccess: () => {
+          toast.success("Password updated successfully");
+          router.push("/login");
+        },
+      }
+    );
   };
 
 

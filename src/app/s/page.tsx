@@ -764,7 +764,7 @@ export default function SellerPage() {
  <Heading title1="Top" title2="Broker Companies" />
  <div className="flex">
     {specialistAgents.map((agent) => (
-               <div className="group h-full overflow-hidden border rounded-xl border-gray-100 transition-all duration-200 hover:-translate-y-1">
+               <div key={agent.name} className="group h-full overflow-hidden border rounded-xl border-gray-100 transition-all duration-200 hover:-translate-y-1">
                   <div className="relative h-56 w-full overflow-hidden ">
                     <Image
                       src={agent.image}

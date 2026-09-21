@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { AppDispatch, RootState } from "@/store/store";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1/auth";
 
@@ -10,20 +11,22 @@ export const axiosInstance = axios.create({
   },
 });
 
-let storeRef: { getState: () => any; dispatch: (action: any) => any } | null = null;
+type StoreRef = { getState: () => RootState; dispatch: AppDispatch };
 
-export function injectStore(store: { getState: () => any; dispatch: (action: any) => any }) {
+let storeRef: StoreRef | null = null;
+
+export function injectStore(store: StoreRef) {
   storeRef = store;
 }
 
 let failedQueue: Array<{
   resolve: (token: string) => void;
-  reject: (error: any) => void;
+  reject: (error: unknown) => void;
 }> = [];
 
 let isRefreshing = false;
 
-function processQueue(error: any, token: string | null = null) {
+function processQueue(error: unknown, token: string | null = null) {
   failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);

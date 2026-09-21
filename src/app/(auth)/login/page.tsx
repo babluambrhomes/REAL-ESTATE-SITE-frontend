@@ -14,16 +14,15 @@ import { clearOtpState } from "@/store/slice/authSlice";
 import { useAppDispatch, useAppSelector } from'@/store/hooks';
 import {
   loginEmailSchema,
-  loginPhonePasswordSchema,
+  loginPhoneSchema,
   type LoginEmailForm,
-  type LoginPhonePasswordForm,
+  type LoginPhoneForm,
 } from "@/lib/features/auth/schemas";
 import toast from "react-hot-toast";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { GoogleAuth } from "@/components/auth/GoogleAuth";
-import { WhatsAppButton } from "@/components/auth/WhatsAppButton";
+
 import { VerifyOtpForm } from "@/components/auth/VerifyOtpForm";
-import { ChangePasswordSuccess } from "@/components/auth/ChangePasswordSuccess";
 import type { LoginMode } from "@/types";
 
 
@@ -38,7 +37,7 @@ export default function LoginForm() {
   const otpIdentifier = useAppSelector((s) => s.auth.otpIdentifier);
   const otpPurpose = useAppSelector((s) => s.auth.otpPurpose);
 
-  const [mode, setMode] = useState<LoginMode>("email");
+  const [mode, setMode] = useState<LoginMode>("phone");
   const [showPassword, setShowPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
 
@@ -46,8 +45,8 @@ export default function LoginForm() {
     resolver: zodResolver(loginEmailSchema),
   });
 
-  const phoneForm = useForm<LoginPhonePasswordForm>({
-    resolver: zodResolver(loginPhonePasswordSchema),
+  const phoneForm = useForm<LoginPhoneForm>({
+    resolver: zodResolver(loginPhoneSchema),
   });
 
   const onEmailLogin = (data: LoginEmailForm) => {
@@ -64,9 +63,9 @@ export default function LoginForm() {
     });
   };
 
-  const onPhoneLogin = (data: LoginPhonePasswordForm) => {
+  const onPhoneLogin = (data: LoginPhoneForm) => {
     loginMutation.mutate(
-      { phone: `${countryCode}${data.phone}`, password: data.password },
+      { phone: `${countryCode}${data.phone}` },
       {
         onSuccess: (result) => {
           if (result.data === null) {
@@ -100,7 +99,7 @@ export default function LoginForm() {
   }
 
 
-  // return <ChangePasswordSuccess />
+ 
 
   return (
     <div className="relative flex w-full flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:items-center">
@@ -124,7 +123,6 @@ export default function LoginForm() {
             </p>
           </div>
 
-         <WhatsAppButton />
 
           {mode === "email" && (
             <form
@@ -219,7 +217,7 @@ export default function LoginForm() {
                 >
                   Phone Number
                 </label>
-                <div className="flex rounded-md border border-gray-300 bg-white shadow-none focus-within:border-primary focus-within:ring-2 focus-within:ring-primary">
+                <div className="flex rounded-md border border-gray-300 bg-white mt-1 shadow-none focus-within:border-primary focus-within:ring-2 focus-within:ring-primary">
                   <select
                     aria-label="Country code"
                     value={countryCode}

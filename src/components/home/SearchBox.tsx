@@ -22,6 +22,7 @@ const {
 } = SEARCH_BOX;
 
 export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
+
   const [activeTab, setActiveTab] = useState("buy");
   const dispatch = useAppDispatch();
       const selectedCity = useAppSelector((state) => state.location.selectedCity);
@@ -134,3 +135,5 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
     </section>
   );
 });
+
+SearchBox.displayName = "SearchBox";

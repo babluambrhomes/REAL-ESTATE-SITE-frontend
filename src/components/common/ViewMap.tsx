@@ -18,6 +18,7 @@ export default function ViewMap({
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [markerPosition, setMarkerPosition] = useState<{ x: number; y: number } | null>(null);
   const [cardHeight, setCardHeight] = useState(350);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
   const toggleFullscreen = () => {
     setIsFullscreen((prev) => !prev);
@@ -46,6 +47,20 @@ export default function ViewMap({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isFullscreen, selectedProperty]);
+
+  // Measure container size so getCardStyle avoids reading refs during render
+  useEffect(() => {
+    const el = mapContainerRef.current;
+    if (!el) return;
+
+    const update = () =>
+      setContainerSize({ width: el.clientWidth, height: el.clientHeight });
+
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Measure card height on mount and when content changes
   useEffect(() => {
@@ -207,11 +222,9 @@ export default function ViewMap({
     const cardWidth = 220;
     const actualCardHeight = cardHeight + 30; // Add some padding
 
-    const container = mapContainerRef.current;
-    if (!container) return {};
-
-    const containerHeight = container.clientHeight;
-    const containerWidth = container.clientWidth;
+    const containerHeight = containerSize.height;
+    const containerWidth = containerSize.width;
+    if (!containerWidth || !containerHeight) return {};
     
     // Calculate initial position - ABOVE the marker
     let left = markerPosition.x - cardWidth / 2;

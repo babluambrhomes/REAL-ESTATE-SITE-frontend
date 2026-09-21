@@ -9,18 +9,6 @@ export const loginPhoneSchema = z.object({
   phone: z.string().min(10, "Enter a valid phone number"),
 });
 
-export const loginPhonePasswordSchema = z.object({
-  phone: z.string().min(10, "Enter a valid phone number"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
-export const loginPhoneVerifySchema = z.object({
-  code: z
-    .string()
-    .length(6, "OTP must be 6 digits")
-    .regex(/^\d{6}$/, "OTP must be 6 digits"),
-});
-
 export const registerEmailSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().optional(),
@@ -59,8 +47,8 @@ export const verifyOtpSchema = z.object({
 
 export type LoginEmailForm = z.infer<typeof loginEmailSchema>;
 export type LoginPhoneForm = z.infer<typeof loginPhoneSchema>;
-export type LoginPhonePasswordForm = z.infer<typeof loginPhonePasswordSchema>;
-export type LoginPhoneVerifyForm = z.infer<typeof loginPhoneVerifySchema>;
+
+
 export type RegisterEmailForm = z.infer<typeof registerEmailSchema>;
 export type RegisterPhoneForm = z.infer<typeof registerPhoneSchema>;
 export type ForgotPasswordForm = z.infer<typeof forgotPasswordSchema>;
