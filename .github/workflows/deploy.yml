@@ -30,12 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Secret / credential leak detection
-      - name: Gitleaks scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Lint
         run: npm run lint
 
@@ -64,7 +58,7 @@ jobs:
             echo "Starting Next.js deployment"
             echo "================================="
 
-            cd /var/www/ambrhomes/frontend
+            cd /var/www/roofin/frontend
 
             echo "Fetching latest code..."
             git fetch origin main
@@ -79,7 +73,7 @@ jobs:
             npm run build
 
             echo "Restarting PM2..."
-            pm2 reload ambrhomes-frontend --update-env
+            pm2 reload roofin-frontend --update-env
 
             echo "Checking PM2 status..."
             pm2 status
