@@ -8,4 +8,5 @@ export interface AuthState {
   requiresOtp: boolean;
   otpIdentifier: string | null;
   otpPurpose: string | null;
+  verificationToken: string | null;
 }

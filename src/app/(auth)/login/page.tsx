@@ -8,14 +8,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+// import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { useLoginMutation } from "@/lib/features/auth/authMutations";
 import { clearOtpState } from "@/store/slice/authSlice";
-import { useAppDispatch, useAppSelector } from'@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
-  loginEmailSchema,
+  // loginEmailSchema,
   loginPhoneSchema,
-  type LoginEmailForm,
+  // type LoginEmailForm,
   type LoginPhoneForm,
 } from "@/lib/features/auth/schemas";
 import toast from "react-hot-toast";
@@ -41,45 +42,47 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
 
-  const emailForm = useForm<LoginEmailForm>({
-    resolver: zodResolver(loginEmailSchema),
-  });
+  // const emailForm = useForm<LoginEmailForm>({
+  //   resolver: zodResolver(loginEmailSchema),
+  // });
 
   const phoneForm = useForm<LoginPhoneForm>({
     resolver: zodResolver(loginPhoneSchema),
   });
 
-  const onEmailLogin = (data: LoginEmailForm) => {
-    loginMutation.mutate(data, {
-      onSuccess: (result) => {
-        if (result.data === null) {
-          toast.success("OTP sent! Verify to continue.");
-         
-        } else {
-          toast.success("Logged in successfully");
-          router.push("/");
-        }
-      },
-    });
-  };
+  // const onEmailLogin = (data: LoginEmailForm) => {
+  //   loginMutation.mutate(data, {
+  //     onSuccess: (result) => {
+  //       if (result.message?.toLowerCase().includes("otp")) {
+  //         toast.success("OTP sent! Verify to continue.");
+  //         return;
+  //       }
+
+  //       toast.success("Logged in successfully");
+  //       router.push("/");
+  //     },
+  //   });
+  // };
 
   const onPhoneLogin = (data: LoginPhoneForm) => {
     loginMutation.mutate(
       { phone: `${countryCode}${data.phone}` },
       {
         onSuccess: (result) => {
-          if (result.data === null) {
+          if (result.message?.toLowerCase().includes("otp")) {
             toast.success("OTP sent! Verify to continue.");
-          } else {
-            toast.success("Logged in successfully");
-            router.push("/");
+            return;
           }
+
+
+          toast.success("Logged in successfully");
+          router.push("/");
         },
       }
     );
   };
 
- 
+
   const inputBase =
     "h-10 w-full rounded-lg border mt-1 border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-none placeholder:text-gray-400 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
@@ -88,7 +91,7 @@ export default function LoginForm() {
       <VerifyOtpForm
         identifier={otpIdentifier}
         purpose={otpPurpose}
-        apiUrl="/verify-otp"
+        apiUrl="/private-otp-verify"
         imgUrl="/auth/otp.png"
         onSuccess={() => {
           dispatch(clearOtpState());
@@ -99,7 +102,7 @@ export default function LoginForm() {
   }
 
 
- 
+
 
   return (
     <div className="relative flex w-full flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:items-center">
@@ -124,7 +127,7 @@ export default function LoginForm() {
           </div>
 
 
-          {mode === "email" && (
+          {/* {mode === "email" && (
             <form
               onSubmit={emailForm.handleSubmit(onEmailLogin)}
               className="mt-6 space-y-2"
@@ -152,14 +155,14 @@ export default function LoginForm() {
               </div>
 
               <div className="space-y-1">
-                 <div className="flex justify-between items-end ">
+                <div className="flex justify-between items-end ">
                   <label
-                  htmlFor="password"
-                  className="text-sm font-medium text-gray-900"
-                >
-                  Password
-                </label>
-                <span className="text-[10px] text-primary">8+ chars, Aa, 1, & @</span>
+                    htmlFor="password"
+                    className="text-sm font-medium text-gray-900"
+                  >
+                    Password
+                  </label>
+                  <span className="text-[10px] text-primary">8+ chars, Aa, 1, & @</span>
                 </div>
                 <div className="relative">
                   <input
@@ -188,12 +191,12 @@ export default function LoginForm() {
                     {emailForm.formState.errors.password?.message}
                   </p>
                 )}
-                 <Link
-                    href="/forgot-password"
-                    className="text-[10px] text-primary hover:text-primary/80"
-                  >
-                    Forgot Password?
-                  </Link>
+                <Link
+                  href="/forgot-password"
+                  className="text-[10px] text-primary hover:text-primary/80"
+                >
+                  Forgot Password?
+                </Link>
               </div>
 
               <PrimaryButton
@@ -203,7 +206,7 @@ export default function LoginForm() {
                 Sign in
               </PrimaryButton>
             </form>
-          )}
+          )} */}
 
           {mode === "phone" && (
             <form
@@ -246,7 +249,7 @@ export default function LoginForm() {
                 )}
               </div>
 
-            
+
               <PrimaryButton
                 pending={loginMutation.isPending}
                 pendingLabel="Signing in..."
@@ -264,9 +267,9 @@ export default function LoginForm() {
             <div className="h-px flex-1 bg-gray-200" />
           </div>
 
-          <GoogleAuth  AuthType='LOGIN'/>
+          <GoogleAuth AuthType='LOGIN' />
 
-          <button
+          {/* <button
             type="button"
             onClick={() => setMode(mode === "phone" ? "email" : "phone")}
             className="mt-3 relative inline-flex w-full items-center justify-center gap-2 rounded-md bg-black px-4 py-2 text-[12px] font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -288,9 +291,9 @@ export default function LoginForm() {
                 With Phone
               </>
             )}
-          </button>
+          </button> */}
 
-         
+
         </div>
 
         <p className="mt-6 text-center text-base text-gray-600">

@@ -7,12 +7,24 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
   --font-sans: var(--font-poppins), sans-serif;
+  --font-outfit: var(--font-outfit), sans-serif;
+  --font-jakarta: var(--font-jakarta), sans-serif;
+  --font-rounded-mplus: var(--font-rounded-mplus), sans-serif;
+}
+
+.font-rounded-mplus {
+  font-family: var(--font-rounded-mplus), sans-serif;
+}
+
+.font-outfit {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+.font-jakarta {
+  font-family: var(--font-jakarta), sans-serif;
 }
 
 
-body {
-  font-family: var(--font-poppins), sans-serif;
-}
 
 .thumbs-swiper .swiper-slide {
   opacity: 0.55;
@@ -61,6 +73,20 @@ body {
   background: #ffffff;
 }
 
+/* Hide scrollbar for Chrome, Safari, Opera, Edge, Firefox, IE */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar,
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
 /* Custom thin scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -75,4 +101,34 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+@keyframes happyFade {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-happy-fade {
+  animation: happyFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes happySlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-happy-text {
+  animation: happySlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

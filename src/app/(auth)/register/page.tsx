@@ -6,14 +6,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+// import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+import { Eye, EyeOff, Phone } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { clearOtpState } from "@/store/slice/authSlice";
 import { useRegisterMutation } from "@/lib/features/auth/authMutations";
+import { authApi } from "@/lib/features/auth/authApi";
 import {
-  registerEmailSchema,
+  // registerEmailSchema,
+
   registerPhoneSchema,
-  type RegisterEmailForm,
+  // type RegisterEmailForm,
   type RegisterPhoneForm,
 } from "@/lib/features/auth/schemas";
 import toast from "react-hot-toast";
@@ -36,24 +39,26 @@ export default function RegisterForm() {
   const otpPurpose = useAppSelector((s) => s.auth.otpPurpose);
 
   const [mode, setMode] = useState<RegisterMode>("phone");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showOptionalEmail, setShowOptionalEmail] = useState(false);
+  const [email, setEmail] = useState("");
+  // const [showPassword, setShowPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
 
-  const emailForm = useForm<RegisterEmailForm>({
-    resolver: zodResolver(registerEmailSchema),
-  });
+  // const emailForm = useForm<RegisterEmailForm>({
+  //   resolver: zodResolver(registerEmailSchema),
+  // });
 
   const phoneForm = useForm<RegisterPhoneForm>({
     resolver: zodResolver(registerPhoneSchema),
   });
 
-  const onEmailRegister = (data: RegisterEmailForm) => {
-    registerMutation.mutate(data, {
-      onSuccess: () => {
-        toast.success("Account created! Verify your email.");
-      },
-    });
-  };
+  // const onEmailRegister = (data: RegisterEmailForm) => {
+  //   registerMutation.mutate(data, {
+  //     onSuccess: () => {
+  //       toast.success("Account created! Verify your email.");
+  //     },
+  //   });
+  // };
 
   const onPhoneRegister = (data: RegisterPhoneForm) => {
     const phone = `${countryCode}${data.phone}`;
@@ -70,23 +75,116 @@ export default function RegisterForm() {
     );
   };
 
- 
+  const handleOptionalEmail = async () => {
+    if (!email.trim()) {
+      router.push("/");
+      return;
+    }
+
+    try {
+      await authApi.updateContact({
+        email: email.trim(),
+      });
+
+      toast.success("Email added successfully");
+      router.push("/");
+    } catch (error) {
+      toast.error("Unable to add email");
+    }
+  };
+
+
 
 
 
   const inputBase =
     "h-10 w-full rounded-lg border mt-1 border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-none placeholder:text-gray-400 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
+  if (showOptionalEmail) {
+    return (
+      <div className="relative flex w-full flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:items-center">
+        <div className="hidden w-full max-w-md lg:block">
+          <Image
+            src="/auth/register.png"
+            alt="Roofin registration"
+            width={600}
+            height={600}
+            className="h-auto w-full object-contain"
+          />
+        </div>
+
+        <div>
+          <div className="w-full max-w-md rounded-2xl border border-dashed border-black bg-white p-6 sm:p-8">
+            <div className="mb-6 text-center">
+              <h1 className="text-2xl font-semibold leading-tight tracking-tight text-gray-900 [font-family:var(--font-playfair)]">
+                Add your email
+              </h1>
+
+              <p className="mt-1.5 text-[12px] text-black">
+                Add your email to make your Roofin account more secure.
+              </p>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              <div>
+                <label
+                  htmlFor="optional-email"
+                  className="text-sm font-medium text-gray-900"
+                >
+                  Email <span className="text-gray-500">(Optional)</span>
+                </label>
+
+                <input
+                  id="optional-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  className={inputBase}
+                />
+              </div>
+
+              <PrimaryButton
+                onClick={handleOptionalEmail}
+              >
+                Continue
+              </PrimaryButton>
+
+              <button
+                type="button"
+                onClick={() => router.push("/")}
+                className="w-full text-sm font-medium text-gray-600 hover:text-gray-900"
+              >
+                Skip for now
+              </button>
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-base text-gray-600">
+            Already have an account?{" "}
+            <Link
+              href="/login"
+              className="font-medium text-primary hover:text-primary/80"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (requiresOtp && otpIdentifier && otpPurpose) {
     return (
       <VerifyOtpForm
         identifier={otpIdentifier}
         purpose={otpPurpose}
-        apiUrl="/verify-otp"
+        apiUrl="/private-otp-verify"
         imgUrl="/auth/otp.png"
         onSuccess={() => {
           dispatch(clearOtpState());
-          router.push("/");
+          router.push("/contactupdate");
         }}
       />
     );
@@ -95,7 +193,7 @@ export default function RegisterForm() {
   return (
     <div
       className="relative flex w-full  flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:items-center"
-     
+
     >
       <div className="hidden w-full max-w-md lg:block">
         <Image
@@ -113,13 +211,13 @@ export default function RegisterForm() {
               Welcome to Roofin
             </h1>
             <p className="mt-1.5 text-[12px] text-black">
-              India&apos;s trusted property platform for buyers, sellers, builders, and agents.
+              India's trusted property platform for buyers, sellers, builders, and agents.
             </p>
           </div>
 
-    
 
-          {mode === "email" && (
+
+          {/* {mode === "email" && (
             <form
               onSubmit={emailForm.handleSubmit(onEmailRegister)}
               className="mt-6 space-y-2"
@@ -211,7 +309,7 @@ export default function RegisterForm() {
                 Register Now
               </PrimaryButton>
             </form>
-          )}
+          )} */}
 
           {mode === "phone" && (
             <form
@@ -293,10 +391,10 @@ export default function RegisterForm() {
             <div className="h-px flex-1 bg-gray-200" />
           </div>
 
-          <GoogleAuth  AuthType='REGISTER'/>
-           
+          <GoogleAuth AuthType='REGISTER' />
 
-          <button
+
+          {/* <button
             type="button"
             onClick={() => setMode(mode === "phone" ? "email" : "phone")}
             className="mt-3 relative inline-flex w-full items-center justify-center gap-2 rounded-md  bg-black px-4 py-2 text-[12px] font-medium text-white transition-colors  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -318,7 +416,7 @@ export default function RegisterForm() {
                 With Phone
               </>
             )}
-          </button>
+          </button> */}
 
           <p className="mt-2 text-left text-[12px] text-gray-600">
             By Clicking you agree to <Link
@@ -338,17 +436,17 @@ export default function RegisterForm() {
 
 
         </div>
-         <p className="mt-6 text-center text-base text-gray-600">
-        Already have an account? {" "}
-        <Link
-          href="/login"
-          className="font-medium text-primary hover:text-primary/80"
-        >
-          Sign in
-        </Link>
-      </p>
+        <p className="mt-6 text-center text-base text-gray-600">
+          Already have an account? {" "}
+          <Link
+            href="/login"
+            className="font-medium text-primary hover:text-primary/80"
+          >
+            Sign in
+          </Link>
+        </p>
       </div>
-     
+
 
     </div>
   );

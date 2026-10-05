@@ -30,6 +30,8 @@ export interface Property {
   description?: string;
   nearby?: NearbyItem[];
   layout?: "vertical" | "horizontal" | "mapcard";
+  category?: string;
+  index?: number;
 }
 
 export interface MapComponentProps {

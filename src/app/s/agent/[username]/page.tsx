@@ -88,7 +88,7 @@ export default function AgenProfilePage() {
                     alt="Verified"
                     width={10}
                     height={10}
-                  />   Roofin   Broker
+                  />   Roofin Broker
                 </span>
                 <div className="flex items-center gap-6 text-center">
                   <div>
@@ -113,7 +113,7 @@ export default function AgenProfilePage() {
 
             <div className="grid grid-cols-2 gap-6 pt-14 ">
               <div className="space-y-2">
-                <h4 className="flex items-center gap-2 text-sm font-semibold text-gray-800"> <Image src='/broker/verified.png' alt="" width={20} height={20} /> 12+ years of experience</h4>
+                <h4 className="flex items-center gap-2 text-sm font-semibold text-gray-800"> <Image src='/broker/verified.png' alt="" width={20} height={20} />12+ years of experience</h4>
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-0.5 text-amber-500 text-sm">
                     {[1, 2, 3, 4, 5].map((i) => {

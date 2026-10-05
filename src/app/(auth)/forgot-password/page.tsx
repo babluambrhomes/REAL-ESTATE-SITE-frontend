@@ -84,7 +84,7 @@ export default function ForgotPasswordForm() {
               Forgot Password?
             </h1>
             <p className="mt-1.5 text-[12px] text-black">
-              No worries! Enter your registered email or mobile number to reset your password.
+              No worries! Enter your registered email to reset your password.
             </p>
           </div>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
@@ -93,10 +93,10 @@ export default function ForgotPasswordForm() {
                 Email/mobile Number
               </label>
               <input
-                id="text"
-                type="text"
+                id="email"
+                type="email"
                 placeholder="you@example.com"
-                autoComplete="text"
+                autoComplete="email"
                 className={inputBase}
                 {...form.register("email")}
               />
@@ -113,7 +113,7 @@ export default function ForgotPasswordForm() {
               Reset Password
             </PrimaryButton>
           </form>
-        
+
         </div>
       </div>
     </div>

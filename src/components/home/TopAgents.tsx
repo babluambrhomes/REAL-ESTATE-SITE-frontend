@@ -1,116 +1,120 @@
 "use client";
 
-import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { Swiper as SwiperType } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import { AgentCard } from "@/components/card/AgentCard";
+import Image from "next/image";
 
-import "swiper/css";
-
-const agents = [
+const AGENTS_BUILDERS = [
   {
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
-    name: "Rahul Sharma",
-    designation: "Senior Property Consultant",
-    followers: 1200,
-    views: 3500,
-    videos: 24,
+    type: "agent",
+    name: "JITENDRA SINGH",
+    designation: "Director Sales",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    bgCircle: "bg-[#EEF1F6]",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
-    name: "Priya Verma",
-    designation: "Residential Sales Expert",
-    followers: 980,
-    views: 2800,
-    videos: 18,
+    type: "agent",
+    name: "JITENDRA SINGH",
+    designation: "Director Sales",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
+    bgCircle: "bg-[#EAE5DF]",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
-    name: "Amit Gupta",
-    designation: "Commercial Realty Advisor",
-    followers: 1500,
-    views: 4200,
-    videos: 31,
+    type: "builder",
+    name: "Smiriti Singh",
+    company: "E-BUILDER",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80",
+    bgCircle: "bg-[#F5E8D8]",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80",
-    name: "Sneha Kapoor",
-    designation: "Luxury Home Specialist",
-    followers: 1750,
-    views: 5100,
-    videos: 42,
+    type: "builder",
+    name: "Smiriti Singh",
+    company: "E-BUILDER",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    bgCircle: "bg-[#F8BABA]",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-    name: "Vikram Singh",
-    designation: "Investment Property Advisor",
-    followers: 860,
-    views: 2400,
-    videos: 15,
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
-    name: "Neha Malhotra",
-    designation: "NRI Property Consultant",
-    followers: 2100,
-    views: 6800,
-    videos: 55,
+    type: "builder",
+    name: "Smiriti Singh",
+    company: "E-BUILDER",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    bgCircle: "bg-[#E2E8F0]",
   },
 ];
 
 export const TopAgents = () => {
-  const swiperRef = useRef<SwiperType | null>(null);
-
   return (
-    <section className="relative mx-auto w-full px-6 pb-12 sm:px-10">
-      <div className="relative mt-6">
-        <Swiper
-          modules={[]}
-          loop
-          speed={600}
-          spaceBetween={20}
-          // autoplay={{ delay: 4000, disableOnInteraction: false }}
-          slidesPerView={1}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
-          }}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          className="!pb-2"
-        >
-          {agents.map((agent) => (
-            <SwiperSlide key={agent.name} className="!h-auto">
-              <AgentCard {...agent} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+    <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-10 sm:py-12">
+      {/* Header (Matches Figma Screenshot) */}
+      <div className="mb-8 sm:mb-10 text-center">
+        <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-extrabold tracking-tight text-[#0B132B]">
+          Meet Our <span className="text-[#1865F2]">Trusted Agents & Builder</span>
+        </h2>
+        <p className="mt-1.5 text-xs sm:text-sm text-[#64748B] font-normal">
+          Meet our team of trusted real estate professionals dedicated to your property needs.
+        </p>
+      </div>
 
-        {/* <button
-          type="button"
-          aria-label="Previous"
-          onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute -left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-md transition-colors hover:bg-primary hover:text-white sm:-left-4"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next"
-          onClick={() => swiperRef.current?.slideNext()}
-          className="absolute -right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-md transition-colors hover:bg-primary hover:text-white sm:-right-4"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button> */}
+      {/* 5 Cards Row matching screenshot 1:1 */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4.5 sm:gap-5">
+        {AGENTS_BUILDERS.map((person, index) => (
+          <div
+            key={index}
+            className="group relative flex flex-col items-center justify-between rounded-[28px] sm:rounded-[32px] bg-[#F5F6FB] border-b-[8px] border-b-[#1865F2] p-5 pt-7 pb-6 text-center transition-all duration-300 hover:-translate-y-1.5"
+          >
+            {/* Circular Profile Avatar Container */}
+            <div
+              className={`relative h-32 w-32 sm:h-36 sm:w-36 overflow-hidden rounded-full ${person.bgCircle} shrink-0 transition-transform duration-500 group-hover:scale-105 shadow-inner`}
+            >
+              <Image
+                src={person.image}
+                alt={person.name}
+                fill
+                sizes="150px"
+                className="object-cover"
+                unoptimized
+              />
+            </div>
+
+            {/* Info Area */}
+            <div className="mt-4.5 flex flex-col items-center justify-center w-full min-h-[50px]">
+              {person.type === "agent" ? (
+                <>
+                  <h3 className="text-[15.5px] sm:text-[16.5px] font-bold uppercase tracking-tight text-[#0B132B] truncate w-full leading-tight">
+                    {person.name}
+                  </h3>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#627D98] font-medium mt-1 leading-tight">
+                    {person.designation}
+                  </p>
+                </>
+              ) : (
+                <div className="flex items-center justify-center gap-2 w-full">
+                  {/* e-Builder Logo from saved Figma asset */}
+                  <div className="relative h-11 w-16 sm:w-18 shrink-0">
+                    <Image
+                      src="/icon/e-builder.png"
+                      alt="e-Builder"
+                      fill
+                      className="object-contain"
+                      unoptimized
+                    />
+                  </div>
+
+                  {/* Vertical Blue-tinted Divider */}
+                  <div className="h-8.5 w-[1.5px] bg-[#1865F2]/50 shrink-0 mx-1" />
+
+                  {/* Company & Representative */}
+                  <div className="flex flex-col text-left">
+                    <span className="text-[13px] sm:text-[13.5px] font-bold uppercase tracking-tight text-[#0B132B] leading-tight">
+                      {person.company}
+                    </span>
+                    <span className="text-[12.5px] sm:text-[13px] text-[#627D98] font-medium leading-tight mt-0.5">
+                      {person.name}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

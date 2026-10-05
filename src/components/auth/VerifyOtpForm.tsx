@@ -10,6 +10,8 @@ import type { VerifyOtpRequest, VerifyOtpFormProps } from "@/types";
 import { axiosInstance } from "@/lib/axios";
 import toast from "react-hot-toast";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
+import { setAuth } from "@/store/slice/authSlice";
+import { useAppDispatch } from "@/store/hooks";
 
 const DEFAULT_RESEND_DELAY = 30;
 
@@ -45,6 +47,7 @@ export function VerifyOtpForm({
   const [otp, setOtp] = useState("");
   const [seconds, setSeconds] = useState(resendDelay);
   const [isPending, setIsPending] = useState(false);
+  const dispatch = useAppDispatch();
 
   const purposeLabel = getPurposeLabel(purpose);
 
@@ -76,22 +79,35 @@ export function VerifyOtpForm({
     }
   };
 
-  const onSubmit = async (data: VerifyOtpFormType) => {
-    setIsPending(true);
-    try {
-      await axiosInstance.post(apiUrl, {
-        identifier,
-        code: data.code,
-        purpose: purpose as VerifyOtpRequest["purpose"],
-      });
-      toast.success("Verified successfully");
-      onSuccess?.();
-    } catch (error) {
-      toast.error(getErrorMessage(error, "OTP verification failed"));
-    } finally {
-      setIsPending(false);
+ const onSubmit = async (data: VerifyOtpFormType) => {
+  setIsPending(true);
+
+  try {
+    const response = await axiosInstance.post(apiUrl, {
+      identifier,
+      code: data.code,
+      purpose: purpose as VerifyOtpRequest["purpose"],
+    });
+
+    const authData = response.data?.data;
+
+    // Private OTP verification returns fresh auth tokens
+    if (
+      authData?.user &&
+      authData?.accessToken &&
+      authData?.refreshToken
+    ) {
+      dispatch(setAuth(authData));
     }
-  };
+
+    toast.success("Verified successfully");
+    onSuccess?.();
+  } catch (error) {
+    toast.error(getErrorMessage(error, "OTP verification failed"));
+  } finally {
+    setIsPending(false);
+  }
+};
 
   const formattedTime = `00:${seconds.toString().padStart(2, "0")}`;
 

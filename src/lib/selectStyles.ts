@@ -10,63 +10,76 @@ export const headerSelectStyles: StylesConfig<
 > = {
   control: (base) => ({
     ...base,
-    minHeight: '2.2rem',
-    color: 'red',
-    width: '100%',
-    maxWidth: '200px',
+    minHeight: '2.1rem',
+    height: '2.1rem',
+    width: 'auto',
+    minWidth: '130px',
+    maxWidth: '160px',
     backgroundColor: 'transparent',
-    borderRadius: '10px',
-    boxShadow: 'transparent',
+    borderRadius: '12px',
+    boxShadow: 'none',
+    border: 'none',
     cursor: 'pointer',
-    borderColor: 'transparent',
     '&:hover': { borderColor: 'transparent' },
   }),
-  valueContainer: () => ({}),
+  valueContainer: (base) => ({
+    ...base,
+    padding: 0,
+  }),
   placeholder: (base) => ({
     ...base,
-    color: '#9CA3AF',
+    color: '#000000',
     fontWeight: 500,
-    fontSize: '0.875rem',
+    fontSize: '16px',
+    letterSpacing: '-0.019em',
+    whiteSpace: 'nowrap',
   }),
   singleValue: (base) => ({
     ...base,
-    color: '#111827',
+    color: '#000000',
     fontWeight: 500,
-    fontSize: '0.875rem',
+    fontSize: '16px',
+    letterSpacing: '-0.019em',
+    whiteSpace: 'nowrap',
+    margin: 0,
   }),
+
   menu: (base) => ({
     ...base,
-    borderRadius: '0.75rem',
+    borderRadius: '1rem',
     overflow: 'hidden',
     boxShadow:
-      '0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)',
+      '0 12px 36px rgba(24, 101, 242, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05)',
+    border: '1px solid #DCE8FE',
     marginTop: '0.5rem',
   }),
   menuList: (base) => ({
     ...base,
     padding: '0.25rem',
   }),
-  option: (base) => ({
+  option: (base, state) => ({
     ...base,
     borderRadius: '0.5rem',
-    padding: '0.3rem 0.75rem',
+    padding: '0.4rem 0.75rem',
     cursor: 'pointer',
     fontSize: '0.875rem',
     fontWeight: 500,
-    backgroundColor: 'transparent',
-    color: '111827',
-    '&:hover': { backgroundColor: 'rgba(37, 99, 235, 0.2)' },
+    backgroundColor: state.isSelected ? '#1d64ec' : 'transparent',
+    color: state.isSelected ? '#ffffff' : '#111827',
+    '&:hover': { backgroundColor: state.isSelected ? '#1d64ec' : 'rgba(37, 99, 235, 0.1)' },
   }),
   indicatorSeparator: () => ({ display: 'none' }),
   dropdownIndicator: (base) => ({
     ...base,
-    color: '#6B7280',
+    padding: '0 6px 0 0',
+    color: '#0f172a',
     cursor: 'pointer',
-    '&:hover': { color: '#2563EB' },
   }),
 };
 
-/* ────────────────  SearchBox  (white bg, rounded-xl, focus ring)  ──────────────── */
+
+
+/* ────────────────  SearchBox  (white bg, rounded-2xl, 48px height, focus ring)  ──────────────── */
 
 export const searchBoxSelectStyles: StylesConfig<
   OptionType,
@@ -75,69 +88,75 @@ export const searchBoxSelectStyles: StylesConfig<
 > = {
   control: (base, state) => ({
     ...base,
-    minHeight: "2rem",
+    minHeight: "48px",
+    height: "48px",
     width: "100%",
-    maxWidth: '200px',
-    border: state.isFocused ? "1.5px solid #2563EB" : "1px solid #E5E7EB",
+    border: state.isFocused ? "1.5px solid #1865F2" : "1px solid #E2E8F0",
     backgroundColor: "#FFFFFF",
-    borderRadius: "0.75rem",
-    boxShadow: state.isFocused ? "0 0 0 3px rgba(37, 99, 235, 0.15)" : "none",
+    borderRadius: "1rem",
+    boxShadow: state.isFocused ? "0 0 0 3px rgba(24, 101, 242, 0.12)" : "none",
     cursor: "pointer",
-    "&:hover": { borderColor: "#2563EB" },
+    transition: "all 0.2s ease",
+    "&:hover": { borderColor: "#1865F2" },
   }),
   valueContainer: (base) => ({
     ...base,
-    overflow: "hidden",
-    paddingLeft: "0.75rem",
+    paddingLeft: "0.85rem",
+    paddingRight: "0.5rem",
   }),
   placeholder: (base) => ({
     ...base,
-    color: "#6B7280",
-    fontWeight: 500,
+    color: "#64748B",
+    fontWeight: 400,
     fontSize: "0.875rem",
     whiteSpace: "nowrap",
   }),
   singleValue: (base) => ({
     ...base,
-    color: "#111827",
+    color: "#0F172A",
     fontWeight: 500,
     fontSize: "0.875rem",
     whiteSpace: "nowrap",
   }),
   menu: (base) => ({
     ...base,
-    borderRadius: "0.75rem",
+    borderRadius: "1rem",
     overflow: "hidden",
+    width: "auto",
+    minWidth: "180px",
+    maxWidth: "240px",
     boxShadow:
-      "0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)",
+      "0 12px 36px rgba(24, 101, 242, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05)",
+    border: "1px solid #DCE8FE",
     marginTop: "0.5rem",
-    zIndex: 40,
+    zIndex: 50,
   }),
   menuList: (base) => ({
     ...base,
-    padding: "0.25rem",
+    padding: "0.35rem",
   }),
   option: (base, state) => ({
     ...base,
-    borderRadius: "0.5rem",
-    padding: "0.5rem 0.75rem",
+    borderRadius: "0.6rem",
+    padding: "0.5rem 0.85rem",
     cursor: "pointer",
     fontSize: "0.875rem",
     fontWeight: 500,
     backgroundColor: state.isSelected
-      ? "#2563EB"
+      ? "#1865F2"
       : state.isFocused
-        ? "rgba(37, 99, 235, 0.1)"
+        ? "rgba(24, 101, 242, 0.08)"
         : "transparent",
-    color: state.isSelected ? "#FFFFFF" : "#111827",
-    "&:active": { backgroundColor: "rgba(37, 99, 235, 0.2)" },
+    color: state.isSelected ? "#FFFFFF" : "#0F172A",
+    "&:active": { backgroundColor: "rgba(24, 101, 242, 0.15)" },
   }),
   indicatorSeparator: () => ({ display: "none" }),
   dropdownIndicator: (base, state) => ({
     ...base,
-    color: state.isFocused ? "#2563EB" : "#6B7280",
+    paddingRight: "0.75rem",
+    color: state.isFocused ? "#1865F2" : "#94A3B8",
     cursor: "pointer",
-    "&:hover": { color: "#2563EB" },
+    "&:hover": { color: "#1865F2" },
   }),
 };
 

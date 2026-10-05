@@ -40,7 +40,8 @@ function processQueue(error: unknown, token: string | null = null) {
 axiosInstance.interceptors.request.use(
   (config) => {
     const state = storeRef?.getState();
-    const token = state?.auth?.accessToken;
+    const token =
+      state?.auth?.accessToken || state?.auth?.verificationToken;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

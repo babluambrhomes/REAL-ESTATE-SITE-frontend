@@ -73,7 +73,7 @@ export interface Membership {
 
 export interface User {
   id: string;
-  email: string;
+  email: string | null;
   phone: string | null;
   status: "PENDING" | "ACTIVE" | "SUSPENDED" | "DEACTIVATED";
   accountOrigin?: string;
@@ -90,20 +90,29 @@ export interface AuthTokens {
   refreshToken: string;
 }
 
+export interface AuthData {
+  user: User;
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface AuthSuccessResponse {
   statusCode: number;
-  data: {
-    user: User;
-    accessToken: string;
-    refreshToken: string;
-  };
+  data:AuthData;
   message: string;
   success: true;
 }
 
+/**
+ * Phone login OTP response.
+ * Backend returns verificationToken before OTP verification.
+ */
+
 export interface OtpSentResponse {
   statusCode: number;
-  data: null;
+  data: {
+    verificationToken: string | null;
+  };
   message: string;
   success: true;
 }

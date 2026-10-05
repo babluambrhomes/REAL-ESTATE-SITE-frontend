@@ -5,28 +5,24 @@ import Link from "next/link";
 import { Mail, Phone, Send } from "lucide-react";
 
 const quickLinks = [
-  { label: "Buy a Property", href: "/properties" },
-  { label: "Rent a Property", href: "/properties" },
+  { label: "Buy Property", href: "/properties" },
+  { label: "Rent Property", href: "/properties" },
+  { label: "Sell Property", href: "/properties" },
   { label: "New Projects", href: "/projects" },
-  { label: "PG / Coliving", href: "/properties" },
-  { label: "Commercial", href: "/properties" },
-  { label: "Plot / Land", href: "/properties" },
 ];
 
 const resources = [
-  { label: "Property Valuation", href: "/resources" },
-  { label: "Home Loan Guide", href: "/resources" },
-  { label: "RERA Updates", href: "/resources" },
-  { label: "Buying Tips", href: "/blog" },
-  { label: "Selling Tips", href: "/blog" },
+  { label: "Investment Guide", href: "/resources" },
+  { label: "EMI Calculator", href: "/resources" },
+  { label: "Area Converter", href: "/resources" },
+  { label: "Price Trends", href: "/resources" },
 ];
 
 const company = [
   { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Careers", href: "/careers" },
-  { label: "Blog", href: "/blog" },
-  { label: "Agents", href: "/agents" },
-  { label: "Contact", href: "/contact" },
+  { label: "Terms & Conditions", href: "/terms" },
 ];
 
 const FacebookIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
@@ -66,11 +62,11 @@ const XIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
   </svg>
 );
 
-const socialIcons = [        
+const socialIcons = [
   {
     label: "Facebook",
     href: "https://facebook.com",
-    icon: <FacebookIcon className="h-5 w-5" />, 
+    icon: <FacebookIcon className="h-5 w-5" />,
   },
   {
     label: "Instagram",
@@ -87,16 +83,16 @@ const socialIcons = [
 export const Footer = () => {
   return (
     <footer
-      className="relative bg-cover bg-center  text-gray-300"
+      className="relative bg-cover bg-center text-gray-300"
       style={{ backgroundImage: "url('/layout/footer_bg.png')" }}
     >
-      <div className="absolute inset-0 " />
-      <div className="relative w-full px-6 py-12 sm:px-10">
+      <div className="absolute inset-0 bg-black/10" />
+      <div className="relative w-full px-6 py-12 sm:px-10 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-6">
-          <div className="sm:col-span-2 ">
+          <div className="sm:col-span-2">
             <Image
               src="/layout/white_logo.png"
-              alt="AmbrHomes"
+              alt="Roofin"
               width={140}
               height={50}
               className="object-contain"
@@ -105,55 +101,57 @@ export const Footer = () => {
               Explore the latest properties and market insights
             </p>
 
-             <form
-                className="mt-8 max-w-sm items-center gap-2"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <div className="relative flex-1 overflow-hidden rounded-full border ">
-               
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your email"
-                    className="w-full rounded-lg  bg-white py-2.5 pl-4 px-3 text-sm text-gray-500 placeholder:text-gray-500 focus:border-primary focus:outline-none"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="Subscribe"
-                    className="flex bg-gold text-sm top-0 right-0 h-10 w-[38%] absolute z-30  items-center justify-center gap-1 text-white transition-transform duration-200"
+            <form
+              className="mt-8 max-w-sm items-center gap-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Thank you for subscribing!");
+              }}
+            >
+              <div className="relative flex-1 overflow-hidden rounded-full border border-white/20">
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  className="w-full rounded-lg bg-white py-2.5 pl-4 pr-32 text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  aria-label="Subscribe"
+                  className="flex bg-gold text-sm top-0 right-0 h-full w-[38%] absolute z-30 items-center justify-center gap-1 text-white transition-transform duration-200 hover:brightness-110 cursor-pointer"
+                >
+                  <Send className="h-4 w-4" /> Subscribe
+                </button>
+              </div>
+              <div className="mt-6 flex items-center gap-2">
+                <input
+                  id="subscribe-terms"
+                  type="checkbox"
+                  defaultChecked
+                  required
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-2xl accent-gold"
+                />
+                <label
+                  htmlFor="subscribe-terms"
+                  className="text-xs text-white select-none cursor-pointer"
+                >
+                  I accept{" "}
+                  <Link
+                    href="/terms"
+                    className="text-gold underline-offset-2 hover:underline"
                   >
-                    <Send className="h-4 w-4" /> Subscribe
-                  </button>
-                  
-                </div>
-                <div className="mt-10 flex items-center gap-2">
-                  <input
-                    id="subscribe-terms"
-                    type="checkbox"
-                    required
-                    className="mt-0.5 h-4 w-4 shrink-0  cursor-pointer rounded-2xl accent-gold"
-                  />
-                  <label
-                    htmlFor="subscribe-terms"
-                    className="text-xs text-white"
+                    terms and conditions
+                  </Link>{" "}
+                  <span className="text-gold">&amp;</span>{" "}
+                  <Link
+                    href="/privacy"
+                    className="text-gold underline-offset-2 hover:underline"
                   >
-                    I accept{" "}
-                    <Link
-                      href="/terms"
-                      className="text-gold underline-offset-2 hover:underline"
-                    >
-                      terms and conditions
-                    </Link>{" "}
-                   <span className="text-gold">&</span>{" "}
-                    <Link
-                      href="/privacy"
-                      className="text-gold underline-offset-2 hover:underline"
-                    >
-                      privacy policy
-                    </Link>
-                  </label>
-                </div>
-              </form>
+                    privacy policy
+                  </Link>
+                </label>
+              </div>
+            </form>
           </div>
 
           <div>
@@ -208,32 +206,31 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
-
           </div>
+
           <div>
             <h4 className="text-lg font-semibold uppercase tracking-wide text-white">
               Contact Us
             </h4>
             <ul className="mt-4 text-base space-y-2 text-white">
-             
               <li>
                 <h3 className="text-base font-medium text-white">Toll free</h3>
                 <a
-                  href="tel:+919876543210"
-                  className="flex items-center gap-2 transition-colors hover:text-secondary"
+                  href="tel:1800418389"
+                  className="flex items-center gap-2 transition-colors hover:text-secondary text-sm"
                 >
-                  <Phone className="h-4 w-4 shrink-0 " />
-                  +91 98765 43210
+                  <Phone className="h-4 w-4 shrink-0" />
+                  1800 41 8389
                 </a>
               </li>
-              <li>
+              <li className="pt-1">
                 <h3 className="text-base font-medium text-white">Email</h3>
                 <a
-                  href="mailto:info@ambrhomes.com"
-                  className="flex items-center gap-2 transition-colors hover:text-secondary"
+                  href="mailto:roofin@realestate.com"
+                  className="flex items-center gap-2 transition-colors hover:text-secondary text-sm"
                 >
-                  <Mail className="h-4 w-4 shrink-0 " />
-                  info@ambrhomes.com
+                  <Mail className="h-4 w-4 shrink-0" />
+                  roofin@realestate.com
                 </a>
               </li>
             </ul>
@@ -256,9 +253,9 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="relative  text-white ">
-        <div className="mx-auto flex w-full font-normal items-center justify-between gap-2 px-6 py-4 text-xs ">
-          <p>© 2026 AmbrHomes. All rights reserved.</p>
+      <div className="relative text-white border-t border-white/10">
+        <div className="mx-auto flex max-w-[1440px] w-full font-normal items-center justify-between gap-2 px-6 py-4 text-xs">
+          <p>© 2026 Roofin. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="transition-colors hover:text-secondary">
               Privacy Policy

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { authApi } from "./authApi";
-import { setAuth, setRequiresOtp, setOtpState, clearAuth } from "@/store/slice/authSlice";
+import { setAuth, setRequiresOtp, setOtpState, setVerificationToken, clearAuth } from "@/store/slice/authSlice";
 import { useAppDispatch } from "@/store/hooks";
 import type { AuthSuccessResponse, OtpSentResponse, ApiError } from "@/types";
 import type {
@@ -21,7 +21,10 @@ function getErrorMessage(error: unknown, fallback: string): string {
 function isOtpSentResponse(
   response: AuthSuccessResponse | OtpSentResponse
 ): response is OtpSentResponse {
-  return response.data === null;
+  return (
+    response.message?.toLowerCase().includes("otp") ||
+    response.message?.toLowerCase().includes("verify")
+  );
 }
 
 export function useLoginMutation() {
@@ -32,9 +35,20 @@ export function useLoginMutation() {
     onSuccess: (result, variables) => {
       if (isOtpSentResponse(result)) {
         const identifier = variables.email || variables.phone || "";
-        dispatch(setOtpState({ identifier, purpose: "LOGIN_PASSWORDLESS" }));
+
+        if ("verificationToken" in result.data && result.data.verificationToken) {
+          dispatch(setVerificationToken(result.data.verificationToken));
+        }
+
+        dispatch(
+          setOtpState({
+            identifier,
+            purpose: "PHONE_VERIFICATION",
+          })
+        );
+
         dispatch(setRequiresOtp(true));
-      } else {
+      } else if (result.data) {
         dispatch(setAuth(result.data));
       }
     },
@@ -50,14 +64,25 @@ export function useRegisterMutation() {
   return useMutation({
     mutationFn: (data: RegisterRequest) => authApi.register(data),
     onSuccess: (result, variables) => {
-      if (result.data === null) {
+      const requiresVerification =
+        result.message?.toLowerCase().includes("otp") ?? false;
+
+      if (requiresVerification) {
         const purpose = variables.phone
           ? "PHONE_VERIFICATION"
           : "EMAIL_VERIFICATION";
+
         const identifier = variables.phone || variables.email || "";
+
+        // Keep tokens received from backend
+        if (result.data) {
+          dispatch(setAuth(result.data));
+        }
+
+        // Then show OTP screen
         dispatch(setOtpState({ identifier, purpose }));
         dispatch(setRequiresOtp(true));
-      } else {
+      } else if (result.data) {
         dispatch(setAuth(result.data));
       }
     },
@@ -72,8 +97,10 @@ export function useVerifyOtpMutation() {
 
   return useMutation({
     mutationFn: (data: VerifyOtpRequest) => authApi.verifyOtp(data),
-    onSuccess: () => {
-      dispatch(clearAuth());
+    onSuccess: (result) => {
+      if (result.data) {
+        dispatch(setAuth(result.data));
+      }
     },
     onError: (error) => {
       toast.error(getErrorMessage(error, "OTP verification failed"));

@@ -1,4 +1,6 @@
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+"use client";
+
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { PaginationProps } from "@/types";
 
@@ -28,14 +30,14 @@ export const Pagination = ({
   onChange,
   totalItems,
   perPage,
-  text 
+  text = "Properties",
 }: PaginationProps) => {
   if (totalPages <= 1) return null;
 
   const pages = getPageWindow(currentPage, totalPages);
 
   const navButton =
-    "flex items-center justify-center rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-600 shadow-sm transition-colors hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-40";
+    "flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-xs font-semibold text-slate-600 shadow-2xs transition-all hover:border-[#1865F2] hover:text-[#1865F2] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
 
   const start =
     totalItems != null && perPage != null
@@ -47,24 +49,37 @@ export const Pagination = ({
       : null;
 
   return (
-    <div className="mt-10 flex items-center justify-between gap-2 sm:flex-row">
-      <div className=" flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+    <div className="my-8 flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+      {/* Pagination Controls */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        {/* First Page */}
+        <button
+          type="button"
+          aria-label="First page"
+          onClick={() => onChange(1)}
+          disabled={currentPage === 1}
+          className={navButton}
+        >
+          <ChevronsLeft className="h-3.5 w-3.5" />
+        </button>
+
+        {/* Previous Page */}
         <button
           type="button"
           aria-label="Previous page"
           onClick={() => onChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className={cn(navButton, "h-8 w-8 sm:h-9 sm:w-auto sm:gap-1 sm:px-3")}
+          className={navButton}
         >
-          <ChevronsLeft className="h-4 w-4" />
-
+          <ChevronLeft className="h-3.5 w-3.5" />
         </button>
 
+        {/* Page Numbers */}
         {pages.map((page, index) =>
           page === "ellipsis" ? (
             <span
               key={`ellipsis-${index}`}
-              className="flex h-8 w-8 items-center justify-center text-sm text-gray-400 sm:h-9 sm:w-9"
+              className="flex h-9 w-9 items-center justify-center text-xs font-medium text-slate-400"
             >
               …
             </span>
@@ -76,10 +91,10 @@ export const Pagination = ({
               aria-current={page === currentPage ? "page" : undefined}
               onClick={() => onChange(page)}
               className={cn(
-                "flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition-colors sm:h-9 sm:w-9",
+                "flex h-9 w-9 items-center justify-center rounded-md text-xs font-bold transition-all cursor-pointer",
                 page === currentPage
-                  ? "bg-primary text-white shadow-md"
-                  : "border border-gray-200 bg-white text-gray-600 hover:border-primary hover:text-primary"
+                  ? "bg-[#1865F2] text-white shadow-xs"
+                  : "border border-slate-200 bg-white text-slate-700 hover:border-[#1865F2] hover:text-[#1865F2]"
               )}
             >
               {page}
@@ -87,26 +102,39 @@ export const Pagination = ({
           )
         )}
 
+        {/* Next Page */}
         <button
           type="button"
           aria-label="Next page"
           onClick={() => onChange(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className={cn(navButton, "h-8 w-8 sm:h-9 sm:w-auto sm:gap-1 sm:px-3")}
+          className={navButton}
         >
+          <ChevronRight className="h-3.5 w-3.5" />
+        </button>
 
-          <ChevronsRight className="h-4 w-4" />
+        {/* Last Page */}
+        <button
+          type="button"
+          aria-label="Last page"
+          onClick={() => onChange(totalPages)}
+          disabled={currentPage === totalPages}
+          className={navButton}
+        >
+          <ChevronsRight className="h-3.5 w-3.5" />
         </button>
       </div>
-      <p className="text-sm text-gray-600">
+
+      {/* Showing Text Matching Figma */}
+      <p className="text-[13px] text-[#475569] font-medium">
         {start != null && end != null ? (
           <>
             Showing{" "}
-            <span className="font-semibold ">
+            <span className="font-semibold text-[#0B132B]">
               {start} to {end}
             </span>{" "}
             of{" "}
-            <span className="font-semibold ">
+            <span className="font-semibold text-[#0B132B]">
               {totalItems!.toLocaleString("en-IN")}
             </span>{" "}
             {text}
@@ -116,6 +144,5 @@ export const Pagination = ({
         )}
       </p>
     </div>
-
   );
 };
