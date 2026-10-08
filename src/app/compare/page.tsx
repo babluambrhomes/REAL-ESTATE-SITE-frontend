@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SimpleHeader } from "@/components/layout/SimpleHeader";
+import { SearchHeader } from "@/components/layout/SearchHeader";
 import { PostPropertyTopAnnouncement } from "@/components/post-property/PostPropertyTopAnnouncement";
 import { CompareHero } from "@/components/compare/CompareHero";
 import { CompareCtaBanner } from "@/components/compare/CompareCtaBanner";
@@ -12,11 +12,13 @@ import { CompareByBuilder } from "@/components/compare/CompareByBuilder";
 import { CompareLikedPairs, ComparePair } from "@/components/compare/CompareLikedPairs";
 import { CompareModal } from "@/components/compare/CompareModal";
 import { ComparePropertyPickerModal } from "@/components/compare/ComparePropertyPickerModal";
-import { Footer } from "@/components/layout/Footer";
 import { properties as allProperties } from "@/data/properties";
 import { Property } from "@/types";
 
+import { useRouter } from "next/navigation";
+
 export default function ComparePage() {
+  const router = useRouter();
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [isPickerModalOpen, setIsPickerModalOpen] = useState(false);
 
@@ -117,7 +119,7 @@ export default function ComparePage() {
     };
 
     setComparedProperties([prop1Obj, prop2Obj]);
-    setIsCompareModalOpen(true);
+    router.push("/compare/side-by-side");
   };
 
   const [showAnnouncement, setShowAnnouncement] = useState(true);
@@ -130,24 +132,19 @@ export default function ComparePage() {
       )}
 
       {/* 2. Top Header Navigation */}
-      <div className="relative z-40">
-        <SimpleHeader variant="compare" hasAnnouncement={showAnnouncement} />
-      </div>
-
-      {/* Spacer for fixed SimpleHeader */}
-      <div className={showAnnouncement ? "h-24 sm:h-28" : "h-16 sm:h-20"} />
+      <SearchHeader hasAnnouncement={showAnnouncement} />
 
       {/* 3. Hero Section (Heading, Description, ADD PROPERTY, Experts, Overlapping Property Cards) */}
       <CompareHero onAddProperty={() => setIsPickerModalOpen(true)} />
 
       {/* 4. Ready To Explore Dark Navy CTA Banner */}
-      <CompareCtaBanner onStartComparing={() => setIsCompareModalOpen(true)} />
+      <CompareCtaBanner onStartComparing={() => router.push("/compare/side-by-side")} />
 
       {/* 5. 4-Feature Icons Strip (Compare Details, Save Time, Confident Decisions, Share with Family) */}
       <CompareFeatureStrip />
 
       {/* 6. How It Works Section (4 Simple Steps + Highlighted Card Visual) */}
-      <CompareHowItWorks onStartComparing={() => setIsCompareModalOpen(true)} />
+      <CompareHowItWorks onStartComparing={() => router.push("/compare/side-by-side")} />
 
       {/* 7. Why Compare on Roofin (See The Biggest Picture 4 Cards Grid) */}
       <CompareWhySection />
@@ -175,9 +172,6 @@ export default function ComparePage() {
         onSelectProperty={handleSelectProperty}
         selectedIds={comparedProperties.map((p) => p.title)}
       />
-
-      {/* 12. Global Footer */}
-      <Footer />
     </main>
   );
 }

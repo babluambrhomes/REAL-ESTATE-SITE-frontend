@@ -18,8 +18,7 @@ import { useState } from "react";
 import { cn, formatPropertyChip } from "@/lib/utils";
 import type { Property } from "@/types";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/auth\/?$/, "") ?? "";
+const API_BASE_URL = "/api/v1";
 
 // Custom Spec Icons using user's saved Figma assets
 const AreaBlueprintIcon = () => (

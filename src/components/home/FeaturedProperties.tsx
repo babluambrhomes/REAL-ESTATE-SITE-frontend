@@ -11,8 +11,7 @@ import type { Property } from "@/types";
 
 import "swiper/css";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/auth\/?$/, "") ?? "";
+const API_BASE_URL = "/api/v1";
 
 const FALLBACK_FAST_SELLING: Property[] = [
   {

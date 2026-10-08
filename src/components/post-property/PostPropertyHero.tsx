@@ -17,7 +17,7 @@ export const PostPropertyHero = () => {
 
   return (
     <section 
-      className="relative pt-10 sm:pt-12 pb-8 overflow-hidden"
+      className="relative pt-24 sm:pt-28 pb-8 overflow-hidden"
       style={{
         background: "linear-gradient(180deg, rgba(196, 214, 255, 0.30) 0%, rgba(126, 188, 245, 0.00) 100%)",
       }}

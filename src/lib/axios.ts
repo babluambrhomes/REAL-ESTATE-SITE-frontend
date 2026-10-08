@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AppDispatch, RootState } from "@/store/store";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1/auth";
+const BASE_URL = "/api/v1/auth";
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import { getFirebaseAuth } from "@/config/firebase";
 import { useRouter } from "next/navigation";
 
 import type { GoogleAuthProps } from "@/types";
@@ -28,10 +28,7 @@ export function GoogleAuth({ AuthType }: GoogleAuthProps) {
         prompt: "select_account",
       });
 
-      console.log("Firebase project:", auth.app.options.projectId);
-      console.log("Firebase authDomain:", auth.app.options.authDomain);
-      console.log("Firebase API key:", auth.app.options.apiKey);
-
+      const auth = await getFirebaseAuth();
       const result = await signInWithPopup(auth, provider);
 
       const accessToken = await result.user.getIdToken();

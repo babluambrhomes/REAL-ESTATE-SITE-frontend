@@ -213,8 +213,7 @@ interface ExclusiveNewLaunchesProps {
   projects?: Property[];
 }
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/auth\/?$/, "") ?? "";
+const API_BASE_URL = "/api/v1";
 
 export const ExclusiveNewLaunches = ({
   projects: initialProjects,
