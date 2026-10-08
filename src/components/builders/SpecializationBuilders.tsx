@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 
@@ -187,12 +188,12 @@ export const SpecializationBuilders = () => {
             </div>
 
             {/* View Profile Button (Blue Outline) */}
-            <button
-              type="button"
-              className="w-full mt-2.5 py-1.5 bg-white hover:bg-blue-50 text-[#1865F2] border border-[#1865F2] text-[11px] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs"
+            <Link
+              href="/builder"
+              className="w-full mt-2.5 py-1.5 bg-white hover:bg-blue-50 text-[#1865F2] border border-[#1865F2] text-[11px] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs text-center block"
             >
               View Profile
-            </button>
+            </Link>
           </div>
         ))}
       </div>

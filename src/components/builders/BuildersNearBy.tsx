@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 interface NearByBuilder {
@@ -162,12 +163,12 @@ export const BuildersNearBy = () => {
               </p>
 
               <div className="pt-2">
-                <button
-                  type="button"
-                  className="px-5 py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-[11px] font-bold rounded-lg transition-colors shadow-2xs cursor-pointer"
+                <Link
+                  href="/builder"
+                  className="px-5 py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-[11px] font-bold rounded-lg transition-colors shadow-2xs cursor-pointer inline-block text-center"
                 >
                   View Profile
-                </button>
+                </Link>
               </div>
             </div>
           </div>

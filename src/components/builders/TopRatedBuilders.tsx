@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 interface BuilderItem {
@@ -152,12 +153,12 @@ export const TopRatedBuilders = () => {
             </p>
 
             {/* View Profile Button (solid black pill) */}
-            <button
-              type="button"
-              className="w-full py-2 bg-[#0B132B] hover:bg-black text-white text-[11px] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs"
+            <Link
+              href="/builder"
+              className="w-full py-2 bg-[#0B132B] hover:bg-black text-white text-[11px] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs text-center block"
             >
               View Profile
-            </button>
+            </Link>
           </div>
         ))}
       </div>
