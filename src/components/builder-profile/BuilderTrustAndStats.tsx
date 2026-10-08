@@ -58,7 +58,7 @@ export const BuilderTrustAndStats = () => {
             <h3 className="text-sm font-extrabold text-[#0B132B]">
               Roofin trust score
             </h3>
-            <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-extrabold uppercase tracking-wide">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#10B981] text-white text-[10px] font-extrabold uppercase tracking-wide">
               GOOD
             </span>
           </div>
@@ -102,14 +102,18 @@ export const BuilderTrustAndStats = () => {
             </svg>
           </div>
 
-          {/* Verification Badges */}
-          <div className="flex items-center justify-center gap-4 text-[11px] font-bold text-[#0B132B] pt-2 border-t border-slate-100">
+          {/* Verification Badges with Blue Check Icons */}
+          <div className="flex items-center justify-center gap-5 text-[11px] font-bold text-[#0B132B] pt-2 border-t border-slate-100">
             <span className="flex items-center gap-1.5 text-slate-700">
-              <span className="w-2 h-2 rounded-full bg-[#1865F2]" />
+              <span className="w-4 h-4 rounded-full bg-[#1865F2] flex items-center justify-center text-white shrink-0">
+                <Check className="w-2.5 h-2.5 stroke-[3]" />
+              </span>
               RERA Verified
             </span>
             <span className="flex items-center gap-1.5 text-slate-700">
-              <span className="w-2 h-2 rounded-full bg-[#00D1FF]" />
+              <span className="w-4 h-4 rounded-full bg-[#1865F2] flex items-center justify-center text-white shrink-0">
+                <Check className="w-2.5 h-2.5 stroke-[3]" />
+              </span>
               Land Title Verified
             </span>
           </div>
