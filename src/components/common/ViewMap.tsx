@@ -15,9 +15,10 @@ export default function ViewMap({
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<maplibregl.Marker[]>([]);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const selectedPropertyRef = useRef<Property | null>(null);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [markerPosition, setMarkerPosition] = useState<{ x: number; y: number } | null>(null);
-  const [cardHeight, setCardHeight] = useState(350);
+  const [cardHeight, setCardHeight] = useState(170);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
   const toggleFullscreen = () => {
@@ -37,6 +38,7 @@ export default function ViewMap({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         if (selectedProperty) {
+          selectedPropertyRef.current = null;
           setSelectedProperty(null);
           setMarkerPosition(null);
         } else if (isFullscreen) {
@@ -71,7 +73,7 @@ export default function ViewMap({
         if (cardEl) {
           setCardHeight(cardEl.clientHeight);
         }
-      }, 100);
+      }, 60);
       return () => clearTimeout(timer);
     }
   }, [selectedProperty]);
@@ -81,8 +83,8 @@ export default function ViewMap({
 
     markerEl.className = "custom-marker";
     markerEl.style.cssText = `
-      width: 50px;
-      height: 50px;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
       position: relative;
       display: flex;
@@ -94,21 +96,21 @@ export default function ViewMap({
     img.src = "/icon/map_icon.png";
     img.alt = property.title;
     img.style.cssText = `
-      width: 50px;
-      height: 50px;
+      width: 36px;
+      height: 36px;
       object-fit: contain;
-      transition: all 0.3s ease;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+      transition: all 0.25s ease;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22));
     `;
 
     markerEl.addEventListener("mouseenter", () => {
-      img.style.transform = "scale(1.15) translateY(-5px)";
-      img.style.filter = "drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35))";
+      img.style.transform = "scale(1.1) translateY(-3px)";
+      img.style.filter = "drop-shadow(0 5px 10px rgba(0, 0, 0, 0.32))";
     });
 
     markerEl.addEventListener("mouseleave", () => {
       img.style.transform = "scale(1) translateY(0)";
-      img.style.filter = "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25))";
+      img.style.filter = "drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22))";
     });
 
     markerEl.addEventListener("click", (e) => {
@@ -120,8 +122,17 @@ export default function ViewMap({
           x: point.x,
           y: point.y,
         });
+
+        // Ensure marker has room below so the card fits smoothly without clipping
+        const containerHeight = mapContainerRef.current?.clientHeight || 0;
+        const estimatedHeight = 145;
+        if (containerHeight && point.y + estimatedHeight + 15 > containerHeight) {
+          const dy = point.y + estimatedHeight + 25 - containerHeight;
+          mapRef.current.panBy([0, dy], { duration: 300 });
+        }
       }
       
+      selectedPropertyRef.current = property;
       setSelectedProperty(property);
     });
 
@@ -190,10 +201,18 @@ export default function ViewMap({
       renderMarkers();
     });
 
-    // Update marker position when map moves
+    // Dismiss card when user clicks on empty map
+    map.on("click", () => {
+      selectedPropertyRef.current = null;
+      setSelectedProperty(null);
+      setMarkerPosition(null);
+    });
+
+    // Update marker position live when map moves, zooms, or pans
     map.on("move", () => {
-      if (selectedProperty && selectedProperty.coordinates) {
-        const point = map.project(selectedProperty.coordinates);
+      const current = selectedPropertyRef.current;
+      if (current && current.coordinates && mapRef.current) {
+        const point = mapRef.current.project(current.coordinates);
         setMarkerPosition({
           x: point.x,
           y: point.y,
@@ -215,23 +234,21 @@ export default function ViewMap({
     }
   }, [properties]);
 
-  // Get card position with proper bounds checking
+  // Position card BELOW the marker with bounds checking
   const getCardStyle = () => {
     if (!markerPosition) return {};
 
-    const cardWidth = 220;
-    const actualCardHeight = cardHeight + 30; // Add some padding
+    const cardWidth = 165;
+    const padding = 8;
 
     const containerHeight = containerSize.height;
     const containerWidth = containerSize.width;
     if (!containerWidth || !containerHeight) return {};
     
-    // Calculate initial position - ABOVE the marker
+    // Horizontally center beneath marker
     let left = markerPosition.x - cardWidth / 2;
-    let top = markerPosition.y - actualCardHeight - 30;
 
     // Clamp horizontally to container bounds
-    const padding = 10;
     if (left < padding) {
       left = padding;
     }
@@ -239,31 +256,15 @@ export default function ViewMap({
       left = containerWidth - cardWidth - padding;
     }
 
-    // Check if card fits above
-    const fitsAbove = top >= padding;
-    
-    // Check if card fits below
-    const fitsBelow = markerPosition.y + 30 + actualCardHeight <= containerHeight - padding;
+    // Position directly BELOW the marker (anchor is bottom, so markerPosition.y is the tip of pin)
+    let top = markerPosition.y + 4;
 
-    if (fitsAbove) {
-      // Show ABOVE marker
-      top = markerPosition.y - actualCardHeight - 30;
-    } else if (fitsBelow) {
-      // Show BELOW marker
-      top = markerPosition.y + 30;
-    } else {
-      // If neither fits, show above with scroll (clamp to top)
-      top = padding;
-      // Or show below with clamp to bottom
-      // top = containerHeight - actualCardHeight - padding;
+    // Safety clamp vertically so it doesn't get pushed off the bottom
+    if (top + cardHeight > containerHeight - padding) {
+      top = Math.max(padding, containerHeight - cardHeight - padding);
     }
-
-    // Final safety clamp
     if (top < padding) {
       top = padding;
-    }
-    if (top + actualCardHeight > containerHeight - padding) {
-      top = containerHeight - actualCardHeight - padding;
     }
 
     return {
@@ -301,20 +302,22 @@ export default function ViewMap({
         {/* Card positioned relative to marker with bounds checking */}
         {selectedProperty && markerPosition && (
           <div
-            className="z-30 w-[220px] shadow-lg rounded-xl property-card-measure"
+            className="z-30 w-[165px] shadow-lg rounded-xl property-card-measure transition-all duration-150"
             style={getCardStyle()}
           >
             <div className="relative bg-white rounded-xl">
               <button
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+                  selectedPropertyRef.current = null;
                   setSelectedProperty(null);
                   setMarkerPosition(null);
                 }}
                 type="button"
                 aria-label="Close"
-                className="absolute top-1 right-1 z-30 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition-all"
+                className="absolute top-1 right-1 z-30 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-white/95 backdrop-blur-xs shadow-sm hover:bg-gray-100 transition-all text-gray-600 hover:text-black cursor-pointer"
               >
-                <X className="h-3.5 w-3.5 text-gray-600" />
+                <X className="h-2.5 w-2.5" />
               </button>
               <PropertyCard {...selectedProperty} layout="mapcard" />
             </div>

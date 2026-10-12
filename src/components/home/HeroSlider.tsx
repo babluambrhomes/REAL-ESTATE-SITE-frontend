@@ -131,15 +131,18 @@ export const HeroSlider = () => {
                 India’s Most Trusted Buying platform
               </p>
 
-              {/* 3 Circular Badges Row */}
+              {/* Trust Badges */}
               <div className="mt-6 flex flex-wrap items-center gap-6 sm:gap-8 pt-1">
                 {/* Badge 1: Verified Properties */}
                 <div className="flex items-center gap-3">
-                  <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0">
-                    <svg className="h-[30px] w-[30px] shrink-0" viewBox="0 0 24 26" fill="none">
-                      <path d="M12 1L3.5 4.5V12C3.5 18.5 7.8 23.5 12 25C16.2 23.5 20.5 18.5 20.5 12V4.5L12 1Z" fill="#1d7bf8" />
-                      <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                  <div className="flex h-[54px] w-[54px] sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0 p-2.5">
+                    <Image
+                      src="/icon/verified_properties_shield.png"
+                      alt="Verified Properties"
+                      width={34}
+                      height={34}
+                      className="object-contain w-7 h-7 sm:w-8 sm:h-8"
+                    />
                   </div>
                   <div className="leading-[1.25] text-left">
                     <span className="block text-[14.5px] font-normal text-black">Verified</span>
@@ -149,12 +152,14 @@ export const HeroSlider = () => {
 
                 {/* Badge 2: Trusted Agents */}
                 <div className="flex items-center gap-3">
-                  <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0">
-                    <svg className="h-[30px] w-[30px] shrink-0" viewBox="0 0 24 24" fill="none">
-                      <circle cx="10" cy="7" r="4.5" fill="#1d7bf8" />
-                      <path d="M1.5 19.5c0-4 3.8-6 8.5-6s8.5 2 8.5 6" fill="#1d7bf8" />
-                      <path d="M16 10.5L18.5 13L23 8" stroke="#00A3FF" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                  <div className="flex h-[54px] w-[54px] sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0 p-2.5">
+                    <Image
+                      src="/icon/trusted_agents_user.png"
+                      alt="Trusted Agents"
+                      width={34}
+                      height={34}
+                      className="object-contain w-7 h-7 sm:w-8 sm:h-8"
+                    />
                   </div>
                   <div className="leading-[1.25] text-left">
                     <span className="block text-[14.5px] font-normal text-black">Trusted</span>
@@ -162,19 +167,20 @@ export const HeroSlider = () => {
                   </div>
                 </div>
 
-                {/* Badge 3: Best Deal */}
+                {/* Badge 3: Best Deals */}
                 <div className="flex items-center gap-3">
-                  <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0">
-                    <svg className="h-[32px] w-[32px] shrink-0" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2l2.3 2 3-.4 1.3 2.8 2.8.8.2 3 2 2.3-1.1 2.9 1.1 2.9-2 2.3-.2 3-2.8.8-1.3 2.8-3-.4L12 22l-2.3-2-3 .4-1.3-2.8-2.8-.8-.2-3-2-2.3 1.1-2.9-1.1-2.9 2-2.3.2-3 2.8-.8 1.3-2.8 3 .4L12 2z" fill="#1d7bf8" />
-                      <path d="M8.5 15.5L15.5 8.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
-                      <circle cx="9" cy="9" r="1.2" fill="white" />
-                      <circle cx="15" cy="15" r="1.2" fill="white" />
-                    </svg>
+                  <div className="flex h-[54px] w-[54px] sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0 p-2.5">
+                    <Image
+                      src="/icon/best_deals_percent.png"
+                      alt="Best Deals"
+                      width={36}
+                      height={36}
+                      className="object-contain w-7 h-7 sm:w-8 sm:h-8"
+                    />
                   </div>
                   <div className="leading-[1.25] text-left">
                     <span className="block text-[14.5px] font-normal text-black">Best</span>
-                    <span className="block text-[14.5px] font-normal text-black">Deal</span>
+                    <span className="block text-[14.5px] font-normal text-black">Deals</span>
                   </div>
                 </div>
               </div>

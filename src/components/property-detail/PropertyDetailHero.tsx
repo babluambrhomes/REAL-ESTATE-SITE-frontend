@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Download,
   Heart,
@@ -10,6 +11,7 @@ import {
   MapPin,
   Play,
   ChevronDown,
+  ArrowRight,
 } from "lucide-react";
 import { Property } from "@/types";
 
@@ -110,6 +112,7 @@ export const PropertyDetailHero = ({
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [liked, setLiked] = useState(false);
   const [configOpen, setConfigOpen] = useState(false);
+  const [showMapPopup, setShowMapPopup] = useState(true);
 
   const galleryImages = [
     "/images/properties/max-estate-tower-figma.jpg",
@@ -421,10 +424,10 @@ export const PropertyDetailHero = ({
         </div>
 
         {/* 2. Interactive Map Card with Floating Popup */}
-        <div className="relative w-full h-46 sm:h-48 rounded-2xl border border-slate-200 bg-[#E8F4EC] overflow-hidden shadow-2xs">
+        <div className="relative w-full h-52 sm:h-56 rounded-2xl border border-slate-200 bg-[#E8F4EC] overflow-hidden shadow-2xs">
           {/* Map Graphic Lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-70 pointer-events-none" viewBox="0 0 400 200">
-            <rect x="0" y="0" width="400" height="200" fill="#E8F4EC" />
+          <svg className="absolute inset-0 w-full h-full opacity-70 pointer-events-none" viewBox="0 0 400 220">
+            <rect x="0" y="0" width="400" height="220" fill="#E8F4EC" />
             <path d="M-20 60 Q120 40 220 90 T420 120" stroke="#FFFFFF" strokeWidth="10" fill="none" />
             <path d="M-20 60 Q120 40 220 90 T420 120" stroke="#CBD5E1" strokeWidth="6" fill="none" />
             <path d="M80 -20 Q140 100 200 220" stroke="#FFFFFF" strokeWidth="8" fill="none" />
@@ -437,51 +440,77 @@ export const PropertyDetailHero = ({
             <rect x="290" y="30" width="80" height="40" rx="4" fill="#D7CCC8" opacity="0.5" />
           </svg>
 
-          <div className="absolute top-2.5 left-4 text-[9px] font-bold text-slate-500 uppercase tracking-wider">
-            Delhi / Haryana
+          {/* Region Badges */}
+          <div className="absolute top-2 left-3 text-[9px] font-bold text-slate-500 uppercase tracking-wider z-10 pointer-events-none">
+            {property?.location?.split(",")?.[1]?.trim() || "Delhi / Haryana"}
           </div>
 
-          <div className="absolute top-2.5 right-4 flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#0B132B] text-white text-[9px] font-semibold shadow-md">
+          <div className="absolute top-2 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#0B132B] text-white text-[8.5px] font-semibold shadow-md z-10 pointer-events-none">
             <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-            <span>Manipal Palam Vihar</span>
+            <span>{property?.location?.split(",")?.[0]?.trim() || "Manipal Palam Vihar"}</span>
           </div>
 
-          <div className="absolute bottom-2.5 right-6 flex items-center justify-center h-6 w-6 rounded-full bg-[#0B132B] text-white shadow-md">
-            <MapPin size={12} className="text-[#00B4D8]" />
-          </div>
-
-          {/* Floating Card Popup */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[86%] max-w-[260px] bg-white rounded-xl shadow-xl border border-slate-200/90 p-2 z-10">
-            <div className="relative h-16 w-full rounded-lg overflow-hidden bg-slate-900">
-              <Image
-                src="/images/properties/tower-popular-figma.jpg"
-                alt="The Terraces"
-                fill
-                className="object-cover"
-              />
-              <button className="absolute top-1 right-1 h-4 w-4 rounded-full bg-black/60 text-white flex items-center justify-center text-[8.5px] font-bold hover:bg-black transition-colors cursor-pointer">
-                ✕
-              </button>
+          {/* Interactive Map Pin - Click to toggle card */}
+          <button
+            type="button"
+            onClick={() => setShowMapPopup((prev) => !prev)}
+            aria-label="Toggle property location card"
+            className="absolute top-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group"
+          >
+            <div className="relative flex items-center justify-center h-7 w-7 rounded-full bg-[#1865F2] text-white shadow-md transition-transform group-hover:scale-110">
+              <MapPin size={14} className="text-white fill-white" />
+              <span className="absolute -bottom-0.5 h-1.5 w-1.5 rotate-45 bg-[#1865F2]" />
             </div>
-
-            <div className="pt-1.5 space-y-0.5">
-              <span className="px-2 py-0.5 rounded-full text-[8px] font-bold bg-[#EFF6FF] text-[#1865F2]">
-                2, 3 &amp; 4 BHK Apartments
+            {!showMapPopup && (
+              <span className="mt-1 px-1.5 py-0.5 rounded-full bg-slate-900/80 text-white text-[8.5px] font-medium shadow-sm whitespace-nowrap animate-pulse">
+                Click pin to view
               </span>
-              <h5 className="text-[11px] font-bold text-[#0B132B] truncate pt-0.5">
-                The Terraces at Max Estate 361
-              </h5>
-              <div className="flex items-center gap-1 text-[9px] text-slate-500">
-                <MapPin size={9} className="text-[#1865F2]" />
-                <span>Sector 76, Noida</span>
+            )}
+          </button>
+
+          {/* Floating Card Popup - Placed directly BELOW the pin */}
+          {showMapPopup && (
+            <div className="absolute left-1/2 top-15 -translate-x-1/2 w-[165px] bg-white rounded-xl shadow-xl border border-slate-200/90 p-1.5 z-20 transition-all duration-150">
+              <div className="relative h-[62px] w-full rounded-lg overflow-hidden bg-slate-900">
+                <Image
+                  src={property?.images?.[0] || "/images/properties/tower-popular-figma.jpg"}
+                  alt={property?.title || "Property"}
+                  fill
+                  sizes="165px"
+                  className="object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowMapPopup(false)}
+                  aria-label="Close"
+                  className="absolute top-1 right-1 h-4 w-4 rounded-full bg-black/65 hover:bg-black text-white flex items-center justify-center text-[8px] font-bold transition-colors cursor-pointer"
+                >
+                  ✕
+                </button>
               </div>
 
-              <button className="w-full mt-1 py-1 rounded-md bg-[#1865F2] hover:bg-blue-700 text-white text-[10px] font-bold flex items-center justify-center gap-1 shadow-2xs transition-colors cursor-pointer">
-                <span>View Details</span>
-                <span>→</span>
-              </button>
+              <div className="p-1 pt-1.5 space-y-0.5">
+                <span className="inline-block px-1.5 py-0.5 rounded-full text-[8px] font-semibold bg-[#EFF6FF] text-[#1865F2] leading-none">
+                  {property?.chips?.[0] || "2, 3 & 4 BHK Apartments"}
+                </span>
+                <h5 className="text-[10px] font-bold text-[#0B132B] truncate pt-0.5">
+                  {property?.title || "The Terraces at Max Estate 361"}
+                </h5>
+                <div className="flex items-center gap-0.5 text-[8.5px] text-slate-500">
+                  <MapPin size={9} className="text-[#1865F2] shrink-0" />
+                  <span className="truncate">{property?.location || "Sector 76, Noida"}</span>
+                </div>
+
+                <Link
+                  href={`/properties/${property?.id || ""}`}
+                  className="w-full mt-1.5 py-1 rounded-md bg-[#1865F2] hover:bg-blue-700 text-white text-[9.5px] font-semibold flex items-center justify-center gap-1 shadow-2xs transition-colors cursor-pointer"
+                >
+                  <span>View Details</span>
+                  <ArrowRight size={10} />
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* 3. Property Comparison */}

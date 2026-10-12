@@ -102,7 +102,7 @@ export const PropertyCard = ({
   };
 
   const propertyImage = getImageUrl(images[0]);
-  const propertyUrl = id ? `/property/${id}` : `/properties/${encodeURIComponent(title || "details")}`;
+  const propertyUrl = id ? `/properties/${id}` : `/properties/${encodeURIComponent(title || "details")}`;
 
   if (layout === "horizontal") {
     const rawPrice = price ? price.replace("Cr", "").trim() : "₹1.25";
@@ -578,43 +578,43 @@ export const PropertyCard = ({
     );
   }
 
-  // Map card layout (Matches Map Popover)
+  // Map card layout (Matches Map Popover - Ultra Compact & Sleek)
   return (
-    <div className="overflow-hidden w-[230px] rounded-2xl bg-white p-2 shadow-xl border border-slate-100">
-      <div className="relative h-28 w-full overflow-hidden rounded-xl bg-slate-100">
+    <div className="overflow-hidden w-[165px] rounded-xl bg-white p-1.5 shadow-xl border border-slate-100">
+      <div className="relative h-[68px] w-full overflow-hidden rounded-lg bg-slate-100">
         <Image
           src={propertyImage}
           alt={title || "Property"}
           fill
-          sizes="230px"
+          sizes="165px"
           className="object-cover"
           unoptimized
         />
-        <div className="absolute inset-x-0 bottom-1.5 flex justify-center items-center gap-1 z-10">
-          <span className="h-1.5 w-1.5 rounded-full bg-white shadow-xs" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+        <div className="absolute inset-x-0 bottom-1 flex justify-center items-center gap-1 z-10">
+          <span className="h-1 w-1 rounded-full bg-white shadow-xs" />
+          <span className="h-1 w-1 rounded-full bg-white/70" />
+          <span className="h-1 w-1 rounded-full bg-white/70" />
+          <span className="h-1 w-1 rounded-full bg-white/70" />
         </div>
       </div>
 
-      <div className="p-2 pt-2.5">
-        <div className="inline-block rounded-full bg-blue-50/90 border border-blue-200 px-2 py-0.5 text-[9.5px] font-semibold text-[#2563EB]">
+      <div className="p-1 pt-1.5">
+        <div className="inline-block max-w-full truncate rounded-full bg-blue-50 border border-blue-200 px-1.5 py-0.5 text-[8px] font-semibold text-[#2563EB] leading-none">
           {chips?.[0] || "2, 3 & 4 BHK Apartments"}
         </div>
-        <h3 className="mt-1 text-xs font-semibold text-slate-900 truncate">
+        <h3 className="mt-1 text-[10.5px] font-bold text-slate-900 truncate leading-tight">
           {title || "The Terraces at Max Estate 361"}
         </h3>
-        <p className="mt-0.5 flex items-center gap-1 text-[10.5px] text-slate-500 font-medium">
-          <MapPin className="h-3 w-3 shrink-0 text-[#2563EB]" />
+        <p className="mt-0.5 flex items-center gap-0.5 text-[8.5px] text-slate-500 font-medium">
+          <MapPin className="h-2.5 w-2.5 shrink-0 text-[#2563EB]" />
           <span className="truncate">{location || "Sector 76, Noida"}</span>
         </p>
         <Link
           href={propertyUrl}
-          className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#2563EB] py-1.5 text-[11px] font-semibold text-white shadow-sm transition-all hover:bg-blue-700"
+          className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-md bg-[#2563EB] py-1 text-[9.5px] font-semibold text-white shadow-xs transition-all hover:bg-blue-700 active:scale-[0.98]"
         >
           <span>View Details</span>
-          <ArrowRight className="h-3 w-3" />
+          <ArrowRight className="h-2.5 w-2.5" />
         </Link>
       </div>
     </div>
