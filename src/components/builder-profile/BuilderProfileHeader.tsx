@@ -18,44 +18,43 @@ export const BuilderProfileHeader = ({
   founded = "Founded 2012",
   projectsCount = "25+ Project Delivered",
   locations = "Noida , Greater Noida, Gurgaon",
-  coverSrc = "/images/properties/modern-white-penthouse.jpg",
+  coverSrc = "/builders/builder_cover_modern_building.jpg",
 }: BuilderProfileHeaderProps) => {
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-2 font-jakarta">
-      
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 font-jakarta">
       {/* 1. Cover Banner */}
-      <div className="relative w-full h-[180px] sm:h-[220px] md:h-[260px] rounded-[24px] overflow-hidden border border-slate-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-slate-900">
+      <div className="relative w-full h-[190px] sm:h-[230px] md:h-[270px] rounded-[24px] overflow-hidden border border-slate-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-slate-900">
         <Image
           src={coverSrc}
           alt="Builder Cover"
           fill
           priority
-          className="object-cover object-center opacity-90"
+          className="object-cover object-center"
           sizes="(max-width: 1360px) 100vw, 1360px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
 
-        {/* Add Cover Page Button */}
+        {/* + Add Cover Page Button */}
         <button
           type="button"
-          className="absolute right-4 sm:right-6 bottom-4 px-3.5 py-1.5 rounded-lg bg-white/95 hover:bg-white text-slate-800 text-xs font-bold flex items-center gap-1.5 shadow-md backdrop-blur-sm transition-all cursor-pointer"
+          className="absolute right-4 sm:right-6 bottom-4 px-3.5 py-1.5 rounded-lg bg-sky-500/90 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md backdrop-blur-xs transition-all cursor-pointer border border-sky-400/40"
         >
-          <Plus className="w-3.5 h-3.5 text-[#1865F2]" />
+          <Plus className="w-3.5 h-3.5 text-white stroke-[3]" />
           <span>Add Cover page</span>
         </button>
       </div>
 
-      {/* 2. White Floating Builder Identity Card */}
-      <div className="relative -mt-10 sm:-mt-12 bg-white rounded-[24px] border border-slate-200/90 p-4 sm:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] flex flex-col lg:flex-row items-center lg:items-center justify-between gap-5">
+      {/* 2. White Floating Builder Identity Card (Figma 1:1) */}
+      <div className="relative -mt-6 sm:-mt-8 bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex flex-col lg:flex-row items-center justify-between gap-5">
         
-        {/* Left: Logo & Info */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-5 text-center sm:text-left w-full lg:w-auto">
+        {/* Left: Logo & Builder Info */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-5 text-center sm:text-left w-full lg:w-auto">
           
-          {/* Exact Logo Box from Figma */}
-          <div className="relative shrink-0">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[20px] bg-[#F4F9FF] border-2 border-[#1865F2]/20 flex flex-col items-center justify-center p-2 shadow-2xs">
+          {/* Logo Box Overlapping Upwards */}
+          <div className="relative shrink-0 -mt-12 sm:-mt-14">
+            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-[24px] bg-white border-2 border-[#00D1FF] flex flex-col items-center justify-center p-3 shadow-[0_8px_25px_rgba(0,209,255,0.15)] relative">
               {/* Teal House Icon */}
-              <div className="w-10 h-10 rounded-lg bg-[#00D1FF] flex items-center justify-center text-white mb-1 shadow-2xs">
+              <div className="w-11 h-11 rounded-xl bg-[#00D1FF] flex items-center justify-center text-white mb-1.5 shadow-xs">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -69,15 +68,29 @@ export const BuilderProfileHeader = ({
                   <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
               </div>
-              <span className="text-[12px] font-black text-[#0B132B] tracking-tight leading-none">
-                Reverse<span className="text-[#00D1FF]">EXP</span><span className="text-[9px] text-slate-400 font-bold">.com</span>
+              <span className="text-[12.5px] font-black text-[#0B132B] tracking-tight leading-none">
+                Reverse<span className="text-[#00D1FF]">EXP</span><span className="text-[9.5px] text-slate-400 font-semibold">.com</span>
               </span>
             </div>
 
-            {/* Bottom-right verified 4-star crosshair badge */}
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
-              <div className="w-4 h-4 rounded-full bg-[#1865F2] flex items-center justify-center text-white">
-                <Check className="w-2.5 h-2.5 stroke-[3.5]" />
+            {/* Blue Target / Verified Badge at bottom-right of logo */}
+            <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white border-2 border-white shadow-md flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-[#1865F2] flex items-center justify-center text-white">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-3 h-3"
+                >
+                  <circle cx="12" cy="12" r="7" />
+                  <line x1="12" y1="2" x2="12" y2="6" />
+                  <line x1="12" y1="18" x2="12" y2="22" />
+                  <line x1="2" y1="12" x2="6" y2="12" />
+                  <line x1="18" y1="12" x2="22" y2="12" />
+                </svg>
               </div>
             </div>
           </div>
@@ -97,18 +110,18 @@ export const BuilderProfileHeader = ({
               {subtitle}
             </p>
 
-            {/* Badges row with icons */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-[11px] font-semibold text-slate-500 pt-1">
+            {/* Badges line with subtle gray dot separators */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-[11px] font-semibold text-slate-500 pt-1">
               <span className="flex items-center gap-1.5 text-slate-600">
                 <Calendar className="w-3 h-3 text-[#1865F2]" />
                 {founded}
               </span>
-              <span>•</span>
+              <span className="text-slate-300">•</span>
               <span className="flex items-center gap-1.5 text-slate-600">
                 <Award className="w-3 h-3 text-[#1865F2]" />
                 {projectsCount}
               </span>
-              <span>•</span>
+              <span className="text-slate-300">•</span>
               <span className="flex items-center gap-1.5 text-slate-600">
                 <MapPin className="w-3 h-3 text-[#1865F2]" />
                 {locations}
@@ -117,7 +130,7 @@ export const BuilderProfileHeader = ({
           </div>
         </div>
 
-        {/* Right: Actions */}
+        {/* Right: Actions (Contact Builder, WhatsApp, Schedule Visit) */}
         <div className="flex flex-col items-center lg:items-end gap-2.5 w-full sm:w-auto shrink-0">
           <div className="flex items-center gap-2.5 w-full sm:w-auto">
             {/* Contact Builder */}
@@ -139,12 +152,12 @@ export const BuilderProfileHeader = ({
             </button>
           </div>
 
-          {/* Schedule Visit */}
+          {/* Schedule Visit (Centered below) */}
           <button
             type="button"
-            className="w-full sm:w-auto px-6 py-2 bg-[#F0F6FF] hover:bg-[#E2EFFF] text-[#1865F2] border border-[#BFDBFE] text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="w-full px-6 py-2 bg-[#F0F6FF] hover:bg-[#E2EFFF] text-[#1865F2] border border-[#BFDBFE] text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
-            <Calendar className="w-3.5 h-3.5" />
+            <Calendar className="w-3.5 h-3.5 text-[#1865F2]" />
             <span>Schedule Visit</span>
           </button>
         </div>

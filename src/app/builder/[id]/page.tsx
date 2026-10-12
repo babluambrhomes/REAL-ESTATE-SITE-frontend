@@ -19,87 +19,125 @@ export default function SingleBuilderProfilePage() {
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const [activeTab, setActiveTab] = useState("overview");
 
-  const handleTabChange = (tabId: string) => {
-    setActiveTab(tabId);
-    const element = document.getElementById(tabId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#F0F6FF] relative flex flex-col font-jakarta overflow-x-hidden">
+    <div className="min-h-screen bg-[#F0F6FF] relative flex flex-col font-jakarta overflow-x-clip">
       {/* Soft Ambient Figma Glow Background */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-10%,rgba(219,234,254,0.6),rgba(240,246,255,0.9))] pointer-events-none z-0" />
 
       <div className="relative z-10 flex flex-col min-h-screen">
-      {/* 1. Top Announcement Bar */}
-      {showAnnouncement && (
-        <TopAnnouncementBar
-          isFixed={false}
-          onClose={() => setShowAnnouncement(false)}
-        />
-      )}
+        {/* 1. Top Announcement Bar */}
+        {showAnnouncement && (
+          <TopAnnouncementBar
+            isFixed={false}
+            onClose={() => setShowAnnouncement(false)}
+          />
+        )}
 
-      {/* 2. Global Unified Header */}
-      <SearchHeader />
+        {/* 2. Global Unified Header */}
+        <SearchHeader />
 
-      {/* Main Container */}
-      <main className="flex-1 pb-16">
-        {/* 3. Hero Cover, Logo, Title, Verification, Actions */}
-        <BuilderProfileHeader />
+        {/* Main Content Area */}
+        <main className="flex-1 pb-16">
+          {/* 3. Hero Cover, Logo, Title, Verification, Actions */}
+          <BuilderProfileHeader />
 
-        {/* 4. Roofin Trust Score & Location Presence Stats */}
-        <BuilderTrustAndStats />
+          {/* 4. Roofin Trust Score & Location Presence Stats */}
+          <BuilderTrustAndStats />
 
-        {/* 5. Sticky Navigation Tabs Strip */}
-        <BuilderNavTabs activeTab={activeTab} onTabChange={handleTabChange} />
+          {/* 5. Sticky Navigation Tabs Strip */}
+          <BuilderNavTabs
+            activeTab={activeTab}
+            onTabChange={(tabId) => setActiveTab(tabId)}
+          />
 
-        {/* 6. Main 2-Column Content Layout */}
-        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            
-            {/* Left Column: Projects, Track Record, Progress, About, Reviews, FAQs (Col 8) */}
-            <div className="lg:col-span-8 space-y-6">
-              {/* Projects Section */}
-              <div id="projects" className="scroll-mt-6">
-                <BuilderProjectsSection />
+          {/* 6. Main 2-Column Content Layout */}
+          <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              
+              {/* =========================================================================
+                  SINGLE UNIFIED LEFT CONTAINER DIV (Contains all left-side content & tabs)
+                 ========================================================================= */}
+              <div id="builder-left-content-column" className="lg:col-span-8 w-full flex flex-col space-y-6">
+                
+                {/* 1. Overview Tab -> All sections stacked */}
+                {activeTab === "overview" && (
+                  <div className="w-full flex flex-col space-y-6">
+                    <BuilderProjectsSection />
+                    <BuilderTrackRecord />
+                    <BuilderConstructionProgress />
+                    <BuilderAboutDetails />
+                    <BuilderReviewsSection />
+                    <BuilderFaqSection />
+                  </div>
+                )}
+
+                {/* 2. Projects Tab */}
+                {activeTab === "projects" && (
+                  <div className="w-full">
+                    <BuilderProjectsSection />
+                  </div>
+                )}
+
+                {/* 3. Delivery Track Record Tab */}
+                {activeTab === "delivery" && (
+                  <div className="w-full space-y-3">
+                    <h2 className="text-lg sm:text-xl font-black text-[#0B132B] px-1">
+                      Delivery Track Record
+                    </h2>
+                    <BuilderTrackRecord />
+                  </div>
+                )}
+
+                {/* 4. Construction Updates Tab */}
+                {activeTab === "construction" && (
+                  <div className="w-full space-y-3">
+                    <h2 className="text-lg sm:text-xl font-black text-[#0B132B] px-1">
+                      Construction Updates
+                    </h2>
+                    <BuilderConstructionProgress />
+                  </div>
+                )}
+
+                {/* 5. About Tab */}
+                {activeTab === "about" && (
+                  <div className="w-full space-y-3">
+                    <h2 className="text-lg sm:text-xl font-black text-[#0B132B] px-1">
+                      About
+                    </h2>
+                    <BuilderAboutDetails />
+                  </div>
+                )}
+
+                {/* 6. Reviews Tab */}
+                {activeTab === "reviews" && (
+                  <div className="w-full space-y-3">
+                    <h2 className="text-lg sm:text-xl font-black text-[#0B132B] px-1">
+                      Reviews
+                    </h2>
+                    <BuilderReviewsSection />
+                  </div>
+                )}
+
+                {/* 7. Q&A / FAQs Tab */}
+                {activeTab === "qa" && (
+                  <div className="w-full space-y-3">
+                    <h2 className="text-lg sm:text-xl font-black text-[#0B132B] px-1">
+                      FAQS & Inquiries
+                    </h2>
+                    <BuilderFaqSection />
+                  </div>
+                )}
+
               </div>
 
-              {/* Delivery Track Record */}
-              <div id="delivery" className="scroll-mt-6">
-                <BuilderTrackRecord />
+              {/* Right Column (Col 4): Sticky Sidebar (3 Cards) */}
+              <div id="builder-right-sticky-sidebar" className="lg:col-span-4 sticky top-4 self-start space-y-4">
+                <BuilderSidebarLeadForm />
               </div>
 
-              {/* Construction Progress */}
-              <div id="construction" className="scroll-mt-6">
-                <BuilderConstructionProgress />
-              </div>
-
-              {/* About Builder Details */}
-              <div id="about" className="scroll-mt-6">
-                <BuilderAboutDetails />
-              </div>
-
-              {/* Reputation & Reviews */}
-              <div id="reviews" className="scroll-mt-6">
-                <BuilderReviewsSection />
-              </div>
-
-              {/* FAQs Accordion */}
-              <div id="qa" className="scroll-mt-6">
-                <BuilderFaqSection />
-              </div>
             </div>
-
-            {/* Right Column: Lead Form, Bank Approvals, Portfolio Donut (Col 4 Sticky) */}
-            <div className="lg:col-span-4 sticky top-6 space-y-4">
-              <BuilderSidebarLeadForm />
-            </div>
-
           </div>
-        </div>
-      </main>
+        </main>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export const BuilderNavTabs = ({
 
   return (
     <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1 font-jakarta">
-      <div className="bg-white rounded-[20px] border border-slate-200/90 p-2 shadow-xs overflow-x-auto no-scrollbar">
+      <div className="bg-white rounded-[22px] border border-slate-200/90 p-2 shadow-xs overflow-x-auto no-scrollbar">
         <div className="flex items-center gap-2 min-w-max">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -32,7 +32,7 @@ export const BuilderNavTabs = ({
                 onClick={() => onTabChange(tab.id)}
                 className={`px-5 py-2 rounded-full text-xs sm:text-[13px] font-bold transition-all cursor-pointer ${
                   isActive
-                    ? "bg-[#1865F2] text-white shadow-[0_4px_12px_rgba(24,101,242,0.3)]"
+                    ? "bg-[#F0F6FF] text-[#1865F2] border border-[#1865F2] shadow-2xs"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent"
                 }`}
               >

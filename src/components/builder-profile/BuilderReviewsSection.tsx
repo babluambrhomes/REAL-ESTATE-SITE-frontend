@@ -6,9 +6,9 @@ export const BuilderReviewsSection = () => {
   const ratingBreakdown = [
     { stars: "5 star", percent: 85 },
     { stars: "4 star", percent: 65 },
-    { stars: "3 star", percent: 55 },
-    { stars: "2 star", percent: 45 },
-    { stars: "1 star", percent: 80 },
+    { stars: "3 star", percent: 45 },
+    { stars: "2 star", percent: 20 },
+    { stars: "1 star", percent: 10 },
   ];
 
   const reviews = [
@@ -16,34 +16,34 @@ export const BuilderReviewsSection = () => {
       id: "rev-1",
       name: "Ritik Singh",
       avatarBg: "bg-purple-600 text-white",
-      date: "10/7/2022 1:10:37 AM",
+      date: "10/7/2022 10:27 AM",
       rating: 5,
       comment:
-        "The Property Is Really Nice. I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
+        "The Property Is Really Nice, I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
     },
     {
       id: "rev-2",
       name: "Ritik Singh",
       avatarBg: "bg-rose-600 text-white",
-      date: "10/7/2022 1:10:37 AM",
+      date: "10/7/2022 10:27 AM",
       rating: 5,
       comment:
-        "The Property Is Really Nice. I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
+        "The Property Is Really Nice, I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
     },
   ];
 
   return (
-    <div className="w-full bg-white rounded-[22px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] font-jakarta">
+    <div className="w-full bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)] font-jakarta">
       {/* Header with Write Review */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base sm:text-lg font-black text-[#0B132B]">
+        <h3 className="text-base sm:text-lg font-black text-[#1865F2] tracking-tight">
           Reputation & Reviews
         </h3>
         <button
           type="button"
           className="text-xs font-bold text-[#1865F2] hover:underline flex items-center gap-1 cursor-pointer"
         >
-          <Edit3 className="w-3 h-3" />
+          <Edit3 className="w-3 h-3 text-[#1865F2]" />
           <span>Write Review</span>
         </button>
       </div>
@@ -51,13 +51,13 @@ export const BuilderReviewsSection = () => {
       {/* Ratings Summary Box */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pb-6 border-b border-slate-100">
         {/* Big Score */}
-        <div className="md:col-span-4 flex flex-col items-center justify-center text-center p-3">
-          <span className="text-4xl sm:text-5xl font-black text-[#0B132B]">
+        <div className="md:col-span-4 flex flex-col items-center justify-center text-center p-2">
+          <span className="text-4xl sm:text-5xl font-black text-[#00B368]">
             4.5
           </span>
           <div className="flex items-center gap-1 text-amber-400 my-1.5">
             {[1, 2, 3, 4, 5].map((s) => (
-              <Star key={s} className="w-4 h-4 fill-amber-400" />
+              <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             ))}
           </div>
           <span className="text-xs text-slate-400 font-semibold">
@@ -112,14 +112,14 @@ export const BuilderReviewsSection = () => {
                   <h5 className="text-xs sm:text-[13px] font-black text-[#0B132B]">
                     {rev.name}
                   </h5>
-                  <span className="text-[10px] text-slate-400 font-medium">
+                  <span className="text-[10.5px] text-slate-400 font-medium">
                     {rev.date}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-0.5 my-1 text-amber-400">
                   {[...Array(rev.rating)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-amber-400" />
+                    <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
 

@@ -1,31 +1,91 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown, Calculator } from "lucide-react";
+import { ChevronDown, Calculator } from "lucide-react";
 
 export const BuilderSidebarLeadForm = () => {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
-  const [city, setCity] = useState("");
+  const [email, setEmail] = useState("");
   const [budget, setBudget] = useState("");
   const [project, setProject] = useState("");
   const [agreed, setAgreed] = useState(true);
 
   const banks = [
-    { name: "SBI", color: "bg-blue-600 text-white" },
-    { name: "HDFC BANK", color: "bg-red-600 text-white" },
-    { name: "ICICI Bank", color: "bg-orange-600 text-white" },
-    { name: "AXIS BANK", color: "bg-rose-700 text-white" },
-    { name: "kotak", color: "bg-red-500 text-white" },
-    { name: "Union Bank", color: "bg-blue-700 text-white" },
+    {
+      name: "SBI",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 rounded-full bg-[#0091DF] flex items-center justify-center shrink-0">
+            <div className="w-1 h-1.5 bg-white rounded-t-full" />
+          </div>
+          <span className="text-[11px] font-black text-[#0091DF] tracking-tight">SBI</span>
+        </div>
+      ),
+    },
+    {
+      name: "AXIS BANK",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 bg-[#97144D] rounded-xs flex items-center justify-center text-white text-[8px] font-black shrink-0">
+            ▲
+          </div>
+          <span className="text-[10px] font-black text-[#97144D] tracking-tight">AXIS BANK</span>
+        </div>
+      ),
+    },
+    {
+      name: "ICICI BANK",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 rounded-full bg-[#F37021] flex items-center justify-center text-white text-[7px] font-black shrink-0">
+            i
+          </div>
+          <span className="text-[10px] font-black text-[#F37021] tracking-tight">ICICI BANK</span>
+        </div>
+      ),
+    },
+    {
+      name: "HDFC BANK",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 bg-[#004C8F] border border-[#ED232A] rounded-xs flex items-center justify-center shrink-0">
+            <div className="w-1.5 h-1.5 bg-[#ED232A]" />
+          </div>
+          <span className="text-[10px] font-black text-[#004C8F] tracking-tight">HDFC BANK</span>
+        </div>
+      ),
+    },
+    {
+      name: "kotak",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 rounded-full bg-[#ED1C24] flex items-center justify-center text-white text-[7px] font-bold shrink-0">
+            ∞
+          </div>
+          <span className="text-[11px] font-black text-[#ED1C24] tracking-tight">kotak</span>
+        </div>
+      ),
+    },
+    {
+      name: "Union Bank",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 rounded-xs bg-[#E31E24] flex items-center justify-center text-white text-[7px] font-black shrink-0">
+            UB
+          </div>
+          <span className="text-[10px] font-black text-[#003B73] tracking-tight">Union Bank</span>
+        </div>
+      ),
+    },
   ];
 
   return (
     <div className="w-full space-y-4 font-jakarta">
-      {/* 1. Card: Interested In This Builder ? */}
-      <div className="bg-white rounded-[22px] border border-slate-200/90 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
-        <h3 className="text-sm font-black text-[#0B132B]">
-          Interested In This Builder ?
+      {/* 1. Card: Interested in this builder ? */}
+      <div className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
+        <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B]">
+          Interested in this builder ?
         </h3>
         <p className="text-[11px] text-slate-500 font-medium mt-1 leading-relaxed">
           Get Expert Guidance For Your Ideal Home Purchase Today.
@@ -54,10 +114,10 @@ export const BuilderSidebarLeadForm = () => {
 
           <div>
             <input
-              type="text"
-              placeholder="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-xs text-slate-800 placeholder:text-slate-400 focus:bg-white focus:border-[#1865F2] focus:outline-none transition-all"
             />
           </div>
@@ -99,17 +159,17 @@ export const BuilderSidebarLeadForm = () => {
               type="checkbox"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="w-3.5 h-3.5 rounded border-slate-300 text-[#10B981] focus:ring-0"
+              className="w-3.5 h-3.5 rounded border-slate-300 text-[#00B368] focus:ring-0"
             />
             <span className="text-[10.5px] text-slate-500">
-              Agree to terms & Condition
+              I Agree To ReverseExp Terms & Condition
             </span>
           </label>
 
           {/* Green Submit CTA */}
           <button
             type="submit"
-            className="w-full py-2.5 bg-[#10B981] hover:bg-[#0ea371] text-white text-xs font-bold rounded-xl shadow-[0_4px_14px_rgba(16,185,129,0.3)] transition-all cursor-pointer mt-1"
+            className="w-full py-2.5 bg-[#00B368] hover:bg-[#009b5a] text-white text-xs font-bold rounded-xl shadow-[0_4px_14px_rgba(0,179,104,0.3)] transition-all cursor-pointer mt-1"
           >
             Contact Builder Now
           </button>
@@ -117,8 +177,8 @@ export const BuilderSidebarLeadForm = () => {
       </div>
 
       {/* 2. Card: Bank Approvals */}
-      <div className="bg-white rounded-[22px] border border-slate-200/90 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
-        <h3 className="text-sm font-black text-[#0B132B] mb-3">
+      <div className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
+        <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B] mb-3">
           Bank Approvals
         </h3>
 
@@ -126,27 +186,25 @@ export const BuilderSidebarLeadForm = () => {
           {banks.map((b) => (
             <div
               key={b.name}
-              className="h-9 rounded-lg border border-slate-100 bg-slate-50/60 flex items-center justify-center p-1 shadow-2xs hover:bg-slate-50 transition-colors"
+              className="h-10 rounded-xl border border-slate-100 bg-white flex items-center justify-center p-2 shadow-2xs hover:border-slate-300 transition-colors"
             >
-              <span className="text-[11px] font-black text-slate-800 tracking-tight">
-                {b.name}
-              </span>
+              {b.logo}
             </div>
           ))}
         </div>
 
         <button
           type="button"
-          className="w-full mt-3 text-center text-[11px] font-bold text-[#1865F2] hover:underline flex items-center justify-center gap-1.5 cursor-pointer"
+          className="w-full mt-3.5 py-2 rounded-xl border border-[#BFDBFE] bg-white hover:bg-blue-50/50 text-center text-[11px] font-bold text-[#1865F2] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
         >
-          <Calculator className="w-3.5 h-3.5" />
+          <Calculator className="w-3.5 h-3.5 text-[#1865F2]" />
           <span>Calculate Home Loan</span>
         </button>
       </div>
 
       {/* 3. Card: Company Portfolio (Donut Chart) */}
-      <div className="bg-white rounded-[22px] border border-slate-200/90 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
-        <h3 className="text-sm font-black text-[#0B132B] mb-3">
+      <div className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
+        <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B] mb-3">
           Company Portfolio
         </h3>
 
@@ -154,25 +212,25 @@ export const BuilderSidebarLeadForm = () => {
           {/* SVG Donut Chart */}
           <div className="relative w-24 h-24 shrink-0">
             <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
-              {/* Slice 1: Delivered (25/44 = ~57%) -> Orange */}
+              {/* Slice 1: Delivered (25/44 = ~57%) -> Teal/Blue */}
+              <circle
+                cx="18"
+                cy="18"
+                r="15.915"
+                fill="none"
+                stroke="#00D1FF"
+                strokeWidth="4.5"
+                strokeDasharray="57, 100"
+                strokeDashoffset="0"
+              />
+              {/* Slice 2: Ongoing (12/44 = ~27%) -> Orange */}
               <circle
                 cx="18"
                 cy="18"
                 r="15.915"
                 fill="none"
                 stroke="#F59E0B"
-                strokeWidth="4"
-                strokeDasharray="57, 100"
-                strokeDashoffset="0"
-              />
-              {/* Slice 2: Ongoing (12/44 = ~27%) -> Blue */}
-              <circle
-                cx="18"
-                cy="18"
-                r="15.915"
-                fill="none"
-                stroke="#1865F2"
-                strokeWidth="4"
+                strokeWidth="4.5"
                 strokeDasharray="27, 100"
                 strokeDashoffset="-57"
               />
@@ -183,7 +241,7 @@ export const BuilderSidebarLeadForm = () => {
                 r="15.915"
                 fill="none"
                 stroke="#10B981"
-                strokeWidth="4"
+                strokeWidth="4.5"
                 strokeDasharray="16, 100"
                 strokeDashoffset="-84"
               />
@@ -198,21 +256,21 @@ export const BuilderSidebarLeadForm = () => {
           <div className="flex-1 space-y-2 text-xs">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-slate-600 font-bold text-[11px]">
-                <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#00D1FF]" />
                 Delivered
               </span>
               <span className="font-black text-[#0B132B]">25</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-slate-600 font-bold text-[11px]">
-                <span className="w-2 h-2 rounded-full bg-[#1865F2]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#F59E0B]" />
                 Ongoing
               </span>
               <span className="font-black text-[#0B132B]">12</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-slate-600 font-bold text-[11px]">
-                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#10B981]" />
                 Upcoming
               </span>
               <span className="font-black text-[#0B132B]">7</span>

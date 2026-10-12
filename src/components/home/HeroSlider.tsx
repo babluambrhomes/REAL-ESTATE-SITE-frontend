@@ -76,8 +76,16 @@ export const HeroSlider = () => {
                     className="object-cover object-center"
                     unoptimized
                   />
-                  {/* Soft atmospheric blue shade between building and map */}
-                  <div className="absolute inset-y-0 right-0 hidden lg:block w-40 sm:w-56 bg-gradient-to-r from-transparent via-[#bfdcfa]/40 via-[#d6e8fb]/75 to-[#eaf2fb] pointer-events-none z-10" />
+                  {/* Exact Figma Vertical Shade Divider Overlay on right edge of banner */}
+                  <div className="absolute inset-y-0 right-0 hidden lg:block w-32 sm:w-44 lg:w-52 h-full pointer-events-none z-10">
+                    <Image
+                      src="/layout/hero_shade_divider.png"
+                      alt="Hero Shade"
+                      fill
+                      className="object-cover object-right pointer-events-none"
+                      priority
+                    />
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
@@ -154,7 +162,7 @@ export const HeroSlider = () => {
                   </div>
                 </div>
 
-                {/* Badge 3: Best Daal */}
+                {/* Badge 3: Best Deal */}
                 <div className="flex items-center gap-3">
                   <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0">
                     <svg className="h-[32px] w-[32px] shrink-0" viewBox="0 0 24 24" fill="none">
@@ -174,16 +182,21 @@ export const HeroSlider = () => {
           </div>
         </div>
 
-
-
+        {/* Vertical Transition Shade positioned between Banner and Map */}
+        <div className="hidden lg:block absolute top-0 bottom-0 left-[73%] -translate-x-1/2 w-24 lg:w-36 h-full z-20 pointer-events-none select-none">
+          <Image
+            src="/layout/hero_shade_divider.png"
+            alt="Atmospheric Shade Divider"
+            fill
+            className="object-cover object-center pointer-events-none"
+            priority
+          />
+        </div>
 
         {/* 2. Right Side: Interactive Map */}
         <div className="relative hidden lg:block lg:w-[27%] h-full bg-slate-100 overflow-hidden">
           <div className="relative h-full w-full">
             <ViewMap height="100%" properties={properties} />
-
-            {/* Left Edge Soft Atmospheric Shade from Banner to Map */}
-            <div className="absolute inset-y-0 left-0 w-28 sm:w-36 bg-gradient-to-r from-[#eaf2fb] via-[#eaf2fb]/60 to-transparent pointer-events-none z-10" />
 
             {/* Top Floating Badge: Premium Living (Exact match with zoomed screenshot) */}
             <div className="absolute top-24 left-4 z-20 w-[190px] rounded-2xl border border-slate-100 bg-white p-3.5 shadow-xl backdrop-blur-md">
@@ -234,18 +247,18 @@ export const HeroSlider = () => {
                 <span className="tracking-tight whitespace-nowrap">Explore on Map</span>
               </Link>
 
-              {/* 3 Vertical Circular Dots with Exact Shadows & Size */}
-              <div className="flex flex-col items-center gap-2.5">
+              {/* 3 Vertical Circular Dots */}
+              <div className="flex flex-col items-center gap-2">
                 {slides.map((_, index) => (
                   <button
                     key={index}
                     type="button"
                     aria-label={`Go to slide ${index + 1}`}
                     onClick={() => swiperRef.current?.slideToLoop(index)}
-                    className={`h-6 w-6 rounded-full transition-all duration-300 cursor-pointer ${
+                    className={`rounded-full transition-all duration-300 cursor-pointer ${
                       activeIndex === index
-                        ? "bg-[#1865F2] shadow-[0_4px_14px_rgba(24,101,242,0.5)] scale-105"
-                        : "bg-white shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-slate-50"
+                        ? "h-3.5 w-3.5 bg-[#1865F2] shadow-[0_2px_8px_rgba(24,101,242,0.5)] scale-110"
+                        : "h-3 w-3 bg-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] hover:bg-slate-50"
                     }`}
                   />
                 ))}
