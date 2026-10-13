@@ -144,7 +144,7 @@ export const TopRatedAgents = () => {
 
             {/* View Profile Button (solid blue) */}
             <Link
-              href="/broker"
+              href="/s/agent/jitender-singh"
               className="w-full py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-[11px] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs text-center"
             >
               View Profile

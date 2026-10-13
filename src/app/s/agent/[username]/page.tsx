@@ -1,161 +1,115 @@
 "use client";
 
+import { useState, use } from "react";
+import { Plus } from "lucide-react";
+import { TopAnnouncementBar } from "@/components/layout/TopAnnouncementBar";
 import { SearchHeader } from "@/components/layout/SearchHeader";
-import { Plus, UserPlus, UserCheck, Share2, Users, Ellipsis, MapPin, PhoneCall, Star } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
+import { BrokerHeroSection } from "@/components/broker-profile/BrokerHeroSection";
+import { BrokerHighlightsRow } from "@/components/broker-profile/BrokerHighlightsRow";
+import { BrokerTabs } from "@/components/broker-profile/BrokerTabs";
+import { BrokerPostedProperties } from "@/components/broker-profile/BrokerPostedProperties";
+import { BrokerRecentPosts } from "@/components/broker-profile/BrokerRecentPosts";
+import { BrokerVideosSection } from "@/components/broker-profile/BrokerVideosSection";
+import { BrokerAboutSection } from "@/components/broker-profile/BrokerAboutSection";
+import { BrokerSidebar } from "@/components/broker-profile/BrokerSidebar";
 
-export default function AgenProfilePage() {
+interface AgentProfilePageProps {
+  params: Promise<{ username: string }>;
+}
 
+export default function AgentProfilePage({ params }: AgentProfilePageProps) {
+  const { username } = use(params);
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <>
-      <SearchHeader />
-      <div className="bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/broker/brokerbg.png')" }}>
-        <div className="w-full  pt-24 pb-12">
-          {/* Cover Image */}
-          <div className="relative w-full h-44 overflow-hidden bg-gray-100">
-            <Image
-              src="/broker/bg_image.png"
-              alt="Cover"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-            <button className="absolute right-10 bottom-4 flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-gradient-to-r from-primary to-secondary text-xs font-medium text-white hover:opacity-90 transition-opacity">
-              <Plus className="w-4 h-4" />
-              Add Cover Page
-            </button>
+    <div className="min-h-screen flex flex-col font-jakarta bg-[#F8FAFC]">
+      
+      {/* 1. Top Announcement Bar */}
+      {showAnnouncement && (
+        <TopAnnouncementBar isFixed={false} onClose={() => setShowAnnouncement(false)} />
+      )}
 
-          </div>
+      {/* 2. Full-Bleed (Edge to Edge 100vw) Top Mesh Background Section */}
+      <div 
+        className="w-full relative pt-3 pb-24 sm:pb-28 overflow-hidden"
+        style={{
+          background: "linear-gradient(90deg, #B5F2E3 0%, #BCE7FD 50%, #A9C7FA 100%)",
+        }}
+      >
+        {/* Mint / Emerald green ambient glow on the left */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_55%,rgba(16,185,129,0.5)_0%,rgba(52,211,153,0.3)_30%,transparent_65%)] pointer-events-none" />
 
+        {/* Deep Royal Blue ambient glow on the right */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_86%_38%,rgba(29,78,216,0.85)_0%,rgba(37,99,235,0.5)_35%,transparent_70%)] pointer-events-none" />
 
-          <div className="px-10">
-            <div className="relative flex flex-col sm:flex-row items-center sm:items-end -mt-8 gap-8  px-2">
-              {/* Avatar */}
-              <div className="relative shrink-0">
-                <div className="w-36 h-36 overflow-hidden border-2 ring-12 ring-gray-50 border-primary rounded-2xl  shadow-2xl bg-green-200">
-                  <Image
-                    src="/broker/broker.png"
-                    alt="Broker"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-full p-0.5 shadow-sm">
-                  <Image
-                    src="/broker/ai_icon.png"
-                    alt="Verified"
-                    width={30}
-                    height={30}
-                  />
-                </div>
-              </div>
+        {/* Subtle white perspective grid lines */}
+        <div className="absolute inset-0 opacity-25 bg-[linear-gradient(to_right,rgba(255,255,255,0.7)_1.5px,transparent_1.5px),linear-gradient(to_bottom,rgba(255,255,255,0.7)_1.5px,transparent_1.5px)] bg-[size:32px_32px] pointer-events-none" />
 
-              {/* Name & Actions */}
-              <div className="flex-1 text-center sm:text-left pb-1">
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <h1 className="text-lg sm:text-xl font-semibold text-gray-800">
-                    Jitender Singh
-                  </h1>
-                  <Image src='/broker/verified_tick.png' alt='' width={16} height={16} />
-                </div>
-                <p className="text-sm text-gray-500 mt-0.5">
-                  Senior Property Consultant
-                </p>
-                <div className="flex items-center justify-center sm:justify-start gap-2.5 mt-3">
-                  <button
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-sm font-medium transition-all bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90`}
-                  >
-                    <Users className="w-4 h-4" />
-                    Fallow
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1 rounded-md text-sm font-medium border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors">
-                    <Share2 className="w-4 h-4" />
-                    Share
-                  </button>
+        {/* Global Search Header inside top mesh banner */}
+        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 relative z-30">
+          <SearchHeader className="!relative !top-0 !left-auto !right-auto !px-0 pointer-events-auto" />
+        </div>
 
-                </div>
-              </div>
-
-              {/* Verified Badge & Stats */}
-              <div className="flex flex-col items-center sm:items-end gap-3 pb-1">
-                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-primary/10 border uppercase border-gray-300 text-[10px] font-medium text-primary ">
-                  <Image
-                    src="/broker/verified.png"
-                    alt="Verified"
-                    width={10}
-                    height={10}
-                  />   Roofin Broker
-                </span>
-                <div className="flex items-center gap-6 text-center">
-                  <div>
-                    <p className="text-[11px] text-gray-500 font-medium">Followers</p>
-                    <p className="text-base font-semibold text-primary">200</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] text-gray-500 font-medium">Views</p>
-                    <p className="text-base font-semibold text-primary">132</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] text-gray-500 font-medium">Listing</p>
-                    <p className="text-base font-semibold text-primary">500</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] text-gray-500 font-medium">Videos</p>
-                    <p className="text-base font-semibold text-primary">20</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6 pt-14 ">
-              <div className="space-y-2">
-                <h4 className="flex items-center gap-2 text-sm font-semibold text-gray-800"> <Image src='/broker/verified.png' alt="" width={20} height={20} />12+ years of experience</h4>
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-0.5 text-amber-500 text-sm">
-                    {[1, 2, 3, 4, 5].map((i) => {
-                      const fillPercent = Math.min(Math.max((4.5 - (i - 1)) * 100, 0), 100);
-                      return (
-                        <div key={i} className="relative w-4 h-4">
-                          <Star className="absolute inset-0 w-4 h-4 text-gray-200" />
-                          <div className="absolute inset-0 overflow-hidden" style={{ width: `${fillPercent}%` }}>
-                            <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <span className="text-sm font-semibold text-primary">4.5/5</span>
-                  <span className="text-xs text-gray-500">(320 Verified Reviews)</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-sm text-gray-600">
-                  <MapPin className="w-4 h-4 text-primary" /> <span>Operating in: Noida, Greater Noida, Ghaziabad</span>
-                </div>
-                <div className="flex items-center gap-3 pt-2">
-                  <button className="flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-primary to-secondary text-white text-sm font-medium hover:opacity-90 transition-opacity">
-                    <Image src='/broker/usercall.png' alt="" width={16} height={16} /> Contact Broker
-                  </button>
-                  <button className="px-3 py-1 flex gap-2 items-center rounded-md border border-primary text-sm font-medium text-primary hover:bg-gray-50 transition-colors">
-                    <PhoneCall className="w-4 h-4" />  Request Callback
-                  </button>
-                </div>
-              </div>
-              <div>
-                
-              </div>
-            </div>
-
-
-
-
-
-
-          </div>
+        {/* Add Cover page button floating at bottom-right of full-width banner */}
+        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 flex justify-end relative z-10">
+          <button
+            type="button"
+            className="px-4 py-2 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-[0_4px_14px_rgba(24,101,242,0.45)] cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add Cover page</span>
+          </button>
         </div>
       </div>
-    </>
+
+      {/* 3. Main Content Area Overlapping the Top Gradient Banner */}
+      <main className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20 pb-16 relative z-20">
+        
+        {/* Profile Hero Card */}
+        <BrokerHeroSection />
+
+        {/* Separate Standalone Highlights Metrics Card */}
+        <BrokerHighlightsRow />
+
+        {/* Two-Column Layout: Left (3/4 = 75%) | Right Sidebar (1/4 = 25%) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-7 items-start mt-6">
+          
+          {/* Left Main Content (9 of 12 cols = 3/4) */}
+          <div className="lg:col-span-9">
+            
+            {/* Single White Container Card Wrapping ALL Left Content */}
+            <div className="bg-white rounded-[12px] border border-[#D8E6FC] shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-5 sm:p-6 space-y-6">
+              <BrokerTabs activeTab={activeTab} onTabChange={setActiveTab} />
+
+              {/* Dynamic Content Based on Tab */}
+              {activeTab === "overview" && (
+                <>
+                  <BrokerPostedProperties />
+                  <div className="pt-3 border-t border-slate-100">
+                    <BrokerRecentPosts />
+                  </div>
+                </>
+              )}
+              {activeTab === "videos" && <BrokerVideosSection />}
+              {(activeTab === "properties-listed" || activeTab === "listed-properties") && (
+                <BrokerPostedProperties />
+              )}
+              {activeTab === "about" && <BrokerAboutSection />}
+              {activeTab === "post" && <BrokerRecentPosts isFullGrid={true} />}
+            </div>
+
+          </div>
+
+          {/* Right Sidebar (3 of 12 cols = 1/4) - Sticky on Scroll */}
+          <div className="lg:col-span-3 sticky top-6 self-start">
+            <BrokerSidebar />
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
   );
 }

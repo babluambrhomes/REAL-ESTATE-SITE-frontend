@@ -11,7 +11,7 @@ export const BrokerAboutSection = () => {
           About
         </h2>
         <Link
-          href="/broker"
+          href="/s/agent/jitender-singh"
           className="text-xs font-bold text-[#1865F2] hover:underline cursor-pointer"
         >
           View All

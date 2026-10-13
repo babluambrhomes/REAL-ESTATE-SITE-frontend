@@ -1,7 +1,10 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import BrokerProfilePage from "../../broker/page";
-
-export default function DynamicAgentPage() {
-  return <BrokerProfilePage />;
+export default async function DynamicAgentPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  redirect(`/s/agent/${id}`);
 }

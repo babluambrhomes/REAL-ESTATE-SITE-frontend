@@ -2,24 +2,63 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { BlogSection } from "@/components/home/BlogSection";
-import { FeaturedProperties } from "@/components/home/FeaturedProperties";
-import { HappyClients } from "@/components/home/HappyClients";
-import { HeroSlider } from "@/components/home/HeroSlider";
-import { HomeChip } from "@/components/home/HomeChip";
-import { SearchBox } from "@/components/home/SearchBox";
-import { TopAgents } from "@/components/home/TopAgents";
-import { VideoSlider } from "@/components/home/VideoSlider";
-import { ExclusiveNewLaunches } from "@/components/home/ExclusiveNewLaunches";
-import { CompoundProperties } from "@/components/home/CompoundProperties";
-import { ExploreLifestyle } from "@/components/home/ExploreLifestyle";
-import { TopCities } from "@/components/home/TopCities";
-import { GroupDealBanner } from "@/components/home/GroupDealBanner";
-import { HandpickedProperties } from "@/components/home/HandpickedProperties";
-import { PropertyCtaBanner } from "@/components/home/PropertyCtaBanner";
+import dynamic from "next/dynamic";
 import { SimpleHeader } from "@/components/layout/SimpleHeader";
 import { SearchHeader } from "@/components/layout/SearchHeader";
 import { useAppSelector } from "@/store/hooks";
+import { LazySection } from "@/components/common/LazySection";
+
+// Statically imported for immediate above-the-fold first paint
+import { HeroSlider } from "@/components/home/HeroSlider";
+import { SearchBox } from "@/components/home/SearchBox";
+import { HomeChip } from "@/components/home/HomeChip";
+import { ExclusiveNewLaunches } from "@/components/home/ExclusiveNewLaunches";
+
+// Lazy-loaded dynamic imports for below-the-fold sections
+const FeaturedProperties = dynamic(
+  () => import("@/components/home/FeaturedProperties").then((mod) => mod.FeaturedProperties),
+  { ssr: false }
+);
+const CompoundProperties = dynamic(
+  () => import("@/components/home/CompoundProperties").then((mod) => mod.CompoundProperties),
+  { ssr: false }
+);
+const ExploreLifestyle = dynamic(
+  () => import("@/components/home/ExploreLifestyle").then((mod) => mod.ExploreLifestyle),
+  { ssr: false }
+);
+const TopCities = dynamic(
+  () => import("@/components/home/TopCities").then((mod) => mod.TopCities),
+  { ssr: false }
+);
+const TopAgents = dynamic(
+  () => import("@/components/home/TopAgents").then((mod) => mod.TopAgents),
+  { ssr: false }
+);
+const VideoSlider = dynamic(
+  () => import("@/components/home/VideoSlider").then((mod) => mod.VideoSlider),
+  { ssr: false }
+);
+const GroupDealBanner = dynamic(
+  () => import("@/components/home/GroupDealBanner").then((mod) => mod.GroupDealBanner),
+  { ssr: false }
+);
+const HandpickedProperties = dynamic(
+  () => import("@/components/home/HandpickedProperties").then((mod) => mod.HandpickedProperties),
+  { ssr: false }
+);
+const HappyClients = dynamic(
+  () => import("@/components/home/HappyClients").then((mod) => mod.HappyClients),
+  { ssr: false }
+);
+const BlogSection = dynamic(
+  () => import("@/components/home/BlogSection").then((mod) => mod.BlogSection),
+  { ssr: false }
+);
+const PropertyCtaBanner = dynamic(
+  () => import("@/components/home/PropertyCtaBanner").then((mod) => mod.PropertyCtaBanner),
+  { ssr: false }
+);
 
 export default function Home() {
   const searchBoxRef = useRef<HTMLDivElement>(null);
@@ -64,10 +103,10 @@ export default function Home() {
       </div>
 
       <main className="min-h-screen bg-[#fafbfc]">
-        {/* 1. Hero Section */}
+        {/* 1. Hero Section (Immediate) */}
         <HeroSlider />
 
-        {/* 2. Abstract Background Wrapper covering Category Chips & Exclusive New Launches */}
+        {/* 2 & 3. Abstract Background Wrapper covering Category Chips & Exclusive New Launches (Immediate) */}
         <div className="relative w-full z-20">
           {/* Abstract Wave Mesh Background Image (Soft faded) */}
           <div className="absolute inset-x-0 top-20 sm:top-24 bottom-0 -z-10 overflow-hidden pointer-events-none">
@@ -92,41 +131,65 @@ export default function Home() {
           <ExclusiveNewLaunches />
         </div>
 
-        {/* 5. Fast Selling Properties */}
-        <FeaturedProperties title1="Fast Selling" title2="Properties" />
+        {/* 5. Fast Selling Properties (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="420px" skeletonType="cards">
+          <FeaturedProperties title1="Fast Selling" title2="Properties" />
+        </LazySection>
 
-        {/* 6. Properties Section */}
-        <CompoundProperties />
+        {/* 6. Properties Section (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="440px" skeletonType="grid">
+          <CompoundProperties />
+        </LazySection>
 
-        {/* 7. Explore by Lifestyle */}
-        <ExploreLifestyle />
+        {/* 7. Explore by Lifestyle (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="380px" skeletonType="cards">
+          <ExploreLifestyle />
+        </LazySection>
 
-        {/* 8. Top Cities in Delhi NCR */}
-        <TopCities />
+        {/* 8. Top Cities in Delhi NCR (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="360px" skeletonType="cards">
+          <TopCities />
+        </LazySection>
 
-        {/* 9. Latest View */}
-        <FeaturedProperties title1="Latest" title2="View" />
+        {/* 9. Latest View (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="420px" skeletonType="cards">
+          <FeaturedProperties title1="Latest" title2="View" />
+        </LazySection>
 
-        {/* 10. Meet Our Trusted Agents & Builder */}
-        <TopAgents />
+        {/* 10. Meet Our Trusted Agents & Builder (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="400px" skeletonType="cards">
+          <TopAgents />
+        </LazySection>
 
-        {/* 11. Explore Projects Through Video */}
-        <VideoSlider />
+        {/* 11. Explore Projects Through Video (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="380px" skeletonType="cards">
+          <VideoSlider />
+        </LazySection>
 
-        {/* 12. Exclusive Group Deal Banner */}
-        <GroupDealBanner />
+        {/* 12. Exclusive Group Deal Banner (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="260px" skeletonType="banner">
+          <GroupDealBanner />
+        </LazySection>
 
-        {/* 13. Handpicked by Roofin */}
-        <HandpickedProperties />
+        {/* 13. Handpicked by Roofin (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="420px" skeletonType="cards">
+          <HandpickedProperties />
+        </LazySection>
 
-        {/* 14. Happy Clients */}
-        <HappyClients />
+        {/* 14. Happy Clients (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="380px" skeletonType="cards">
+          <HappyClients />
+        </LazySection>
 
-        {/* 15. Latest Blogs */}
-        <BlogSection />
+        {/* 15. Latest Blogs (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="400px" skeletonType="cards">
+          <BlogSection />
+        </LazySection>
 
-        {/* 16. Property CTA Banner (Find the Perfect Property for Your Future) */}
-        <PropertyCtaBanner />
+        {/* 16. Property CTA Banner (Lazy Loaded on Scroll) */}
+        <LazySection minHeight="240px" skeletonType="banner">
+          <PropertyCtaBanner />
+        </LazySection>
       </main>
     </>
   );

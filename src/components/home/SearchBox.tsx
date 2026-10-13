@@ -3,12 +3,8 @@
 import { forwardRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  Home,
   Building2,
   TrendingUp,
-  Rocket,
-  Store,
-  LandPlot,
   FileText,
   UserCheck,
   Search,
@@ -27,13 +23,47 @@ const {
   propertyTypeOptions,
 } = SEARCH_BOX;
 
+/* Custom Tab Mask Icon Helper that renders PNG masks in currentColor (white when active, slate grey when inactive) */
+const TabMaskIcon = ({ src, className }: { src: string; className?: string }) => (
+  <span
+    aria-hidden="true"
+    className={cn("inline-block shrink-0 bg-current transition-colors", className)}
+    style={{
+      maskImage: `url(${src})`,
+      WebkitMaskImage: `url(${src})`,
+      maskSize: "contain",
+      WebkitMaskSize: "contain",
+      maskRepeat: "no-repeat",
+      WebkitMaskRepeat: "no-repeat",
+      maskPosition: "center",
+      WebkitMaskPosition: "center",
+    }}
+  />
+);
+
+const BuyIcon = ({ className }: { className?: string }) => (
+  <TabMaskIcon src="/icon/tabs/tab_buy.png" className={className} />
+);
+
+const CommercialIcon = ({ className }: { className?: string }) => (
+  <TabMaskIcon src="/icon/tabs/tab_commercial.png" className={className} />
+);
+
+const PlotLandIcon = ({ className }: { className?: string }) => (
+  <TabMaskIcon src="/icon/tabs/tab_plot.png" className={className} />
+);
+
+const RocketTabIcon = ({ className }: { className?: string }) => (
+  <TabMaskIcon src="/icon/tabs/tab_rocket.png" className={className} />
+);
+
 const tabsList = [
-  { label: "Buy", value: "buy", Icon: Home },
+  { label: "Buy", value: "buy", Icon: BuyIcon },
   { label: "Rent", value: "rent", Icon: Building2 },
   { label: "Pg/Coliving", value: "pg", Icon: TrendingUp },
-  { label: "New Launch", value: "new-launch", Icon: Rocket },
-  { label: "Commercial", value: "commercial", Icon: Store },
-  { label: "Plot/Land", value: "plot", Icon: LandPlot },
+  { label: "New Launch", value: "new-launch", Icon: RocketTabIcon },
+  { label: "Commercial", value: "commercial", Icon: CommercialIcon },
+  { label: "Plot/Land", value: "plot", Icon: PlotLandIcon },
   { label: "Project", value: "project", Icon: FileText },
   { label: "Agent", value: "agent", Icon: UserCheck },
 ];
@@ -74,13 +104,13 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
   return (
     <section ref={ref} className="relative z-30 mx-auto -mt-20 sm:-mt-24 w-full max-w-[1000px] px-4 sm:px-6">
       <div className="relative">
-        {/* Bottom-Only Gradient Underlay (Matches Screenshot) */}
-        <div className="absolute inset-x-4 -bottom-2.5 h-full rounded-[28px] bg-gradient-to-r from-[#1865F2] via-[#2A5AF0] to-[#4338CA] -z-10 opacity-90" />
+        {/* Bottom-Only Gradient Underlay */}
+        <div className="absolute inset-x-4 -bottom-2 h-full rounded-[22px] sm:rounded-[24px] bg-gradient-to-r from-[#1865F2] via-[#2A5AF0] to-[#4338CA] -z-10 opacity-90" />
 
-        {/* Main Floating Search Card */}
-        <div className="relative rounded-[28px] bg-white p-5 sm:p-6 shadow-[0_16px_48px_rgba(24,101,242,0.16),0_2px_12px_rgba(0,0,0,0.04)] border border-[#DCE8FE]">
-          {/* Top Category Tabs (Compact fit in single row) */}
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        {/* Main Floating Search Card (Ultra-Sleek & Bareek) */}
+        <div className="relative rounded-[22px] sm:rounded-[24px] bg-white p-3 sm:p-4.5 shadow-[0_12px_40px_rgba(24,101,242,0.12),0_2px_10px_rgba(0,0,0,0.03)] border border-[#DCE8FE]">
+          {/* Top Category Tabs */}
+          <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide">
             {tabsList.map((tab) => {
               const isActive = activeTab === tab.value;
               return (
@@ -89,17 +119,16 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                   type="button"
                   onClick={() => setActiveTab(tab.value)}
                   className={cn(
-                    "flex items-center gap-1.5 cursor-pointer rounded-full px-3 py-1.5 sm:px-3.5 sm:py-2 text-[13px] font-medium transition-all duration-200 shrink-0",
+                    "flex items-center gap-1.5 cursor-pointer rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 text-[12px] sm:text-[12.5px] font-medium transition-all duration-200 shrink-0",
                     isActive
-                      ? "bg-[#1865F2] text-white shadow-md shadow-blue-500/30"
+                      ? "bg-[#1865F2] text-white shadow-md shadow-blue-500/25"
                       : "text-slate-600 hover:bg-slate-100/80 hover:text-slate-900"
                   )}
                 >
                   <tab.Icon
                     className={cn(
                       "h-3.5 w-3.5",
-                      isActive ? "text-white" : "text-slate-500",
-                      tab.value === "new-launch" && !isActive ? "text-cyan-500" : ""
+                      isActive ? "text-white" : "text-slate-500"
                     )}
                   />
                   <span>{tab.label}</span>
@@ -109,13 +138,13 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
           </div>
 
           {/* Thin Separator Line */}
-          <div className="h-px mt-3.5 mb-4 w-full bg-slate-100" />
+          <div className="h-px mt-2.5 mb-2.5 w-full bg-slate-100" />
 
-          {/* 4 Filter Dropdowns + Search Button Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
+          {/* 4 Filter Dropdowns + Search Button Grid (Ultra-Bareek 34px Height) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-2.5 items-end">
             {/* 1. CITY */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <label className="mb-0.5 block text-[9.5px] sm:text-[10px] font-medium uppercase tracking-wider text-slate-400">
                 City
               </label>
               <Select<OptionType, false>
@@ -134,7 +163,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
 
             {/* 2. LOCALITY */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <label className="mb-0.5 block text-[9.5px] sm:text-[10px] font-medium uppercase tracking-wider text-slate-400">
                 Locality
               </label>
               <div className="relative">
@@ -142,14 +171,14 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                   value={locality}
                   onChange={(e) => setLocality(e.target.value)}
                   placeholder="Select Locality"
-                  className="h-[48px] w-full rounded-2xl border border-slate-200 bg-white px-3.5 text-sm font-medium text-slate-900 outline-none transition-colors placeholder:text-slate-400 hover:border-[#1865F2] focus:border-[#1865F2] focus:ring-2 focus:ring-blue-100"
+                  className="h-[34px] w-full rounded-[8px] border border-slate-200 bg-white px-2.5 text-[12px] font-normal text-slate-900 outline-none transition-colors placeholder:text-slate-400 hover:border-[#1865F2] focus:border-[#1865F2] focus:ring-1 focus:ring-blue-100"
                 />
               </div>
             </div>
 
             {/* 3. BUDGET */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <label className="mb-0.5 block text-[9.5px] sm:text-[10px] font-medium uppercase tracking-wider text-slate-400">
                 Budget
               </label>
               <Select<OptionType, false>
@@ -166,7 +195,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
 
             {/* 4. PROPERTY TYPE */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <label className="mb-0.5 block text-[9.5px] sm:text-[10px] font-medium uppercase tracking-wider text-slate-400">
                 Property Type
               </label>
               <Select<OptionType, false>
@@ -186,17 +215,17 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="flex h-[48px] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-5 text-[15px] font-bold text-white shadow-[0_8px_22px_rgba(30,80,240,0.4)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_10px_26px_rgba(30,80,240,0.5)] cursor-pointer"
+                className="flex h-[34px] w-full items-center justify-center gap-1.5 rounded-[8px] bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-3.5 text-[12.5px] font-semibold text-white shadow-[0_3px_10px_rgba(30,80,240,0.25)] transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_4px_14px_rgba(30,80,240,0.3)] cursor-pointer"
               >
-                <Search className="h-4 w-4 stroke-[2.5]" />
+                <Search className="h-3.5 w-3.5 stroke-[2.2]" />
                 <span>Search</span>
               </button>
             </div>
           </div>
 
           {/* Bottom Popular Searches Row */}
-          <div className="mt-5 flex flex-wrap items-center gap-2.5 pt-2">
-            <span className="text-[13px] font-medium text-slate-500 shrink-0">
+          <div className="mt-3 flex flex-wrap items-center gap-1.5 pt-1">
+            <span className="text-[11.5px] font-medium text-slate-400 shrink-0">
               Popular:
             </span>
             {popularList.map((search) => (
@@ -204,7 +233,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                 key={search}
                 type="button"
                 onClick={() => handlePopularSearch(search)}
-                className="rounded-full bg-[#f1f6fb] hover:bg-blue-50 px-4 py-1.5 text-[13px] font-medium text-slate-700 hover:text-[#1865F2] transition-colors border border-slate-200/50 cursor-pointer"
+                className="rounded-full bg-[#f1f6fb] hover:bg-blue-50 px-2.5 py-0.5 text-[11px] font-medium text-slate-600 hover:text-[#1865F2] transition-colors border border-slate-200/50 cursor-pointer"
               >
                 {search}
               </button>
@@ -217,4 +246,3 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
 });
 
 SearchBox.displayName = "SearchBox";
-

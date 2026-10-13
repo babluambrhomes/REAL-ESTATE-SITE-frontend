@@ -114,7 +114,7 @@ export const AllPropertyExpertsGrid = () => {
 
             {/* Solid Blue View Profile Button */}
             <Link
-              href="/broker"
+              href="/s/agent/jitender-singh"
               className="w-full mt-2.5 py-2 bg-[#1865F2] hover:bg-[#1250C4] text-white text-[11px] font-bold rounded-xl transition-all shadow-2xs cursor-pointer text-center"
             >
               View Profile

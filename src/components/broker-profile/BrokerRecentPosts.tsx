@@ -153,7 +153,7 @@ export const BrokerRecentPosts = ({
     e.stopPropagation();
     if (navigator.clipboard) {
       navigator.clipboard.writeText(
-        `${window.location.origin}/broker#${post.id}`
+        `${window.location.origin}${window.location.pathname}#${post.id}`
       );
       setCopiedPostId(post.id);
       setTimeout(() => setCopiedPostId(null), 2500);

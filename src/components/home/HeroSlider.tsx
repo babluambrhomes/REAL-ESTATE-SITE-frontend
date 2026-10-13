@@ -30,7 +30,7 @@ const slides = [
     subtitle: "Explore luxury properties in the most desirable locations.",
   },
   {
-    image: "/banner/banner.png",
+    image: "/banner/commercial_skyscrapers_banner.png",
     title: "Luxury Living Redefined",
     subtitle: "Modern designs crafted for comfort and elegance.",
   },
@@ -73,19 +73,11 @@ export const HeroSlider = () => {
                     fill
                     priority={index === 0}
                     sizes="(max-width: 1024px) 100vw, 73vw"
-                    className="object-cover object-center"
+                    className="object-cover object-left"
                     unoptimized
                   />
-                  {/* Exact Figma Vertical Shade Divider Overlay on right edge of banner */}
-                  <div className="absolute inset-y-0 right-0 hidden lg:block w-32 sm:w-44 lg:w-52 h-full pointer-events-none z-10">
-                    <Image
-                      src="/layout/hero_shade_divider.png"
-                      alt="Hero Shade"
-                      fill
-                      className="object-cover object-right pointer-events-none"
-                      priority
-                    />
-                  </div>
+                  {/* Natural seamless soft fade into map on right edge */}
+                  <div className="absolute inset-y-0 right-0 hidden lg:block w-24 xl:w-32 bg-gradient-to-r from-transparent via-[#d8eafb]/40 to-[#d8eafb] pointer-events-none z-10" />
                 </div>
               </SwiperSlide>
             ))}
@@ -95,92 +87,89 @@ export const HeroSlider = () => {
           <div className="absolute inset-0 z-10 flex items-center pointer-events-none font-rounded-mplus">
             <div className="w-full px-6 sm:px-12 lg:px-16 pointer-events-auto">
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-3 rounded-full bg-white px-4 py-2 shadow-[0_2px_14px_rgba(0,0,0,0.06)] border border-slate-100">
-                <svg 
-                  className="h-[28px] w-[26px] shrink-0" 
-                  viewBox="0 0 24 26" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    d="M12 1L3.5 4.5V12C3.5 18.5 7.8 23.5 12 25C16.2 23.5 20.5 18.5 20.5 12V4.5L12 1Z" 
-                    fill="#34C759" 
-                  />
-                  <path 
-                    d="M7.5 12.5L10.5 15.5L16.5 9.5" 
-                    stroke="white" 
-                    strokeWidth="2.8" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                  />
-                </svg>
-                <span className="text-[17.5px] font-medium text-black tracking-normal">
+              <div className="inline-flex items-center gap-2.5 rounded-full bg-white px-3.5 py-1.5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-slate-100">
+                <Image
+                  src="/icon/hero/trusted_buyers_shield_hd.png"
+                  alt="Trusted by 50k+ Buyers"
+                  width={28}
+                  height={32}
+                  unoptimized
+                  priority
+                  className="w-[18px] sm:w-[20px] h-auto object-contain shrink-0"
+                />
+                <span className="text-[14px] sm:text-[15px] font-medium text-black tracking-normal">
                   Trusted by 50k+ Buyers
                 </span>
               </div>
 
               {/* Headline */}
-              <h1 className="mt-4 text-3xl sm:text-4xl lg:text-[48px] font-bold tracking-normal text-black leading-[1.14] lg:leading-[56px] max-w-[470px]">
+              <h1 className="mt-3.5 text-2xl sm:text-3xl lg:text-[38px] xl:text-[40px] font-bold tracking-tight text-black leading-[1.16] lg:leading-[46px] max-w-[420px]">
                 BUY PROPERTY <br />
-                <span className="text-[#1d7bf8]">LOWER THAN</span> <br />
+                <span className="text-[#1865F2]">LOWER THAN</span> <br />
                 MARKET PRICE
               </h1>
 
               {/* Subtitle */}
-              <p className="mt-3.5 text-base sm:text-lg lg:text-[25px] font-normal text-black tracking-normal">
+              <p className="mt-3.5 text-base sm:text-lg lg:text-[22px] font-normal text-black tracking-normal">
                 India’s Most Trusted Buying platform
               </p>
 
               {/* Trust Badges */}
-              <div className="mt-6 flex flex-wrap items-center gap-6 sm:gap-8 pt-1">
+              <div className="mt-6 flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-7 pt-1">
                 {/* Badge 1: Verified Properties */}
-                <div className="flex items-center gap-3">
-                  <div className="flex h-[54px] w-[54px] sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0 p-2.5">
+                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
                     <Image
-                      src="/icon/verified_properties_shield.png"
+                      src="/icon/hero/verified_properties_shield_hd.png"
                       alt="Verified Properties"
-                      width={34}
-                      height={34}
-                      className="object-contain w-7 h-7 sm:w-8 sm:h-8"
+                      width={56}
+                      height={56}
+                      unoptimized
+                      priority
+                      className="object-contain w-6 h-6 sm:w-7 sm:h-7"
                     />
                   </div>
                   <div className="leading-[1.25] text-left">
-                    <span className="block text-[14.5px] font-normal text-black">Verified</span>
-                    <span className="block text-[14.5px] font-normal text-black">Properties</span>
+                    <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Verified</span>
+                    <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Properties</span>
                   </div>
                 </div>
 
                 {/* Badge 2: Trusted Agents */}
-                <div className="flex items-center gap-3">
-                  <div className="flex h-[54px] w-[54px] sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0 p-2.5">
+                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
                     <Image
-                      src="/icon/trusted_agents_user.png"
+                      src="/icon/hero/trusted_agents_user_hd.png"
                       alt="Trusted Agents"
-                      width={34}
-                      height={34}
-                      className="object-contain w-7 h-7 sm:w-8 sm:h-8"
+                      width={56}
+                      height={56}
+                      unoptimized
+                      priority
+                      className="object-contain w-6 h-6 sm:w-7 sm:h-7"
                     />
                   </div>
                   <div className="leading-[1.25] text-left">
-                    <span className="block text-[14.5px] font-normal text-black">Trusted</span>
-                    <span className="block text-[14.5px] font-normal text-black">Agents</span>
+                    <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Trusted</span>
+                    <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Agents</span>
                   </div>
                 </div>
 
                 {/* Badge 3: Best Deals */}
-                <div className="flex items-center gap-3">
-                  <div className="flex h-[54px] w-[54px] sm:h-[58px] sm:w-[58px] items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] shrink-0 p-2.5">
+                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
                     <Image
-                      src="/icon/best_deals_percent.png"
+                      src="/icon/hero/best_deals_percent_hd.png"
                       alt="Best Deals"
-                      width={36}
-                      height={36}
-                      className="object-contain w-7 h-7 sm:w-8 sm:h-8"
+                      width={56}
+                      height={56}
+                      unoptimized
+                      priority
+                      className="object-contain w-6 h-6 sm:w-7 sm:h-7"
                     />
                   </div>
                   <div className="leading-[1.25] text-left">
-                    <span className="block text-[14.5px] font-normal text-black">Best</span>
-                    <span className="block text-[14.5px] font-normal text-black">Deals</span>
+                    <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Best</span>
+                    <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Deals</span>
                   </div>
                 </div>
               </div>
@@ -188,21 +177,13 @@ export const HeroSlider = () => {
           </div>
         </div>
 
-        {/* Vertical Transition Shade positioned between Banner and Map */}
-        <div className="hidden lg:block absolute top-0 bottom-0 left-[73%] -translate-x-1/2 w-24 lg:w-36 h-full z-20 pointer-events-none select-none">
-          <Image
-            src="/layout/hero_shade_divider.png"
-            alt="Atmospheric Shade Divider"
-            fill
-            className="object-cover object-center pointer-events-none"
-            priority
-          />
-        </div>
-
         {/* 2. Right Side: Interactive Map */}
-        <div className="relative hidden lg:block lg:w-[27%] h-full bg-slate-100 overflow-hidden">
+        <div className="relative hidden lg:block lg:w-[27%] h-full bg-[#f1f6fc] overflow-hidden">
           <div className="relative h-full w-full">
             <ViewMap height="100%" properties={properties} />
+
+            {/* Seamless edge fade from banner sky into map */}
+            <div className="absolute inset-y-0 left-0 w-8 xl:w-14 bg-gradient-to-r from-[#d8eafb]/70 to-transparent pointer-events-none z-10" />
 
             {/* Top Floating Badge: Premium Living (Exact match with zoomed screenshot) */}
             <div className="absolute top-24 left-4 z-20 w-[190px] rounded-2xl border border-slate-100 bg-white p-3.5 shadow-xl backdrop-blur-md">
@@ -219,7 +200,7 @@ export const HeroSlider = () => {
                 <p className="text-[17px] font-extrabold text-slate-900 tracking-tight">1.25 cr</p>
                 <Link
                   href="/properties"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1d7bf8] text-white shadow-md transition-transform hover:scale-105"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1865F2] text-white shadow-md transition-transform hover:scale-105"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </Link>

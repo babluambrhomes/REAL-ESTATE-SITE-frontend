@@ -191,7 +191,7 @@ export const AllPropertyExpertsList = () => {
               {/* Action Buttons */}
               <div className="w-full space-y-2 pt-1.5">
                 <Link
-                  href="/broker"
+                  href="/s/agent/jitender-singh"
                   className="w-full py-1.5 bg-white hover:bg-blue-50 text-[#1865F2] border border-[#1865F2] text-xs font-bold rounded-lg transition-colors cursor-pointer shadow-2xs block text-center"
                 >
                   View Profile

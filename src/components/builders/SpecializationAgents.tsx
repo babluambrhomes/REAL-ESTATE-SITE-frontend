@@ -190,7 +190,7 @@ export const SpecializationAgents = () => {
 
             {/* View Profile Button (Solid Blue) */}
             <Link
-              href="/broker"
+              href="/s/agent/jitender-singh"
               className="w-full mt-2.5 py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-[11px] font-bold rounded-lg transition-colors cursor-pointer shadow-2xs text-center"
             >
               View Profile

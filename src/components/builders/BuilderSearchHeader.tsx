@@ -156,19 +156,30 @@ export const BuilderSearchHeader = ({
             <Link
               href="/login"
               aria-label="Wishlist"
-              className="flex h-9 w-9 items-center justify-center rounded-full text-[#1865F2] hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
             >
-              <Heart className="h-[22px] w-[22px] stroke-[2.2]" />
+              <Image
+                src="/layout/nav/nav_heart.png"
+                alt="Wishlist"
+                width={22}
+                height={20}
+                className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+              />
             </Link>
 
             {/* Notifications Bell */}
             <Link
               href="/login"
               aria-label="Notifications"
-              className="relative flex h-9 w-9 items-center justify-center rounded-full text-[#1865F2] hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
             >
-              <Bell className="h-[22px] w-[22px] stroke-[2.2]" />
-              <span className="absolute top-0.5 right-1 h-2.5 w-2.5 rounded-full bg-[#f95738]" />
+              <Image
+                src="/layout/nav/nav_bell.png"
+                alt="Notifications"
+                width={20}
+                height={24}
+                className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
+              />
             </Link>
 
             {/* User Profile */}
@@ -176,45 +187,39 @@ export const BuilderSearchHeader = ({
               type="button"
               aria-label="User Profile"
               onClick={() => setSidebarOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] text-[#1865F2] hover:bg-[#e2eeff] transition-colors cursor-pointer shrink-0"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0"
             >
-              <User className="h-4.5 w-4.5 stroke-[2.0]" />
+              <Image
+                src="/layout/nav/nav_user.png"
+                alt="User Profile"
+                width={18}
+                height={18}
+                className="w-[16px] h-auto object-contain"
+              />
             </button>
 
             {/* Post Property Free Button matching site layout */}
             <Link
               href="/post-property"
-              className="group relative flex h-[40px] sm:h-[42px] items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#1456DB] to-[#0A38A8] pl-3.5 pr-1.5 py-1 text-white shadow-[0_4px_14px_rgba(24,101,242,0.35)] transition-all duration-200 hover:scale-[1.02] shrink-0"
+              className="group relative flex h-[38px] sm:h-[40px] items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-2.5 sm:pl-3 pr-1 sm:pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
             >
               {/* Sparkle icon */}
               <svg 
                 className="h-[18px] w-[18px] shrink-0" 
-                viewBox="0 0 30 30" 
+                viewBox="0 0 26 26" 
                 fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path 
-                  d="M12 9 C12 15 7 19 1 19 C7 19 12 23 12 29 C12 23 17 19 23 19 C17 19 12 15 12 9 Z" 
-                  fill="#00D084" 
-                />
-                <path 
-                  d="M6 1 C6 4 3 5.5 0.5 5.5 C3 5.5 6 7 6 10 C6 7 9 5.5 11.5 5.5 C9 5.5 6 4 6 1 Z" 
-                  fill="#00D084" 
-                />
-                <path 
-                  d="M21 2 C21 5.5 17.5 7 15 7 C17.5 7 21 8.5 21 12 C21 8.5 24.5 7 27 7 C24.5 7 21 5.5 21 2 Z" 
-                  fill="none" 
-                  stroke="#00D084" 
-                  strokeWidth="1.6" 
-                  strokeLinejoin="round" 
-                />
+                <path d="M4.5 1C4.5 2.8 3.2 4 1.5 4C3.2 4 4.5 5.2 4.5 7C4.5 5.2 5.8 4 7.5 4C5.8 4 4.5 2.8 4.5 1Z" fill="#00D084" />
+                <path d="M20 1C20 3.3 18 5 15.5 5C18 5 20 6.7 20 9C20 6.7 22 5 24.5 5C22 5 20 3.3 20 1Z" stroke="#00D084" strokeWidth="1.4" strokeLinejoin="round" fill="none" />
+                <path d="M11.5 6C11.5 12 7 16 1.5 16C7 16 11.5 20 11.5 26C11.5 20 16 16 21.5 16C16 16 11.5 12 11.5 6Z" fill="#00D084" />
               </svg>
 
-              <span className="text-[13px] font-bold text-white tracking-normal whitespace-nowrap">
+              <span className="text-[13px] sm:text-[13.5px] font-medium text-white tracking-normal whitespace-nowrap">
                 Post Property
               </span>
 
-              <span className="rounded-full bg-white px-2.5 py-1 text-[12px] font-extrabold text-[#1865F2] shadow-xs leading-none">
+              <span className="rounded-full bg-white px-2.5 sm:px-3 py-1 text-[12px] sm:text-[12.5px] font-semibold text-[#1865F2] shadow-xs leading-none">
                 Free
               </span>
             </Link>

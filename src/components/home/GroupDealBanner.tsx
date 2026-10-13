@@ -50,46 +50,181 @@ export const GroupDealBanner = () => {
     <>
       <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-8 sm:py-12">
         {/* ========================================================================= */}
-        {/* DESKTOP & WIDE SCREEN (Exact 1:1 Pixel-Perfect Match with Interactive Hotspots) */}
+        {/* DESKTOP & WIDE SCREEN (Live High-Fidelity UI with Clean Master Background) */}
         {/* ========================================================================= */}
-        <div className="hidden lg:block relative overflow-hidden rounded-[28px] xl:rounded-[36px] shadow-[0_20px_50px_rgba(0,102,255,0.22)] border border-blue-400/30 transition-transform duration-300 hover:scale-[1.003]">
-          {/* Main 1:1 High-Fidelity Banner Graphic matching reference */}
+        <div className="hidden lg:block relative overflow-hidden rounded-[28px] xl:rounded-[36px] shadow-[0_20px_50px_rgba(0,102,255,0.22)] border border-blue-400/30 transition-transform duration-300 hover:scale-[1.002]">
+          {/* Main Container with Clean Master Background */}
           <div className="relative w-full aspect-[1748/582] min-h-[440px]">
             <Image
-              src="/banner/exclusive-group-deal-banner.png"
+              src="/banner/exclusive_group_deal_clean_bg.png"
               alt="Exclusive Group Deal For Only 20 Units - Roofin"
               fill
               sizes="(max-width: 1440px) 100vw, 1440px"
               className="object-cover object-center select-none"
               priority
+              unoptimized
             />
 
-            {/* Interactive Pulse & Glow on CTA Button */}
-            <div className="absolute left-[2.9%] bottom-[8.5%] w-[19.5%] h-[15%] z-20 pointer-events-none">
-              <span className="absolute -inset-1 rounded-[18px] bg-amber-400/30 blur-sm animate-pulse" />
+            {/* Live Interactive UI Overlay */}
+            <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 xl:p-8 pointer-events-none">
+              {/* Top Row: Roofin Logo & Exclusive Group Deal Badge */}
+              <div className="flex items-center gap-4 pointer-events-auto">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[30px] xl:text-[34px] font-black tracking-tight text-white font-rounded-mplus drop-shadow-sm">
+                    Roofin
+                  </span>
+                  <span className="h-2 w-2 rounded-xs bg-[#FFCC00] -mt-4 shadow-xs" />
+                </div>
+
+                <Link
+                  href="/group-deal"
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/60 bg-white/15 px-3 py-1.5 backdrop-blur-md shadow-sm hover:bg-white/25 transition-all"
+                >
+                  <div className="flex h-5 w-5 items-center justify-center rounded-md bg-white/20 text-white">
+                    <Users className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="flex flex-col text-left leading-none">
+                    <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-white">
+                      EXCLUSIVE
+                    </span>
+                    <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-white mt-0.5">
+                      GROUP DEAL
+                    </span>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Middle Row: Headline & Property Card */}
+              <div className="flex items-center gap-6 xl:gap-8 pointer-events-auto">
+                {/* Headline */}
+                <div className="max-w-[300px] xl:max-w-[330px]">
+                  <h2 className="text-[26px] xl:text-[32px] font-black leading-[1.12] tracking-tight text-white drop-shadow-sm">
+                    Exclusive Group Deal <br />
+                    For Only{" "}
+                    <span className="text-[#FFCC00] drop-shadow-md">20 Units</span>
+                  </h2>
+                  <div className="mt-2 h-1.5 w-16 rounded-full bg-[#FFCC00]" />
+                </div>
+
+                {/* Aspire Silicon City Spec Card */}
+                <Link
+                  href="/group-deal"
+                  className="rounded-2xl bg-white/95 backdrop-blur-md p-3 xl:p-3.5 text-slate-900 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white hover:scale-[1.02] hover:shadow-[0_12px_36px_rgba(0,0,0,0.18)] transition-all max-w-[260px] xl:max-w-[280px]"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-[#0066FF] shrink-0">
+                      <MapPin className="h-3.5 w-3.5 fill-[#0066FF]" />
+                    </div>
+                    <div>
+                      <h3 className="text-[12.5px] xl:text-[13px] font-bold text-slate-900 leading-tight">
+                        Aspire Silicon City,
+                      </h3>
+                      <p className="text-[10.5px] xl:text-[11px] font-medium text-slate-500">
+                        Sector 76, Noida
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="my-2 border-b border-dashed border-[#0066FF]/25" />
+
+                  <div className="grid grid-cols-3 gap-1 text-center">
+                    <div className="flex flex-col items-center justify-center border-r border-slate-100 pr-1">
+                      <Bed className="h-3.5 w-3.5 text-[#0066FF]" />
+                      <span className="mt-0.5 text-[9.5px] font-bold text-slate-800 leading-tight">
+                        4BHK + S
+                      </span>
+                      <span className="text-[8px] text-slate-500">[Servant]</span>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center border-r border-slate-100 px-1">
+                      <Maximize2 className="h-3.5 w-3.5 text-[#0066FF]" />
+                      <span className="mt-0.5 text-[9.5px] font-bold text-slate-800 leading-tight">
+                        3342
+                      </span>
+                      <span className="text-[8px] text-slate-500">sq.ft.</span>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center pl-1">
+                      <Star className="h-3.5 w-3.5 text-[#0066FF] fill-[#0066FF]" />
+                      <span className="mt-0.5 text-[9.5px] font-bold text-slate-800 leading-tight">
+                        Premium
+                      </span>
+                      <span className="text-[8px] text-slate-500">Residences</span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Benefits Pill Bar */}
+              <div className="pointer-events-auto max-w-[530px] xl:max-w-[580px] rounded-2xl bg-white/95 backdrop-blur-md p-2 xl:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.1)] border border-white flex items-center gap-2.5">
+                <div className="flex-1 flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-[#0066FF] shrink-0">
+                    <Percent className="h-3 w-3 stroke-[2.5]" />
+                  </div>
+                  <div className="leading-tight">
+                    <p className="text-[11px] xl:text-[11.5px] font-bold text-[#0066FF]">
+                      Save 10-15 %
+                    </p>
+                    <p className="text-[9px] xl:text-[9.5px] text-slate-600">
+                      more than market prices
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-[1px] h-7 bg-slate-200" />
+
+                <div className="flex-1 flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-[#0066FF] shrink-0">
+                    <Handshake className="h-3 w-3 text-[#0066FF]" />
+                  </div>
+                  <div className="leading-tight">
+                    <p className="text-[11px] xl:text-[11.5px] font-bold text-slate-800">
+                      We negotiate
+                    </p>
+                    <p className="text-[9px] xl:text-[9.5px] text-slate-600">
+                      directly with developers
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-[1px] h-7 bg-slate-200" />
+
+                <div className="flex-1 flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-[#0066FF] shrink-0">
+                    <Coins className="h-3 w-3 text-[#0066FF]" />
+                  </div>
+                  <div className="leading-tight">
+                    <p className="text-[11px] xl:text-[11.5px] font-bold text-slate-800">
+                      100%
+                    </p>
+                    <p className="text-[9px] xl:text-[9.5px] text-slate-600">
+                      broker commission passed
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Row: CTA Button & Validity */}
+              <div className="flex items-center gap-4 pointer-events-auto">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(true)}
+                  className="group relative flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#FFB703] to-[#FB8500] px-5 xl:px-6 py-2.5 xl:py-3 text-[13.5px] xl:text-[14px] font-extrabold text-slate-950 shadow-[0_6px_24px_rgba(255,183,3,0.4)] hover:shadow-[0_8px_30px_rgba(255,183,3,0.55)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  <span className="tracking-wide">I’M INTERESTED</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </button>
+
+                <div className="flex items-center gap-2 text-white">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
+                    <Calendar className="h-3.5 w-3.5 text-white" />
+                  </div>
+                  <span className="text-[11.5px] xl:text-[12px] font-semibold tracking-wide drop-shadow-sm">
+                    Offer Valid For Limited Units Only.
+                  </span>
+                </div>
+              </div>
             </div>
-
-            {/* Clickable Hotspot on 'I'M INTERESTED' Button */}
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-              aria-label="Open Group Deal Registration"
-              className="absolute left-[2.9%] bottom-[8.5%] w-[19.5%] h-[15%] rounded-[18px] cursor-pointer hover:bg-white/15 active:scale-[0.98] transition-all z-30 focus:outline-none"
-            />
-
-            {/* Clickable Hotspot on Spec Card to navigate to /group-deal */}
-            <Link
-              href="/group-deal"
-              aria-label="View Aspire Silicon City Group Deal Details"
-              className="absolute left-[25.5%] top-[33%] w-[20%] h-[26%] rounded-2xl cursor-pointer hover:bg-white/15 hover:ring-2 hover:ring-white/40 transition-all z-30"
-            />
-
-            {/* Clickable Hotspot on Exclusive Group Deal Badge */}
-            <Link
-              href="/group-deal"
-              aria-label="Exclusive Group Deal Page"
-              className="absolute left-[16%] top-[7.5%] w-[12%] h-[12%] rounded-2xl cursor-pointer hover:bg-white/15 transition-all z-30"
-            />
           </div>
         </div>
 
@@ -144,7 +279,7 @@ export const GroupDealBanner = () => {
             {/* Building Visual on Mobile */}
             <div className="relative w-full h-[180px] sm:h-[240px] rounded-2xl overflow-hidden shadow-md bg-sky-200/20">
               <Image
-                src="/banner/exclusive-group-deal-banner.png"
+                src="/banner/exclusive_group_deal_clean_bg.png"
                 alt="Building towers"
                 fill
                 className="object-cover object-right"
