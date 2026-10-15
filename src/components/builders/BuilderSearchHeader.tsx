@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Mic, Heart, Bell, User, ChevronDown, MapPin } from "lucide-react";
 import { HeaderSidebar } from "@/components/layout/HeaderSidebar";
+import { useAppSelector } from "@/store/hooks";
 
 interface BuilderSearchHeaderProps {
   activeLocation?: string;
@@ -19,11 +20,17 @@ export const BuilderSearchHeader = ({
   onSearch,
   mode = "builders",
 }: BuilderSearchHeaderProps) => {
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+  const [isMounted, setIsMounted] = useState(false);
   const [location, setLocation] = useState(activeLocation);
   const [builderName, setBuilderName] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const locations = [
     "Delhi NCR",
@@ -164,6 +171,7 @@ export const BuilderSearchHeader = ({
                 width={22}
                 height={20}
                 className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+                style={{ width: "auto", height: "auto" }}
               />
             </Link>
 
@@ -179,6 +187,7 @@ export const BuilderSearchHeader = ({
                 width={20}
                 height={24}
                 className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
+                style={{ width: "auto", height: "auto" }}
               />
             </Link>
 
@@ -187,15 +196,35 @@ export const BuilderSearchHeader = ({
               type="button"
               aria-label="User Profile"
               onClick={() => setSidebarOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100"
             >
-              <Image
-                src="/layout/nav/nav_user.png"
-                alt="User Profile"
-                width={18}
-                height={18}
-                className="w-[16px] h-auto object-contain"
-              />
+              {isMounted && isAuthenticated && user ? (
+                user?.person?.avatarUrl ? (
+                  <Image
+                    src={user.person.avatarUrl}
+                    alt="Profile"
+                    width={36}
+                    height={36}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="text-xs font-bold text-[#1865F2] uppercase">
+                    {(user?.person?.firstName || user?.email || user?.phone || "U").charAt(0)}
+                  </span>
+                )
+              ) : (
+                <Image
+                  src="/layout/nav/nav_user.png"
+                  alt="User Profile"
+                  width={18}
+                  height={18}
+                  className="w-[16px] h-auto object-contain"
+                  style={{ width: "auto", height: "auto" }}
+                />
+              )}
+              {isMounted && isAuthenticated && (
+                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+              )}
             </button>
 
             {/* Post Property Free Button matching site layout */}

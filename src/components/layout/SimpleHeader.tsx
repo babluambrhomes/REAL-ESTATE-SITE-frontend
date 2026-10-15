@@ -7,6 +7,8 @@ import { Bell, ChevronDown, Heart, User } from "lucide-react";
 import { HeaderSelect } from "./HeaderSelect";
 import { HeaderSidebar } from "./HeaderSidebar";
 import { SIMPLE_HEADER } from "@/data/headerData";
+import { useWishlist } from "@/lib/wishlist";
+import { useAppSelector } from "@/store/hooks";
 
 const { exploreItems: EXPLORE_ITEMS } = SIMPLE_HEADER;
 
@@ -21,9 +23,16 @@ export const SimpleHeader = ({
   hasAnnouncement = false,
   className,
 }: SimpleHeaderProps) => {
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+  const [isMounted, setIsMounted] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const exploreRef = useRef<HTMLDivElement>(null);
+  const { count: wishlistCount } = useWishlist();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!exploreOpen) return;
@@ -39,12 +48,13 @@ export const SimpleHeader = ({
   const isCompare = variant === "compare";
 
   return (
-    <header
-      className={`fixed left-0 right-0 z-50 px-3 sm:px-8 pointer-events-none transition-all duration-300 ${
-        hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-3 sm:top-4"
-      } ${className || ""}`}
-    >
-      <div className="mx-auto flex h-[58px] sm:h-[62px] w-full max-w-[1380px] items-center justify-between rounded-full bg-white px-5 sm:px-7 shadow-[0_8px_30px_rgba(0,0,0,0.07)] border border-slate-100/90 pointer-events-auto">
+    <>
+      <header
+        className={`fixed left-0 right-0 z-50 px-3 sm:px-8 pointer-events-none transition-all duration-300 ${
+          hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-3 sm:top-4"
+        } ${className || ""}`}
+      >
+        <div className="mx-auto flex h-[58px] sm:h-[62px] w-full max-w-[1380px] items-center justify-between rounded-full bg-white px-5 sm:px-7 shadow-[0_8px_30px_rgba(0,0,0,0.07)] border border-slate-100/90 pointer-events-auto">
         
         {/* Left Side: Brand Logo (+ optional divider & location if default) */}
         <div className="flex items-center gap-3.5 shrink-0">
@@ -55,6 +65,7 @@ export const SimpleHeader = ({
               width={96}
               height={28}
               className="h-6 sm:h-7 w-auto object-contain"
+              style={{ width: "auto", height: "auto" }}
               priority
             />
           </Link>
@@ -145,9 +156,9 @@ export const SimpleHeader = ({
 
           {/* Wishlist Heart */}
           <Link
-            href="/login"
+            href="/properties?saved=true"
             aria-label="Wishlist"
-            className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
           >
             <Image
               src="/layout/nav/nav_heart.png"
@@ -155,7 +166,13 @@ export const SimpleHeader = ({
               width={22}
               height={20}
               className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+              style={{ width: "auto", height: "auto" }}
             />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-4.5 min-w-[18px] px-1 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-xs">
+                {wishlistCount}
+              </span>
+            )}
           </Link>
 
           {/* Notifications Bell with Orange-Red dot */}
@@ -170,6 +187,7 @@ export const SimpleHeader = ({
               width={20}
               height={24}
               className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 
@@ -178,15 +196,35 @@ export const SimpleHeader = ({
             type="button"
             aria-label="User Profile"
             onClick={() => setSidebarOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100"
           >
-            <Image
-              src="/layout/nav/nav_user.png"
-              alt="User Profile"
-              width={18}
-              height={18}
-              className="w-[16px] h-auto object-contain"
-            />
+            {isMounted && isAuthenticated && user ? (
+              user?.person?.avatarUrl ? (
+                <Image
+                  src={user.person.avatarUrl}
+                  alt="Profile"
+                  width={36}
+                  height={36}
+                  className="w-full h-full rounded-full object-cover"
+                />
+              ) : (
+                <span className="text-xs font-bold text-[#1865F2] uppercase">
+                  {(user?.person?.firstName || user?.email || user?.phone || "U").charAt(0)}
+                </span>
+              )
+            ) : (
+              <Image
+                src="/layout/nav/nav_user.png"
+                alt="User Profile"
+                width={18}
+                height={18}
+                className="w-[16px] h-auto object-contain"
+                style={{ width: "auto", height: "auto" }}
+              />
+            )}
+            {isMounted && isAuthenticated && (
+              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+            )}
           </button>
 
           {/* Post Property Free Button */}
@@ -218,8 +256,10 @@ export const SimpleHeader = ({
           </Link>
         </div>
       </div>
-
-      <HeaderSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </header>
-  );
+
+    {/* Global Navigation Sidebar Drawer */}
+    <HeaderSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+  </>
+);
 };

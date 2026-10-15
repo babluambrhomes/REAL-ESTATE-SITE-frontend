@@ -100,6 +100,21 @@ export default function RegisterForm() {
   const inputBase =
     "h-10 w-full rounded-lg border mt-1 border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-none placeholder:text-gray-400 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
+  if (requiresOtp && otpIdentifier && otpPurpose) {
+    return (
+      <VerifyOtpForm
+        identifier={otpIdentifier}
+        purpose={otpPurpose}
+        apiUrl="/private-otp-verify"
+        imgUrl="/auth/otp.png"
+        onSuccess={() => {
+          dispatch(clearOtpState());
+          setShowOptionalEmail(true);
+        }}
+      />
+    );
+  }
+
   if (showOptionalEmail) {
     return (
       <div className="relative flex w-full flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:items-center">

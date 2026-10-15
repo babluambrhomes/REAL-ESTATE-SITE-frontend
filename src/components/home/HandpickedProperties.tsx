@@ -7,6 +7,8 @@ import { ChevronLeft, ChevronRight, Heart, Share2, ShieldCheck, MapPin, PhoneCal
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import toast from "react-hot-toast";
+import { useWishlist } from "@/lib/wishlist";
 
 interface HandpickedItem {
   id: string;
@@ -36,32 +38,38 @@ const HANDPICKED_DATA: HandpickedItem[] = [
     id: "hp-2",
     image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
     tag: "2,3 & 4 BHK Apartments",
-    title: "NBCC Aspire Silicon City",
-    location: "Sector 76, Noida",
-    price: "₹1.25*Cr",
-    originalPrice: "₹1.58 Cr",
-    discountText: "Get upto 33L Off on this property",
+    title: "ATS Knightsbridge",
+    location: "Sector 124, Noida",
+    price: "₹1.58*Cr",
+    originalPrice: "₹1.85 Cr",
+    discountText: "Get upto 27L Off on this property",
     phone: "+919876543210",
   },
   {
     id: "hp-3",
     image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
     tag: "2,3 & 4 BHK Apartments",
-    title: "NBCC Aspire Silicon City",
-    location: "Sector 76, Noida",
-    price: "₹1.25*Cr",
-    originalPrice: "₹1.58 Cr",
-    discountText: "Get upto 33L Off on this property",
+    title: "Premium Villa with Garden",
+    location: "Knowledge Park, Greater Noida",
+    price: "₹2.10*Cr",
+    originalPrice: "₹2.45 Cr",
+    discountText: "Exclusive club membership included",
     phone: "+919876543210",
   },
 ];
 
 export const HandpickedProperties = () => {
   const swiperRef = useRef<SwiperType | null>(null);
-  const [likedMap, setLikedMap] = useState<Record<string, boolean>>({});
+  const { isSaved, toggle } = useWishlist();
 
-  const toggleLike = (id: string) => {
-    setLikedMap((prev) => ({ ...prev, [id]: !prev[id] }));
+  const handleShare = (item: HandpickedItem) => {
+    const fullUrl = typeof window !== "undefined" ? `${window.location.origin}/properties/${encodeURIComponent(item.title)}` : `/properties/${encodeURIComponent(item.title)}`;
+    if (navigator.share) {
+      navigator.share({ title: item.title, url: fullUrl }).catch(() => {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(fullUrl);
+      toast.success("Property link copied to clipboard!");
+    }
   };
 
   return (
@@ -132,16 +140,32 @@ export const HandpickedProperties = () => {
                 <button
                   type="button"
                   aria-label="Wishlist"
-                  onClick={() => toggleLike(item.id)}
+                  onClick={() =>
+                    toggle(item.id, {
+                      id: item.id,
+                      title: item.title,
+                      location: item.location,
+                      city: "Noida",
+                      type: "Apartment",
+                      beds: "3 BHK",
+                      price: item.price,
+                      originalPrice: item.originalPrice,
+                      images: [item.image],
+                      chips: [item.tag],
+                      phone: item.phone,
+                      verifiedText: "VERIFIED DEAL",
+                    })
+                  }
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-slate-600 shadow-sm transition-transform hover:scale-110 cursor-pointer"
                 >
                   <Heart
-                    className={`h-4 w-4 ${likedMap[item.id] ? "fill-red-500 text-red-500" : "text-[#1865F2]"}`}
+                    className={`h-4 w-4 ${isSaved(item.id) ? "fill-red-500 text-red-500" : "text-[#1865F2]"}`}
                   />
                 </button>
                 <button
                   type="button"
                   aria-label="Share"
+                  onClick={() => handleShare(item)}
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-[#1865F2] shadow-sm transition-transform hover:scale-110 cursor-pointer"
                 >
                   <Share2 className="h-4 w-4" />
@@ -202,7 +226,7 @@ export const HandpickedProperties = () => {
                 </div>
 
                 <Link
-                  href="/properties"
+                  href={`/properties/${encodeURIComponent(item.title)}`}
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1865F2] hover:bg-[#1250C4] px-5 sm:px-6 py-2.5 text-[13px] sm:text-[14px] font-semibold text-white shadow-xs transition-all duration-200 hover:scale-105 cursor-pointer shrink-0"
                 >
                   <span>View Details</span>

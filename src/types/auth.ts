@@ -3,6 +3,7 @@ export interface RegisterRequest {
   phone?: string;
   password?: string;
   accessToken?: string;
+  FbTokenId?: string;
   firstName?: string;
   lastName?: string;
   gender?: "MALE" | "FEMALE" | "OTHER";
@@ -14,6 +15,7 @@ export interface LoginRequest {
   password?: string;
   code?: string;
   accessToken?: string;
+  FbTokenId?: string;
 }
 
 export interface VerifyOtpRequest {

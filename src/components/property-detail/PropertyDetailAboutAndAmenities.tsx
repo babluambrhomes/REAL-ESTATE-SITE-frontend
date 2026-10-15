@@ -72,7 +72,13 @@ const SOCIETY_FEATURES = [
   },
 ];
 
-export const PropertyDetailAboutAndAmenities = () => {
+export const PropertyDetailAboutAndAmenities = ({
+  description,
+  amenities,
+}: {
+  description?: string;
+  amenities?: string[];
+}) => {
   const [activeTab, setActiveTab] = useState("about");
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -111,22 +117,28 @@ export const PropertyDetailAboutAndAmenities = () => {
       {/* ----------------- 1. ABOUT PROPERTY SECTION ----------------- */}
       <div id="about" className="space-y-2.5 scroll-mt-28">
         <p className="text-[13.5px] font-semibold text-[#0B132B]">
-          Address : <span className="font-semibold text-[#0284C7]">Sector 103 , Noida Ext</span>
+          Overview : <span className="font-semibold text-[#0284C7]">Verified Property Details</span>
         </p>
 
         <p className="text-[13px] text-[#475569] leading-relaxed">
-          This property faces the east direction. The floor plan additionally contains 3 bedroom(s), 2 bathrooms and 3 balconies. All in all, the flat is spread over a super built up area of 1270 sq.Ft. The property is located on the 3rd floor of a 18 floors tall building. Being a ready to move project, you c...
-          {isExpanded && (
-            <span className="block mt-2">
-              The project is situated in a prominent location with direct connectivity to Noida-Greater Noida Expressway, metro stations, multi-speciality hospitals, top-tier schools, and bustling shopping centers. Enjoy high rental demand and solid capital appreciation.
-            </span>
+          {description ? (
+            <span>{description}</span>
+          ) : (
+            <>
+              This property faces the east direction. The floor plan additionally contains 3 bedroom(s), 2 bathrooms and 3 balconies. All in all, the flat is spread over a super built up area of 1270 sq.Ft. The property is located on the 3rd floor of a 18 floors tall building. Being a ready to move project, you can settle down right away.
+              {isExpanded && (
+                <span className="block mt-2">
+                  The project is situated in a prominent location with direct connectivity to Noida-Greater Noida Expressway, metro stations, multi-speciality hospitals, top-tier schools, and bustling shopping centers. Enjoy high rental demand and solid capital appreciation.
+                </span>
+              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-[#1865F2] font-semibold ml-1.5 hover:underline cursor-pointer inline-flex items-center"
+              >
+                {isExpanded ? "Less <<<" : "More >>>"}
+              </button>
+            </>
           )}
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="text-[#1865F2] font-semibold ml-1.5 hover:underline cursor-pointer inline-flex items-center"
-          >
-            {isExpanded ? "Less <<<" : "More >>>"}
-          </button>
         </p>
       </div>
 

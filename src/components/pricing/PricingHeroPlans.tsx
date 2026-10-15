@@ -2,10 +2,22 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { Check, Plus, Diamond, Sparkles } from "lucide-react";
 
 export const PricingHeroPlans = () => {
+  const router = useRouter();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+
+  const handleSelectPlan = (planName: string) => {
+    setSelectedPlan(planName);
+    toast.success(`Selected ${planName} Plan (${billingCycle})! Redirecting to post your property...`);
+    setTimeout(() => {
+      router.push(`/post-property?plan=${planName.toLowerCase()}&billing=${billingCycle}`);
+    }, 600);
+  };
 
   return (
     <section className="relative w-full overflow-hidden bg-white pt-28 sm:pt-32 md:pt-36 pb-24 font-jakarta min-h-[900px]">
@@ -135,6 +147,7 @@ export const PricingHeroPlans = () => {
               <div className="pt-8">
                 <button
                   type="button"
+                  onClick={() => handleSelectPlan("Free")}
                   className="w-full py-3 bg-gradient-to-r from-[#38BDF8] to-[#0284C7] hover:opacity-95 text-white text-xs font-bold rounded-lg shadow-[0_4px_14px_rgba(56,189,248,0.35)] transition-all cursor-pointer"
                 >
                   Start 7 day free trial
@@ -202,6 +215,7 @@ export const PricingHeroPlans = () => {
               <div className="pt-8">
                 <button
                   type="button"
+                  onClick={() => handleSelectPlan("Basic")}
                   className="w-full py-3 bg-gradient-to-r from-[#0284C7] to-[#2563EB] hover:opacity-95 text-white text-xs font-bold rounded-lg shadow-[0_4px_14px_rgba(2,132,199,0.35)] transition-all cursor-pointer"
                 >
                   Start 7 day free trial
@@ -270,6 +284,7 @@ export const PricingHeroPlans = () => {
               <div className="pt-8">
                 <button
                   type="button"
+                  onClick={() => handleSelectPlan("Advanced")}
                   className="w-full py-3 bg-[#1865F2] hover:bg-blue-700 text-white text-xs font-bold rounded-lg shadow-[0_4px_14px_rgba(24,101,242,0.35)] transition-all cursor-pointer"
                 >
                   Start 7 day free trial
@@ -321,7 +336,7 @@ export const PricingHeroPlans = () => {
                     "Priority Lead Access",
                     "24/7 Priority Support",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-xs text-white font-semibold">
+                    <li key={i} className="flex items-center gap-2.5 text-white font-semibold">
                       <div className="w-4 h-4 rounded-full bg-white text-[#0284C7] flex items-center justify-center shrink-0 shadow-2xs">
                         <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>
@@ -335,6 +350,7 @@ export const PricingHeroPlans = () => {
               <div className="pt-8">
                 <button
                   type="button"
+                  onClick={() => handleSelectPlan("Plus")}
                   className="w-full py-3 bg-white hover:bg-slate-50 text-[#0284C7] text-xs font-black rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.18)] transition-all cursor-pointer"
                 >
                   Start 7 day free trial

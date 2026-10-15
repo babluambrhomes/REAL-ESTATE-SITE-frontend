@@ -567,7 +567,7 @@ export const ExclusiveNewLaunches = ({
                       {/* KNOW MORE BUTTON (EXACT DEEP NAVY TO ROYAL BLUE GRADIENT & ROUNDED SHAPE) */}
                       <div className="mt-3.5">
                         <Link
-                          href={project.id ? `/property/${project.id}` : `/properties/${encodeURIComponent(project.title)}`}
+                          href={project.id ? `/properties/${project.id}` : `/properties/${encodeURIComponent(project.title)}`}
                           className="inline-flex items-center gap-2 rounded-[14px] bg-gradient-to-r from-[#0C3896] via-[#124DBE] to-[#1E62EC] px-5 py-2.5 text-[13px] font-bold text-white shadow-md shadow-blue-900/25 hover:from-[#092B74] hover:to-[#1752CA] hover:shadow-lg transition-all duration-200 cursor-pointer"
                         >
                           <span>Know More</span>

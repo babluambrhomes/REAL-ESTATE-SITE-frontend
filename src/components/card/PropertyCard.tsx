@@ -15,8 +15,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { cn, formatPropertyChip } from "@/lib/utils";
 import type { Property } from "@/types";
+import { useWishlist } from "@/lib/wishlist";
 
 const API_BASE_URL = "/api/v1";
 
@@ -28,6 +30,7 @@ const AreaBlueprintIcon = () => (
     width={26}
     height={22}
     className="h-5.5 w-6 shrink-0 object-contain"
+    style={{ width: "auto", height: "auto" }}
     unoptimized
   />
 );
@@ -39,6 +42,7 @@ const AmenitiesClipboardIcon = () => (
     width={26}
     height={26}
     className="h-5.5 w-5.5 shrink-0 object-contain"
+    style={{ width: "auto", height: "auto" }}
     unoptimized
   />
 );
@@ -50,6 +54,7 @@ const ReadyToMoveIcon = () => (
     width={26}
     height={22}
     className="h-5.5 w-6 shrink-0 object-contain"
+    style={{ width: "auto", height: "auto" }}
     unoptimized
   />
 );
@@ -74,23 +79,26 @@ const DiscountBadgeIcon = () => (
   </svg>
 );
 
-export const PropertyCard = ({
-  id,
-  images = [],
-  verifiedText = "VERIFIED DEAL",
-  chips = ["2, 3 & 4 BHK Apartments"],
-  title,
-  phone = "+91 9876543210",
-  location,
-  price,
-  originalPrice,
-  description = "",
-  layout = "vertical",
-  infoChips,
-  nearby = [],
-  index,
-}: Property) => {
-  const [liked, setLiked] = useState(false);
+export const PropertyCard = (props: Property) => {
+  const {
+    id,
+    images = [],
+    verifiedText = "VERIFIED DEAL",
+    chips = ["2, 3 & 4 BHK Apartments"],
+    title,
+    phone = "+91 9876543210",
+    location,
+    price,
+    originalPrice,
+    description = "",
+    layout = "vertical",
+    infoChips,
+    nearby = [],
+    index,
+  } = props;
+  const { isSaved, toggle } = useWishlist();
+  const [localLiked, setLocalLiked] = useState(false);
+  const isItemSaved = id ? isSaved(id) : localLiked;
 
   const getImageUrl = (imagePath?: string | null) => {
     if (!imagePath) return "/images/properties/villa-popular-figma.jpg";
@@ -102,7 +110,25 @@ export const PropertyCard = ({
   };
 
   const propertyImage = getImageUrl(images[0]);
-  const propertyUrl = id ? `/properties/${id}` : `/properties/${encodeURIComponent(title || "details")}`;
+  const propertyUrl = props.slug
+    ? `/properties/${props.slug}`
+    : id
+    ? `/properties/${id}`
+    : `/properties/${encodeURIComponent(title || "details")}`;
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const fullUrl = typeof window !== "undefined" ? `${window.location.origin}${propertyUrl}` : propertyUrl;
+    if (navigator.share) {
+      navigator.share({ title: title || "Property", url: fullUrl }).catch(() => {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(fullUrl);
+      toast.success("Property link copied to clipboard!");
+    } else {
+      toast.success("Link: " + fullUrl);
+    }
+  };
 
   if (layout === "horizontal") {
     const rawPrice = price ? price.replace("Cr", "").trim() : "₹1.25";
@@ -144,14 +170,18 @@ export const PropertyCard = ({
                 aria-label="Wishlist"
                 onClick={(e) => {
                   e.preventDefault();
-                  setLiked((prev) => !prev);
+                  if (id) {
+                    toggle(id, props);
+                  } else {
+                    setLocalLiked((prev) => !prev);
+                  }
                 }}
                 className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
               >
                 <Heart
                   className={cn(
                     "h-4 w-4 transition-colors",
-                    liked ? "fill-red-500 text-red-500" : "text-[#1865F2]"
+                    isItemSaved ? "fill-red-500 text-red-500" : "text-[#1865F2]"
                   )}
                   strokeWidth={2.2}
                 />
@@ -159,7 +189,7 @@ export const PropertyCard = ({
               <button
                 type="button"
                 aria-label="Share"
-                onClick={(e) => e.preventDefault()}
+                onClick={handleShare}
                 className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
               >
                 <svg
@@ -407,11 +437,15 @@ export const PropertyCard = ({
                 aria-label="Wishlist"
                 onClick={(e) => {
                   e.preventDefault();
-                  setLiked((prev) => !prev);
+                  if (id) {
+                    toggle(id, props);
+                  } else {
+                    setLocalLiked((prev) => !prev);
+                  }
                 }}
                 className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
               >
-                {liked ? (
+                {isItemSaved ? (
                   <Heart className="h-4 w-4 fill-red-500 text-red-500" />
                 ) : (
                   <Image
@@ -420,6 +454,7 @@ export const PropertyCard = ({
                     width={16}
                     height={14}
                     className="h-4 w-4 object-contain"
+                    style={{ width: "auto", height: "auto" }}
                     unoptimized
                   />
                 )}
@@ -427,7 +462,7 @@ export const PropertyCard = ({
               <button
                 type="button"
                 aria-label="Share"
-                onClick={(e) => e.preventDefault()}
+                onClick={handleShare}
                 className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
               >
                 <Image

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 const AGENTS_BUILDERS = [
   {
@@ -9,6 +10,7 @@ const AGENTS_BUILDERS = [
     designation: "Director Sales",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
     bgCircle: "bg-[#EEF1F6]",
+    href: "/s/agent/jitender-singh",
   },
   {
     type: "agent",
@@ -16,6 +18,7 @@ const AGENTS_BUILDERS = [
     designation: "Director Sales",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
     bgCircle: "bg-[#EAE5DF]",
+    href: "/s/agent/jitender-singh",
   },
   {
     type: "builder",
@@ -23,6 +26,7 @@ const AGENTS_BUILDERS = [
     company: "E-BUILDER",
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80",
     bgCircle: "bg-[#F5E8D8]",
+    href: "/builder",
   },
   {
     type: "builder",
@@ -30,6 +34,7 @@ const AGENTS_BUILDERS = [
     company: "E-BUILDER",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
     bgCircle: "bg-[#F8BABA]",
+    href: "/builder",
   },
   {
     type: "builder",
@@ -37,6 +42,7 @@ const AGENTS_BUILDERS = [
     company: "E-BUILDER",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
     bgCircle: "bg-[#E2E8F0]",
+    href: "/builder",
   },
 ];
 
@@ -56,9 +62,10 @@ export const TopAgents = () => {
       {/* 5 Cards Row matching screenshot 1:1 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4.5 sm:gap-5">
         {AGENTS_BUILDERS.map((person, index) => (
-          <div
+          <Link
             key={index}
-            className="group relative flex flex-col items-center justify-between rounded-[28px] sm:rounded-[32px] bg-[#F5F6FB] border-b-[8px] border-b-[#1865F2] p-5 pt-7 pb-6 text-center transition-all duration-300 hover:-translate-y-1.5"
+            href={person.href}
+            className="group relative flex flex-col items-center justify-between rounded-[28px] sm:rounded-[32px] bg-[#F5F6FB] border-b-[8px] border-b-[#1865F2] p-5 pt-7 pb-6 text-center transition-all duration-300 hover:-translate-y-1.5 cursor-pointer block"
           >
             {/* Circular Profile Avatar Container */}
             <div
@@ -113,7 +120,7 @@ export const TopAgents = () => {
                 </div>
               )}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

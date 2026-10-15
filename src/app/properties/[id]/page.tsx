@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import { PropertyDetailTopBar } from "@/components/property-detail/PropertyDetailTopBar";
 import { PropertyDetailHero } from "@/components/property-detail/PropertyDetailHero";
@@ -9,19 +9,36 @@ import { PropertyDetailAboutAndAmenities } from "@/components/property-detail/Pr
 import { PropertyDetailFloorPlanAndHighlights } from "@/components/property-detail/PropertyDetailFloorPlanAndHighlights";
 import { PropertyDetailWhyRoofinAndBankOffers } from "@/components/property-detail/PropertyDetailWhyRoofinAndBankOffers";
 import { PropertyDetailFAQAndSuggestions } from "@/components/property-detail/PropertyDetailFAQAndSuggestions";
+import { PropertyGalleryModal } from "@/components/property-detail/PropertyGalleryModal";
+import { PropertyVideoModal } from "@/components/property-detail/PropertyVideoModal";
 import { properties } from "@/data/properties";
-import { Property } from "@/types";
+import type { Property } from "@/types";
+import { usePropertyDetailQuery } from "@/lib/features/property/propertyHooks";
+import { mapApiPropertyToUi } from "@/lib/features/property/propertyAdapter";
 
 export default function PropertyDetailPage() {
   const params = useParams();
   const [activeTab, setActiveTab] = useState("overview");
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-  // Lookup property by id or fallback to first property
-  const propertyIndex = typeof params?.id === "string" ? parseInt(params.id) : 0;
+  const paramId = typeof params?.id === "string" ? params.id : "";
+  const numericId = parseInt(paramId);
+
+  // Fetch live property details from backend API by slug or ID
+  const { data: detailData, isLoading: isDetailLoading } = usePropertyDetailQuery(paramId);
+
+  // Adapt live API data to UI Property model
+  const apiAdaptedProperty = useMemo(() => {
+    if (!detailData?.data) return null;
+    return mapApiPropertyToUi(detailData.data);
+  }, [detailData]);
+
+  // Lookup property by live API, fallback to numeric id / static properties
   const property: Property =
-    !isNaN(propertyIndex) && properties[propertyIndex]
-      ? properties[propertyIndex]
-      : properties[0];
+    apiAdaptedProperty ||
+    properties.find((p) => String(p.id) === paramId || p.slug === paramId) ||
+    (!isNaN(numericId) && properties[numericId] ? properties[numericId] : properties[0]);
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
@@ -35,6 +52,21 @@ export default function PropertyDetailPage() {
     }
   };
 
+  if (isDetailLoading && !apiAdaptedProperty) {
+    return (
+      <main className="min-h-screen bg-[#FAFBFD] pb-16">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 pt-8 space-y-6">
+          <div className="h-10 w-64 rounded-xl bg-slate-200 animate-pulse" />
+          <div className="h-[420px] w-full rounded-3xl bg-slate-200 animate-pulse" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-8 h-80 rounded-2xl bg-slate-200 animate-pulse" />
+            <div className="lg:col-span-4 h-80 rounded-2xl bg-slate-200 animate-pulse" />
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#FAFBFD] pb-16">
       {/* 1. Top Notice, SearchHeader, Sub Tabs & Breadcrumb */}
@@ -46,28 +78,53 @@ export default function PropertyDetailPage() {
 
       {/* 2. Main Page Container */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-6">
-        {/* Hero Gallery & Property Info Specs (Screenshot 1) */}
+        {/* Hero Gallery & Property Info Specs */}
         <PropertyDetailHero
           property={property}
-          onOpenGallery={() => alert("Photo Gallery Modal")}
-          onOpenVideo={() => alert("Video Tour Modal")}
+          onOpenGallery={() => setIsGalleryOpen(true)}
+          onOpenVideo={() => setIsVideoOpen(true)}
         />
 
-        {/* Builder Profile & Dealer Enquiry Form (Screenshot 2) */}
-        <PropertyDetailBuilderAndDealer />
+        {/* Builder Profile & Dealer Enquiry Form */}
+        <PropertyDetailBuilderAndDealer
+          seller={property.seller}
+          propertyId={property.id ? String(property.id) : undefined}
+          propertyTitle={property.title}
+        />
 
-        {/* About Property, Furnishing Grid & Society (Screenshot 3 & 4) */}
-        <PropertyDetailAboutAndAmenities />
+        {/* About Property, Furnishing Grid & Society */}
+        <PropertyDetailAboutAndAmenities
+          description={property.description}
+          amenities={property.amenities}
+        />
 
-        {/* Floor Plan & Location Advantages (Screenshot 4 & 5) */}
-        <PropertyDetailFloorPlanAndHighlights />
+        {/* Floor Plan & Location Advantages */}
+        <PropertyDetailFloorPlanAndHighlights
+          variants={property.variants}
+        />
 
-        {/* Why Roofin, Bank Offers & Price Trend Graph (Screenshot 5) */}
+        {/* Why Roofin, Bank Offers & Price Trend Graph */}
         <PropertyDetailWhyRoofinAndBankOffers />
 
-        {/* FAQs, Suggestion 3-Card Grid & Have Questions Banner (Screenshot 6) */}
+        {/* FAQs, Suggestion 3-Card Grid & Have Questions Banner */}
         <PropertyDetailFAQAndSuggestions />
       </div>
+
+      {/* Interactive Photo Gallery Lightbox */}
+      <PropertyGalleryModal
+        isOpen={isGalleryOpen}
+        onClose={() => setIsGalleryOpen(false)}
+        images={property.images}
+        title={property.title}
+      />
+
+      {/* Interactive Video Tour Modal */}
+      <PropertyVideoModal
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        title={`${property.title} - Video Tour`}
+        videoUrl={property.videoUrl}
+      />
     </main>
   );
 }

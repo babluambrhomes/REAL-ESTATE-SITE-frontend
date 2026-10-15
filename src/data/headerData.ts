@@ -124,8 +124,8 @@ export const HEADER_SIDEBAR = {
     moreLinks: [
         { label: 'My Reviews', href: '/reviews' },
         { label: 'Insights', href: '/insights' },
-        { label: 'Pay for Results', href: '/login' },
-        { label: 'Saved Properties', href: '/login' },
+        { label: 'Pay for Results', href: '/pay-for-results' },
+        { label: 'Saved Properties', href: '/properties?saved=true' },
     ] satisfies SidebarLink[],
     bottomLinks: [
         { label: 'About Us', href: '/about' },

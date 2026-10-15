@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import {
   ShieldCheck,
   Star,
@@ -17,6 +18,48 @@ import {
 
 export const BrokerHeroSection = () => {
   const [isFollowing, setIsFollowing] = useState(false);
+  const [followersCount, setFollowersCount] = useState(2985);
+  const [callbackRequested, setCallbackRequested] = useState(false);
+
+  const handleToggleFollow = () => {
+    if (isFollowing) {
+      setIsFollowing(false);
+      setFollowersCount((prev) => prev - 1);
+      toast.success("Unfollowed Jitender Singh");
+    } else {
+      setIsFollowing(true);
+      setFollowersCount((prev) => prev + 1);
+      toast.success("You are now following Jitender Singh!");
+    }
+  };
+
+  const handleShare = () => {
+    const fullUrl = typeof window !== "undefined" ? window.location.href : "";
+    if (navigator.share) {
+      navigator.share({ title: "Jitender Singh - Verified Broker on Roofin", url: fullUrl }).catch(() => {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(fullUrl);
+      toast.success("Broker profile link copied to clipboard!");
+    }
+  };
+
+  const handleRequestCallback = async () => {
+    setCallbackRequested(true);
+    try {
+      await fetch("/api/v1/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Buyer Applicant",
+          email: "callback_request@roofin.com",
+          message: "Request callback for broker Jitender Singh",
+        }),
+      });
+    } catch {
+      // Ignore network fallback
+    }
+    toast.success("Callback request sent! Jitender Singh will call you shortly.");
+  };
 
   const highlights = [
     {
@@ -123,7 +166,7 @@ export const BrokerHeroSection = () => {
               <div className="flex items-center justify-center sm:justify-start gap-2 pt-1 pb-2">
                 <button
                   type="button"
-                  onClick={() => setIsFollowing(!isFollowing)}
+                  onClick={handleToggleFollow}
                   className={`px-5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer shadow-[0_4px_12px_rgba(24,101,242,0.3)] ${
                     isFollowing
                       ? "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -131,11 +174,12 @@ export const BrokerHeroSection = () => {
                   }`}
                 >
                   <Users className="w-4 h-4" />
-                  <span>{isFollowing ? "Fallowing" : "Fallow"}</span>
+                  <span>{isFollowing ? "Following" : "Follow"}</span>
                 </button>
 
                 <button
                   type="button"
+                  onClick={handleShare}
                   className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300/80 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors shadow-xs cursor-pointer"
                 >
                   <Share2 className="w-4 h-4 text-slate-600" />
@@ -145,6 +189,7 @@ export const BrokerHeroSection = () => {
                 <button
                   type="button"
                   aria-label="More Options"
+                  onClick={handleShare}
                   className="w-10 h-9 bg-white hover:bg-slate-50 text-slate-600 border border-slate-300/80 rounded-xl flex items-center justify-center transition-colors shadow-xs cursor-pointer"
                 >
                   <MoreHorizontal className="w-4 h-4" />
@@ -177,20 +222,21 @@ export const BrokerHeroSection = () => {
 
                 {/* Primary CTA Buttons: Contact Broker & Request Callback */}
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-3">
-                  <button
-                    type="button"
+                  <a
+                    href="tel:+919876543210"
                     className="px-6 py-2.5 bg-gradient-to-r from-[#00C49F] via-[#00B4D8] to-[#0284C7] hover:from-[#00B4D8] hover:to-[#0284C7] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-[0_4px_14px_rgba(0,196,159,0.35)] transition-all cursor-pointer"
                   >
                     <Phone className="w-3.5 h-3.5" />
                     <span>Contact Broker</span>
-                  </button>
+                  </a>
 
                   <button
                     type="button"
+                    onClick={handleRequestCallback}
                     className="px-6 py-2.5 bg-white hover:bg-blue-50/60 text-[#1865F2] border border-[#1865F2] text-xs font-bold rounded-xl flex items-center gap-2 transition-colors cursor-pointer shadow-2xs"
                   >
                     <PhoneCall className="w-3.5 h-3.5" />
-                    <span>Request Callback</span>
+                    <span>{callbackRequested ? "Callback Requested" : "Request Callback"}</span>
                   </button>
                 </div>
 
@@ -215,8 +261,8 @@ export const BrokerHeroSection = () => {
               {/* 4 Stats Columns */}
               <div className="grid grid-cols-4 gap-2 text-center pt-1">
                 <div>
-                  <p className="text-xs font-bold text-slate-700">Fallowers</p>
-                  <p className="text-lg sm:text-xl font-black text-[#1865F2] mt-0.5">2,985</p>
+                  <p className="text-xs font-bold text-slate-700">Followers</p>
+                  <p className="text-lg sm:text-xl font-black text-[#1865F2] mt-0.5">{followersCount.toLocaleString("en-IN")}</p>
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-700">Views</p>

@@ -19,6 +19,7 @@ export default function CompareSideBySidePage() {
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const [activeTab, setActiveTab] = useState("highlights");
   const [isPickerModalOpen, setIsPickerModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Default properties matching the screenshot design
   const [prop1, setProp1] = useState({
@@ -95,6 +96,15 @@ export default function CompareSideBySidePage() {
             element.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          if (query.trim()) {
+            const facilitiesEl = document.getElementById("facilities");
+            if (facilitiesEl) {
+              facilitiesEl.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        }}
       />
 
       {/* 5. Section 1: Highlights Table Matrix */}
@@ -115,7 +125,7 @@ export default function CompareSideBySidePage() {
 
       {/* 9. Section 5: Facilities 22-Checklist with Sky Blue Column Highlight */}
       <div id="facilities">
-        <CompareFacilitiesTable prop1={prop1} prop2={prop2} />
+        <CompareFacilitiesTable prop1={prop1} prop2={prop2} searchQuery={searchQuery} />
       </div>
 
       {/* 10. Section 6: COMPARE SECTOR 124 & 120 Grid */}

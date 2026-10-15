@@ -31,17 +31,61 @@ const LOCATION_ADVANTAGES = [
   { label: "Bank", time: "4 Min", icon: "/location_advantage/bank.png" },
 ];
 
-export const PropertyDetailFloorPlanAndHighlights = () => {
+export const PropertyDetailFloorPlanAndHighlights = ({
+  variants,
+  nearbyPlaces,
+}: {
+  variants?: any[];
+  nearbyPlaces?: string[];
+}) => {
   const [showMoreHighlights, setShowMoreHighlights] = useState(false);
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+
+  const activeVariant = variants?.[selectedVariantIndex];
+  const variantTitle = activeVariant
+    ? `${activeVariant.variantName || `${activeVariant.bedrooms} BHK`} – ${activeVariant.totalArea} ${activeVariant.totalAreaUnit || "SQ.FT."}`
+    : "3 BHK – 1350 SQ.FT.";
+
+  const dynamicBullets = activeVariant
+    ? [
+        `1 Living & Dining Area`,
+        `1 Modular Kitchen`,
+        `${activeVariant.bedrooms || 3} Bedrooms`,
+        `${activeVariant.bathrooms || 3} Bathrooms`,
+        `${activeVariant.balconies || 2} Balconies`,
+      ]
+    : FLOOR_PLAN_BULLETS;
 
   return (
     <div className="w-full my-6 flex flex-col gap-8">
       {/* ----------------- 1. FLOOR PLAN SECTION ----------------- */}
       <div id="floor-plan" className="space-y-4 scroll-mt-28">
-        <div className="pl-2.5 border-l-4 border-[#00B4D8]">
-          <h3 className="text-[16px] font-extrabold text-[#1865F2] tracking-tight uppercase">
-            FLOOR PLAN
-          </h3>
+        <div className="flex items-center justify-between">
+          <div className="pl-2.5 border-l-4 border-[#00B4D8]">
+            <h3 className="text-[16px] font-extrabold text-[#1865F2] tracking-tight uppercase">
+              FLOOR PLAN
+            </h3>
+          </div>
+
+          {/* Variant Selector Tabs if multiple variants */}
+          {variants && variants.length > 1 && (
+            <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg">
+              {variants.map((v, i) => (
+                <button
+                  key={v.id || i}
+                  type="button"
+                  onClick={() => setSelectedVariantIndex(i)}
+                  className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all ${
+                    selectedVariantIndex === i
+                      ? "bg-[#1865F2] text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  {v.variantName || `${v.bedrooms} BHK`}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Floor Plan Container Cards matching Figma 1:1 */}
@@ -62,7 +106,7 @@ export const PropertyDetailFloorPlanAndHighlights = () => {
             <div className="sm:col-span-6 space-y-3 pl-0 sm:pl-2">
               <div>
                 <h4 className="text-[15px] sm:text-[16px] font-bold text-[#0B132B] uppercase tracking-tight">
-                  3 BHK – 1350 SQ.FT.
+                  {variantTitle}
                 </h4>
                 <p className="text-[12.5px] text-[#64748B] mt-1.5 leading-relaxed font-normal">
                   Smartly designed layout with spacious rooms and efficient space utilization.
@@ -70,7 +114,7 @@ export const PropertyDetailFloorPlanAndHighlights = () => {
               </div>
 
               <ul className="space-y-2.5 text-[13px] text-[#334155] font-normal pt-1">
-                {FLOOR_PLAN_BULLETS.map((bullet, idx) => (
+                {dynamicBullets.map((bullet, idx) => (
                   <li key={idx} className="flex items-center gap-2.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-[#00A896] ring-2 ring-[#00A896]/20 shrink-0" />
                     <span>{bullet}</span>

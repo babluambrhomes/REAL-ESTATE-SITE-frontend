@@ -64,8 +64,9 @@ export function useRegisterMutation() {
   return useMutation({
     mutationFn: (data: RegisterRequest) => authApi.register(data),
     onSuccess: (result, variables) => {
+      const isGoogleAuth = !!variables.FbTokenId || !!variables.accessToken;
       const requiresVerification =
-        result.message?.toLowerCase().includes("otp") ?? false;
+        !isGoogleAuth && (result.message?.toLowerCase().includes("otp") ?? false);
 
       if (requiresVerification) {
         const purpose = variables.phone

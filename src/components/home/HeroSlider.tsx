@@ -117,7 +117,7 @@ export const HeroSlider = () => {
               {/* Trust Badges */}
               <div className="mt-6 flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-7 pt-1">
                 {/* Badge 1: Verified Properties */}
-                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                <Link href="/properties?verified=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
                     <Image
                       src="/icon/hero/verified_properties_shield_hd.png"
@@ -133,10 +133,10 @@ export const HeroSlider = () => {
                     <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Verified</span>
                     <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Properties</span>
                   </div>
-                </div>
+                </Link>
 
                 {/* Badge 2: Trusted Agents */}
-                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                <Link href="/properties?agent=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
                     <Image
                       src="/icon/hero/trusted_agents_user_hd.png"
@@ -152,10 +152,10 @@ export const HeroSlider = () => {
                     <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Trusted</span>
                     <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Agents</span>
                   </div>
-                </div>
+                </Link>
 
                 {/* Badge 3: Best Deals */}
-                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                <Link href="/properties?deal=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
                     <Image
                       src="/icon/hero/best_deals_percent_hd.png"
@@ -171,7 +171,7 @@ export const HeroSlider = () => {
                     <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Best</span>
                     <span className="block text-[13px] sm:text-[13.5px] font-medium text-black whitespace-nowrap">Deals</span>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@ export const HeroSlider = () => {
             <div className="absolute inset-y-0 left-0 w-8 xl:w-14 bg-gradient-to-r from-[#d8eafb]/70 to-transparent pointer-events-none z-10" />
 
             {/* Top Floating Badge: Premium Living (Exact match with zoomed screenshot) */}
-            <div className="absolute top-24 left-4 z-20 w-[190px] rounded-2xl border border-slate-100 bg-white p-3.5 shadow-xl backdrop-blur-md">
+            <div className="absolute top-24 left-4 z-20 w-[190px] rounded-xl border border-slate-100 bg-white p-3.5 shadow-xl backdrop-blur-md">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#a3e8c8] bg-[#e6f8f0] text-[#10b981] shrink-0">
                   <Building2 className="h-4 w-4" />
@@ -199,7 +199,7 @@ export const HeroSlider = () => {
               <div className="mt-2.5 flex items-center justify-between pt-1">
                 <p className="text-[17px] font-extrabold text-slate-900 tracking-tight">1.25 cr</p>
                 <Link
-                  href="/properties"
+                  href="/properties?location=Greater+Noida"
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1865F2] text-white shadow-md transition-transform hover:scale-105"
                 >
                   <ArrowRight className="h-4 w-4" />
@@ -211,7 +211,7 @@ export const HeroSlider = () => {
             <div className="absolute bottom-12 right-6 z-20 flex items-center gap-4 pointer-events-auto">
               {/* Explore on Map Button */}
               <Link
-                href="/properties"
+                href="/properties?map=true"
                 className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#1865F2] to-[#029BE5] px-5 py-3.5 text-[15.5px] font-medium text-white shadow-[0_8px_24px_rgba(24,101,242,0.4)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_10px_28px_rgba(24,101,242,0.5)] shrink-0"
               >
                 {/* Folded Map with Pin icon */}

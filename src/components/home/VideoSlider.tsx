@@ -378,7 +378,7 @@ export const VideoSlider = () => {
             </button>
             <div className="relative aspect-video w-full">
               <iframe
-                src={`${selectedVideo.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ"}?autoplay=1`}
+                src={`${selectedVideo.videoUrl || "https://www.youtube.com/embed/LXb3EKWsInQ"}?autoplay=1`}
                 title={selectedVideo.title}
                 className="h-full w-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

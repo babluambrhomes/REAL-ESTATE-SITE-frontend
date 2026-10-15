@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { HeaderSelect } from './HeaderSelect'
 import { HeaderSidebar } from './HeaderSidebar'
 import Link from 'next/link'
@@ -9,6 +10,8 @@ import { Bell, Heart, Logs, User, Search, SlidersHorizontal, X, CircleX, TextAli
 import { LocationButton } from './LocationButton'
 import { SEARCH_HEADER } from '@/data/headerData'
 import { cn } from '@/lib/utils'
+import { useWishlist } from '@/lib/wishlist'
+import { useAppSelector } from '@/store/hooks'
 
 const {
     locations: LOCATIONS,
@@ -52,16 +55,26 @@ interface SearchHeaderProps {
 }
 
 export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeaderProps) => {
+    const router = useRouter();
+    const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+    const selectedCity = useAppSelector((state) => state.location.selectedCity);
+    const { count: wishlistCount } = useWishlist();
 
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [budgetOpen, setBudgetOpen] = useState(false)
-    const [logsOpen, setLogsOpen] = useState(false)
-    const filterRef = useRef<HTMLDivElement>(null)
-    const filterPanelRef = useRef<HTMLDivElement>(null)
-    const logsRef = useRef<HTMLDivElement>(null)
+    const [isMounted, setIsMounted] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [budgetOpen, setBudgetOpen] = useState(false);
+    const [logsOpen, setLogsOpen] = useState(false);
+    const filterRef = useRef<HTMLDivElement>(null);
+    const filterPanelRef = useRef<HTMLDivElement>(null);
+    const logsRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const [filters, setFilters] = useState<FilterState>({
-        locations: ['Sector 108 Noida'],
+        locations: [],
         bhk: [],
         constructionStatus: [],
         postedBy: [],
@@ -69,17 +82,17 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
         amenities: [],
         budgetMin: BUDGET_MIN,
         budgetMax: BUDGET_MAX,
-    })
+    });
 
     const toggleFilter = useCallback((key: keyof FilterState, value: string) => {
         setFilters(prev => {
-            const arr = prev[key] as string[]
+            const arr = prev[key] as string[];
             const next = arr.includes(value)
                 ? arr.filter(v => v !== value)
-                : [...arr, value]
-            return { ...prev, [key]: next }
-        })
-    }, [])
+                : [...arr, value];
+            return { ...prev, [key]: next };
+        });
+    }, []);
 
     const clearAll = useCallback(() => {
         setFilters({
@@ -91,8 +104,59 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
             amenities: [],
             budgetMin: BUDGET_MIN,
             budgetMax: BUDGET_MAX,
-        })
-    }, [])
+        });
+    }, []);
+
+    const handleSearchSubmit = useCallback(() => {
+        const params = new URLSearchParams();
+
+        if (searchQuery.trim()) {
+            params.set("q", searchQuery.trim());
+        }
+
+        if (selectedCity?.value) {
+            params.set("city", selectedCity.value);
+        }
+
+        if (filters.locations.length > 0) {
+            params.set("locality", filters.locations[0]);
+        }
+
+        if (filters.bhk.length > 0) {
+            const bhkNums = Array.from(
+                new Set(
+                    filters.bhk
+                        .map((b) => {
+                            const match = b.match(/\d+/);
+                            return match ? match[0] : "";
+                        })
+                        .filter(Boolean)
+                )
+            ).join(",");
+            if (bhkNums) params.set("bhk", bhkNums);
+        }
+
+        if (filters.propertyTypes.length > 0) {
+            const rawType = filters.propertyTypes[0].toLowerCase();
+            let cleanType = rawType;
+            if (rawType.includes("villa") || rawType.includes("house")) cleanType = "house";
+            else if (rawType.includes("apartment") || rawType.includes("flat")) cleanType = "apartment";
+            else if (rawType.includes("land") || rawType.includes("plot")) cleanType = "plot";
+            else if (rawType.includes("builder")) cleanType = "builder-floor";
+            else if (rawType.includes("studio") || rawType.includes("rk")) cleanType = "studio";
+            params.set("type", cleanType);
+        }
+
+        if (filters.budgetMin > BUDGET_MIN) {
+            params.set("minPrice", String(filters.budgetMin));
+        }
+        if (filters.budgetMax < BUDGET_MAX) {
+            params.set("maxPrice", String(filters.budgetMax));
+        }
+
+        setBudgetOpen(false);
+        router.push(`/properties?${params.toString()}`);
+    }, [searchQuery, selectedCity, filters, router]);
 
 
     useEffect(() => {
@@ -144,14 +208,15 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
     )
 
     return (
-        <header className={cn(
-            "fixed left-0 right-0 z-50 px-3 sm:px-10 transition-all duration-300 pointer-events-none",
-            hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-2 sm:top-3",
-            className
-        )}>
-            <div className="bg-white py-2.5 px-5 rounded-full shadow-2xl justify-between flex gap-4 items-center pointer-events-auto">
-                <div className="flex items-center gap-3">
-                    <Link href="/" className="shrink-0 flex items-center">
+        <>
+            <header className={cn(
+                "fixed left-0 right-0 z-50 px-3 sm:px-10 transition-all duration-300 pointer-events-none",
+                hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-2 sm:top-3",
+                className
+            )}>
+                <div className="w-full max-w-[1380px] mx-auto bg-white py-2 px-3 sm:px-5 rounded-full shadow-2xl justify-between flex gap-2 sm:gap-4 items-center pointer-events-auto">
+                <div className="flex items-center gap-3 shrink-0">
+                    <Link href="/" className="shrink-0 flex items-center min-w-[85px] sm:min-w-[95px]">
                         <Image
                             src="/layout/logo.png"
                             alt="Roofin"
@@ -164,7 +229,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                     <div className="h-6 w-[1px] bg-slate-200" />
                 </div>
 
-                <div className="flex gap-6 text-sm items-center flex-1">
+                <div className="flex gap-4 sm:gap-6 text-sm items-center flex-1 min-w-0">
                     {/* Search Bar */}
                     <div ref={filterRef} className="relative w-full">
                         <div className="rounded-full border border-gray-200 bg-[#FBFDFF] shadow-2xs flex items-center hover:border-gray-300 transition-colors py-1 pl-1 pr-1.5">
@@ -178,9 +243,19 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                 <input
                                     type="text"
                                     placeholder={SEARCH_PLACEHOLDER}
+                                    value={searchQuery}
                                     onFocus={() => setBudgetOpen(true)}
-                                    onClick={() => setBudgetOpen(true)}
-                                    onChange={(e) => console.log(e.target.value)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setBudgetOpen(true);
+                                    }}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                            handleSearchSubmit();
+                                        }
+                                    }}
                                     className="w-full outline-none text-[12px] text-gray-800 placeholder:text-gray-400 font-medium bg-transparent leading-tight truncate"
                                 />
                             </div>
@@ -197,8 +272,14 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                             <div className="flex items-center rounded-full bg-[#1865F2] hover:bg-blue-700 text-white shadow-xs transition-all shrink-0 my-0.5 ml-1">
                                 <button
                                     type="button"
-                                    onClick={() => setBudgetOpen(prev => !prev)}
-                                    onFocus={() => setBudgetOpen(true)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        if (searchQuery.trim() || budgetOpen) {
+                                            handleSearchSubmit();
+                                        } else {
+                                            setBudgetOpen(true);
+                                        }
+                                    }}
                                     className="flex items-center gap-2 pl-4 pr-2.5 py-1.5 text-[12.5px] font-normal tracking-wide cursor-pointer"
                                 >
                                     <span>Search ...</span>
@@ -353,7 +434,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                             </button>
                                             <button
                                                 type="button"
-                                                onClick={() => setBudgetOpen(false)}
+                                                onClick={handleSearchSubmit}
                                                 className="rounded-lg bg-[#1865F2] hover:bg-blue-700 text-white px-7 py-2 text-xs font-semibold shadow-md shadow-blue-500/20 transition-all cursor-pointer"
                                             >
                                                 Search
@@ -399,14 +480,24 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                     <div className="h-6 w-[1px] bg-slate-200 shrink-0" />
 
                     <div className="flex gap-2 sm:gap-3 items-center shrink-0">
-                        <Link href="/login" aria-label="Wishlist" className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0">
+                        <Link
+                            href="/properties?saved=true"
+                            aria-label="Wishlist"
+                            className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+                        >
                             <Image
                                 src="/layout/nav/nav_heart.png"
                                 alt="Wishlist"
                                 width={22}
                                 height={20}
                                 className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+                                style={{ width: "auto", height: "auto" }}
                             />
+                            {wishlistCount > 0 && (
+                                <span className="absolute -top-1 -right-1 flex h-4.5 min-w-[18px] px-1 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-xs">
+                                    {wishlistCount}
+                                </span>
+                            )}
                         </Link>
                         <Link href="/login" aria-label="Notifications" className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0">
                             <Image
@@ -415,16 +506,37 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                 width={20}
                                 height={24}
                                 className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
+                                style={{ width: "auto", height: "auto" }}
                             />
                         </Link>
-                        <button onClick={() => setSidebarOpen(true)} aria-label="User Profile" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0">
-                            <Image
-                                src="/layout/nav/nav_user.png"
-                                alt="User Profile"
-                                width={18}
-                                height={18}
-                                className="w-[16px] h-auto object-contain"
-                            />
+                        <button onClick={() => setSidebarOpen(true)} aria-label="User Profile" className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100">
+                            {isMounted && isAuthenticated && user ? (
+                                user?.person?.avatarUrl ? (
+                                    <Image
+                                        src={user.person.avatarUrl}
+                                        alt="Profile"
+                                        width={36}
+                                        height={36}
+                                        className="w-full h-full rounded-full object-cover"
+                                    />
+                                ) : (
+                                    <span className="text-xs font-bold text-[#1865F2] uppercase">
+                                        {(user?.person?.firstName || user?.email || user?.phone || "U").charAt(0)}
+                                    </span>
+                                )
+                            ) : (
+                                <Image
+                                    src="/layout/nav/nav_user.png"
+                                    alt="User Profile"
+                                    width={18}
+                                    height={18}
+                                    className="w-[16px] h-auto object-contain"
+                                    style={{ width: "auto", height: "auto" }}
+                                />
+                            )}
+                            {isMounted && isAuthenticated && (
+                                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+                            )}
                         </button>
                         <Link
                             href="/post-property"
@@ -450,9 +562,12 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                     </div>
                 </div>
             </div>
-            <HeaderSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         </header>
-    )
+
+        {/* Global Navigation Sidebar Drawer */}
+        <HeaderSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    </>
+)
 }
 
 

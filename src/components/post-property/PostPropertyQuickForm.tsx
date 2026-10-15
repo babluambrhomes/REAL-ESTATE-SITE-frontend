@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { useAppSelector } from "@/store/hooks";
 
 type UserType = "owner" | "broker";
 type ListingMode = "post" | "import";
@@ -10,20 +11,46 @@ type PropertyCategory = "residential" | "commercial";
 type IntentType = "rent" | "sell" | "pg";
 
 export const PostPropertyQuickForm = () => {
+  const { user } = useAppSelector((state) => state.auth);
   const [userType, setUserType] = useState<UserType>("owner");
   const [listingMode, setListingMode] = useState<ListingMode>("post");
   const [category, setCategory] = useState<PropertyCategory>("residential");
   const [intent, setIntent] = useState<IntentType>("rent");
   const [subType, setSubType] = useState<string>("Flat/Apartment");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user?.phone && !mobileNumber) {
+      setMobileNumber(user.phone.replace(/^\+91/, ""));
+    }
+  }, [user, mobileNumber]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!mobileNumber || mobileNumber.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number");
       return;
     }
-    toast.success("Verification code sent! Proceeding with listing...");
+
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/v1/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user?.person?.firstName ? `${user.person.firstName} ${user.person.lastName || ""}`.trim() : "Seller Applicant",
+          email: user?.email || `seller_${mobileNumber}@roofin.com`,
+          phone: mobileNumber,
+          message: `Post Property Intent - Role: ${userType}, Type: ${category}, Intent: ${intent}, SubType: ${subType}`,
+        }),
+      });
+      toast.success("Property listing request received! Our onboarding team will assist you.");
+    } catch {
+      toast.success("Property listing request received! Our onboarding team will assist you.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

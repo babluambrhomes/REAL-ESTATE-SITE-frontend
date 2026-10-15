@@ -20,6 +20,9 @@ export async function getFirebaseAuth(): Promise<Auth> {
     throw new Error("Failed to load Firebase configuration");
   }
   const config = await res.json();
+  if (!config?.apiKey) {
+    throw new Error("Firebase API key is missing. Please set FIREBASE_API_KEY in your .env file.");
+  }
   const app = initializeApp(config);
   cachedAuth = getAuth(app);
   return cachedAuth;

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SlidersHorizontal, Heart, Share2, Eye, ArrowRight, Star, MapPin } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface ProjectItem {
   id: string;
@@ -23,6 +24,26 @@ interface ProjectItem {
 
 export const BuilderProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [likedProjectIds, setLikedProjectIds] = useState<Record<string, boolean>>({});
+
+  const toggleLike = (id: string, title: string) => {
+    setLikedProjectIds((prev) => {
+      const isLiked = !prev[id];
+      toast.success(
+        isLiked ? `Saved "${title}" to your favorites!` : `Removed from favorites`
+      );
+      return { ...prev, [id]: isLiked };
+    });
+  };
+
+  const handleShare = (title: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      toast.success(`Link for "${title}" copied to clipboard!`);
+    } else {
+      toast.success("Link copied!");
+    }
+  };
 
   const filterTabs = ["All", "Under Construction", "Ready to move", "Upcoming"];
 
@@ -213,13 +234,23 @@ export const BuilderProjectsSection = () => {
                   <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
                     <button
                       type="button"
-                      className="flex items-center gap-1 hover:text-rose-500 transition-colors cursor-pointer"
+                      onClick={() => toggleLike(proj.id, proj.title)}
+                      className={`flex items-center gap-1 transition-colors cursor-pointer ${
+                        likedProjectIds[proj.id] ? "text-rose-500 font-bold" : "hover:text-rose-500"
+                      }`}
                     >
-                      <Heart className="w-3.5 h-3.5" />
-                      <span>{proj.likes} Like</span>
+                      <Heart
+                        className={`w-3.5 h-3.5 ${
+                          likedProjectIds[proj.id] ? "fill-rose-500 text-rose-500" : ""
+                        }`}
+                      />
+                      <span>
+                        {proj.likes + (likedProjectIds[proj.id] ? 1 : 0)} Like
+                      </span>
                     </button>
                     <button
                       type="button"
+                      onClick={() => handleShare(proj.title)}
                       className="flex items-center gap-1 hover:text-[#1865F2] transition-colors cursor-pointer"
                     >
                       <Share2 className="w-3.5 h-3.5" />
@@ -250,6 +281,10 @@ export const BuilderProjectsSection = () => {
       <div className="pt-2">
         <button
           type="button"
+          onClick={() => {
+            setActiveFilter("All");
+            window.scrollTo({ top: 400, behavior: "smooth" });
+          }}
           className="w-full py-3 bg-white hover:bg-slate-50 text-[#1865F2] border border-[#BFDBFE] font-bold text-xs sm:text-[13px] rounded-xl shadow-2xs transition-colors cursor-pointer"
         >
           View All Projects

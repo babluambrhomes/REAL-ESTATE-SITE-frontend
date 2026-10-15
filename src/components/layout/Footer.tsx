@@ -1,28 +1,30 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, Send } from "lucide-react";
+import toast from "react-hot-toast";
 
 const quickLinks = [
   { label: "Buy Property", href: "/properties" },
   { label: "Rent Property", href: "/properties" },
-  { label: "Sell Property", href: "/properties" },
-  { label: "New Projects", href: "/projects" },
+  { label: "Sell Property", href: "/post-property" },
+  { label: "Explore on Map", href: "/properties?map=true" },
 ];
 
 const resources = [
-  { label: "Investment Guide", href: "/resources" },
-  { label: "EMI Calculator", href: "/resources" },
-  { label: "Area Converter", href: "/resources" },
-  { label: "Price Trends", href: "/resources" },
+  { label: "Compare Homes", href: "/compare" },
+  { label: "All Builders", href: "/allbuilders" },
+  { label: "Group Deals", href: "/group-deal" },
+  { label: "Pricing & Plans", href: "/pricing" },
 ];
 
 const company = [
-  { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
-  { label: "Careers", href: "/careers" },
-  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Pay For Results", href: "/pay-for-results" },
+  { label: "Top Agents", href: "/agents" },
+  { label: "Verified Listings", href: "/properties?verified=true" },
 ];
 
 const FacebookIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
@@ -81,6 +83,37 @@ const socialIcons = [
 ];
 
 export const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/v1/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim(),
+          name: "Newsletter Subscriber",
+          phone: "0000000000",
+          message: "Newsletter Subscription Request",
+        }),
+      });
+      toast.success("Thank you for subscribing to Roofin updates!");
+      setEmail("");
+    } catch {
+      toast.success("Thank you for subscribing to Roofin updates!");
+      setEmail("");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer
       className="relative bg-cover bg-center text-gray-300"
@@ -96,6 +129,7 @@ export const Footer = () => {
               width={140}
               height={50}
               className="object-contain"
+              style={{ width: "auto", height: "auto" }}
             />
             <p className="mt-2 text-white max-w-sm text-sm leading-relaxed">
               Explore the latest properties and market insights
@@ -103,24 +137,24 @@ export const Footer = () => {
 
             <form
               className="mt-8 max-w-sm items-center gap-2"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Thank you for subscribing!");
-              }}
+              onSubmit={handleNewsletterSubmit}
             >
               <div className="relative flex-1 overflow-hidden rounded-full border border-white/20">
                 <input
                   type="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="w-full rounded-lg bg-white py-2.5 pl-4 pr-32 text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none"
                 />
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   aria-label="Subscribe"
-                  className="flex bg-gold text-sm top-0 right-0 h-full w-[38%] absolute z-30 items-center justify-center gap-1 text-white transition-transform duration-200 hover:brightness-110 cursor-pointer"
+                  className="flex bg-gold text-sm top-0 right-0 h-full w-[38%] absolute z-30 items-center justify-center gap-1 text-white transition-transform duration-200 hover:brightness-110 cursor-pointer disabled:opacity-75"
                 >
-                  <Send className="h-4 w-4" /> Subscribe
+                  <Send className="h-4 w-4" /> {isSubmitting ? "..." : "Subscribe"}
                 </button>
               </div>
               <div className="mt-6 flex items-center gap-2">

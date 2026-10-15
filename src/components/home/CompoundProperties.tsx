@@ -10,7 +10,9 @@ import {
   ArrowRight,
   ArrowUpRight,
   ShieldCheck,
+  Heart,
 } from "lucide-react";
+import toast from "react-hot-toast";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -173,6 +175,17 @@ const COMPOUND_UNITS: CompoundUnit[] = [
 
 export const CompoundProperties = () => {
   const swiperRef = useRef<SwiperType | null>(null);
+  const [savedIds, setSavedIds] = useState<Record<string, boolean>>({});
+
+  const toggleSave = (id: string, title: string) => {
+    setSavedIds((prev) => {
+      const isSaved = !prev[id];
+      toast.success(
+        isSaved ? `Saved "${title}" to your favorites!` : `Removed from favorites`
+      );
+      return { ...prev, [id]: isSaved };
+    });
+  };
 
   return (
     <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-8 sm:py-10">
@@ -247,11 +260,23 @@ export const CompoundProperties = () => {
                     </div>
 
                     {/* Top Right Heart Outline */}
-                    <div className="absolute top-2.5 right-2.5 z-10 flex h-7 w-7 items-center justify-center text-white/90 drop-shadow-sm">
-                      <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-                      </svg>
-                    </div>
+                    <button
+                      type="button"
+                      aria-label="Save Property"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSave(unit.big.id, unit.big.title);
+                      }}
+                      className="absolute top-2.5 right-2.5 z-20 flex h-7 w-7 items-center justify-center text-white/90 drop-shadow-sm cursor-pointer hover:scale-110 transition-transform"
+                    >
+                      <Heart
+                        className={`h-4.5 w-4.5 transition-colors ${
+                          savedIds[unit.big.id]
+                            ? "fill-rose-500 text-rose-500"
+                            : "text-white"
+                        }`}
+                      />
+                    </button>
 
                     {/* Bottom Right 3BHK Badge */}
                     <div className="absolute bottom-2.5 right-2.5 z-10 rounded-md bg-black/60 backdrop-blur-md px-2 py-0.5 text-[9.5px] font-normal text-white">
@@ -329,11 +354,23 @@ export const CompoundProperties = () => {
                           unoptimized
                         />
                         {/* Top Right Heart Outline */}
-                        <div className="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center text-white/90 drop-shadow-sm">
-                          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-                          </svg>
-                        </div>
+                        <button
+                          type="button"
+                          aria-label="Save Property"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleSave(mini.id, mini.title);
+                          }}
+                          className="absolute top-1.5 right-1.5 z-20 flex h-5 w-5 items-center justify-center text-white/90 drop-shadow-sm cursor-pointer hover:scale-110 transition-transform"
+                        >
+                          <Heart
+                            className={`h-3.5 w-3.5 transition-colors ${
+                              savedIds[mini.id]
+                                ? "fill-rose-500 text-rose-500"
+                                : "text-white"
+                            }`}
+                          />
+                        </button>
                         {/* Bottom Left 3BHK Badge */}
                         <div className="absolute bottom-1.5 left-1.5 z-10 rounded-md bg-black/60 backdrop-blur-md px-1.5 py-0.5 text-[8.5px] font-normal text-white">
                           {mini.beds}

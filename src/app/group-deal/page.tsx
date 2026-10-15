@@ -38,9 +38,23 @@ export default function GroupDealPage() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
+    try {
+      await fetch("/api/v1/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email?.trim() || `deal_${formData.phone.replace(/\D/g, "")}@roofin.com`,
+          phone: formData.phone.trim(),
+          message: `Group Deal Reservation: Aspire Silicon City, Sector 76 Noida - ${formData.unitType}`,
+        }),
+      });
+    } catch (err) {
+      console.warn("Group deal lead sync error:", err);
+    }
     setSubmitted(true);
   };
 

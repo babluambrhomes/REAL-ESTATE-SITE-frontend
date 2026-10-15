@@ -10,6 +10,7 @@ export interface NearbyItem {
 
 export interface Property {
   id?: number | string;
+  slug?: string;
   images: string[];
   verifiedText: string;
   chips: string[];
@@ -32,6 +33,11 @@ export interface Property {
   layout?: "vertical" | "horizontal" | "mapcard";
   category?: string;
   index?: number;
+  seller?: any;
+  variants?: any[];
+  reraNumber?: string;
+  amenities?: string[];
+  videoUrl?: string;
 }
 
 export interface MapComponentProps {

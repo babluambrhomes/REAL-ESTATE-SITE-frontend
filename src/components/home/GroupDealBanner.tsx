@@ -26,16 +26,34 @@ import {
 export const GroupDealBanner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/v1/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email?.trim() || `deal_${formData.phone.replace(/\D/g, "")}@roofin.com`,
+          phone: formData.phone.trim(),
+          message: "Exclusive Group Deal Registration: Aspire Silicon City, Sector 76 Noida (4BHK + S)",
+        }),
+      });
+    } catch (err) {
+      console.warn("Group deal enquiry backend sync:", err);
+    } finally {
+      setIsSubmitting(false);
+      setFormSubmitted(true);
+    }
   };
 
   const handleCloseModal = () => {

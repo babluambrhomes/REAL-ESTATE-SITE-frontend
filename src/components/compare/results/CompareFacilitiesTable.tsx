@@ -12,6 +12,7 @@ interface PropertySummary {
 interface CompareFacilitiesTableProps {
   prop1?: PropertySummary;
   prop2?: PropertySummary;
+  searchQuery?: string;
 }
 
 export const CompareFacilitiesTable = ({
@@ -25,6 +26,7 @@ export const CompareFacilitiesTable = ({
     location: "Sector 124, Noida",
     image: "/images/properties/tower-popular-figma.jpg",
   },
+  searchQuery = "",
 }: CompareFacilitiesTableProps) => {
   const facilityRows = [
     { name: "AC", hasProp1: true, hasProp2: false },
@@ -50,6 +52,12 @@ export const CompareFacilitiesTable = ({
     { name: "CCTV Surveillia...", hasProp1: true, hasProp2: true },
     { name: "Pipeline", hasProp1: true, hasProp2: true },
   ];
+
+  const filteredRows = searchQuery.trim()
+    ? facilityRows.filter((r) =>
+        r.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
+      )
+    : facilityRows;
 
   return (
     <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 font-jakarta">
@@ -128,9 +136,14 @@ export const CompareFacilitiesTable = ({
 
         {/* 22 Facilities Rows with Continuous Column 2 Highlight */}
         <div className="divide-y divide-slate-100">
-          {facilityRows.map((item, idx) => {
-            const isFirst = idx === 0;
-            const isLast = idx === facilityRows.length - 1;
+          {filteredRows.length === 0 ? (
+            <div className="text-center py-8 text-slate-500 text-xs font-semibold">
+              No facilities found matching &quot;{searchQuery}&quot;
+            </div>
+          ) : (
+            filteredRows.map((item, idx) => {
+              const isFirst = idx === 0;
+              const isLast = idx === filteredRows.length - 1;
 
             return (
               <div
@@ -203,7 +216,7 @@ export const CompareFacilitiesTable = ({
 
               </div>
             );
-          })}
+          }))}
         </div>
 
       </div>

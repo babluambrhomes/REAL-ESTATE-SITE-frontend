@@ -4,9 +4,24 @@ import { SearchHeader } from "@/components/layout/SearchHeader";
 import { Plus, Share2, Users, MapPin, PhoneCall, Star } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import { useAppSelector } from "@/store/hooks";
 
 export default function UserProfilePage() {
+  const params = useParams();
+  const userId = params?.id as string;
+  const { user: currentUser } = useAppSelector((state) => state.auth);
 
+  const isSelf = currentUser?.id === userId;
+  const displayName = isSelf && currentUser
+    ? [currentUser?.person?.firstName, currentUser?.person?.lastName].filter(Boolean).join(" ") ||
+      currentUser?.phone ||
+      currentUser?.email ||
+      "My Profile"
+    : "Jitender Singh";
+
+  const displayRole = isSelf && currentUser ? "Verified Member" : "Senior Property Consultant";
+  const avatarUrl = isSelf && currentUser?.person?.avatarUrl ? currentUser.person.avatarUrl : "/broker/broker.png";
 
   return (
     <>
@@ -35,14 +50,20 @@ export default function UserProfilePage() {
             <div className="relative flex flex-col sm:flex-row items-center sm:items-end -mt-8 gap-8  px-2">
               {/* Avatar */}
               <div className="relative shrink-0">
-                <div className="w-36 h-36 overflow-hidden border-2 ring-12 ring-gray-50 border-primary rounded-2xl  shadow-2xl bg-green-200">
-                  <Image
-                    src="/broker/broker.png"
-                    alt="Broker"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="w-36 h-36 overflow-hidden border-2 ring-12 ring-gray-50 border-primary rounded-2xl  shadow-2xl bg-slate-100 flex items-center justify-center">
+                  {avatarUrl ? (
+                    <Image
+                      src={avatarUrl}
+                      alt={displayName}
+                      width={144}
+                      height={144}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-3xl font-bold text-primary uppercase">
+                      {displayName.charAt(0)}
+                    </span>
+                  )}
                 </div>
                 <div className="absolute -bottom-4 -right-4 bg-white rounded-full p-0.5 shadow-sm">
                   <Image
@@ -58,12 +79,12 @@ export default function UserProfilePage() {
               <div className="flex-1 text-center sm:text-left pb-1">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                   <h1 className="text-lg sm:text-xl font-semibold text-gray-800">
-                    Jitender Singh
+                    {displayName}
                   </h1>
                   <Image src='/broker/verified_tick.png' alt='' width={16} height={16} />
                 </div>
                 <p className="text-sm text-gray-500 mt-0.5">
-                  Senior Property Consultant
+                  {displayRole}
                 </p>
                 <div className="flex items-center justify-center sm:justify-start gap-2.5 mt-3">
                   <button

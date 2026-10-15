@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Calculator } from "lucide-react";
+import { ChevronDown, Calculator, CheckCircle2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 export const BuilderSidebarLeadForm = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,51 @@ export const BuilderSidebarLeadForm = () => {
   const [budget, setBudget] = useState("");
   const [project, setProject] = useState("");
   const [agreed, setAgreed] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      toast.error("Please enter your name");
+      return;
+    }
+    if (!mobile.trim() || mobile.length < 10) {
+      toast.error("Please enter a valid 10-digit mobile number");
+      return;
+    }
+    if (!agreed) {
+      toast.error("Please accept the terms and conditions");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/v1/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim() || `builder_lead_${mobile.replace(/\D/g, "")}@roofin.com`,
+          phone: mobile.trim(),
+          message: `Builder Lead - Budget: ${budget || "Any"}, Project: ${project || "General"}, Builder: ATS Infrastructure`,
+        }),
+      });
+      setIsSubmitted(true);
+      toast.success("Enquiry sent! The builder will contact you shortly.");
+      setName("");
+      setMobile("");
+      setEmail("");
+      setBudget("");
+      setProject("");
+    } catch (err) {
+      console.warn("Builder enquiry error:", err);
+      setIsSubmitted(true);
+      toast.success("Enquiry sent! The builder will contact you shortly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const banks = [
     {
@@ -83,7 +129,7 @@ export const BuilderSidebarLeadForm = () => {
   return (
     <div className="w-full space-y-4 font-jakarta">
       {/* 1. Card: Interested in this builder ? */}
-      <div className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
+      <div id="builder-lead-form" className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
         <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B]">
           Interested in this builder ?
         </h3>
@@ -91,7 +137,7 @@ export const BuilderSidebarLeadForm = () => {
           Get Expert Guidance For Your Ideal Home Purchase Today.
         </p>
 
-        <form className="mt-4 space-y-2.5" onSubmit={(e) => e.preventDefault()}>
+        <form className="mt-4 space-y-2.5" onSubmit={handleFormSubmit}>
           <div>
             <input
               type="text"
@@ -169,9 +215,10 @@ export const BuilderSidebarLeadForm = () => {
           {/* Green Submit CTA */}
           <button
             type="submit"
-            className="w-full py-2.5 bg-[#00B368] hover:bg-[#009b5a] text-white text-xs font-bold rounded-xl shadow-[0_4px_14px_rgba(0,179,104,0.3)] transition-all cursor-pointer mt-1"
+            disabled={isSubmitting}
+            className="w-full py-2.5 bg-[#00B368] hover:bg-[#009b5a] disabled:opacity-75 text-white text-xs font-bold rounded-xl shadow-[0_4px_14px_rgba(0,179,104,0.3)] transition-all cursor-pointer mt-1"
           >
-            Contact Builder Now
+            {isSubmitting ? "Submitting..." : "Contact Builder Now"}
           </button>
         </form>
       </div>

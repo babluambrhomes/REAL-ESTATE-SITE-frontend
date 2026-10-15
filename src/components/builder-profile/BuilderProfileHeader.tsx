@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Plus, Phone, MessageCircle, Calendar, Check, MapPin, Award } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface BuilderProfileHeaderProps {
   name?: string;
@@ -20,6 +21,27 @@ export const BuilderProfileHeader = ({
   locations = "Noida , Greater Noida, Gurgaon",
   coverSrc = "/builders/builder_cover_modern_building.jpg",
 }: BuilderProfileHeaderProps) => {
+  const handleScrollToForm = () => {
+    const el = document.getElementById("builder-lead-form");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  const handleWhatsApp = () => {
+    window.open(
+      `https://wa.me/919876543210?text=${encodeURIComponent(
+        `Hello ${name}, I am interested in your projects listed on Roofin.`
+      )}`,
+      "_blank"
+    );
+  };
+
+  const handleContact = () => {
+    window.location.href = "tel:+919876543210";
+    toast.success(`Calling ${name}...`);
+  };
+
   return (
     <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 font-jakarta">
       {/* 1. Cover Banner */}
@@ -37,6 +59,9 @@ export const BuilderProfileHeader = ({
         {/* + Add Cover Page Button */}
         <button
           type="button"
+          onClick={() =>
+            toast.success("Cover image upload is available in your Builder Dashboard.")
+          }
           className="absolute right-4 sm:right-6 bottom-4 px-3.5 py-1.5 rounded-lg bg-sky-500/90 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md backdrop-blur-xs transition-all cursor-pointer border border-sky-400/40"
         >
           <Plus className="w-3.5 h-3.5 text-white stroke-[3]" />
@@ -136,6 +161,7 @@ export const BuilderProfileHeader = ({
             {/* Contact Builder */}
             <button
               type="button"
+              onClick={handleContact}
               className="flex-1 sm:flex-none px-5 py-2.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs sm:text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(24,101,242,0.3)] transition-all cursor-pointer"
             >
               <Phone className="w-3.5 h-3.5" />
@@ -145,6 +171,7 @@ export const BuilderProfileHeader = ({
             {/* WhatsApp */}
             <button
               type="button"
+              onClick={handleWhatsApp}
               className="flex-1 sm:flex-none px-5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(37,211,102,0.3)] transition-all cursor-pointer"
             >
               <MessageCircle className="w-3.5 h-3.5" />
@@ -155,6 +182,7 @@ export const BuilderProfileHeader = ({
           {/* Schedule Visit (Centered below) */}
           <button
             type="button"
+            onClick={handleScrollToForm}
             className="w-full px-6 py-2 bg-[#F0F6FF] hover:bg-[#E2EFFF] text-[#1865F2] border border-[#BFDBFE] text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <Calendar className="w-3.5 h-3.5 text-[#1865F2]" />

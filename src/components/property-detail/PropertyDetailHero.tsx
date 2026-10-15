@@ -114,12 +114,17 @@ export const PropertyDetailHero = ({
   const [configOpen, setConfigOpen] = useState(false);
   const [showMapPopup, setShowMapPopup] = useState(true);
 
-  const galleryImages = [
+  const fallbackGallery = [
     "/images/properties/max-estate-tower-figma.jpg",
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85",
     "/images/properties/video-tour-living-room.jpg",
     "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1000&q=85",
   ];
+
+  const galleryImages =
+    property.images && property.images.length > 0 ? property.images : fallbackGallery;
+
+  const currentMainImage = galleryImages[activeImageIdx] || galleryImages[0] || fallbackGallery[0];
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch my-2">
@@ -130,10 +135,11 @@ export const PropertyDetailHero = ({
           {/* Clipped Image Wrapper */}
           <div className="relative w-full h-full">
             <Image
-              src={galleryImages[activeImageIdx]}
+              src={currentMainImage}
               alt={property.title}
               fill
               priority
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 60vw"
               className="object-cover transition-transform duration-500 group-hover:scale-101"
             />
@@ -189,7 +195,7 @@ export const PropertyDetailHero = ({
 
           {/* Bottom Left 1/25 Indicator */}
           <div className="absolute bottom-13 left-4 z-20 px-2.5 py-0.5 rounded-md bg-black/80 text-white text-[11px] font-bold">
-            {activeImageIdx + 1}/25
+            {activeImageIdx + 1}/{galleryImages.length}
           </div>
 
           {/* Bottom Right View Photo Gallery Button */}
@@ -226,9 +232,10 @@ export const PropertyDetailHero = ({
             }`}
           >
             <Image
-              src={galleryImages[0]}
+              src={galleryImages[0] || fallbackGallery[0]}
               alt="360 Tour"
               fill
+              unoptimized
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/25 flex items-center justify-center p-1">
@@ -249,9 +256,10 @@ export const PropertyDetailHero = ({
             }`}
           >
             <Image
-              src={galleryImages[1]}
+              src={galleryImages[1] || galleryImages[0] || fallbackGallery[1]}
               alt="Interior Photo"
               fill
+              unoptimized
               className="object-cover"
             />
           </div>
@@ -262,9 +270,10 @@ export const PropertyDetailHero = ({
             className="relative h-24 sm:h-28 rounded-2xl overflow-hidden border-2 border-slate-200 hover:border-[#1865F2] cursor-pointer group/vid"
           >
             <Image
-              src={galleryImages[2]}
+              src={galleryImages[2] || galleryImages[0] || fallbackGallery[2]}
               alt="Video Tour"
               fill
+              unoptimized
               className="object-cover transition-transform group-hover/vid:scale-105"
             />
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
@@ -274,20 +283,21 @@ export const PropertyDetailHero = ({
             </div>
           </div>
 
-          {/* Thumbnail 4: +28 Photos Gallery */}
+          {/* Thumbnail 4: +Photos Gallery */}
           <div
             onClick={onOpenGallery}
             className="relative h-24 sm:h-28 rounded-2xl overflow-hidden border-2 border-slate-200 hover:border-[#1865F2] cursor-pointer group/gal"
           >
             <Image
-              src={galleryImages[3]}
+              src={galleryImages[3] || galleryImages[0] || fallbackGallery[3]}
               alt="More Photos"
               fill
+              unoptimized
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white transition-colors group-hover/gal:bg-black/50">
               <span className="text-[14px] font-bold leading-none">
-                +28
+                +{galleryImages.length}
               </span>
               <span className="text-[11px] font-semibold mt-0.5">Photos</span>
             </div>
@@ -307,29 +317,31 @@ export const PropertyDetailHero = ({
           {/* Apartment Chips */}
           <div className="flex items-center gap-2">
             <span className="px-3.5 py-1 rounded-full bg-[#1865F2] text-white text-[11.5px] font-bold shadow-2xs">
-              3 BHK Apartments
+              {property.chips?.[0] || `${property.beds || "3 BHK"} ${property.type || "Apartment"}`}
             </span>
             <span className="px-3.5 py-1 rounded-full border border-[#94B8FF] bg-white text-[#1865F2] text-[11.5px] font-semibold">
-              4 BHK Apartments
+              {property.chips?.[1] || property.type || "For Sale"}
             </span>
           </div>
 
           {/* Title */}
           <div>
             <h1 className="text-[25px] sm:text-[27px] font-bold text-[#0B132B] tracking-tight leading-tight">
-              The Terraces at Max<br />Estate 361
+              {property.title}
             </h1>
 
-            {/* Price & 13% OFF Ticket Row */}
+            {/* Price & Discount Ticket Row */}
             <div className="mt-1.5 flex flex-wrap items-center gap-3">
-              <span className="text-[13.5px] text-[#94A3B8] line-through font-normal">
-                MRP ₹1.58 Cr
-              </span>
+              {property.originalPrice && (
+                <span className="text-[13.5px] text-[#94A3B8] line-through font-normal">
+                  MRP {property.originalPrice}
+                </span>
+              )}
               <span className="text-[26px] sm:text-[28px] font-bold text-[#0B132B] leading-none">
-                ₹1.25<sup className="text-[16px] font-bold text-[#0B132B] ml-0.5">*</sup><span className="text-[20px] font-bold ml-0.5">Cr</span>
+                {property.price}
               </span>
 
-              <DiscountTicketBadge />
+              {property.discount && <DiscountTicketBadge />}
             </div>
           </div>
 
@@ -344,10 +356,10 @@ export const PropertyDetailHero = ({
               </div>
               <div>
                 <p className="text-[12px] font-bold text-[#0B132B] leading-tight">
-                  Sector 103 , Noida Ext
+                  {property.location}
                 </p>
                 <p className="text-[10px] text-[#64748B] leading-tight mt-0.5 font-normal">
-                  gdshkasaskshvja...
+                  {property.city ? `${property.city}, India` : "Prime Location"}
                 </p>
               </div>
             </div>
@@ -370,17 +382,19 @@ export const PropertyDetailHero = ({
                 <AreaMapIcon />
                 <span className="text-[9.5px] font-normal text-[#64748B] mt-0.5">Area</span>
                 <span className="text-[11.5px] font-bold text-[#0B132B] mt-0.5 leading-tight">
-                  3,200-4,500
+                  {property.area || "1,200 Sq. Ft"}
                 </span>
-                <span className="text-[9px] text-[#64748B] font-normal">Sq. Ft</span>
+                <span className="text-[9px] text-[#64748B] font-normal">Total Area</span>
               </div>
 
               {/* Box 2: Ready to Move */}
               <div className="relative flex flex-col items-center justify-center p-2 pt-2.5 rounded-2xl bg-[#F4F8FE] text-center shadow-2xs">
                 <HandHouseIcon />
-                <span className="text-[9.5px] font-normal text-[#64748B] mt-0.5">Property</span>
+                <span className="text-[9.5px] font-normal text-[#64748B] mt-0.5">Status</span>
                 <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-[11.5px] font-bold text-[#0B132B] leading-tight">Ready</span>
+                  <span className="text-[11.5px] font-bold text-[#0B132B] leading-tight">
+                    {property.verifiedText || "Ready"}
+                  </span>
                   <span className="text-[9px] text-[#64748B] font-normal">To Move</span>
                 </div>
               </div>
@@ -388,11 +402,11 @@ export const PropertyDetailHero = ({
               {/* Box 3: Floor number */}
               <div className="relative flex flex-col items-center justify-center p-2 pt-2.5 rounded-2xl bg-[#F4F8FE] text-center shadow-2xs">
                 <FloorGridIcon />
-                <span className="text-[9.5px] font-normal text-[#64748B] mt-0.5">Floor number</span>
-                <span className="text-[11.5px] font-bold text-[#0B132B] mt-0.5 leading-tight">
-                  2 Floors
+                <span className="text-[9.5px] font-normal text-[#64748B] mt-0.5">Property Type</span>
+                <span className="text-[11.5px] font-bold text-[#0B132B] mt-0.5 leading-tight truncate max-w-[80px]">
+                  {property.type || "Apartment"}
                 </span>
-                <span className="text-[9px] text-[#64748B] font-normal">Floor Number</span>
+                <span className="text-[9px] text-[#64748B] font-normal">Category</span>
               </div>
             </div>
           </div>
@@ -408,16 +422,16 @@ export const PropertyDetailHero = ({
                 <span className="font-bold text-[#0B132B] text-[11.5px]">Configuration</span>
                 <div className="h-3.5 border-r border-dashed border-[#00C9A7] mx-1" />
                 <span className="text-[#475569] text-[11px] font-normal truncate">
-                  3 Bedrooms, 2 Bathrooms, 3 Balconies, Pool...
+                  {property.beds || "3 Beds"}, {property.baths || 2} Bathrooms, {property.area || "1,200 sqft"}
                 </span>
               </div>
               <span className={`text-[#1865F2] text-[10px] shrink-0 ml-2 transition-transform duration-200 ${configOpen ? "rotate-180" : ""}`}>▼</span>
             </button>
             {configOpen && (
               <div className="px-4 py-2.5 border-t border-slate-100 text-[11.5px] text-[#475569] space-y-1 bg-[#FAFBFD]">
-                <p>• 3 Master Bedrooms with Attached Washrooms</p>
-                <p>• 1 Large Living &amp; Dining Hall with Balcony</p>
-                <p>• Modular Kitchen with European Chimney</p>
+                <p>• {property.beds || "3"} Master Bedrooms with attached washrooms</p>
+                <p>• {property.baths || "2"} Premium Bathrooms &amp; Large Living Hall</p>
+                <p>• Total Area: {property.area || "1,200 sqft"}</p>
               </div>
             )}
           </div>
