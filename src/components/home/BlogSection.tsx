@@ -48,9 +48,9 @@ export const BlogSection = () => {
   return (
     <section className="relative mx-auto w-full max-w-7xl px-4 sm:px-8 py-10">
       {/* Header Section (Matches Figma) */}
-      <div className="border-l-4 border-[#0062E3] pl-4">
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
-          Unlocking the <span className="text-[#0062E3]">Future of Real Estate Articles</span>
+      <div className="border-l-4 border-[#2563EB] pl-4">
+        <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+          Unlocking the <span className="text-[#2563EB]">Future of Real Estate Articles</span>
         </h2>
         <p className="mt-1 text-xs sm:text-sm text-slate-500 font-medium">
           Stay updated with the latest property trends, investment tips, and expert market insights.

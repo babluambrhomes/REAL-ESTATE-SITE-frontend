@@ -479,19 +479,19 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
 
                     <div className="h-6 w-[1px] bg-slate-200 shrink-0" />
 
-                    <div className="flex gap-2 sm:gap-3 items-center shrink-0">
+                    <div className="flex gap-1.5 sm:gap-2 items-center shrink-0">
                         <Link
                             href="/properties?saved=true"
                             aria-label="Wishlist"
-                            className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+                            className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
                         >
                             <Image
                                 src="/layout/nav/nav_heart.png"
                                 alt="Wishlist"
-                                width={22}
-                                height={20}
-                                className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
-                                style={{ width: "auto", height: "auto" }}
+                                width={34}
+                                height={30}
+                                className="w-[20px] sm:w-[22px] h-auto object-contain hover:scale-105 transition-transform"
+                                unoptimized
                             />
                             {wishlistCount > 0 && (
                                 <span className="absolute -top-1 -right-1 flex h-4.5 min-w-[18px] px-1 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-xs">
@@ -499,17 +499,17 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                 </span>
                             )}
                         </Link>
-                        <Link href="/login" aria-label="Notifications" className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0">
+                        <Link href="/login" aria-label="Notifications" className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0">
                             <Image
                                 src="/layout/nav/nav_bell.png"
                                 alt="Notifications"
-                                width={20}
-                                height={24}
-                                className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
-                                style={{ width: "auto", height: "auto" }}
+                                width={28}
+                                height={37}
+                                className="w-[18px] sm:w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+                                unoptimized
                             />
                         </Link>
-                        <button onClick={() => setSidebarOpen(true)} aria-label="User Profile" className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100">
+                        <button onClick={() => setSidebarOpen(true)} aria-label="User Profile" className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100">
                             {isMounted && isAuthenticated && user ? (
                                 user?.person?.avatarUrl ? (
                                     <Image

@@ -57,6 +57,8 @@ export interface Person {
   firstName: string;
   lastName: string;
   avatarUrl: string | null;
+  city?: string;
+  bio?: string;
 }
 
 export interface MembershipRole {

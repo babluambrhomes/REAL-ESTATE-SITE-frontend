@@ -15,7 +15,7 @@ export const Heading = ({
     <section className="mx-auto w-full px-6 pt-10 pb-6 sm:px-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="max-w-3xl border-l-4 border-secondary pl-3">
-          <h2 className="flex gap-1  text-2xl font-bold text-gray-900 ">
+          <h2 className="flex flex-wrap gap-1 text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal leading-tight text-gray-900">
             {title1 && (
               <span style={title1Color ? { color: title1Color } : undefined}>
                 {title1}

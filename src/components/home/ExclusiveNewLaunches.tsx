@@ -116,6 +116,22 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       phone: "+91 9876543210",
       category: "New Launch",
     },
+    {
+      id: "amrapali-silicon-city",
+      title: "Amrapali Silicon City",
+      location: "Sector 76, Noida",
+      city: "Noida",
+      type: "Apartment",
+      beds: "2 BHK",
+      price: "₹93.23 Lakh*",
+      verifiedText: "NEW LAUNCH",
+      images: [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+      ],
+      chips: ["2 BHK", "3 BHK", "4 BHK"],
+      phone: "+91 9876543210",
+      category: "New Launch",
+    },
   ],
   "knowledge-park": [
     {
@@ -279,7 +295,7 @@ export const ExclusiveNewLaunches = ({
       const loc = ALL_LOCALITIES[(startIdx + i) % ALL_LOCALITIES.length];
       const propList = LOCALITY_PROPERTIES[loc.id];
       if (propList && propList.length > 0) {
-        list.push(propList[0]);
+        list.push(...propList);
       }
     }
     return list;
@@ -353,22 +369,22 @@ export const ExclusiveNewLaunches = ({
       ========================================================== */}
       <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         {/* HEADING & SUBTITLE */}
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-            Exclusive <span className="text-[#1865F2]">New Launches</span>
+        <div className="shrink-0">
+          <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-snug whitespace-nowrap">
+            Exclusive <span className="text-[#2563EB]">New Launches</span>
           </h2>
-          <div className="mt-2.5 border-l-[3px] border-[#1865F2] pl-3 py-0.5">
-            <p className="text-xs sm:text-sm font-medium text-slate-600 leading-tight">
+          <div className="mt-2 border-l-[3px] border-[#2563EB] pl-3 py-0.5">
+            <p className="text-[12px] sm:text-[13px] font-normal text-slate-800 leading-snug">
               Explore handpicked premium properties across Delhi NCR
             </p>
-            <p className="text-xs sm:text-sm font-medium text-slate-600 leading-tight mt-0.5">
+            <p className="text-[12px] sm:text-[13px] font-normal text-slate-800 leading-snug mt-0.5">
               Luxury living redefined for you
             </p>
           </div>
         </div>
 
         {/* DYNAMIC LOCALITY THUMBNAILS + STACKED MORE CARDS DECK */}
-        <div className="flex items-center gap-3 sm:gap-4 overflow-x-auto pt-4 pb-2 scrollbar-hide no-scrollbar [&::-webkit-scrollbar]:hidden pr-6">
+        <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 overflow-x-auto pt-2.5 pb-1.5 pr-2 scrollbar-hide no-scrollbar [&::-webkit-scrollbar]:hidden shrink-0">
           {visibleLocalities.map((loc) => {
             const isActive = activeLocality === loc.id;
             return (
@@ -376,25 +392,25 @@ export const ExclusiveNewLaunches = ({
                 key={loc.id}
                 type="button"
                 onClick={() => handleSelectLocality(loc.id)}
-                className={`group flex flex-col items-center w-[104px] sm:w-[114px] md:w-[120px] h-[110px] sm:h-[118px] md:h-[124px] shrink-0 rounded-[22px] sm:rounded-[24px] bg-white p-2 transition-all duration-200 cursor-pointer ${
+                className={`group flex flex-col items-center w-[88px] sm:w-[94px] md:w-[98px] h-[92px] sm:h-[96px] md:h-[100px] shrink-0 rounded-[8px] sm:rounded-[10px] bg-white p-1.5 transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? "border-[2.5px] border-[#1865F2] shadow-lg ring-2 ring-blue-100/90"
+                    ? "border-[2px] border-[#2563EB] shadow-md ring-2 ring-blue-100/80"
                     : "border border-slate-200/90 hover:border-blue-300 shadow-xs hover:shadow-sm"
                 }`}
               >
-                <div className="relative h-[68px] sm:h-[74px] md:h-[80px] w-full overflow-hidden rounded-[15px] bg-slate-100">
+                <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100">
                   <Image
                     src={loc.image}
                     alt={loc.name}
                     fill
-                    sizes="120px"
+                    sizes="100px"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     unoptimized
                   />
                 </div>
                 <p
-                  className={`mt-2 w-full truncate text-center text-[11.5px] sm:text-[12.5px] font-semibold ${
-                    isActive ? "text-[#1865F2]" : "text-slate-700"
+                  className={`mt-1.5 w-full truncate text-center text-[10.5px] sm:text-[11px] font-semibold ${
+                    isActive ? "text-[#2563EB]" : "text-slate-700"
                   }`}
                 >
                   {loc.name}
@@ -406,31 +422,31 @@ export const ExclusiveNewLaunches = ({
           {/* 3D STACKED "MORE" CARDS DECK (FIGMA 1:1) */}
           <div
             onClick={handleCycleLocalities}
-            className="relative h-[110px] sm:h-[118px] md:h-[124px] w-[104px] sm:w-[114px] md:w-[120px] shrink-0 cursor-pointer group select-none ml-1 mr-4"
+            className="relative h-[92px] sm:h-[96px] md:h-[100px] w-[88px] sm:w-[94px] md:w-[98px] shrink-0 cursor-pointer group select-none ml-0.5 mr-2"
             title="Click to view more localities"
           >
-            {/* Card Layer 1 (Deep Back: Rotated +9deg & Translated Top-Right) */}
-            <div className="absolute inset-0 rounded-[22px] sm:rounded-[24px] border border-slate-200/90 bg-white p-1.5 shadow-sm transition-transform duration-300 translate-x-4 -translate-y-2.5 rotate-[9deg] group-hover:translate-x-5 group-hover:-translate-y-3">
-              <div className="relative h-[68px] sm:h-[74px] md:h-[80px] w-full overflow-hidden rounded-[15px] bg-slate-100 opacity-80">
+            {/* Card Layer 1 (Deep Back: Rotated +6deg & Translated Top-Right) */}
+            <div className="absolute inset-0 rounded-[8px] sm:rounded-[10px] border border-slate-200/90 bg-white p-1 shadow-xs transition-transform duration-200 translate-x-2 -translate-y-1.5 rotate-[6deg] group-hover:translate-x-2.5 group-hover:-translate-y-2">
+              <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100 opacity-75">
                 <Image
                   src={stackedLocalities[2]?.image || ALL_LOCALITIES[0].image}
                   alt="More Locality"
                   fill
-                  sizes="120px"
+                  sizes="100px"
                   className="object-cover"
                   unoptimized
                 />
               </div>
             </div>
 
-            {/* Card Layer 2 (Middle: Rotated +4.5deg & Translated Top-Right) */}
-            <div className="absolute inset-0 rounded-[22px] sm:rounded-[24px] border border-slate-200/90 bg-white p-1.5 shadow-sm transition-transform duration-300 translate-x-2 -translate-y-1.5 rotate-[4.5deg] group-hover:translate-x-2.5 group-hover:-translate-y-2">
-              <div className="relative h-[68px] sm:h-[74px] md:h-[80px] w-full overflow-hidden rounded-[15px] bg-slate-100 opacity-90">
+            {/* Card Layer 2 (Middle: Rotated +3deg & Translated Top-Right) */}
+            <div className="absolute inset-0 rounded-[8px] sm:rounded-[10px] border border-slate-200/90 bg-white p-1 shadow-xs transition-transform duration-200 translate-x-1 -translate-y-0.5 rotate-[3deg] group-hover:translate-x-1.5 group-hover:-translate-y-1">
+              <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100 opacity-85">
                 <Image
                   src={stackedLocalities[1]?.image || ALL_LOCALITIES[1].image}
                   alt="More Locality"
                   fill
-                  sizes="120px"
+                  sizes="100px"
                   className="object-cover"
                   unoptimized
                 />
@@ -438,18 +454,18 @@ export const ExclusiveNewLaunches = ({
             </div>
 
             {/* Card Layer 3 (Front Top Card: Crisp & Clickable) */}
-            <div className="relative z-10 flex flex-col items-center h-full w-full rounded-[22px] sm:rounded-[24px] border border-slate-200/95 bg-white p-2 shadow-md transition-all duration-200 group-hover:border-blue-300">
-              <div className="relative h-[68px] sm:h-[74px] md:h-[80px] w-full overflow-hidden rounded-[15px] bg-slate-100">
+            <div className="relative z-10 flex flex-col items-center h-full w-full rounded-[8px] sm:rounded-[10px] border border-slate-200/95 bg-white p-1.5 shadow-sm transition-all duration-200 group-hover:border-blue-300">
+              <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100">
                 <Image
                   src={stackedLocalities[0]?.image || ALL_LOCALITIES[2].image}
                   alt={stackedLocalities[0]?.name || "More"}
                   fill
-                  sizes="120px"
+                  sizes="100px"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                   unoptimized
                 />
               </div>
-              <p className="mt-2 w-full truncate text-center text-[11.5px] sm:text-[12.5px] font-semibold text-slate-700">
+              <p className="mt-1.5 w-full truncate text-center text-[10.5px] sm:text-[11px] font-semibold text-slate-700">
                 {stackedLocalities[0]?.name || "Noida Sec 150"}
               </p>
             </div>
@@ -476,7 +492,7 @@ export const ExclusiveNewLaunches = ({
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          className="!pt-2 !pb-4 overflow-hidden rounded-[28px]"
+          className="!pt-2 !pb-4 overflow-hidden rounded-[14px] sm:rounded-[16px]"
         >
           {currentProperties.map((project, index) => {
             const image = project.images?.[0];
@@ -484,20 +500,26 @@ export const ExclusiveNewLaunches = ({
 
             return (
               <SwiperSlide key={`${project.id || project.title}-${index}`}>
-                <div className="relative h-[420px] sm:h-[480px] w-full pl-2.5">
+                <div className="relative h-[375px] sm:h-[415px] w-full pl-2">
                   {/* 3D RIBBON NEW LAUNCH BADGE (1:1 EXACT FIGMA MATCH) */}
-                  <div className="absolute left-0 top-7 z-20 select-none">
+                  <div className="absolute left-0 top-6 z-20 select-none">
                     <div className="relative flex items-center bg-[#E60049] px-3.5 py-1.5 shadow-md">
                       <span className="text-[11px] font-extrabold uppercase tracking-wider text-white">
                         NEW LAUNCH
                       </span>
-                      {/* 3D Fold Corner Triangle underneath overhang */}
-                      <div className="absolute -bottom-2 left-0 h-0 w-0 border-l-[8px] border-l-transparent border-t-[8px] border-t-[#9F1239]" />
+                      {/* 3D Fold Corner Triangle underneath overhang - precisely flush with card image */}
+                      <svg
+                        className="absolute -bottom-2 left-0 h-2 w-[8.5px]"
+                        viewBox="0 0 8.5 8"
+                        fill="none"
+                      >
+                        <path d="M0 0 L8.5 0 L8.5 8 Z" fill="#9F1239" />
+                      </svg>
                     </div>
                   </div>
 
                   {/* CARD CONTAINER WITH IMAGE & ROUNDED EDGES */}
-                  <div className="relative h-full w-full overflow-hidden rounded-[26px] shadow-lg border border-slate-100 bg-slate-900 group">
+                  <div className="relative h-full w-full overflow-hidden rounded-[14px] sm:rounded-[16px] shadow-lg bg-slate-900 group">
                     {/* MAIN HIGH-RES IMAGE */}
                     <Image
                       src={imageUrl}
@@ -512,66 +534,74 @@ export const ExclusiveNewLaunches = ({
                     {/* SUBTLE GRADIENT SHADE OVERLAY */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
 
-                    {/* FLOATING BOTTOM RIGHT DETAIL CARD (1:1 FIGMA EXACT MATCH) */}
-                    <div className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-5 sm:bottom-5 sm:w-[380px] max-w-[calc(100%-2rem)] rounded-[28px] bg-white p-5 sm:p-6 shadow-[0_16px_44px_rgba(24,101,242,0.22),0_2px_12px_rgba(0,0,0,0.06)] border border-[#DCE8FE]">
-                      {/* TITLE */}
-                      <h3 className="text-xl sm:text-[22px] font-black text-[#000000] tracking-tight truncate">
-                        {project.title}
-                      </h3>
-
-                      {/* LOCATION WITH BLUE PIN & WHITE INNER CIRCLE */}
-                      <div className="mt-1.5 flex items-center gap-2 text-sm sm:text-[15px] font-semibold text-[#0F172A]">
-                        <svg
-                          className="h-5 w-5 shrink-0 text-[#1865F2]"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
+                    {/* FLOATING BOTTOM RIGHT DETAIL CARD (SAME UNIFORM HEIGHT & WIDTH FOR ALL, FURTHER REDUCED WIDTH) */}
+                    <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 w-[240px] max-w-[calc(100%-1.25rem)] h-[128px] flex flex-col justify-between rounded-[12px] bg-white p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-[#E2E8F0]">
+                      {/* TOP SECTION: TITLE & LOCATION */}
+                      <div className="min-w-0">
+                        {/* TITLE */}
+                        <h3
+                          title={project.title}
+                          className="text-[13.5px] sm:text-[14px] font-bold text-[#000000] leading-tight tracking-normal truncate"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        <span className="truncate">{project.location}</span>
-                      </div>
+                          {project.title}
+                        </h3>
 
-                      {/* STARTING FROM HEADING */}
-                      <p className="mt-3.5 text-[11.5px] font-black tracking-wide text-[#000000] uppercase">
-                        STARTING FROM
-                      </p>
-
-                      {/* PRICE & BHK PILLS ROW */}
-                      <div className="mt-1 flex flex-wrap items-center gap-2">
-                        <div className="flex items-start">
-                          <span className="text-xl sm:text-[24px] font-black text-[#1865F2] leading-none">
-                            {project.price?.replace(/\*$/, "") || "₹ 4.17 Lakh"}
+                        {/* LOCATION */}
+                        <div className="mt-0.5 flex items-center gap-1 text-[11px] font-medium text-slate-700 leading-tight min-w-0">
+                          <svg
+                            className="h-3 w-3 shrink-0 text-[#2563EB]"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="truncate" title={project.location}>
+                            {project.location}
                           </span>
-                          <span className="text-sm font-black text-[#1865F2] -mt-0.5 ml-0.5 select-none">
-                            ★
-                          </span>
-                        </div>
-
-                        {/* BHK PILL TAGS (MATCHES FIGMA LIGHT BLUE BACKGROUND & BLUE TEXT) */}
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          {(project.chips || ["3 BHK Apartment", "4 BHK Apartment"]).map((chip) => (
-                            <span
-                              key={chip}
-                              className="rounded-[8px] bg-[#9DBEFF] border border-[#7AA5FF] px-2.5 py-1 text-[11px] sm:text-[11.5px] font-bold text-[#1865F2] shadow-2xs"
-                            >
-                              {chip}
-                            </span>
-                          ))}
                         </div>
                       </div>
 
-                      {/* KNOW MORE BUTTON (EXACT DEEP NAVY TO ROYAL BLUE GRADIENT & ROUNDED SHAPE) */}
-                      <div className="mt-3.5">
+                      {/* MIDDLE SECTION: STARTING FROM, PRICE & BHK PILLS */}
+                      <div className="min-w-0">
+                        {/* STARTING FROM HEADING */}
+                        <p className="text-[8.5px] font-semibold text-slate-500 uppercase leading-none tracking-wider">
+                          STARTING FROM
+                        </p>
+
+                        {/* PRICE & BHK PILLS ROW */}
+                        <div className="mt-1 flex items-center gap-1.5 overflow-hidden min-w-0">
+                          {/* PRICE */}
+                          <span className="text-[14px] font-bold text-[#2563EB] leading-none shrink-0 whitespace-nowrap">
+                            {project.price?.includes("*") ? project.price : `${project.price || "₹ 4.17 Lakh"}*`}
+                          </span>
+
+                          {/* BHK PILL TAGS */}
+                          <div className="flex items-center gap-1 overflow-hidden flex-nowrap min-w-0 flex-1">
+                            {(project.chips || ["3 BHK Apartment", "4 BHK Apartment"]).slice(0, 2).map((chip) => (
+                              <span
+                                key={chip}
+                                title={chip}
+                                className="inline-flex items-center rounded-[3px] bg-[#E8F1FF] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#2563EB] leading-none whitespace-nowrap truncate min-w-0 max-w-[72px]"
+                              >
+                                {chip}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* BOTTOM SECTION: KNOW MORE BUTTON WITH BLUE GRADIENT */}
+                      <div>
                         <Link
                           href={project.id ? `/properties/${project.id}` : `/properties/${encodeURIComponent(project.title)}`}
-                          className="inline-flex items-center gap-2 rounded-[14px] bg-gradient-to-r from-[#0C3896] via-[#124DBE] to-[#1E62EC] px-5 py-2.5 text-[13px] font-bold text-white shadow-md shadow-blue-900/25 hover:from-[#092B74] hover:to-[#1752CA] hover:shadow-lg transition-all duration-200 cursor-pointer"
+                          className="inline-flex items-center gap-1.5 rounded-[6px] bg-gradient-to-r from-[#163C8F] via-[#1D4EB8] to-[#235EE0] hover:brightness-110 active:scale-[0.98] px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-all cursor-pointer leading-none"
                         >
                           <span>Know More</span>
-                          <ArrowRight className="h-4 w-4 stroke-[2.5]" />
+                          <ArrowRight className="h-3 w-3 stroke-[2.5]" />
                         </Link>
                       </div>
                     </div>

@@ -66,15 +66,26 @@ export default function Home() {
   const location_query = useAppSelector((state) => state.location.coordinates);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const checkPosition = () => {
       if (!searchBoxRef.current) return;
       const rect = searchBoxRef.current.getBoundingClientRect();
-      setShowSearchHeader(rect.bottom <= 0);
+      const shouldShow = rect.bottom <= 0;
+      setShowSearchHeader((prev) => (prev !== shouldShow ? shouldShow : prev));
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(checkPosition);
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
-    handleScroll();
+    checkPosition();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);

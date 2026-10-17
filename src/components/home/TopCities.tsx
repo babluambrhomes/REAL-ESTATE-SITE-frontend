@@ -55,10 +55,10 @@ export const TopCities = () => {
       {/* Header: | Top Cities in Delhi NCR ... view all < > */}
       <div className="mb-5 flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="h-6 sm:h-7 w-1.5 rounded-full bg-[#05A579]" />
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0F172A]">
-              Top <span className="text-[#1865F2]">Cities</span> in Delhi NCR
+          <div className="flex items-center gap-2.5">
+            <span className="h-6 sm:h-7 w-1.5 rounded-full bg-[#05A579] shrink-0" />
+            <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+              Top <span className="text-[#2563EB]">Cities</span> in Delhi NCR
             </h2>
           </div>
           <p className="mt-1 pl-3.5 text-xs sm:text-[13px] text-[#64748B] font-normal">
@@ -66,13 +66,13 @@ export const TopCities = () => {
           </p>
         </div>
 
-        {/* Top Right: Exact [ view all < ] ( > ) matching zoomed screenshot */}
+        {/* Top Right: Exact [ view all < ] ( > ) seamlessly joined matching screenshot */}
         <div className="flex items-center gap-2">
           {/* Left Pill containing "view all" text + circular "<" button */}
-          <div className="inline-flex items-center rounded-full border border-[#D3E3FD] bg-white p-0.5 shadow-xs transition-all hover:border-[#B5D4FC]">
+          <div className="inline-flex items-center">
             <Link
               href="/properties"
-              className="pl-4 pr-3 py-1 text-sm sm:text-[15px] font-medium text-[#1865F2] hover:underline cursor-pointer tracking-normal"
+              className="flex h-8 items-center rounded-l-full border-y border-l border-[#D3E3FD] bg-white pl-3.5 sm:pl-4 pr-5 sm:pr-6 text-xs sm:text-[13.5px] font-medium text-[#1865F2] hover:underline cursor-pointer tracking-normal transition-colors"
             >
               view all
             </Link>
@@ -80,7 +80,7 @@ export const TopCities = () => {
               type="button"
               aria-label="Previous"
               onClick={() => swiperRef.current?.slidePrev()}
-              className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-slate-300/80 bg-white text-slate-500 transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+              className="-ml-4 relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4 stroke-[1.5]" />
             </button>
@@ -91,7 +91,7 @@ export const TopCities = () => {
             type="button"
             aria-label="Next"
             onClick={() => swiperRef.current?.slideNext()}
-            className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-slate-300/80 bg-white text-slate-500 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
           >
             <ChevronRight className="h-4 w-4 stroke-[1.5]" />
           </button>
@@ -119,10 +119,10 @@ export const TopCities = () => {
             <SwiperSlide key={city.name} className="!h-auto">
               <Link
                 href={city.href}
-                className="group flex h-[195px] sm:h-[205px] flex-col justify-between overflow-hidden rounded-[22px] border border-slate-100/90 bg-white shadow-[0_8px_20px_-4px_rgba(24,101,242,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_28px_-4px_rgba(24,101,242,0.20)]"
+                className="group flex h-[195px] sm:h-[205px] flex-col justify-between overflow-hidden rounded-[22px] border border-slate-100 bg-white shadow-[0_6px_16px_-4px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.10)]"
               >
-                {/* 50% Top Image */}
-                <div className="relative h-[50%] w-full overflow-hidden rounded-t-[20px] bg-slate-100">
+                {/* 60% Top Image */}
+                <div className="relative h-[60%] w-full overflow-hidden rounded-t-[20px] bg-slate-100">
                   <Image
                     src={city.image}
                     alt={city.name}
@@ -132,8 +132,8 @@ export const TopCities = () => {
                     unoptimized
                   />
                 </div>
-                {/* 50% Bottom Text Area */}
-                <div className="flex h-[50%] w-full flex-col justify-center p-3.5 sm:p-4">
+                {/* 40% Bottom Text Area */}
+                <div className="flex h-[40%] w-full flex-col justify-center px-3.5 sm:px-4 py-2">
                   <h3 className="text-[14px] sm:text-[15px] font-semibold text-[#0F172A] group-hover:text-[#1865F2] transition-colors leading-snug">
                     {city.name}
                   </h3>

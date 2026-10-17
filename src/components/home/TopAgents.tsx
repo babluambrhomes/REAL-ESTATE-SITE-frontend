@@ -51,8 +51,8 @@ export const TopAgents = () => {
     <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-10 sm:py-12">
       {/* Header (Matches Figma Screenshot) */}
       <div className="mb-8 sm:mb-10 text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-extrabold tracking-tight text-[#0B132B]">
-          Meet Our <span className="text-[#1865F2]">Trusted Agents & Builder</span>
+        <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+          Meet Our <span className="text-[#2563EB]">Trusted Agents & Builder</span>
         </h2>
         <p className="mt-1.5 text-xs sm:text-sm text-[#64748B] font-normal">
           Meet our team of trusted real estate professionals dedicated to your property needs.

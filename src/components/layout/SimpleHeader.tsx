@@ -84,14 +84,14 @@ export const SimpleHeader = ({
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-3 sm:gap-5 ml-auto shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3 ml-auto shrink-0">
           {!isCompare && (
             <>
               {/* Explore Dropdown */}
               <div ref={exploreRef} className="relative hidden md:block shrink-0">
                 <button
                   type="button"
-                  className="flex items-center gap-1.5 text-[#2563EB] hover:text-blue-700 select-none cursor-pointer text-base sm:text-[17px] font-normal transition-colors whitespace-nowrap"
+                  className="flex items-center gap-1 text-[#2563EB] hover:text-blue-700 select-none cursor-pointer text-[15px] sm:text-[16px] font-normal transition-colors whitespace-nowrap"
                   onClick={() => setExploreOpen((prev) => !prev)}
                 >
                   <span>Explore</span>
@@ -120,7 +120,7 @@ export const SimpleHeader = ({
               {/* Contact Us */}
               <Link
                 href="/contact"
-                className="hidden sm:inline-block text-base sm:text-[17px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
+                className="hidden sm:inline-block text-[15px] sm:text-[16px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
               >
                 Contact Us
               </Link>
@@ -128,13 +128,13 @@ export const SimpleHeader = ({
               {/* Agent Pro/Builder Pro */}
               <Link
                 href="/login"
-                className="hidden lg:inline-flex h-[34px] px-3 sm:px-3.5 items-center justify-center rounded-[8px] border border-[#2563EB] bg-white text-[12px] sm:text-[12.5px] font-semibold text-[#2563EB] leading-none tracking-normal hover:bg-blue-50/60 transition-all whitespace-nowrap shrink-0"
+                className="hidden lg:inline-flex h-[32px] px-2.5 items-center justify-center rounded-[8px] border border-[#2563EB] bg-white text-[11.5px] font-semibold text-[#2563EB] leading-none tracking-normal hover:bg-blue-50/60 transition-all whitespace-nowrap shrink-0"
               >
                 Agent Pro/Builder Pro
               </Link>
 
               {/* Vertical Separator */}
-              <div className="h-6 w-px bg-slate-200 mx-0.5 hidden sm:block shrink-0" />
+              <div className="h-5 w-px bg-slate-200 hidden sm:block shrink-0" />
             </>
           )}
 
@@ -154,78 +154,81 @@ export const SimpleHeader = ({
             </button>
           )}
 
-          {/* Wishlist Heart */}
-          <Link
-            href="/properties?saved=true"
-            aria-label="Wishlist"
-            className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
-          >
-            <Image
-              src="/layout/nav/nav_heart.png"
-              alt="Wishlist"
-              width={22}
-              height={20}
-              className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
-              style={{ width: "auto", height: "auto" }}
-            />
-            {wishlistCount > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-4.5 min-w-[18px] px-1 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-xs">
-                {wishlistCount}
-              </span>
-            )}
-          </Link>
-
-          {/* Notifications Bell with Orange-Red dot */}
-          <Link
-            href="/login"
-            aria-label="Notifications"
-            className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
-          >
-            <Image
-              src="/layout/nav/nav_bell.png"
-              alt="Notifications"
-              width={20}
-              height={24}
-              className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
-              style={{ width: "auto", height: "auto" }}
-            />
-          </Link>
-
-          {/* User Profile Avatar */}
-          <button
-            type="button"
-            aria-label="User Profile"
-            onClick={() => setSidebarOpen(true)}
-            className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100"
-          >
-            {isMounted && isAuthenticated && user ? (
-              user?.person?.avatarUrl ? (
-                <Image
-                  src={user.person.avatarUrl}
-                  alt="Profile"
-                  width={36}
-                  height={36}
-                  className="w-full h-full rounded-full object-cover"
-                />
-              ) : (
-                <span className="text-xs font-bold text-[#1865F2] uppercase">
-                  {(user?.person?.firstName || user?.email || user?.phone || "U").charAt(0)}
-                </span>
-              )
-            ) : (
+          {/* Icon Actions Group: Heart, Bell, Profile */}
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+            {/* Wishlist Heart */}
+            <Link
+              href="/properties?saved=true"
+              aria-label="Wishlist"
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+            >
               <Image
-                src="/layout/nav/nav_user.png"
-                alt="User Profile"
-                width={18}
-                height={18}
-                className="w-[16px] h-auto object-contain"
-                style={{ width: "auto", height: "auto" }}
+                src="/layout/nav/nav_heart.png"
+                alt="Wishlist"
+                width={34}
+                height={30}
+                className="w-[20px] sm:w-[22px] h-auto object-contain hover:scale-105 transition-transform"
+                unoptimized
               />
-            )}
-            {isMounted && isAuthenticated && (
-              <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
-            )}
-          </button>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4.5 min-w-[18px] px-1 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-xs">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Notifications Bell with Orange-Red dot */}
+            <Link
+              href="/login"
+              aria-label="Notifications"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+            >
+              <Image
+                src="/layout/nav/nav_bell.png"
+                alt="Notifications"
+                width={28}
+                height={37}
+                className="w-[18px] sm:w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+                unoptimized
+              />
+            </Link>
+
+            {/* User Profile Avatar */}
+            <button
+              type="button"
+              aria-label="User Profile"
+              onClick={() => setSidebarOpen(true)}
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100"
+            >
+              {isMounted && isAuthenticated && user ? (
+                user?.person?.avatarUrl ? (
+                  <Image
+                    src={user.person.avatarUrl}
+                    alt="Profile"
+                    width={36}
+                    height={36}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="text-xs font-bold text-[#1865F2] uppercase">
+                    {(user?.person?.firstName || user?.email || user?.phone || "U").charAt(0)}
+                  </span>
+                )
+              ) : (
+                <Image
+                  src="/layout/nav/nav_user.png"
+                  alt="User Profile"
+                  width={24}
+                  height={24}
+                  className="w-[21px] sm:w-[22px] h-auto object-contain"
+                  style={{ width: "auto", height: "auto" }}
+                />
+              )}
+              {isMounted && isAuthenticated && (
+                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
+              )}
+            </button>
+          </div>
 
           {/* Post Property Free Button */}
           <Link

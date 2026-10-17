@@ -163,15 +163,15 @@ export const BuilderSearchHeader = ({
             <Link
               href="/login"
               aria-label="Wishlist"
-              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
             >
               <Image
                 src="/layout/nav/nav_heart.png"
                 alt="Wishlist"
-                width={22}
-                height={20}
-                className="w-[20px] h-auto object-contain hover:scale-105 transition-transform"
-                style={{ width: "auto", height: "auto" }}
+                width={34}
+                height={30}
+                className="w-[20px] sm:w-[22px] h-auto object-contain hover:scale-105 transition-transform"
+                unoptimized
               />
             </Link>
 
@@ -179,15 +179,15 @@ export const BuilderSearchHeader = ({
             <Link
               href="/login"
               aria-label="Notifications"
-              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
             >
               <Image
                 src="/layout/nav/nav_bell.png"
                 alt="Notifications"
-                width={20}
-                height={24}
-                className="w-[18px] h-auto object-contain hover:scale-105 transition-transform"
-                style={{ width: "auto", height: "auto" }}
+                width={28}
+                height={37}
+                className="w-[18px] sm:w-[20px] h-auto object-contain hover:scale-105 transition-transform"
+                unoptimized
               />
             </Link>
 

@@ -69,8 +69,8 @@ export const HappyClients = () => {
     <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-10 sm:py-14 overflow-hidden">
       {/* Centered Heading matching Figma */}
       <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-        <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-[#0B132B]">
-          Story of <span className="text-[#1865F2]">Happy Customers</span>
+        <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+          Story of <span className="text-[#2563EB]">Happy Customers</span>
         </h2>
       </div>
 

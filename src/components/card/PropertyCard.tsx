@@ -59,24 +59,26 @@ const ReadyToMoveIcon = () => (
   />
 );
 
-const DiscountBadgeIcon = () => (
-  <svg
-    className="h-5 w-5 shrink-0 text-[#00BA7A]"
-    viewBox="0 0 24 24"
-    fill="none"
-  >
-    <path
-      d="M10.87 2.47a1.5 1.5 0 012.26 0l.94 1.05a1.5 1.5 0 001.37.45l1.39-.23a1.5 1.5 0 011.69 1.23l.3 1.38a1.5 1.5 0 001 1.05l1.32.48a1.5 1.5 0 01.91 1.89l-.5 1.32a1.5 1.5 0 00.46 1.37l1.05.94a1.5 1.5 0 010 2.26l-1.05.94a1.5 1.5 0 00-.46 1.37l.5 1.32a1.5 1.5 0 01-.91 1.89l-1.32.48a1.5 1.5 0 00-1 1.05l-.3 1.38a1.5 1.5 0 01-1.69 1.23l-1.39-.23a1.5 1.5 0 00-1.37.45l-.94 1.05a1.5 1.5 0 01-2.26 0l-.94-1.05a1.5 1.5 0 00-1.37-.45l-1.39.23a1.5 1.5 0 01-1.69-1.23l-.3-1.38a1.5 1.5 0 00-1-1.05l-1.32-.48a1.5 1.5 0 01-.91-1.89l.5-1.32a1.5 1.5 0 00-.46-1.37l-1.05-.94a1.5 1.5 0 010-2.26l1.05-.94a1.5 1.5 0 00.46-1.37l-.5-1.32a1.5 1.5 0 01.91-1.89l1.32-.48a1.5 1.5 0 001-1.05l.3-1.38a1.5 1.5 0 011.69-1.23l1.39.23a1.5 1.5 0 001.37-.45l.94-1.05z"
-      fill="#00BA7A"
-    />
-    <path
-      d="M9.5 9.5a1 1 0 100-2 1 1 0 000 2zm5 7a1 1 0 100-2 1 1 0 000 2zm-6 0l7-7"
-      stroke="white"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+const BlueLocationPinIcon = ({ className = "h-4 w-3.5 shrink-0" }: { className?: string }) => (
+  <Image
+    src="/icon/location_pin_blue.png"
+    alt="Location"
+    width={34}
+    height={43}
+    className={cn("object-contain", className)}
+    unoptimized
+  />
+);
+
+const DiscountBadgeIcon = ({ className = "h-[18px] w-[18px] shrink-0" }: { className?: string }) => (
+  <Image
+    src="/icon/discount_badge.png"
+    alt="Discount"
+    width={52}
+    height={52}
+    className={cn("object-contain", className)}
+    unoptimized
+  />
 );
 
 export const PropertyCard = (props: Property) => {
@@ -164,7 +166,7 @@ export const PropertyCard = (props: Property) => {
             />
 
             {/* Top-Right: 3 Action Badges */}
-            <div className="absolute top-3.5 right-3.5 z-10 flex flex-col items-center gap-2">
+            <div className="absolute top-3.5 right-3.5 z-10 flex flex-col items-center gap-1.5">
               <button
                 type="button"
                 aria-label="Wishlist"
@@ -176,53 +178,50 @@ export const PropertyCard = (props: Property) => {
                     setLocalLiked((prev) => !prev);
                   }
                 }}
-                className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
+                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
               >
-                <Heart
-                  className={cn(
-                    "h-4 w-4 transition-colors",
-                    isItemSaved ? "fill-red-500 text-red-500" : "text-[#1865F2]"
-                  )}
-                  strokeWidth={2.2}
-                />
+                {isItemSaved ? (
+                  <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+                ) : (
+                  <Image
+                    src="/icon/heart_action.png"
+                    alt="Wishlist"
+                    width={31}
+                    height={27}
+                    className="w-[15.5px] h-[13.5px] object-contain"
+                    unoptimized
+                  />
+                )}
               </button>
               <button
                 type="button"
                 aria-label="Share"
                 onClick={handleShare}
-                className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
+                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
               >
-                <svg
-                  className="h-4 w-4 text-[#1865F2]"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m15 14 5-5-5-5" />
-                  <path d="M4 20v-7a4 4 0 0 1 4-4h12" />
-                </svg>
+                <Image
+                  src="/icon/share_action.png"
+                  alt="Share"
+                  width={30}
+                  height={24}
+                  className="w-[15px] h-[12px] object-contain"
+                  unoptimized
+                />
               </button>
               <button
                 type="button"
-                aria-label="Verified"
+                aria-label="Brochure"
                 onClick={(e) => e.preventDefault()}
-                className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
+                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110 cursor-pointer"
               >
-                <svg
-                  className="h-4.5 w-4.5 text-[#1865F2]"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
+                <Image
+                  src="/icon/brochure_action.png"
+                  alt="Brochure"
+                  width={30}
+                  height={33}
+                  className="w-[15px] h-[16.5px] object-contain"
+                  unoptimized
+                />
               </button>
             </div>
           </div>
@@ -280,7 +279,7 @@ export const PropertyCard = (props: Property) => {
               </h3>
             </div>
             <p className="mt-1 flex items-center gap-1.5 text-[13px] text-[#475569] font-normal pl-3.5">
-              <MapPin className="h-4 w-4 shrink-0 text-[#1865F2] fill-[#1865F2]" />
+              <BlueLocationPinIcon className="h-4 w-3 shrink-0" />
               <span className="truncate">{location || "Sector 103 , Noida Ext"}</span>
             </p>
           </div>
@@ -449,12 +448,11 @@ export const PropertyCard = (props: Property) => {
                   <Heart className="h-4 w-4 fill-red-500 text-red-500" />
                 ) : (
                   <Image
-                    src="/icon/Group (1).png"
+                    src="/icon/heart_action.png"
                     alt="Wishlist"
-                    width={16}
-                    height={14}
-                    className="h-4 w-4 object-contain"
-                    style={{ width: "auto", height: "auto" }}
+                    width={31}
+                    height={27}
+                    className="w-[15.5px] h-[13.5px] object-contain"
                     unoptimized
                   />
                 )}
@@ -466,11 +464,11 @@ export const PropertyCard = (props: Property) => {
                 className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
               >
                 <Image
-                  src="/icon/Group.png"
+                  src="/icon/share_action.png"
                   alt="Share"
-                  width={15}
-                  height={13}
-                  className="h-3.5 w-3.5 object-contain"
+                  width={30}
+                  height={24}
+                  className="w-[15px] h-[12px] object-contain"
                   unoptimized
                 />
               </button>
@@ -481,11 +479,11 @@ export const PropertyCard = (props: Property) => {
                 className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
               >
                 <Image
-                  src="/icon/Frame.png"
+                  src="/icon/brochure_action.png"
                   alt="Brochure"
-                  width={15}
-                  height={17}
-                  className="h-4 w-4 object-contain"
+                  width={30}
+                  height={33}
+                  className="w-[15px] h-[16.5px] object-contain"
                   unoptimized
                 />
               </button>
@@ -517,9 +515,7 @@ export const PropertyCard = (props: Property) => {
 
             {/* Location */}
             <p className="mt-1 flex items-center gap-1.5 text-[13px] text-[#64748B] font-normal">
-              <svg className="h-4 w-4 shrink-0 text-[#1865F2]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-              </svg>
+              <BlueLocationPinIcon className="h-4 w-3.5 shrink-0" />
               <span className="truncate">{location || "Sector 76, Noida"}</span>
             </p>
 

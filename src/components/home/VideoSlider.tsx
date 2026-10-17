@@ -224,11 +224,17 @@ export const VideoSlider = () => {
           display: flex;
           width: max-content;
           animation: scrollLeft 32s linear infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
         }
         .marquee-right {
           display: flex;
           width: max-content;
           animation: scrollRight 36s linear infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
         }
         .marquee-container:hover .marquee-left,
         .marquee-container:hover .marquee-right {
@@ -237,11 +243,11 @@ export const VideoSlider = () => {
       `}</style>
 
       {/* Centered Header */}
-      <div className="mb-8 sm:mb-12 text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-semibold tracking-tight text-[#0B132B]">
-          Explore Projects Through <span className="text-[#1865F2]">Video</span>
+      <div className="mb-8 sm:mb-10 text-center">
+        <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+          Explore Projects Through <span className="text-[#2563EB]">Video</span>
         </h2>
-        <p className="mt-2 text-xs sm:text-sm text-[#64748B] font-normal max-w-xl mx-auto">
+        <p className="mt-1.5 text-xs sm:text-sm text-[#64748B] font-normal max-w-xl mx-auto">
           Watch detailed property videos and explore every project before making your investment decision.
         </p>
       </div>

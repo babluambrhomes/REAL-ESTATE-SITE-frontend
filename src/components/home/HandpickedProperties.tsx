@@ -77,21 +77,21 @@ export const HandpickedProperties = () => {
       {/* Header matching exact Figma layout */}
       <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div className="border-l-[3.5px] border-[#00C48C] pl-3">
-          <h2 className="text-xl sm:text-2xl lg:text-[26px] font-bold tracking-tight text-[#0B132B]">
-            Handpicked by Roofin
+          <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+            Handpicked by <span className="text-[#2563EB]">Roofin</span>
           </h2>
-          <p className="mt-0.5 text-xs sm:text-[13px] text-[#64748B] font-normal">
+          <p className="mt-1 text-xs sm:text-[13px] text-[#64748B] font-normal">
             Explore the best new projects across Delhi NCR from top builders.
           </p>
         </div>
 
-        {/* Top Right: Exact [ view all < ] ( > ) capsule controls */}
+        {/* Top Right: Exact [ view all < ] ( > ) seamlessly joined matching screenshot */}
         <div className="flex items-center gap-2">
           {/* Left Pill containing "view all" text + circular "<" button */}
-          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-xs transition-all hover:border-[#1865F2]/40">
+          <div className="inline-flex items-center">
             <Link
               href="/properties"
-              className="pl-3.5 pr-2.5 py-1 text-xs sm:text-sm font-medium text-[#1865F2] hover:underline cursor-pointer"
+              className="flex h-8 items-center rounded-l-full border-y border-l border-[#D3E3FD] bg-white pl-3.5 sm:pl-4 pr-5 sm:pr-6 text-xs sm:text-[13.5px] font-medium text-[#1865F2] hover:underline cursor-pointer tracking-normal transition-colors"
             >
               view all
             </Link>
@@ -99,7 +99,7 @@ export const HandpickedProperties = () => {
               type="button"
               aria-label="Previous"
               onClick={() => swiperRef.current?.slidePrev()}
-              className="flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+              className="-ml-4 relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4 stroke-[1.5]" />
             </button>
@@ -110,7 +110,7 @@ export const HandpickedProperties = () => {
             type="button"
             aria-label="Next"
             onClick={() => swiperRef.current?.slideNext()}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
           >
             <ChevronRight className="h-4 w-4 stroke-[1.5]" />
           </button>
@@ -203,8 +203,15 @@ export const HandpickedProperties = () => {
                 </div>
 
                 {/* Location */}
-                <p className="mt-1 flex items-center gap-1 text-xs text-[#64748B]">
-                  <MapPin className="h-3.5 w-3.5 text-[#1865F2] shrink-0 fill-[#1865F2]" />
+                <p className="mt-1 flex items-center gap-1.5 text-xs text-[#64748B]">
+                  <Image
+                    src="/icon/location_pin_blue.png"
+                    alt="Location"
+                    width={34}
+                    height={43}
+                    className="h-3.5 w-3 shrink-0 object-contain"
+                    unoptimized
+                  />
                   <span>{item.location}</span>
                 </p>
               </div>

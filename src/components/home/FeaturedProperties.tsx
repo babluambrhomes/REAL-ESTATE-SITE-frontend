@@ -37,19 +37,19 @@ export const FeaturedProperties = ({
       {/* Section Header matching Figma: | Fast Selling Properties ... view all < > */}
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <span className="h-6 sm:h-7 w-1.5 rounded-full bg-[#05A579]" />
-          <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#1865F2]">
+          <span className="h-6 sm:h-7 w-1.5 rounded-full bg-[#05A579] shrink-0" />
+          <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#2563EB] leading-tight">
             {title1} <span>{title2}</span>
           </h2>
         </div>
 
-        {/* Top Right: Exact [ view all < ] ( > ) matching zoomed screenshot */}
+        {/* Top Right: Exact [ view all < ] ( > ) seamlessly joined matching screenshot */}
         <div className="flex items-center gap-2">
           {/* Left Pill containing "view all" text + circular "<" button */}
-          <div className="inline-flex items-center rounded-full border border-[#D3E3FD] bg-white p-0.5 shadow-xs transition-all hover:border-[#B5D4FC]">
+          <div className="inline-flex items-center">
             <Link
               href={viewAllHref}
-              className="pl-4 pr-3 py-1 text-sm sm:text-[15px] font-medium text-[#1865F2] hover:underline cursor-pointer tracking-normal"
+              className="flex h-8 items-center rounded-l-full border-y border-l border-[#D3E3FD] bg-white pl-3.5 sm:pl-4 pr-5 sm:pr-6 text-xs sm:text-[13.5px] font-medium text-[#1865F2] hover:underline cursor-pointer tracking-normal transition-colors"
             >
               view all
             </Link>
@@ -57,7 +57,7 @@ export const FeaturedProperties = ({
               type="button"
               aria-label="Previous"
               onClick={() => swiperRef.current?.slidePrev()}
-              className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-slate-300/80 bg-white text-slate-500 transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+              className="-ml-4 relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4 stroke-[1.5]" />
             </button>
@@ -68,31 +68,49 @@ export const FeaturedProperties = ({
             type="button"
             aria-label="Next"
             onClick={() => swiperRef.current?.slideNext()}
-            className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-slate-300/80 bg-white text-slate-500 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
           >
             <ChevronRight className="h-4 w-4 stroke-[1.5]" />
           </button>
         </div>
       </div>
 
-      {/* Property Cards Carousel (Exact 408px x 527px Figma cards) */}
+      {/* Property Cards Carousel: 3 full cards visible on laptop/desktop screens */}
       <div className="relative group/carousel">
         <Swiper
           modules={[Autoplay]}
-          loop={safeProperties.length > 4}
+          loop={safeProperties.length > 3}
           speed={600}
-          spaceBetween={24}
-          slidesPerView="auto"
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
+          }}
+          spaceBetween={16}
+          slidesPerView={1.15}
+          breakpoints={{
+            640: {
+              slidesPerView: 1.8,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2.2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1280: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
           }}
           className="!pb-9 !pt-3 !px-2.5 -mx-2.5"
         >
           {safeProperties.map((property, idx) => (
             <SwiperSlide
               key={`${property.id || property.title}-${idx}`}
-              className="!w-[330px] sm:!w-[380px] lg:!w-[408px] !h-auto shrink-0"
+              className="!h-auto shrink-0"
             >
               <PropertyCard {...property} layout="vertical" />
             </SwiperSlide>

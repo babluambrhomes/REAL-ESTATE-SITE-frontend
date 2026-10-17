@@ -79,7 +79,7 @@ export const headerSelectStyles: StylesConfig<
 
 
 
-/* ────────────────  SearchBox  (white bg, rounded-[8px], 34px ultra-sleek bareek height)  ──────────────── */
+/* ────────────────  SearchBox  (#F8FAFC bg, #E2E8F0 border, 12px radius, 46px height)  ──────────────── */
 
 export const searchBoxSelectStyles: StylesConfig<
   OptionType,
@@ -88,12 +88,12 @@ export const searchBoxSelectStyles: StylesConfig<
 > = {
   control: (base, state) => ({
     ...base,
-    minHeight: "34px",
-    height: "34px",
+    minHeight: "46px",
+    height: "46px",
     width: "100%",
     border: state.isFocused ? "1.5px solid #1865F2" : "1px solid #E2E8F0",
-    backgroundColor: "#FFFFFF",
-    borderRadius: "8px",
+    backgroundColor: "#F8FAFC",
+    borderRadius: "12px",
     boxShadow: state.isFocused ? "0 0 0 2px rgba(24, 101, 242, 0.1)" : "none",
     cursor: "pointer",
     transition: "all 0.15s ease",
@@ -101,48 +101,48 @@ export const searchBoxSelectStyles: StylesConfig<
   }),
   valueContainer: (base) => ({
     ...base,
-    paddingLeft: "0.55rem",
-    paddingRight: "0.2rem",
+    paddingLeft: "0.75rem",
+    paddingRight: "0.25rem",
     paddingTop: 0,
     paddingBottom: 0,
   }),
   placeholder: (base) => ({
     ...base,
-    color: "#94A3B8",
+    color: "#334155",
     fontWeight: 400,
-    fontSize: "12px",
+    fontSize: "13.5px",
     whiteSpace: "nowrap",
   }),
   singleValue: (base) => ({
     ...base,
     color: "#0F172A",
     fontWeight: 500,
-    fontSize: "12px",
+    fontSize: "13.5px",
     whiteSpace: "nowrap",
   }),
   menu: (base) => ({
     ...base,
-    borderRadius: "8px",
+    borderRadius: "10px",
     overflow: "hidden",
     width: "auto",
-    minWidth: "170px",
-    maxWidth: "230px",
+    minWidth: "180px",
+    maxWidth: "250px",
     boxShadow:
-      "0 10px 30px rgba(24, 101, 242, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04)",
+      "0 12px 32px rgba(24, 101, 242, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04)",
     border: "1px solid #DCE8FE",
-    marginTop: "0.25rem",
+    marginTop: "0.35rem",
     zIndex: 50,
   }),
   menuList: (base) => ({
     ...base,
-    padding: "0.2rem",
+    padding: "0.25rem",
   }),
   option: (base, state) => ({
     ...base,
-    borderRadius: "6px",
-    padding: "0.35rem 0.65rem",
+    borderRadius: "8px",
+    padding: "0.45rem 0.75rem",
     cursor: "pointer",
-    fontSize: "12px",
+    fontSize: "13px",
     fontWeight: 500,
     backgroundColor: state.isSelected
       ? "#1865F2"
@@ -155,12 +155,12 @@ export const searchBoxSelectStyles: StylesConfig<
   indicatorSeparator: () => ({ display: "none" }),
   dropdownIndicator: (base, state) => ({
     ...base,
-    paddingRight: "0.45rem",
-    color: state.isFocused ? "#1865F2" : "#94A3B8",
+    paddingRight: "0.6rem",
+    color: state.isFocused ? "#1865F2" : "#64748B",
     cursor: "pointer",
     svg: {
-      width: "13px",
-      height: "13px",
+      width: "16px",
+      height: "16px",
     },
     "&:hover": { color: "#1865F2" },
   }),

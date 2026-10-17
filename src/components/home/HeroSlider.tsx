@@ -7,13 +7,13 @@ import Link from "next/link";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
-import { Check, UserCheck, BadgePercent, Map as MapIcon, Building2, ArrowRight, ShieldCheck } from "lucide-react";
+import { Check, UserCheck, BadgePercent, Map as MapIcon, ArrowRight, ShieldCheck } from "lucide-react";
 import { properties } from "@/data/properties";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-// 🗺️ Map component dynamically loaded for client
+// Map component dynamically loaded for client
 const ViewMap = dynamic(() => import("@/components/common/ViewMap"), {
   ssr: false,
   loading: () => (
@@ -25,17 +25,17 @@ const ViewMap = dynamic(() => import("@/components/common/ViewMap"), {
 
 const slides = [
   {
-    image: "/layout/banner.png",
+    image: "/banner/hero-banners.jpg",
     title: "Find Your Dream Home",
     subtitle: "Explore luxury properties in the most desirable locations.",
   },
   {
-    image: "/banner/commercial_skyscrapers_banner.png",
+    image: "/banner/hero-banners.jpg",
     title: "Luxury Living Redefined",
     subtitle: "Modern designs crafted for comfort and elegance.",
   },
   {
-    image: "/banner/hero-banner.png",
+    image: "/banner/hero-banners.jpg",
     title: "Invest In Your Future",
     subtitle: "High-growth opportunities with guaranteed returns.",
   },
@@ -73,15 +73,22 @@ export const HeroSlider = () => {
                     fill
                     priority={index === 0}
                     sizes="(max-width: 1024px) 100vw, 73vw"
-                    className="object-cover object-left"
-                    unoptimized
+                    className="object-cover object-center"
                   />
-                  {/* Natural seamless soft fade into map on right edge */}
-                  <div className="absolute inset-y-0 right-0 hidden lg:block w-24 xl:w-32 bg-gradient-to-r from-transparent via-[#d8eafb]/40 to-[#d8eafb] pointer-events-none z-10" />
+
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Right-side shade fade — banner blends into map */}
+          <div
+            className="absolute inset-y-0 right-0 hidden lg:block w-[160px] pointer-events-none z-10"
+            style={{
+              background:
+                "linear-gradient(to right, transparent 0%, rgba(207,232,249,0.45) 30%, rgba(220,239,251,0.72) 52%, rgba(230,244,252,0.88) 70%, #eaf2fb 100%)",
+            }}
+          />
 
           {/* Left Overlay Text Content */}
           <div className="absolute inset-0 z-10 flex items-center pointer-events-none font-rounded-mplus">
@@ -89,10 +96,10 @@ export const HeroSlider = () => {
               {/* Trust Badge */}
               <div className="inline-flex items-center gap-2.5 rounded-full bg-white px-3.5 py-1.5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-slate-100">
                 <Image
-                  src="/icon/hero/trusted_buyers_shield_hd.png"
+                  src="/icon/hero/trusted_buyers_shield_v2.png"
                   alt="Trusted by 50k+ Buyers"
-                  width={28}
-                  height={32}
+                  width={24}
+                  height={28}
                   unoptimized
                   priority
                   className="w-[18px] sm:w-[20px] h-auto object-contain shrink-0"
@@ -109,18 +116,18 @@ export const HeroSlider = () => {
                 MARKET PRICE
               </h1>
 
-              {/* Subtitle */}
-              <p className="mt-3.5 text-base sm:text-lg lg:text-[22px] font-normal text-black tracking-normal">
+              {/* Subtitle - Exact Figma Specs: Poppins, 400 Regular, 30px, Line-height 100%, Letter-spacing 0%, #000000 */}
+              <p className="mt-3 font-poppins text-lg sm:text-2xl lg:text-[24px] font-normal text-[#000000] leading-none tracking-normal">
                 India’s Most Trusted Buying platform
               </p>
 
               {/* Trust Badges */}
-              <div className="mt-6 flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-7 pt-1">
+              <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-7">
                 {/* Badge 1: Verified Properties */}
                 <Link href="/properties?verified=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
-                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-slate-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] shrink-0 p-2">
                     <Image
-                      src="/icon/hero/verified_properties_shield_hd.png"
+                      src="/icon/hero/verified_properties_shield_v2.png"
                       alt="Verified Properties"
                       width={56}
                       height={56}
@@ -137,9 +144,9 @@ export const HeroSlider = () => {
 
                 {/* Badge 2: Trusted Agents */}
                 <Link href="/properties?agent=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
-                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-slate-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] shrink-0 p-2">
                     <Image
-                      src="/icon/hero/trusted_agents_user_hd.png"
+                      src="/icon/hero/trusted_agents_user_v2.png"
                       alt="Trusted Agents"
                       width={56}
                       height={56}
@@ -156,9 +163,9 @@ export const HeroSlider = () => {
 
                 {/* Badge 3: Best Deals */}
                 <Link href="/properties?deal=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
-                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-blue-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] shrink-0 p-2">
+                  <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-slate-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] shrink-0 p-2">
                     <Image
-                      src="/icon/hero/best_deals_percent_hd.png"
+                      src="/icon/hero/best_deals_percent_v2.png"
                       alt="Best Deals"
                       width={56}
                       height={56}
@@ -179,28 +186,45 @@ export const HeroSlider = () => {
 
         {/* 2. Right Side: Interactive Map */}
         <div className="relative hidden lg:block lg:w-[27%] h-full bg-[#f1f6fc] overflow-hidden">
+          {/* Left-side shade on map panel for seamless blend */}
+          <div
+            className="absolute inset-y-0 left-0 w-[60px] pointer-events-none z-10"
+            style={{
+              background:
+                "linear-gradient(to right, #eaf2fb 0%, rgba(234,242,251,0.6) 50%, transparent 100%)",
+            }}
+          />
           <div className="relative h-full w-full">
-            <ViewMap height="100%" properties={properties} />
+            <ViewMap height="100%" properties={properties.slice(0, 8)} />
 
-            {/* Seamless edge fade from banner sky into map */}
-            <div className="absolute inset-y-0 left-0 w-8 xl:w-14 bg-gradient-to-r from-[#d8eafb]/70 to-transparent pointer-events-none z-10" />
 
-            {/* Top Floating Badge: Premium Living (Exact match with zoomed screenshot) */}
-            <div className="absolute top-24 left-4 z-20 w-[190px] rounded-xl border border-slate-100 bg-white p-3.5 shadow-xl backdrop-blur-md">
+
+            {/* Top Floating Badge: Premium Living (Subtle 10px corner radius matching Figma) */}
+            <div className="absolute top-24 left-4 z-30 w-[172px] rounded-[10px] border border-slate-100/90 bg-white p-2.5 sm:p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#a3e8c8] bg-[#e6f8f0] text-[#10b981] shrink-0">
-                  <Building2 className="h-4 w-4" />
+                <div className="relative h-[34px] w-[34px] shrink-0">
+                  <Image
+                    src="/icon/hero/premium_living_icon.png"
+                    alt="Premium Living"
+                    width={68}
+                    height={68}
+                    unoptimized
+                    priority
+                    className="h-full w-full object-contain"
+                  />
                 </div>
                 <div>
-                  <p className="text-[13px] font-bold text-slate-900 leading-tight">Premium Living</p>
-                  <p className="text-[11px] text-slate-500 font-medium leading-tight">In Greater Noida</p>
+                  <p className="text-[12px] font-semibold text-slate-800 leading-tight">Premium Living</p>
+                  <p className="text-[10px] text-slate-500 font-normal leading-tight mt-0.5">In Greater Noida</p>
                 </div>
               </div>
-              <div className="mt-2.5 flex items-center justify-between pt-1">
-                <p className="text-[17px] font-extrabold text-slate-900 tracking-tight">1.25 cr</p>
+              <div className="mt-2.5 flex items-center justify-between pt-0.5">
+                <p className="text-[19px] sm:text-[20px] font-semibold text-slate-900 tracking-tight leading-none">
+                  1.25 cr
+                </p>
                 <Link
                   href="/properties?location=Greater+Noida"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1865F2] text-white shadow-md transition-transform hover:scale-105"
+                  className="flex h-[30px] w-[30px] sm:h-[32px] sm:w-[32px] items-center justify-center rounded-full bg-[#1865F2] text-white shadow-sm transition-transform hover:scale-105 shrink-0"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -208,20 +232,20 @@ export const HeroSlider = () => {
             </div>
 
             {/* Bottom Floating Area: Explore on Map Button + 3 Vertical Circular Dots (Exact Match) */}
-            <div className="absolute bottom-12 right-6 z-20 flex items-center gap-4 pointer-events-auto">
-              {/* Explore on Map Button */}
+            <div className="absolute bottom-[76px] lg:bottom-[80px] right-4 sm:right-6 z-30 flex items-center gap-2.5 sm:gap-3 pointer-events-auto">
+              {/* Explore on Map Button - Compact & Sleek */}
               <Link
                 href="/properties?map=true"
-                className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#1865F2] to-[#029BE5] px-5 py-3.5 text-[15.5px] font-medium text-white shadow-[0_8px_24px_rgba(24,101,242,0.4)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_10px_28px_rgba(24,101,242,0.5)] shrink-0"
+                className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#1865F2] to-[#029BE5] px-3.5 py-2 text-[12px] sm:text-[12.5px] font-medium text-white shadow-[0_4px_16px_rgba(24,101,242,0.35)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_6px_20px_rgba(24,101,242,0.45)] shrink-0"
               >
                 {/* Folded Map with Pin icon */}
-                <svg 
-                  className="h-6 w-6 shrink-0 text-white" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="1.9" 
-                  strokeLinecap="round" 
+                <svg
+                  className="h-4 w-4 shrink-0 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                 >
                   <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
@@ -235,7 +259,7 @@ export const HeroSlider = () => {
               </Link>
 
               {/* 3 Vertical Circular Dots */}
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center gap-1.5 sm:gap-2">
                 {slides.map((_, index) => (
                   <button
                     key={index}
@@ -244,8 +268,8 @@ export const HeroSlider = () => {
                     onClick={() => swiperRef.current?.slideToLoop(index)}
                     className={`rounded-full transition-all duration-300 cursor-pointer ${
                       activeIndex === index
-                        ? "h-3.5 w-3.5 bg-[#1865F2] shadow-[0_2px_8px_rgba(24,101,242,0.5)] scale-110"
-                        : "h-3 w-3 bg-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] hover:bg-slate-50"
+                        ? "h-2.5 w-2.5 sm:h-3 sm:w-3 bg-[#1865F2] shadow-[0_2px_8px_rgba(24,101,242,0.5)] scale-110"
+                        : "h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] hover:bg-slate-50"
                     }`}
                   />
                 ))}
@@ -253,6 +277,8 @@ export const HeroSlider = () => {
             </div>
           </div>
         </div>
+
+        {/* Shade is now built into the banner image itself — no separate divider needed */}
       </div>
     </section>
   );
