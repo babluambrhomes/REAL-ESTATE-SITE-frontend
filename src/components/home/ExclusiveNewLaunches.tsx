@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 import type { Property } from "@/types";
 import type { Swiper as SwiperType } from "swiper";
@@ -71,7 +71,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Noida",
       type: "Apartment",
       beds: "3 BHK",
-      price: "₹ 1.65 Cr*",
+      price: "₹ 1.65 Cr",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
@@ -89,7 +89,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Noida",
       type: "Apartment",
       beds: "4 BHK",
-      price: "₹ 2.45 Cr*",
+      price: "₹ 2.45 Cr",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
@@ -107,7 +107,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Noida",
       type: "Apartment",
       beds: "3 BHK",
-      price: "₹ 4.17 Lakh*",
+      price: "₹ 4.17 Lakh",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
@@ -123,7 +123,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Noida",
       type: "Apartment",
       beds: "2 BHK",
-      price: "₹93.23 Lakh*",
+      price: "₹93.23 Lakh",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
@@ -141,7 +141,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Greater Noida",
       type: "Apartment",
       beds: "3 BHK",
-      price: "₹ 82.50 Lakh*",
+      price: "₹ 82.50 Lakh",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
@@ -159,7 +159,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Greater Noida",
       type: "Apartment",
       beds: "2 BHK",
-      price: "₹ 65.40 Lakh*",
+      price: "₹ 65.40 Lakh",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
@@ -177,7 +177,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Greater Noida",
       type: "Apartment",
       beds: "3 BHK",
-      price: "₹ 1.35 Cr*",
+      price: "₹ 1.35 Cr",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
@@ -195,7 +195,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Gurgaon",
       type: "Apartment",
       beds: "3 BHK",
-      price: "₹ 2.85 Cr*",
+      price: "₹ 2.85 Cr",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
@@ -213,7 +213,7 @@ const LOCALITY_PROPERTIES: Record<string, Property[]> = {
       city: "Gurgaon",
       type: "Apartment",
       beds: "4 BHK",
-      price: "₹ 25.00 Cr*",
+      price: "₹ 25.00 Cr",
       verifiedText: "NEW LAUNCH",
       images: [
         "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
@@ -534,31 +534,28 @@ export const ExclusiveNewLaunches = ({
                     {/* SUBTLE GRADIENT SHADE OVERLAY */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
 
-                    {/* FLOATING BOTTOM RIGHT DETAIL CARD (SAME UNIFORM HEIGHT & WIDTH FOR ALL, FURTHER REDUCED WIDTH) */}
-                    <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 w-[240px] max-w-[calc(100%-1.25rem)] h-[128px] flex flex-col justify-between rounded-[12px] bg-white p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-[#E2E8F0]">
+                    {/* FLOATING BOTTOM RIGHT DETAIL CARD (1:1 FIGMA PROPORTIONS) */}
+                    <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 w-[285px] sm:w-[315px] max-w-[calc(100%-1.5rem)] h-[146px] sm:h-[154px] flex flex-col justify-between rounded-[16px] sm:rounded-[18px] bg-white p-3 sm:p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.14)] border border-[#E2E8F0]">
                       {/* TOP SECTION: TITLE & LOCATION */}
                       <div className="min-w-0">
                         {/* TITLE */}
                         <h3
                           title={project.title}
-                          className="text-[13.5px] sm:text-[14px] font-bold text-[#000000] leading-tight tracking-normal truncate"
+                          className="text-[15px] sm:text-[16px] font-bold text-[#000000] leading-snug tracking-tight truncate"
                         >
                           {project.title}
                         </h3>
 
                         {/* LOCATION */}
-                        <div className="mt-0.5 flex items-center gap-1 text-[11px] font-medium text-slate-700 leading-tight min-w-0">
-                          <svg
-                            className="h-3 w-3 shrink-0 text-[#2563EB]"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                        <div className="mt-1 flex items-center gap-1.5 text-[11.5px] sm:text-[12px] font-medium text-slate-700 leading-tight min-w-0">
+                          <Image
+                            src="/icon/launch_card_pin.png"
+                            alt="Location"
+                            width={14}
+                            height={18}
+                            className="h-3.5 w-3 shrink-0 object-contain"
+                            unoptimized
+                          />
                           <span className="truncate" title={project.location}>
                             {project.location}
                           </span>
@@ -568,24 +565,37 @@ export const ExclusiveNewLaunches = ({
                       {/* MIDDLE SECTION: STARTING FROM, PRICE & BHK PILLS */}
                       <div className="min-w-0">
                         {/* STARTING FROM HEADING */}
-                        <p className="text-[8.5px] font-semibold text-slate-500 uppercase leading-none tracking-wider">
+                        <p className="text-[9px] sm:text-[9.5px] font-semibold text-slate-500 uppercase leading-none tracking-wider">
                           STARTING FROM
                         </p>
 
                         {/* PRICE & BHK PILLS ROW */}
-                        <div className="mt-1 flex items-center gap-1.5 overflow-hidden min-w-0">
-                          {/* PRICE */}
-                          <span className="text-[14px] font-bold text-[#2563EB] leading-none shrink-0 whitespace-nowrap">
-                            {project.price?.includes("*") ? project.price : `${project.price || "₹ 4.17 Lakh"}*`}
-                          </span>
+                        <div className="mt-1 flex items-center gap-1.5 min-w-0 overflow-visible">
+                          {/* PRICE WITH SUPERSCRIPT BLUE STAR */}
+                          <div className="flex items-center shrink-0 leading-none">
+                            <span className="text-[15.5px] sm:text-[16.5px] font-bold text-[#2563EB] leading-none shrink-0 whitespace-nowrap">
+                              {(project.price || "₹ 4.17 Lakh").replace(/\*/g, "").trim()}
+                            </span>
+                            <span className="inline-flex self-start -mt-0.5 ml-0.5 shrink-0 overflow-visible">
+                              <Image
+                                src="/icon/launch_card_star.png"
+                                alt="*"
+                                width={12}
+                                height={12}
+                                className="h-3 w-3 shrink-0 object-contain overflow-visible"
+                                style={{ width: "11px", height: "11px" }}
+                                unoptimized
+                              />
+                            </span>
+                          </div>
 
                           {/* BHK PILL TAGS */}
-                          <div className="flex items-center gap-1 overflow-hidden flex-nowrap min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5 overflow-hidden flex-nowrap min-w-0 flex-1">
                             {(project.chips || ["3 BHK Apartment", "4 BHK Apartment"]).slice(0, 2).map((chip) => (
                               <span
                                 key={chip}
                                 title={chip}
-                                className="inline-flex items-center rounded-[3px] bg-[#E8F1FF] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#2563EB] leading-none whitespace-nowrap truncate min-w-0 max-w-[72px]"
+                                className="inline-flex items-center rounded-[4px] bg-[#E8F1FF] px-2 py-0.5 text-[10px] sm:text-[10.5px] font-semibold text-[#2563EB] leading-none whitespace-nowrap truncate min-w-0 max-w-[85px] sm:max-w-[95px]"
                               >
                                 {chip}
                               </span>
@@ -598,10 +608,10 @@ export const ExclusiveNewLaunches = ({
                       <div>
                         <Link
                           href={project.id ? `/properties/${project.id}` : `/properties/${encodeURIComponent(project.title)}`}
-                          className="inline-flex items-center gap-1.5 rounded-[6px] bg-gradient-to-r from-[#163C8F] via-[#1D4EB8] to-[#235EE0] hover:brightness-110 active:scale-[0.98] px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-all cursor-pointer leading-none"
+                          className="inline-flex items-center gap-1.5 rounded-[7px] bg-gradient-to-r from-[#163C8F] via-[#1D4EB8] to-[#235EE0] hover:brightness-110 active:scale-[0.98] px-3.5 py-1.5 text-[11.5px] sm:text-[12px] font-semibold text-white shadow-sm transition-all cursor-pointer leading-none"
                         >
                           <span>Know More</span>
-                          <ArrowRight className="h-3 w-3 stroke-[2.5]" />
+                          <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
                         </Link>
                       </div>
                     </div>

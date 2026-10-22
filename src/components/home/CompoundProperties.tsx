@@ -56,7 +56,7 @@ const COMPOUND_UNITS: CompoundUnit[] = [
       price: "₹1.25*Cr",
       beds: "3BHK",
       verified: true,
-      image: "/images/properties/night-tower-figma.jpg",
+      image: "/images/properties/compound-nbcc-figma.png",
     },
     minis: [
       {
@@ -86,7 +86,7 @@ const COMPOUND_UNITS: CompoundUnit[] = [
       price: "₹1.25*Cr",
       beds: "3BHK",
       verified: true,
-      image: "/images/properties/night-tower-figma.jpg",
+      image: "/images/properties/compound-nbcc-figma.png",
     },
     minis: [
       {
@@ -116,7 +116,7 @@ const COMPOUND_UNITS: CompoundUnit[] = [
       price: "₹1.25*Cr",
       beds: "3BHK",
       verified: true,
-      image: "/images/properties/night-tower-figma.jpg",
+      image: "/images/properties/compound-nbcc-figma.png",
     },
     minis: [
       {
@@ -146,7 +146,7 @@ const COMPOUND_UNITS: CompoundUnit[] = [
       price: "₹1.25*Cr",
       beds: "3BHK",
       verified: true,
-      image: "/images/properties/night-tower-figma.jpg",
+      image: "/images/properties/compound-nbcc-figma.png",
     },
     minis: [
       {
@@ -236,8 +236,8 @@ export const CompoundProperties = () => {
             <SwiperSlide key={unit.id} className="!h-auto">
               {/* One 50% Compound Unit: 1 Big Card (~65% width) + 2 Stacked Small Cards (~35% width) */}
               <div className="flex w-full flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
-                {/* 1. Big Card (Box 1) - Left Blue Accent, No bg color */}
-                <div className="group relative flex h-[202px] sm:h-[210px] flex-1 w-full flex-row items-center gap-2.5 sm:gap-3 overflow-hidden rounded-[20px] p-2 sm:p-2.5 shadow-[-3.5px_0px_0px_0px_#2563EB] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[-3.5px_0px_0px_0px_#2563EB]">
+                {/* 1. Big Card (Box 1) - Exact Figma bg #F2F6FD, Left blue accent & light bottom shadow */}
+                <div className="compound-big-card group relative flex h-[202px] sm:h-[210px] flex-1 w-full flex-row items-center gap-2.5 sm:gap-3 overflow-hidden rounded-[20px] bg-[#F2F6FD] p-2 sm:p-2.5">
                   {/* Left Image (Wide ~65%) */}
                   <div className="relative h-full w-[62%] sm:w-[65%] shrink-0 overflow-hidden rounded-[14px] sm:rounded-[16px] bg-slate-100">
                     <Image
@@ -320,12 +320,12 @@ export const CompoundProperties = () => {
                   </div>
                 </div>
 
-                {/* 2. Stacked 2 Small Cards (Box 2 & Box 3) - Right Blue Accent, No bg color */}
+                {/* 2. Stacked 2 Small Cards (Box 2 & Box 3) - Exact Figma bg #F2F6FD, Right blue accent & light bottom shadow */}
                 <div className="flex h-[202px] sm:h-[210px] w-full sm:w-[175px] lg:w-[190px] shrink-0 flex-col justify-between gap-2 sm:gap-2.5">
                   {unit.minis.map((mini, miniIdx) => (
                     <div
                       key={`${mini.id}-${miniIdx}`}
-                      className="group flex h-[97px] sm:h-[100px] w-full flex-row items-center justify-between gap-2 rounded-[16px] p-2 shadow-[3.5px_0px_0px_0px_#2563EB] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[3.5px_0px_0px_0px_#2563EB]"
+                      className="compound-small-card group flex h-[97px] sm:h-[100px] w-full flex-row items-center justify-between gap-2 rounded-[18px] bg-[#F2F6FD] p-2"
                     >
                       {/* Left Info */}
                       <div className="flex h-full flex-1 flex-col justify-between py-0.5 min-w-0">

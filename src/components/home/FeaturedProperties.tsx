@@ -29,11 +29,15 @@ export const FeaturedProperties = ({
   const swiperRef = useRef<SwiperType | null>(null);
 
   const safeProperties = useMemo(() => {
+    // Ensure enough slides for Swiper loop with 4.05 slidesPerView
+    if (fastSellingProperties.length < 10) {
+      return [...fastSellingProperties, ...fastSellingProperties];
+    }
     return fastSellingProperties;
   }, []);
 
   return (
-    <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-8 sm:py-10">
+    <section className="relative mx-auto w-full max-w-[1440px] px-3 sm:px-6 lg:px-8 py-8 sm:py-10">
       {/* Section Header matching Figma: | Fast Selling Properties ... view all < > */}
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -75,11 +79,11 @@ export const FeaturedProperties = ({
         </div>
       </div>
 
-      {/* Property Cards Carousel: 3 full cards visible on laptop/desktop screens */}
+      {/* Property Cards Carousel: 4 full cards visible and 5% of 5th card peeking */}
       <div className="relative group/carousel">
         <Swiper
           modules={[Autoplay]}
-          loop={safeProperties.length > 3}
+          loop={safeProperties.length > 4}
           speed={600}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           onSwiper={(swiper) => {
@@ -90,19 +94,23 @@ export const FeaturedProperties = ({
           breakpoints={{
             640: {
               slidesPerView: 1.8,
-              spaceBetween: 20,
+              spaceBetween: 14,
             },
             768: {
-              slidesPerView: 2.2,
-              spaceBetween: 20,
+              slidesPerView: 2.3,
+              spaceBetween: 14,
             },
             1024: {
-              slidesPerView: 3,
-              spaceBetween: 20,
+              slidesPerView: 4.2,
+              spaceBetween: 14,
             },
             1280: {
-              slidesPerView: 3,
-              spaceBetween: 24,
+              slidesPerView: 4.2,
+              spaceBetween: 16,
+            },
+            1536: {
+              slidesPerView: 4.2,
+              spaceBetween: 18,
             },
           }}
           className="!pb-9 !pt-3 !px-2.5 -mx-2.5"

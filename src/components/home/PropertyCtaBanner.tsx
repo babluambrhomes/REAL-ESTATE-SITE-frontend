@@ -6,78 +6,40 @@ import { ArrowUpRight } from "lucide-react";
 
 export const PropertyCtaBanner = () => {
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-4 sm:px-8 py-6">
-      <div className="relative overflow-hidden rounded-[26px] bg-gradient-to-r from-[#0062E3] via-[#007DFE] to-[#00A3FF] p-6 sm:p-10 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
-        {/* Top-Left Warm Yellow Accent Ribbon */}
-        <div className="absolute top-0 left-0 h-16 w-32 bg-[#F9A825]/90 rounded-br-[40px] blur-[1px] -z-0 opacity-80 pointer-events-none" />
+    <section className="relative mx-auto w-full max-w-7xl px-4 sm:px-8 py-6 sm:py-8">
+      {/* 1:1 Figma Full High-Res Banner Container (aspect-[1024/147] for 100% full uncropped image) */}
+      <div className="relative w-full aspect-[1024/148] min-h-[145px] overflow-hidden rounded-[14px] sm:rounded-[18px] shadow-md border border-[#2563EB]/25 bg-[#0062E3]">
+        {/* Full Banner Asset */}
+        <Image
+          src="/images/blogs/property_cta_banner.png"
+          alt="Find the Perfect Property for Your Future"
+          fill
+          priority
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="object-cover object-center select-none"
+          unoptimized
+        />
 
-        {/* Left Content */}
-        <div className="relative z-10 max-w-xl">
-          <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-black tracking-tight text-white leading-tight">
+        {/* Left Content Overlay (Exact Figma Alignment & Sizing) */}
+        <div className="relative z-10 flex h-full flex-col justify-center px-5 sm:px-8 md:px-10 lg:px-12 max-w-[62%] sm:max-w-[56%] md:max-w-[50%] select-none">
+          <h2 className="text-[17px] sm:text-[20px] md:text-[23px] lg:text-[26px] font-extrabold tracking-tight text-white leading-tight drop-shadow-xs">
             Find the Perfect Property for Your Future
           </h2>
 
-          <p className="mt-2 text-xs sm:text-sm text-blue-100 font-medium leading-relaxed max-w-lg">
+          <p className="mt-1 sm:mt-1.5 text-[9.5px] sm:text-[11px] md:text-[12px] text-white/95 font-medium leading-snug max-w-[420px]">
             Explore verified properties, compare top projects, and make informed decisions with expert guidance.
           </p>
 
-          <div className="mt-6">
+          <div className="mt-2.5 sm:mt-3.5">
             <Link
               href="/properties"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs sm:text-sm font-bold text-[#0062E3] shadow-md hover:bg-blue-50 transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-[6px] bg-white hover:bg-blue-50/70 active:scale-98 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[12px] font-bold text-[#2563EB] shadow-xs transition-all cursor-pointer"
             >
-              Explore Properties
-              <ArrowUpRight className="h-4 w-4 stroke-[2.5]" />
+              <span>Explore Properties</span>
+              <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.5] text-[#2563EB]" />
             </Link>
           </div>
         </div>
-
-        {/* Right Graphic Section */}
-        <div className="relative z-10 flex items-center justify-center lg:justify-end shrink-0 w-full lg:w-auto">
-          <div className="relative h-44 w-72 sm:h-52 sm:w-96 flex items-end justify-center">
-            {/* Arched Architectural Portal */}
-            <div className="absolute left-4 bottom-0 h-40 w-40 sm:h-48 sm:w-48 overflow-hidden rounded-t-full rounded-b-2xl border-2 border-white/40 bg-blue-900/30 shadow-2xl backdrop-blur-xs">
-              <Image
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80"
-                alt="Modern Architecture"
-                fill
-                sizes="250px"
-                className="object-cover"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0062E3]/80 via-transparent to-transparent" />
-            </div>
-
-            {/* Glowing Accent Ring */}
-            <div className="absolute left-1 bottom-0 h-44 w-44 sm:h-52 sm:w-52 rounded-full border border-cyan-300/40 pointer-events-none -z-1" />
-
-            {/* Suited Agent */}
-            <div className="absolute right-6 bottom-0 h-44 w-36 sm:h-52 sm:w-44 overflow-hidden z-10">
-              <Image
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80"
-                alt="Expert Advisor"
-                fill
-                sizes="200px"
-                className="object-contain object-bottom drop-shadow-2xl"
-                unoptimized
-              />
-            </div>
-
-            {/* Thought / Speech Bubble (Cloud style) */}
-            <div className="absolute top-1 right-2 z-20 rounded-2xl bg-white px-3 py-1.5 text-[10px] font-black text-slate-900 shadow-xl border border-blue-100 flex flex-col items-center">
-              <span className="tracking-tight">Don&apos;t WAIT FOR...</span>
-              <span className="text-[9px] text-[#0062E3] font-bold">Invest Today!</span>
-              {/* Cloud tail dots */}
-              <div className="absolute -bottom-2 right-4 flex flex-col items-center gap-0.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-white shadow-xs" />
-                <span className="h-1 w-1 rounded-full bg-white shadow-xs" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Subtle Background Waves / Shapes */}
-        <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-cyan-400/20 rounded-full blur-2xl pointer-events-none" />
       </div>
     </section>
   );

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Select from "react-select";
 import {
   Blocks,
@@ -18,6 +19,7 @@ import {
   CalendarCheck,
   Search,
   ArrowLeftRight,
+  ChevronDown,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { PropertyCard } from "@/components/card/PropertyCard";
@@ -104,6 +106,20 @@ export const PropertyListingsClient = () => {
   const [showMap, setShowMap] = useState(searchParams.get("map") === "true");
   const [page, setPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState<OptionType>(sortOptions[0]);
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const sortRef = useRef<HTMLDivElement>(null);
+
+  // Close sort dropdown on outside click
+  useEffect(() => {
+    if (!sortDropdownOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+        setSortDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [sortDropdownOpen]);
 
   // Extract URL Query Parameters
   const purpose = searchParams.get("purpose") || "";
@@ -113,11 +129,30 @@ export const PropertyListingsClient = () => {
   const propertyType = searchParams.get("type") || "";
   const bhk = searchParams.get("bhk") || "";
   const q = searchParams.get("q") || "";
+  const minPrice = searchParams.get("minPrice") || "";
+  const maxPrice = searchParams.get("maxPrice") || "";
+  const status = searchParams.get("status") || "";
+  const postedBy = searchParams.get("postedBy") || "";
+  const amenities = searchParams.get("amenities") || "";
 
   // Reset page when filters change
   useEffect(() => {
     setPage(1);
-  }, [purpose, city, locality, budget, propertyType, bhk, q, savedOnly]);
+  }, [
+    purpose,
+    city,
+    locality,
+    budget,
+    propertyType,
+    bhk,
+    q,
+    minPrice,
+    maxPrice,
+    status,
+    postedBy,
+    amenities,
+    savedOnly,
+  ]);
 
   // 1. Dynamic Filtering Logic
   const filteredProperties = useMemo(() => {
@@ -231,7 +266,7 @@ export const PropertyListingsClient = () => {
         }
       }
 
-      // Filter by Budget (priceValue is in Lakhs, e.g. 125 = 1.25 Cr)
+      // Filter by Budget Preset (priceValue is in Lakhs, e.g. 125 = 1.25 Cr)
       if (budget) {
         const val = item.priceValue || 0;
         if (budget === "under-30l" && val > 30) return false;
@@ -241,6 +276,39 @@ export const PropertyListingsClient = () => {
         if (budget === "1-1.5cr" && (val < 100 || val > 150)) return false;
         if (budget === "1.5-3cr" && (val < 150 || val > 300)) return false;
         if (budget === "above-3cr" && val < 300) return false;
+      }
+
+      // Filter by Min/Max Price from slider (supports INR rupees or Lakhs)
+      if (minPrice) {
+        const minLakhs = Number(minPrice) > 10000 ? Number(minPrice) / 100000 : Number(minPrice);
+        if (!isNaN(minLakhs) && (item.priceValue || 0) < minLakhs) return false;
+      }
+      if (maxPrice) {
+        const maxLakhs = Number(maxPrice) > 10000 ? Number(maxPrice) / 100000 : Number(maxPrice);
+        if (!isNaN(maxLakhs) && (item.priceValue || 0) > maxLakhs) return false;
+      }
+
+      // Filter by Construction Status (e.g. "Ready to move", "Under Construction", "New Launch")
+      if (status) {
+        const statusList = status.toLowerCase().split(",").map((s) => s.trim());
+        const itemInfoChips = item.infoChips?.map((c) => `${c.value} ${c.label}`.toLowerCase()).join(" ") || "";
+        const itemVerified = (item.verifiedText || "").toLowerCase();
+        const itemDesc = (item.description || "").toLowerCase();
+
+        const matchesStatus = statusList.some((s) => {
+          if (s.includes("ready")) {
+            return itemInfoChips.includes("ready") || itemDesc.includes("ready to move");
+          }
+          if (s.includes("under") || s.includes("construction")) {
+            return itemInfoChips.includes("under construction") || itemDesc.includes("under construction");
+          }
+          if (s.includes("launch")) {
+            return itemVerified.includes("launch") || itemDesc.includes("launch");
+          }
+          return false;
+        });
+
+        if (!matchesStatus) return false;
       }
 
       // Filter by Property Type
@@ -350,7 +418,7 @@ export const PropertyListingsClient = () => {
 
       return true;
     });
-  }, [purpose, city, locality, budget, propertyType, bhk, q, savedOnly, savedIds]);
+  }, [purpose, city, locality, budget, minPrice, maxPrice, status, propertyType, bhk, q, savedOnly, savedIds]);
 
   // 2. Sorting Logic
   const sortedProperties = useMemo(() => {
@@ -411,6 +479,15 @@ export const PropertyListingsClient = () => {
       else if (budget === "above-3cr") params.minPrice = 30000000;
     }
 
+    if (minPrice) {
+      const num = Number(minPrice);
+      params.minPrice = num > 10000 ? num : num * 100000;
+    }
+    if (maxPrice) {
+      const num = Number(maxPrice);
+      params.maxPrice = num > 10000 ? num : num * 100000;
+    }
+
     if (bhk) {
       const allowedDigits = bhk.split(",").map((s) => s.replace(/\D/g, "")).filter(Boolean);
       if (allowedDigits.length === 1 && ["1", "2", "3", "4", "5", "6", "7", "8"].includes(allowedDigits[0])) {
@@ -422,7 +499,7 @@ export const PropertyListingsClient = () => {
     }
 
     return params;
-  }, [page, q, city, locality, propertyType, purpose, selectedSort, budget, bhk]);
+  }, [page, q, city, locality, propertyType, purpose, selectedSort, budget, bhk, minPrice, maxPrice]);
 
   const { data: apiData, isLoading: isApiLoading } = useSearchPropertiesQuery(searchApiParams);
 
@@ -461,6 +538,8 @@ export const PropertyListingsClient = () => {
   const clearFilter = (key: string) => {
     const nextParams = new URLSearchParams(searchParams.toString());
     nextParams.delete(key);
+    if (key === "minPrice") nextParams.delete("maxPrice");
+    if (key === "maxPrice") nextParams.delete("minPrice");
     router.push(`/properties?${nextParams.toString()}`);
   };
 
@@ -477,12 +556,20 @@ export const PropertyListingsClient = () => {
     if (propertyType)
       pills.push({ key: "type", label: `Type: ${formatName(propertyType)}` });
     if (budget) pills.push({ key: "budget", label: `Budget: ${budget}` });
+    if (minPrice || maxPrice) {
+      const minTxt = minPrice ? (Number(minPrice) >= 10000000 ? `${(Number(minPrice) / 10000000).toFixed(1)} Cr` : `${(Number(minPrice) / 100000).toFixed(0)} L`) : "0";
+      const maxTxt = maxPrice ? (Number(maxPrice) >= 10000000 ? `${(Number(maxPrice) / 10000000).toFixed(1)} Cr` : `${(Number(maxPrice) / 100000).toFixed(0)} L`) : "Max";
+      pills.push({ key: "minPrice", label: `Budget: ₹${minTxt} - ₹${maxTxt}` });
+    }
     if (purpose)
       pills.push({ key: "purpose", label: `Purpose: ${formatName(purpose)}` });
     if (bhk) pills.push({ key: "bhk", label: `${bhk} BHK` });
+    if (status) pills.push({ key: "status", label: `Status: ${status}` });
+    if (postedBy) pills.push({ key: "postedBy", label: `By: ${postedBy}` });
+    if (amenities) pills.push({ key: "amenities", label: `Amenities: ${amenities}` });
     if (q) pills.push({ key: "q", label: `Keyword: "${q}"` });
     return pills;
-  }, [city, locality, propertyType, budget, purpose, bhk, q]);
+  }, [city, locality, propertyType, budget, minPrice, maxPrice, status, postedBy, amenities, purpose, bhk, q]);
 
   // Dynamic Page Title
   const dynamicTitle = useMemo(() => {
@@ -586,33 +673,47 @@ export const PropertyListingsClient = () => {
                   </div>
                 </div>
 
-                {/* Grid / List View Toggle */}
-                <div className="flex items-center gap-1 rounded-xl border border-gray-200 bg-white p-1 shadow-2xs">
-                  <button
-                    type="button"
-                    aria-label="Grid view"
-                    onClick={() => handleViewChange("grid")}
-                    className={cn(
-                      "flex h-8 w-8 items-center justify-center rounded-lg transition-colors cursor-pointer",
-                      view === "grid"
-                        ? "bg-[#1865F2] text-white shadow-xs"
-                        : "text-gray-500 hover:bg-gray-100 hover:text-[#1865F2]"
-                    )}
-                  >
-                    <Blocks className="h-4 w-4" />
-                  </button>
+                {/* Grid / List View Toggle (2 separate rounded buttons) */}
+                <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     aria-label="List view"
                     onClick={() => handleViewChange("list")}
                     className={cn(
-                      "flex h-8 w-8 items-center justify-center rounded-lg transition-colors cursor-pointer",
+                      "flex h-11 w-11 items-center justify-center rounded-[12px] transition-all cursor-pointer border bg-white shadow-2xs",
                       view === "list"
-                        ? "bg-[#1865F2] text-white shadow-xs"
-                        : "text-gray-500 hover:bg-gray-100 hover:text-[#1865F2]"
+                        ? "border-[#1865F2] text-[#1865F2]"
+                        : "border-slate-300 text-[#475569] hover:border-slate-400"
                     )}
+                    title="List View"
                   >
-                    <Logs className="h-4 w-4" />
+                    <svg width="22" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="2" cy="2" r="1.75" fill="currentColor" />
+                      <circle cx="2" cy="7.5" r="1.75" fill="currentColor" />
+                      <circle cx="2" cy="13" r="1.75" fill="currentColor" />
+                      <rect x="7" y="0.75" width="17" height="2.5" rx="1.25" fill="currentColor" />
+                      <rect x="7" y="6.25" width="17" height="2.5" rx="1.25" fill="currentColor" />
+                      <rect x="7" y="11.75" width="17" height="2.5" rx="1.25" fill="currentColor" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Grid view"
+                    onClick={() => handleViewChange("grid")}
+                    className={cn(
+                      "flex h-11 w-11 items-center justify-center rounded-[12px] transition-all cursor-pointer border bg-white shadow-2xs",
+                      view === "grid"
+                        ? "border-[#1865F2] text-[#1865F2]"
+                        : "border-slate-300 text-[#475569] hover:border-slate-400"
+                    )}
+                    title="Grid View"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1.5" y="1.5" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                      <rect x="12" y="1.5" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                      <rect x="1.5" y="12" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                      <rect x="12" y="12" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -767,67 +868,108 @@ export const PropertyListingsClient = () => {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Properties", href: "/properties" },
-              ...(city ? [{ label: formatName(city) }] : [{ label: "Noida" }]),
+              { label: city ? `Property in ${formatName(city)}` : "Property in Noida" },
             ]}
           />
 
           {/* Subheader Toolbar */}
           <div className="my-5 flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-[#0B132B]">
+              <h2 className="text-2xl sm:text-[28px] font-bold tracking-tight text-[#0B132B]">
                 {dynamicTitle}
               </h2>
-              <p className="mt-0.5 text-xs text-[#64748B]">
+              <p className="mt-0.5 text-xs sm:text-[13px] text-[#64748B] font-normal">
                 {totalItems.toLocaleString("en-IN")} + properties available
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              {/* Sorting Dropdown */}
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500 font-medium hidden sm:inline-block">
-                  Sort by:
-                </span>
-                <div className="w-40 sm:w-44">
-                  <Select<OptionType, false>
-                    options={sortOptions}
-                    styles={listingSelectStyles}
-                    placeholder="Sort by"
-                    isSearchable={false}
-                    value={selectedSort}
-                    onChange={(opt) => opt && setSelectedSort(opt)}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              {/* Short by pill dropdown */}
+              <div ref={sortRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setSortDropdownOpen((prev) => !prev)}
+                  className="flex h-11 items-center gap-2 rounded-full border border-slate-200/90 bg-white px-5 text-[14px] shadow-2xs hover:border-slate-300 transition-colors cursor-pointer"
+                  aria-label="Sort properties"
+                >
+                  <span className="text-[#64748B] font-normal">Short by:</span>
+                  <span className="font-bold text-[#0B132B]">{selectedSort.label}</span>
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 text-[#0B132B] stroke-[2.5] transition-transform duration-200 ml-1",
+                      sortDropdownOpen && "rotate-180"
+                    )}
                   />
-                </div>
+                </button>
+
+                {sortDropdownOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-48 rounded-2xl bg-white shadow-xl border border-slate-100 z-50 p-1.5 overflow-hidden">
+                    {sortOptions.map((opt) => (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => {
+                          setSelectedSort(opt);
+                          setSortDropdownOpen(false);
+                        }}
+                        className={cn(
+                          "w-full text-left px-3.5 py-2 text-xs sm:text-[13px] rounded-xl font-medium transition-colors cursor-pointer flex items-center justify-between",
+                          selectedSort.value === opt.value
+                            ? "bg-[#1865F2] text-white"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-[#1865F2]"
+                        )}
+                      >
+                        <span>{opt.label}</span>
+                        {selectedSort.value === opt.value && (
+                          <span className="text-white text-xs">✓</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Grid vs List View Toggle */}
-              <div className="flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white p-1 shadow-2xs">
+              {/* Grid vs List View Toggle (2 separate rounded buttons matching Image 2 exactly) */}
+              <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   aria-label="List view"
                   onClick={() => handleViewChange("list")}
                   className={cn(
-                    "flex h-8 w-8 items-center justify-center rounded-lg transition-colors cursor-pointer",
+                    "flex h-11 w-11 items-center justify-center rounded-[12px] transition-all cursor-pointer border bg-white shadow-2xs",
                     view === "list"
-                      ? "bg-[#1865F2] text-white shadow-xs"
-                      : "text-gray-500 hover:bg-gray-100 hover:text-[#1865F2]"
+                      ? "border-[#1865F2] text-[#1865F2]"
+                      : "border-slate-300 text-[#475569] hover:border-slate-400"
                   )}
+                  title="List View"
                 >
-                  <Logs className="h-4 w-4" />
+                  <svg width="22" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="2" cy="2" r="1.75" fill="currentColor" />
+                    <circle cx="2" cy="7.5" r="1.75" fill="currentColor" />
+                    <circle cx="2" cy="13" r="1.75" fill="currentColor" />
+                    <rect x="7" y="0.75" width="17" height="2.5" rx="1.25" fill="currentColor" />
+                    <rect x="7" y="6.25" width="17" height="2.5" rx="1.25" fill="currentColor" />
+                    <rect x="7" y="11.75" width="17" height="2.5" rx="1.25" fill="currentColor" />
+                  </svg>
                 </button>
                 <button
                   type="button"
                   aria-label="Grid view"
                   onClick={() => handleViewChange("grid")}
                   className={cn(
-                    "flex h-8 w-8 items-center justify-center rounded-lg transition-colors cursor-pointer",
+                    "flex h-11 w-11 items-center justify-center rounded-[12px] transition-all cursor-pointer border bg-white shadow-2xs",
                     view === "grid"
-                      ? "bg-[#1865F2] text-white shadow-xs"
-                      : "text-gray-500 hover:bg-gray-100 hover:text-[#1865F2]"
+                      ? "border-[#1865F2] text-[#1865F2]"
+                      : "border-slate-300 text-[#475569] hover:border-slate-400"
                   )}
+                  title="Grid View"
                 >
-                  <Blocks className="h-4 w-4" />
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1.5" y="1.5" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                    <rect x="12" y="1.5" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                    <rect x="1.5" y="12" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                    <rect x="12" y="12" width="6.5" height="6.5" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
                 </button>
               </div>
 
@@ -837,13 +979,21 @@ export const PropertyListingsClient = () => {
                 aria-label="Toggle map view"
                 onClick={() => setShowMap((prev) => !prev)}
                 className={cn(
-                  "flex h-8 w-8 items-center justify-center rounded-full transition-all cursor-pointer shadow-md",
+                  "flex h-11 w-11 items-center justify-center rounded-full bg-white transition-all cursor-pointer shadow-2xs border ml-1 sm:ml-1.5",
                   showMap
-                    ? "bg-[#0B132B] text-white ring-2 ring-blue-500"
-                    : "bg-[#1865F2] text-white shadow-blue-500/25 hover:scale-105 hover:bg-blue-700"
+                    ? "border-[#1865F2] ring-2 ring-blue-100"
+                    : "border-slate-300 hover:border-slate-400"
                 )}
+                title="Toggle Map View"
               >
-                <MapPinned className="h-4 w-4" />
+                <Image
+                  src="/icon/map_view_icon.png"
+                  alt="Map View"
+                  width={26}
+                  height={26}
+                  className="h-[25px] w-[25px] object-contain transition-transform hover:scale-105"
+                  unoptimized
+                />
               </button>
             </div>
           </div>
@@ -964,7 +1114,7 @@ export const PropertyListingsClient = () => {
                   {/* Left Column: Full Property Sections Flow */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col gap-6">
-                      {/* Top 2 Properties */}
+                      {/* Top 2 Properties (Matches User Figma Screenshot 1:1) */}
                       <div className="flex flex-col gap-5">
                         {visible.slice(0, 2).map((property, idx) => (
                           <PropertyCard
@@ -1045,10 +1195,10 @@ export const PropertyListingsClient = () => {
                       {/* Property Experts Section */}
                       <ListingsPropertyExperts />
 
-                      {/* Properties 11, 12 & 13 */}
+                      {/* Properties 11+ */}
                       {visible.length > 10 && (
                         <div className="flex flex-col gap-5">
-                          {visible.slice(10, 13).map((property, idx) => (
+                          {visible.slice(10).map((property, idx) => (
                             <PropertyCard
                               key={`${property.id || property.title}-${idx + 10}`}
                               {...property}

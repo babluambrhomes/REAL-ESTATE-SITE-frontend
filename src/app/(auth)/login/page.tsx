@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -33,9 +33,16 @@ export default function LoginForm() {
   const dispatch = useAppDispatch();
   const loginMutation = useLoginMutation();
 
+  const isAuthenticated = useAppSelector((s) => s.auth.isAuthenticated);
   const requiresOtp = useAppSelector((s) => s.auth.requiresOtp);
   const otpIdentifier = useAppSelector((s) => s.auth.otpIdentifier);
   const otpPurpose = useAppSelector((s) => s.auth.otpPurpose);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/");
+    }
+  }, [isAuthenticated, router]);
 
   const [mode, setMode] = useState<LoginMode>("phone");
   const [showPassword, setShowPassword] = useState(false);

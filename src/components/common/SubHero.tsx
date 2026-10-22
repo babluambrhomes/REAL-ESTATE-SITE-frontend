@@ -6,14 +6,15 @@ export const SubHero = ({
   image = "/banner/listing_banner.png",
 }: SubHeroProps) => {
   return (
-    <section className="relative flex min-h-[320px] w-full items-center overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-[#1865F2]">
       <Image
         src={image}
         alt={title}
-        fill
+        width={1920}
+        height={480}
         priority
         sizes="100vw"
-        className="object-cover"
+        className="w-full h-auto min-h-[220px] sm:min-h-0 block object-cover sm:object-contain"
       />
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -34,9 +34,16 @@ export default function RegisterForm() {
   const router = useRouter();
   const registerMutation = useRegisterMutation();
 
+  const isAuthenticated = useAppSelector((s) => s.auth.isAuthenticated);
   const requiresOtp = useAppSelector((s) => s.auth.requiresOtp);
   const otpIdentifier = useAppSelector((s) => s.auth.otpIdentifier);
   const otpPurpose = useAppSelector((s) => s.auth.otpPurpose);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/");
+    }
+  }, [isAuthenticated, router]);
 
   const [mode, setMode] = useState<RegisterMode>("phone");
   const [showOptionalEmail, setShowOptionalEmail] = useState(false);

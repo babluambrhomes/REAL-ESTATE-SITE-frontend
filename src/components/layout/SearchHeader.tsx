@@ -147,6 +147,18 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
             params.set("type", cleanType);
         }
 
+        if (filters.constructionStatus.length > 0) {
+            params.set("status", filters.constructionStatus.join(","));
+        }
+
+        if (filters.postedBy.length > 0) {
+            params.set("postedBy", filters.postedBy.join(","));
+        }
+
+        if (filters.amenities.length > 0) {
+            params.set("amenities", filters.amenities.join(","));
+        }
+
         if (filters.budgetMin > BUDGET_MIN) {
             params.set("minPrice", String(filters.budgetMin));
         }
@@ -157,6 +169,35 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
         setBudgetOpen(false);
         router.push(`/properties?${params.toString()}`);
     }, [searchQuery, selectedCity, filters, router]);
+
+    // 2-Way Sync: Sync filters state from current URL query parameters on load
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const searchParams = new URLSearchParams(window.location.search);
+        const qParam = searchParams.get("q") || "";
+        const bhkParam = searchParams.get("bhk") || "";
+        const localityParam = searchParams.get("locality") || "";
+        const statusParam = searchParams.get("status") || "";
+        const postedByParam = searchParams.get("postedBy") || "";
+        const amenitiesParam = searchParams.get("amenities") || "";
+        const minPriceParam = searchParams.get("minPrice");
+        const maxPriceParam = searchParams.get("maxPrice");
+
+        if (qParam) setSearchQuery(qParam);
+
+        if (bhkParam || localityParam || statusParam || postedByParam || amenitiesParam || minPriceParam || maxPriceParam) {
+            setFilters((prev) => ({
+                ...prev,
+                locations: localityParam ? [localityParam] : prev.locations,
+                bhk: bhkParam ? BHK.filter((b) => bhkParam.split(",").some((num) => b.includes(num))) : prev.bhk,
+                constructionStatus: statusParam ? statusParam.split(",") : prev.constructionStatus,
+                postedBy: postedByParam ? postedByParam.split(",") : prev.postedBy,
+                amenities: amenitiesParam ? amenitiesParam.split(",") : prev.amenities,
+                budgetMin: minPriceParam ? Number(minPriceParam) : prev.budgetMin,
+                budgetMax: maxPriceParam ? Number(maxPriceParam) : prev.budgetMax,
+            }));
+        }
+    }, [router]);
 
 
     useEffect(() => {
@@ -207,11 +248,22 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
         </div>
     )
 
+    const [isScrolled, setIsScrolled] = useState(false);
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <>
             <header className={cn(
                 "fixed left-0 right-0 z-50 px-3 sm:px-10 transition-all duration-300 pointer-events-none",
-                hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-2 sm:top-3",
+                isScrolled
+                    ? "top-0 pt-2 pb-1 bg-gradient-to-b from-white/95 via-white/80 to-transparent backdrop-blur-[3px]"
+                    : hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-2 sm:top-3",
                 className
             )}>
                 <div className="w-full max-w-[1380px] mx-auto bg-white py-2 px-3 sm:px-5 rounded-full shadow-2xl justify-between flex gap-2 sm:gap-4 items-center pointer-events-auto">
@@ -454,21 +506,26 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                             title="Menu"
                             aria-label="Menu"
                         >
-                            {/* 3 lines: top full, middle shorter, bottom shortest */}
-                            <svg width="20" height="13" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1.5H19" stroke="#1865F2" strokeWidth="2.2" strokeLinecap="round" />
-                                <path d="M1 6.5H13.5" stroke="#1865F2" strokeWidth="2.2" strokeLinecap="round" />
-                                <path d="M1 11.5H8" stroke="#1865F2" strokeWidth="2.2" strokeLinecap="round" />
+                            {/* 3 parallel equal lines matching Figma */}
+                            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5H17" stroke="#1865F2" strokeWidth="2.2" strokeLinecap="round" />
+                                <path d="M1 6.5H17" stroke="#1865F2" strokeWidth="2.2" strokeLinecap="round" />
+                                <path d="M1 11.5H17" stroke="#1865F2" strokeWidth="2.2" strokeLinecap="round" />
                             </svg>
                         </button>
                         {logsOpen && (
-                            <div className="absolute top-full -right-6 mt-2 w-44 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 py-2 overflow-hidden">
-                                {MENU_ITEMS.map((item) => (
+                            <div className="absolute top-[calc(100%+12px)] -right-3 w-40 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.18)] border border-slate-100 z-50 overflow-hidden divide-y divide-slate-100">
+                                {MENU_ITEMS.map((item, idx) => (
                                     <Link
                                         key={item.label}
                                         href={item.href}
                                         onClick={() => setLogsOpen(false)}
-                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors font-light"
+                                        className={cn(
+                                            "block py-2.5 px-3 text-xs sm:text-[13px] text-center transition-colors font-medium",
+                                            idx === 0
+                                                ? "bg-[#1865F2] text-white hover:bg-blue-700"
+                                                : "text-slate-700 hover:bg-slate-50 hover:text-[#1865F2] font-normal"
+                                        )}
                                     >
                                         {item.label}
                                     </Link>

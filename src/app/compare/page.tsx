@@ -30,8 +30,8 @@ export default function ComparePage() {
       chips: ["3 BHK Apartments"],
       infoChips: [
         { value: "3,200", label: "Sq. Ft", Icon: "/icon/location.png" },
-        { value: "60%", label: "Amenities", Icon: "/icon/Frame.svg" },
-        { value: "Ready", label: "To Move", Icon: "/icon/Group.svg" },
+        { value: "60%", label: "Amenities", Icon: "/icon/Frame.png" },
+        { value: "Ready", label: "To Move", Icon: "/icon/Group.png" },
       ],
       title: "The Terraces at Max Estate 361",
       phone: "+91 98765 43210",
@@ -48,8 +48,8 @@ export default function ComparePage() {
       chips: ["4 BHK Apartments"],
       infoChips: [
         { value: "4,500", label: "Sq. Ft", Icon: "/icon/location.png" },
-        { value: "60%", label: "Amenities", Icon: "/icon/Frame.svg" },
-        { value: "Ready", label: "To Move", Icon: "/icon/Group.svg" },
+        { value: "60%", label: "Amenities", Icon: "/icon/Frame.png" },
+        { value: "Ready", label: "To Move", Icon: "/icon/Group.png" },
       ],
       title: "ATS Knightsbridge",
       phone: "+91 98765 43210",
@@ -88,8 +88,8 @@ export default function ComparePage() {
       chips: [pair.prop1.bhk],
       infoChips: [
         { value: pair.prop1.area, label: "Sq. Ft", Icon: "/icon/location.png" },
-        { value: "60%", label: "Amenities", Icon: "/icon/Frame.svg" },
-        { value: pair.prop1.status, label: "Status", Icon: "/icon/Group.svg" },
+        { value: "60%", label: "Amenities", Icon: "/icon/Frame.png" },
+        { value: pair.prop1.status, label: "Status", Icon: "/icon/Group.png" },
       ],
       title: pair.prop1.title,
       phone: "+91 98765 43210",
@@ -106,8 +106,8 @@ export default function ComparePage() {
       chips: [pair.prop2.bhk],
       infoChips: [
         { value: pair.prop2.area, label: "Sq. Ft", Icon: "/icon/location.png" },
-        { value: "60%", label: "Amenities", Icon: "/icon/Frame.svg" },
-        { value: pair.prop2.status, label: "Status", Icon: "/icon/Group.svg" },
+        { value: "60%", label: "Amenities", Icon: "/icon/Frame.png" },
+        { value: pair.prop2.status, label: "Status", Icon: "/icon/Group.png" },
       ],
       title: pair.prop2.title,
       phone: "+91 98765 43210",

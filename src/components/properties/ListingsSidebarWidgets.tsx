@@ -186,43 +186,41 @@ export const ListingsSidebarWidgets = () => {
         </button>
       </div>
 
-      {/* 3. Today's Offers Widget with Header Bar */}
-      <div className="rounded-[32px] border border-slate-200/90 bg-white overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-        <div className="bg-[#F4F7FB] px-5 py-3 border-b border-slate-100 flex items-center gap-2">
+      {/* 3. Today's Offers Widget Matching Figma 1:1 */}
+      <div className="rounded-[32px] border border-slate-200/90 bg-white p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+        <div className="flex items-center gap-2 mb-3.5">
           <span className="text-base leading-none">🎁</span>
-          <h4 className="text-[14.5px] font-bold text-[#0B132B]">Today&apos;s Offers</h4>
+          <h4 className="text-[15px] font-bold text-[#0B132B]">Today&apos;s Offers</h4>
         </div>
 
-        <div className="p-5 pt-4">
-          <div className="space-y-2.5">
-            {[
-              "Free Site Visit",
-              "Free Legal Assistance",
-              "No Brokerage",
-              "Bank Loan Support",
-              "Limited Time Builder Offer",
-              "Free Vastu Consultation",
-              "Free Interior Design Consultation",
-            ].map((offer, idx) => (
-              <div key={idx} className="flex items-center gap-2.5">
-                <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#00BA7A] text-white">
-                  <svg className="h-2.5 w-2.5 stroke-[3.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <span className="text-[12px] font-medium text-[#1E293B]">{offer}</span>
+        <div className="space-y-3">
+          {[
+            "Free Site Visit",
+            "Free Legal Assistance",
+            "No Brokerage",
+            "Bank Loan Support",
+            "Limited Time Builder Offer",
+            "Free Vastu Consultation",
+            "Free Interior Design Consultation",
+          ].map((offer, idx) => (
+            <div key={idx} className="flex items-center gap-2.5">
+              <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#00BA7A] text-white">
+                <svg className="h-2.5 w-2.5 stroke-[3.5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
               </div>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#FF385C] bg-white hover:bg-rose-50/60 py-2.5 text-xs font-semibold text-[#FF385C] transition-colors cursor-pointer"
-          >
-            <Gift className="h-3.5 w-3.5 text-[#FF385C]" />
-            <span>Claim Offer Now</span>
-          </button>
+              <span className="text-[12px] font-medium text-[#1E293B]">{offer}</span>
+            </div>
+          ))}
         </div>
+
+        <button
+          type="button"
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[#FF385C] bg-white hover:bg-rose-50/60 py-2.5 text-xs font-semibold text-[#FF385C] transition-colors cursor-pointer"
+        >
+          <Gift className="h-3.5 w-3.5 text-[#FF385C]" />
+          <span>Claim Offer Now</span>
+        </button>
       </div>
 
       {/* 4. EMI Calculator Widget */}

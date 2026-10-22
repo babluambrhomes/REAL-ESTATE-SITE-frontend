@@ -68,13 +68,13 @@ export const GroupDealBanner = () => {
     <>
       <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-8 sm:py-12">
         {/* ========================================================================= */}
-        {/* DESKTOP & WIDE SCREEN (Live High-Fidelity UI with Clean Master Background) */}
+        {/* DESKTOP & WIDE SCREEN (1:1 Exact Figma Match with High-Res Clean Asset) */}
         {/* ========================================================================= */}
-        <div className="hidden lg:block relative overflow-hidden rounded-[28px] xl:rounded-[36px] shadow-[0_20px_50px_rgba(0,102,255,0.22)] border border-blue-400/30 transition-transform duration-300 hover:scale-[1.002]">
-          {/* Main Container with Clean Master Background */}
-          <div className="relative w-full aspect-[1748/582] min-h-[440px]">
+        <div className="hidden lg:block relative overflow-hidden rounded-[20px] xl:rounded-[24px] shadow-[0_16px_40px_rgba(0,102,255,0.2)] border border-blue-400/30">
+          {/* Main Container with High-Res Figma Exported Background */}
+          <div className="relative w-full aspect-[1024/340] min-h-[380px] xl:min-h-[400px]">
             <Image
-              src="/banner/exclusive_group_deal_clean_bg.png"
+              src="/images/banner/group_deal_bg.png"
               alt="Exclusive Group Deal For Only 20 Units - Roofin"
               fill
               sizes="(max-width: 1440px) 100vw, 1440px"
@@ -83,163 +83,172 @@ export const GroupDealBanner = () => {
               unoptimized
             />
 
-            {/* Live Interactive UI Overlay */}
+            {/* Live Interactive UI Overlay (Exact Figma Hierarchy) */}
             <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 xl:p-8 pointer-events-none">
-              {/* Top Row: Roofin Logo & Exclusive Group Deal Badge */}
-              <div className="flex items-center gap-4 pointer-events-auto">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[30px] xl:text-[34px] font-black tracking-tight text-white font-rounded-mplus drop-shadow-sm">
+              {/* Row 1: Roofin Logo, Divider & Exclusive Group Deal Badge */}
+              <div className="flex items-center gap-3 pointer-events-auto">
+                <div className="flex items-center">
+                  <span className="text-[28px] xl:text-[32px] font-black tracking-tight text-white font-sans drop-shadow-xs">
                     Roofin
                   </span>
-                  <span className="h-2 w-2 rounded-xs bg-[#FFCC00] -mt-4 shadow-xs" />
+                  <span className="h-2.5 w-2.5 rounded-xs bg-[#FFCC00] -mt-3.5 ml-0.5 shadow-xs" />
                 </div>
 
+                {/* Vertical Divider */}
+                <div className="h-6 w-[1.5px] bg-white/40 mx-1" />
+
+                {/* Badge */}
                 <Link
                   href="/group-deal"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/60 bg-white/15 px-3 py-1.5 backdrop-blur-md shadow-sm hover:bg-white/25 transition-all"
+                  className="inline-flex items-center gap-2 rounded-[9px] border border-white/70 bg-white/15 px-3 py-1.5 backdrop-blur-md shadow-xs hover:bg-white/25 transition-all"
                 >
-                  <div className="flex h-5 w-5 items-center justify-center rounded-md bg-white/20 text-white">
-                    <Users className="h-3.5 w-3.5" />
-                  </div>
+                  <Users className="h-4 w-4 text-white shrink-0" />
                   <div className="flex flex-col text-left leading-none">
-                    <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-white">
+                    <span className="text-[9px] font-extrabold uppercase tracking-wider text-white">
                       EXCLUSIVE
                     </span>
-                    <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-white mt-0.5">
+                    <span className="text-[9px] font-extrabold uppercase tracking-wider text-[#FFCC00] mt-0.5">
                       GROUP DEAL
                     </span>
                   </div>
                 </Link>
               </div>
 
-              {/* Middle Row: Headline & Property Card */}
-              <div className="flex items-center gap-6 xl:gap-8 pointer-events-auto">
+              {/* Row 2: Headline & Aspire Silicon City Card */}
+              <div className="flex items-center gap-5 xl:gap-7 pointer-events-auto">
                 {/* Headline */}
-                <div className="max-w-[300px] xl:max-w-[330px]">
-                  <h2 className="text-[26px] xl:text-[32px] font-black leading-[1.12] tracking-tight text-white drop-shadow-sm">
+                <div>
+                  <h2 className="text-[24px] xl:text-[28px] font-black leading-[1.15] tracking-tight text-white drop-shadow-xs">
                     Exclusive Group Deal <br />
-                    For Only{" "}
-                    <span className="text-[#FFCC00] drop-shadow-md">20 Units</span>
+                    For Only <span className="text-[#FFCC00]">20 Units</span>
                   </h2>
-                  <div className="mt-2 h-1.5 w-16 rounded-full bg-[#FFCC00]" />
+                  <div className="mt-2 h-[3.5px] w-14 rounded-full bg-[#FFCC00]" />
                 </div>
 
                 {/* Aspire Silicon City Spec Card */}
                 <Link
                   href="/group-deal"
-                  className="rounded-2xl bg-white/95 backdrop-blur-md p-3 xl:p-3.5 text-slate-900 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white hover:scale-[1.02] hover:shadow-[0_12px_36px_rgba(0,0,0,0.18)] transition-all max-w-[260px] xl:max-w-[280px]"
+                  className="rounded-[14px] bg-white p-2.5 xl:p-3 text-slate-900 shadow-md border border-white/90 hover:scale-[1.02] transition-transform w-[240px] xl:w-[255px] shrink-0"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-[#0066FF] shrink-0">
-                      <MapPin className="h-3.5 w-3.5 fill-[#0066FF]" />
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0066FF] shrink-0">
+                      <MapPin className="h-4 w-4 fill-[#0066FF]" />
                     </div>
                     <div>
-                      <h3 className="text-[12.5px] xl:text-[13px] font-bold text-slate-900 leading-tight">
+                      <h3 className="text-[12px] xl:text-[13px] font-bold text-slate-900 leading-tight">
                         Aspire Silicon City,
                       </h3>
-                      <p className="text-[10.5px] xl:text-[11px] font-medium text-slate-500">
+                      <p className="text-[10px] xl:text-[10.5px] font-medium text-slate-500">
                         Sector 76, Noida
                       </p>
                     </div>
                   </div>
 
-                  <div className="my-2 border-b border-dashed border-[#0066FF]/25" />
+                  <div className="my-2 border-b border-dotted border-[#0066FF]/35" />
 
                   <div className="grid grid-cols-3 gap-1 text-center">
                     <div className="flex flex-col items-center justify-center border-r border-slate-100 pr-1">
                       <Bed className="h-3.5 w-3.5 text-[#0066FF]" />
-                      <span className="mt-0.5 text-[9.5px] font-bold text-slate-800 leading-tight">
+                      <span className="mt-0.5 text-[9px] font-bold text-slate-800 leading-tight">
                         4BHK + S
                       </span>
-                      <span className="text-[8px] text-slate-500">[Servant]</span>
+                      <span className="text-[7.5px] text-slate-500">(Servant)</span>
                     </div>
 
                     <div className="flex flex-col items-center justify-center border-r border-slate-100 px-1">
                       <Maximize2 className="h-3.5 w-3.5 text-[#0066FF]" />
-                      <span className="mt-0.5 text-[9.5px] font-bold text-slate-800 leading-tight">
+                      <span className="mt-0.5 text-[9px] font-bold text-slate-800 leading-tight">
                         3342
                       </span>
-                      <span className="text-[8px] text-slate-500">sq.ft.</span>
+                      <span className="text-[7.5px] text-slate-500">sq.ft.</span>
                     </div>
 
                     <div className="flex flex-col items-center justify-center pl-1">
                       <Star className="h-3.5 w-3.5 text-[#0066FF] fill-[#0066FF]" />
-                      <span className="mt-0.5 text-[9.5px] font-bold text-slate-800 leading-tight">
+                      <span className="mt-0.5 text-[9px] font-bold text-slate-800 leading-tight">
                         Premium
                       </span>
-                      <span className="text-[8px] text-slate-500">Residences</span>
+                      <span className="text-[7.5px] text-slate-500">Residences</span>
                     </div>
                   </div>
                 </Link>
               </div>
 
-              {/* Benefits Pill Bar */}
-              <div className="pointer-events-auto max-w-[530px] xl:max-w-[580px] rounded-2xl bg-white/95 backdrop-blur-md p-2 xl:p-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.1)] border border-white flex items-center gap-2.5">
-                <div className="flex-1 flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-[#0066FF] shrink-0">
-                    <Percent className="h-3 w-3 stroke-[2.5]" />
+              {/* Row 3: Benefits Pill Bar (Figma Exact) */}
+              <div className="pointer-events-auto rounded-[14px] xl:rounded-[16px] bg-white p-2 xl:p-2.5 shadow-md border border-white flex items-center gap-3 w-fit max-w-[500px] xl:max-w-[540px]">
+                {/* 1. Save 10-15 % */}
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0066FF] shrink-0 border border-blue-200">
+                    <Percent className="h-3.5 w-3.5 stroke-[2.5]" />
                   </div>
                   <div className="leading-tight">
                     <p className="text-[11px] xl:text-[11.5px] font-bold text-[#0066FF]">
                       Save 10-15 %
                     </p>
-                    <p className="text-[9px] xl:text-[9.5px] text-slate-600">
+                    <p className="text-[8.5px] xl:text-[9px] text-slate-600 font-medium whitespace-nowrap">
                       more than market prices
                     </p>
                   </div>
                 </div>
 
-                <div className="w-[1px] h-7 bg-slate-200" />
+                <div className="w-[1px] h-7 bg-slate-200 shrink-0" />
 
-                <div className="flex-1 flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-[#0066FF] shrink-0">
-                    <Handshake className="h-3 w-3 text-[#0066FF]" />
+                {/* 2. We negotiate directly */}
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0066FF] shrink-0 border border-blue-200">
+                    <Handshake className="h-3.5 w-3.5 text-[#0066FF]" />
                   </div>
                   <div className="leading-tight">
-                    <p className="text-[11px] xl:text-[11.5px] font-bold text-slate-800">
+                    <p className="text-[11px] xl:text-[11.5px] font-bold text-[#0066FF]">
                       We negotiate
                     </p>
-                    <p className="text-[9px] xl:text-[9.5px] text-slate-600">
+                    <p className="text-[8.5px] xl:text-[9px] text-slate-600 font-medium whitespace-nowrap">
                       directly with developers
                     </p>
                   </div>
                 </div>
 
-                <div className="w-[1px] h-7 bg-slate-200" />
+                <div className="w-[1px] h-7 bg-slate-200 shrink-0" />
 
-                <div className="flex-1 flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-[#0066FF] shrink-0">
-                    <Coins className="h-3 w-3 text-[#0066FF]" />
+                {/* 3. 100% broker commission */}
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[#0066FF] shrink-0 border border-blue-200">
+                    <Coins className="h-3.5 w-3.5 text-[#0066FF]" />
                   </div>
                   <div className="leading-tight">
-                    <p className="text-[11px] xl:text-[11.5px] font-bold text-slate-800">
+                    <p className="text-[11px] xl:text-[11.5px] font-bold text-[#0066FF]">
                       100%
                     </p>
-                    <p className="text-[9px] xl:text-[9.5px] text-slate-600">
-                      broker commission passed
+                    <p className="text-[8.5px] xl:text-[9px] text-slate-600 font-medium whitespace-nowrap">
+                      broker commission passed back
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Bottom Row: CTA Button & Validity */}
+              {/* Row 4: CTA Button with Crisp White Border & Validity */}
               <div className="flex items-center gap-4 pointer-events-auto">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(true)}
-                  className="group relative flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#FFB703] to-[#FB8500] px-5 xl:px-6 py-2.5 xl:py-3 text-[13.5px] xl:text-[14px] font-extrabold text-slate-950 shadow-[0_6px_24px_rgba(255,183,3,0.4)] hover:shadow-[0_8px_30px_rgba(255,183,3,0.55)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="group flex items-center gap-2 rounded-[10px] border-2 border-white bg-gradient-to-r from-[#FFB800] via-[#FFAE00] to-[#FF9500] px-5 py-2 xl:py-2.5 text-[12px] xl:text-[13px] font-black text-white shadow-[0_4px_16px_rgba(255,160,0,0.45)] hover:shadow-[0_6px_22px_rgba(255,160,0,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer uppercase tracking-wider"
                 >
-                  <span className="tracking-wide">I’M INTERESTED</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <span>I’M INTERESTED</span>
+                  <ArrowRight className="h-4 w-4 stroke-[2.5] transition-transform group-hover:translate-x-1" />
                 </button>
 
                 <div className="flex items-center gap-2 text-white">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-[8px] bg-white/20 border border-white/40 backdrop-blur-xs text-white">
                     <Calendar className="h-3.5 w-3.5 text-white" />
                   </div>
-                  <span className="text-[11.5px] xl:text-[12px] font-semibold tracking-wide drop-shadow-sm">
-                    Offer Valid For Limited Units Only.
-                  </span>
+                  <div className="flex flex-col text-left leading-tight">
+                    <span className="text-[10px] font-semibold text-white/90">
+                      Offer Valid For
+                    </span>
+                    <span className="text-[11px] font-bold text-[#FFCC00]">
+                      Limited Units Only .
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,7 +285,7 @@ export const GroupDealBanner = () => {
                   <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-white">
                     EXCLUSIVE
                   </span>
-                  <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-white mt-0.5">
+                  <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-[#FFCC00] mt-0.5">
                     GROUP DEAL
                   </span>
                 </div>
@@ -297,7 +306,7 @@ export const GroupDealBanner = () => {
             {/* Building Visual on Mobile */}
             <div className="relative w-full h-[180px] sm:h-[240px] rounded-2xl overflow-hidden shadow-md bg-sky-200/20">
               <Image
-                src="/banner/exclusive_group_deal_clean_bg.png"
+                src="/images/banner/group_deal_bg.png"
                 alt="Building towers"
                 fill
                 className="object-cover object-right"

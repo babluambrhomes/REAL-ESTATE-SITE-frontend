@@ -10,13 +10,15 @@ export default async function PropertiesPage(props: {
   const isSaved = searchParams?.saved === "true";
 
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <SearchHeader />
       {!isSaved && <SubHero title="Property Listing" />}
-      <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center text-slate-400">Loading properties...</div>}>
-        <PropertyListingsClient />
-      </Suspense>
-    </>
+      <div className="w-full bg-[linear-gradient(180deg,#EEF5FF_0%,#F6FAFF_160px,#FFFFFF_340px)] bg-no-repeat">
+        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center text-slate-400">Loading properties...</div>}>
+          <PropertyListingsClient />
+        </Suspense>
+      </div>
+    </div>
   ); 
 }
 
