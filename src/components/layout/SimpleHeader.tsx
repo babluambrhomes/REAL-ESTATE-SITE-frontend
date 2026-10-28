@@ -73,10 +73,17 @@ export const SimpleHeader = ({
           {!isCompare && (
             <>
               {/* Thin vertical divider */}
-              <div className="h-6 w-px bg-slate-200" />
+              <Image
+                src="/banner/Line 82.svg"
+                alt="Divider"
+                width={1}
+                height={37}
+                className="h-[37px] w-[1px] shrink-0 select-none self-center"
+                unoptimized
+              />
 
               {/* Location Selector Pill */}
-              <div className="rounded-[8px] border border-[#bfdbfe] bg-white hover:border-[#1d64ec] transition-colors shadow-2xs shrink-0">
+              <div className="rounded-[8px] border border-[#2563EB] bg-white hover:border-[#2563EB] transition-colors shadow-2xs shrink-0">
                 <HeaderSelect />
               </div>
             </>
@@ -87,11 +94,12 @@ export const SimpleHeader = ({
         <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3 ml-auto shrink-0">
           {!isCompare && (
             <>
-              {/* Explore Dropdown */}
+              {/* Explore, Contact Us, Roofin Pro Nav Group with refined spacing */}
+              {/* Previous links group:
               <div ref={exploreRef} className="relative hidden md:block shrink-0">
                 <button
                   type="button"
-                  className="flex items-center gap-1 text-[#2563EB] hover:text-blue-700 select-none cursor-pointer text-[15px] sm:text-[16px] font-normal transition-colors whitespace-nowrap"
+                  className="flex items-center gap-1 text-[#2563EB] hover:text-blue-700 select-none cursor-pointer text-[14px] sm:text-[15px] font-normal transition-colors whitespace-nowrap"
                   onClick={() => setExploreOpen((prev) => !prev)}
                 >
                   <span>Explore</span>
@@ -101,40 +109,86 @@ export const SimpleHeader = ({
                     }`}
                   />
                 </button>
-                {exploreOpen && (
-                  <div className="absolute top-full left-0 mt-3 w-48 rounded-2xl bg-white p-2 shadow-2xl border border-slate-100 z-50">
-                    {EXPLORE_ITEMS.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => setExploreOpen(false)}
-                        className="block rounded-xl px-3.5 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-[#2563EB] transition-colors whitespace-nowrap"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
               </div>
-
-              {/* Contact Us */}
               <Link
                 href="/contact"
-                className="hidden sm:inline-block text-[15px] sm:text-[16px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
+                className="hidden sm:inline-block text-[14px] sm:text-[15px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
               >
                 Contact Us
               </Link>
-
-              {/* Agent Pro/Builder Pro */}
               <Link
                 href="/login"
-                className="hidden lg:inline-flex h-[32px] px-2.5 items-center justify-center rounded-[8px] border border-[#2563EB] bg-white text-[11.5px] font-semibold text-[#2563EB] leading-none tracking-normal hover:bg-blue-50/60 transition-all whitespace-nowrap shrink-0"
+                className="hidden sm:inline-block text-[14px] sm:text-[15px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
               >
-                Agent Pro/Builder Pro
+                Roofin Pro
               </Link>
+              */}
+
+              <div className="flex items-center gap-3.5 sm:gap-4.5 lg:gap-5 shrink-0">
+                {/* Explore Dropdown */}
+                <div ref={exploreRef} className="relative hidden md:block shrink-0">
+                  <button
+                    type="button"
+                    className="flex items-center gap-0.5 text-[#2563EB] hover:text-blue-700 select-none cursor-pointer text-[14px] sm:text-[15px] font-normal transition-colors whitespace-nowrap"
+                    onClick={() => setExploreOpen((prev) => !prev)}
+                  >
+                    <span>Explore</span>
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 stroke-[2.2] text-[#2563EB] -translate-y-[0.5px] transition-transform duration-200 ${
+                        exploreOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {exploreOpen && (
+                    <div className="absolute top-full left-0 mt-3 w-48 rounded-2xl bg-white p-2 shadow-2xl border border-slate-100 z-50">
+                      {EXPLORE_ITEMS.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setExploreOpen(false)}
+                          className="block rounded-xl px-3.5 py-2 text-xs font-medium text-slate-700 hover:bg-blue-50 hover:text-[#2563EB] transition-colors whitespace-nowrap"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Contact Us */}
+                <Link
+                  href="/contact"
+                  className="hidden sm:inline-block text-[14px] sm:text-[15px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
+                >
+                  Contact Us
+                </Link>
+
+                {/* Roofin Pro - Border removed, matching Explore & Contact Us size */}
+                {/* Previous Bordered Button:
+                <Link
+                  href="/login"
+                  className="hidden lg:inline-flex h-[38px] px-2.5 items-center justify-center rounded-[6px] border border-[#2563EB] bg-white text-[11.5px] font-medium text-[#2563EB] leading-none tracking-normal hover:bg-blue-50/60 transition-all whitespace-nowrap shrink-0"
+                >
+                  Roofin Pro
+                </Link>
+                */}
+                <Link
+                  href="/login"
+                  className="hidden sm:inline-block text-[14px] sm:text-[15px] font-normal text-[#2563EB] hover:text-blue-700 transition-colors whitespace-nowrap shrink-0"
+                >
+                  Roofin Pro
+                </Link>
+              </div>
 
               {/* Vertical Separator */}
-              <div className="h-5 w-px bg-slate-200 hidden sm:block shrink-0" />
+              <Image
+                src="/banner/Line 82.svg"
+                alt="Divider"
+                width={1}
+                height={37}
+                className="hidden sm:block h-[37px] w-[1px] shrink-0 select-none self-center"
+                unoptimized
+              />
             </>
           )}
 
@@ -160,10 +214,10 @@ export const SimpleHeader = ({
             <Link
               href="/properties?saved=true"
               aria-label="Wishlist"
-              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0"
             >
               <Image
-                src="/layout/nav/nav_heart.png"
+                src="/layout/nav/nav_heart.svg"
                 alt="Wishlist"
                 width={34}
                 height={30}
@@ -181,10 +235,10 @@ export const SimpleHeader = ({
             <Link
               href="/login"
               aria-label="Notifications"
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0"
             >
               <Image
-                src="/layout/nav/nav_bell.png"
+                src="/layout/nav/nav_bell.svg"
                 alt="Notifications"
                 width={28}
                 height={37}
@@ -198,7 +252,7 @@ export const SimpleHeader = ({
               type="button"
               aria-label="User Profile"
               onClick={() => setSidebarOpen(true)}
-              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100"
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors cursor-pointer shrink-0"
             >
               {isMounted && isAuthenticated && user ? (
                 user?.person?.avatarUrl ? (
@@ -216,12 +270,13 @@ export const SimpleHeader = ({
                 )
               ) : (
                 <Image
-                  src="/layout/nav/nav_user.png"
+                  src="/layout/nav/nav_user.svg"
                   alt="User Profile"
-                  width={24}
+                  width={23}
                   height={24}
-                  className="w-[21px] sm:w-[22px] h-auto object-contain"
+                  className="w-[18px] sm:w-[20px] h-auto object-contain hover:scale-105 transition-transform"
                   style={{ width: "auto", height: "auto" }}
+                  unoptimized
                 />
               )}
               {isMounted && isAuthenticated && (
@@ -231,29 +286,40 @@ export const SimpleHeader = ({
           </div>
 
           {/* Post Property Free Button */}
+          {/* Previous Post Property Button:
           <Link
             href="/post-property"
             className="group relative flex h-[38px] sm:h-[40px] items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-2.5 sm:pl-3 pr-1 sm:pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
           >
+            <span className="text-[13px] sm:text-[13.5px] font-medium text-white tracking-normal whitespace-nowrap">
+              Post Property
+            </span>
+            <span className="rounded-full bg-white px-2.5 sm:px-3 py-1 text-[12px] sm:text-[12.5px] font-semibold text-[#1865F2] shadow-xs leading-none">
+              Free
+            </span>
+          </Link>
+          */}
+          <Link
+            href="/post-property"
+            className="group relative flex h-[38px] sm:h-[40px] translate-x-2 sm:translate-x-3.5 items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-3 sm:pl-3.5 pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
+          >
             {/* Sparkle icon */}
-            <svg 
-              className="h-[18px] w-[18px] shrink-0" 
-              viewBox="0 0 26 26" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M4.5 1C4.5 2.8 3.2 4 1.5 4C3.2 4 4.5 5.2 4.5 7C4.5 5.2 5.8 4 7.5 4C5.8 4 4.5 2.8 4.5 1Z" fill="#00D084" />
-              <path d="M20 1C20 3.3 18 5 15.5 5C18 5 20 6.7 20 9C20 6.7 22 5 24.5 5C22 5 20 3.3 20 1Z" stroke="#00D084" strokeWidth="1.4" strokeLinejoin="round" fill="none" />
-              <path d="M11.5 6C11.5 12 7 16 1.5 16C7 16 11.5 20 11.5 26C11.5 20 16 16 21.5 16C16 16 11.5 12 11.5 6Z" fill="#00D084" />
-            </svg>
+            {/* <Image
+              src="/layout/nav/nav_sparkle.svg"
+              alt="Sparkle"
+              width={27}
+              height={29}
+              className="h-[18px] w-auto shrink-0"
+              unoptimized
+            /> */}
 
             {/* Text with refined boldness */}
             <span className="text-[13px] sm:text-[13.5px] font-medium text-white tracking-normal whitespace-nowrap">
               Post Property
             </span>
 
-            {/* White Free Badge with compact padding */}
-            <span className="rounded-full bg-white px-2.5 sm:px-3 py-1 text-[12px] sm:text-[12.5px] font-semibold text-[#1865F2] shadow-xs leading-none">
+            {/* White Free Badge with increased height and reduced width */}
+            <span className="flex items-center justify-center h-[20px] sm:h-[25px] px-3 sm:px-4 rounded-full bg-white text-[15.5px] sm:text-[15px] font-bold text-[#1865F2] shadow-xs leading-none">
               Free
             </span>
           </Link>

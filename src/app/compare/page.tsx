@@ -164,13 +164,16 @@ export default function ComparePage() {
         onRemoveProperty={handleRemoveProperty}
       />
 
-      {/* 11. Property Selection Picker Modal */}
+      {/* 11. Property Selection Picker Modal (Matching Figma 1:1) */}
       <ComparePropertyPickerModal
         isOpen={isPickerModalOpen}
         onClose={() => setIsPickerModalOpen(false)}
         properties={allProperties}
         onSelectProperty={handleSelectProperty}
         selectedIds={comparedProperties.map((p) => p.title)}
+        selectedProperties={comparedProperties}
+        onRemoveProperty={handleRemoveProperty}
+        onReset={() => setComparedProperties([])}
       />
     </main>
   );

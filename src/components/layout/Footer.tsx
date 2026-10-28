@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, Send } from "lucide-react";
+import { usePathname } from "next/navigation";
 import toast from "react-hot-toast";
 
 const quickLinks = [
@@ -83,6 +84,12 @@ const socialIcons = [
 ];
 
 export const Footer = () => {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/portal")) {
+    return null;
+  }
+
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 

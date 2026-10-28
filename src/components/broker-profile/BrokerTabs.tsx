@@ -9,7 +9,7 @@ export const BrokerTabs = ({ activeTab, onTabChange }: BrokerTabsProps) => {
   const tabs = [
     { id: "overview", label: "Overview" },
     { id: "videos", label: "Videos" },
-    { id: "properties-listed", label: "Properties Listed" },
+    { id: "listed-properties", label: "Listed Properties" },
     { id: "about", label: "About" },
     { id: "post", label: "Post" },
   ];

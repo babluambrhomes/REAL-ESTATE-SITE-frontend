@@ -14,7 +14,15 @@ import {
   Check,
 } from "lucide-react";
 
-export const BrokerPostedProperties = () => {
+interface BrokerPostedPropertiesProps {
+  title?: string;
+  limit?: number;
+}
+
+export const BrokerPostedProperties = ({
+  title = "Properties Listed",
+  limit,
+}: BrokerPostedPropertiesProps = {}) => {
   const [likes, setLikes] = useState<Record<string, number>>({
     "prop-1": 72,
     "prop-2": 72,
@@ -59,7 +67,7 @@ export const BrokerPostedProperties = () => {
         { label: "4 BHK Apartments", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, Italian marble flooring, and smart home automation.",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
       image: "/images/properties/max-estate-tower-figma.jpg",
       isImageLeft: true,
     },
@@ -75,7 +83,7 @@ export const BrokerPostedProperties = () => {
         { label: "4 BHK Apartments", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, private terrace garden, and Olympic-sized clubhouse.",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
       image: "/builders/figma_photo_delhi.png",
       isImageLeft: false, // Image on right
     },
@@ -91,8 +99,8 @@ export const BrokerPostedProperties = () => {
         { label: "4 BHK Apartments", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, 100% power backup, and 3-tier high-security surveillance.",
-      image: "/images/properties/commercial-office-figma.jpg",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
+      image: "/images/properties/compound-nbcc-figma.png",
       isImageLeft: true,
     },
     {
@@ -107,18 +115,20 @@ export const BrokerPostedProperties = () => {
         { label: "4 BHK Apartments", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, dual covered car parking, and EV charging points.",
-      image: "/images/properties/commercial-office-figma.jpg",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
+      image: "/builders/figma_photo_delhi.png",
       isImageLeft: false, // Image on right
     },
   ];
+
+  const displayProperties = limit ? properties.slice(0, limit) : properties;
 
   return (
     <div className="w-full space-y-4 font-jakarta relative">
       {/* Header */}
       <div className="flex items-center justify-between pb-1">
         <h2 className="text-base sm:text-[18px] font-black text-[#0B132B] tracking-tight">
-          Properties Listed
+          {title}
         </h2>
         <Link
           href="/properties"
@@ -136,9 +146,9 @@ export const BrokerPostedProperties = () => {
         </div>
       )}
 
-      {/* 4 Alternating Property Cards */}
+      {/* Alternating Property Cards */}
       <div className="space-y-4 sm:space-y-5">
-        {properties.map((prop) => {
+        {displayProperties.map((prop) => {
           const isLiked = !!userLiked[prop.id];
           const isExpanded = !!expandedDesc[prop.id];
 

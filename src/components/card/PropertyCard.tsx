@@ -19,6 +19,10 @@ import toast from "react-hot-toast";
 import { cn, formatPropertyChip } from "@/lib/utils";
 import type { Property } from "@/types";
 import { useWishlist } from "@/lib/wishlist";
+import { useCompare } from "@/lib/compare";
+import { PropertyContactModal } from "./PropertyContactModal";
+import { PropertyMapModal } from "./PropertyMapModal";
+import { PropertyEmiCalculatorModal } from "@/components/properties/PropertyEmiCalculatorModal";
 
 const API_BASE_URL = "/api/v1";
 
@@ -102,8 +106,91 @@ export const PropertyCard = (props: Property) => {
     index,
   } = props;
   const { isSaved, toggle } = useWishlist();
+  const { isCompared, toggle: toggleCompare } = useCompare();
+  const inCompare = isCompared(id, title);
   const [localLiked, setLocalLiked] = useState(false);
   const isItemSaved = id ? isSaved(id) : localLiked;
+
+  // Interactive Card Logics State
+  const [showConfig, setShowConfig] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [mapModalOpen, setMapModalOpen] = useState(false);
+  const [emiModalOpen, setEmiModalOpen] = useState(false);
+  const [distanceText, setDistanceText] = useState("15 km Away");
+  const [isCalculatingDistance, setIsCalculatingDistance] = useState(false);
+
+  const computeDistance = (userLat: number, userLon: number, propLat = 28.5355, propLon = 77.391) => {
+    const R = 6371; // Earth radius in km
+    const dLat = ((propLat - userLat) * Math.PI) / 180;
+    const dLon = ((propLon - userLon) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((userLat * Math.PI) / 180) *
+        Math.cos((propLat * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return (R * c).toFixed(1);
+  };
+
+  const handleCalculateDistance = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setIsCalculatingDistance(true);
+    toast.loading("Calculating distance from your location...", { id: "geo" });
+
+    const propLat = props.coordinates?.[1] || 28.5355;
+    const propLon = props.coordinates?.[0] || 77.391;
+
+    const applyCoords = (lat: number, lon: number, sourceName = "your location") => {
+      setIsCalculatingDistance(false);
+      const d = computeDistance(lat, lon, propLat, propLon);
+      setDistanceText(`${d} km Away`);
+      toast.success(`Distance updated: ${d} km from ${sourceName}!`, { id: "geo" });
+    };
+
+    const fallbackToIp = async () => {
+      try {
+        const res = await fetch("https://ipwho.is/");
+        const data = await res.json();
+        if (data && data.success && data.latitude && data.longitude) {
+          applyCoords(data.latitude, data.longitude, data.city || "your area");
+          return true;
+        }
+      } catch {
+        // Fallback failed
+      }
+      return false;
+    };
+
+    if (typeof window !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          applyCoords(pos.coords.latitude, pos.coords.longitude, "your device location");
+        },
+        async (err) => {
+          // If browser GPS fails (POSITION_UNAVAILABLE / Windows Location disabled / timeout), fallback to IP
+          const ok = await fallbackToIp();
+          if (!ok) {
+            setIsCalculatingDistance(false);
+            if (err.code === 1) {
+              toast.error("Location permission denied. Showing estimated 15 km.", { id: "geo" });
+            } else {
+              toast.error("Could not detect exact location. Showing estimated 15 km.", { id: "geo" });
+            }
+          }
+        },
+        { enableHighAccuracy: false, timeout: 6000, maximumAge: 300000 }
+      );
+    } else {
+      const ok = await fallbackToIp();
+      if (!ok) {
+        setIsCalculatingDistance(false);
+        toast.error("Location service not available.", { id: "geo" });
+      }
+    }
+  };
 
   const getImageUrl = (imagePath?: string | null) => {
     if (!imagePath) return "/images/properties/villa-popular-figma.jpg";
@@ -224,7 +311,12 @@ export const PropertyCard = (props: Property) => {
 
           {/* Bottom Blue Bar across Image with Solid White Borders and Radius matching Figma 1:1 */}
           <div className="h-[46px] shrink-0 bg-[#1865F2] flex items-stretch border-t-2 border-white rounded-bl-[31px] sm:rounded-bl-[35px] rounded-br-[26px] sm:rounded-br-[30px] text-white overflow-hidden">
-            <div className="flex items-center justify-center gap-2 text-[12.5px] font-semibold flex-1 border-r-2 border-white px-2">
+            <button
+              type="button"
+              onClick={handleCalculateDistance}
+              title="Click to calculate distance from your current location"
+              className="flex items-center justify-center gap-2 text-[12.5px] font-semibold flex-1 border-r-2 border-white px-2 hover:bg-white/15 transition-colors cursor-pointer"
+            >
               <Image
                 src="/icon/card_distance_arrow.png"
                 alt="Distance"
@@ -233,11 +325,19 @@ export const PropertyCard = (props: Property) => {
                 className="w-[18px] h-[9px] object-contain shrink-0"
                 unoptimized
               />
-              <span className="tracking-wide text-white whitespace-nowrap">15 km Away</span>
-            </div>
+              <span className="tracking-wide text-white whitespace-nowrap">
+                {isCalculatingDistance ? "Locating..." : distanceText}
+              </span>
+            </button>
             <button
               type="button"
-              className="flex items-center justify-center gap-2 text-[12.5px] font-semibold hover:bg-blue-600/30 transition-colors cursor-pointer flex-1 px-2"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setMapModalOpen(true);
+              }}
+              className="flex items-center justify-center gap-2 text-[12.5px] font-semibold hover:bg-white/15 transition-colors cursor-pointer flex-1 px-2"
+              title="View on Map"
             >
               <Image
                 src="/icon/card_map_pin_circle.png"
@@ -268,13 +368,40 @@ export const PropertyCard = (props: Property) => {
               </span>
             </div>
 
-            <a
-              href={`tel:${phone}`}
-              aria-label="Call Agent"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#1865F2] hover:bg-[#1250C4] text-white shadow-md shadow-blue-500/25 transition-transform hover:scale-105 cursor-pointer"
-            >
-              <PhoneCall className="h-5 w-5 text-white" />
-            </a>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleCompare(props);
+                }}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition-all cursor-pointer border shadow-2xs",
+                  inCompare
+                    ? "bg-[#1865F2] text-white border-[#1865F2] shadow-xs"
+                    : "bg-white text-slate-700 border-slate-200 hover:border-blue-300 hover:text-[#1865F2]"
+                )}
+                title={inCompare ? "Remove from comparison" : "Add to comparison (up to 3)"}
+              >
+                <ArrowLeftRight className="h-3 w-3" />
+                <span>{inCompare ? "Compared" : "Compare"}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setContactModalOpen(true);
+                }}
+                aria-label="Contact Dealer"
+                title="Contact / Instant Callback"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#1865F2] hover:bg-[#1250C4] text-white shadow-md shadow-blue-500/25 transition-transform hover:scale-105 cursor-pointer"
+              >
+                <PhoneCall className="h-5 w-5 text-white" />
+              </button>
+            </div>
           </div>
 
           {/* Row 2: Title with left blue bar, and Location */}
@@ -376,12 +503,69 @@ export const PropertyCard = (props: Property) => {
             </div>
           </div>
 
-          {/* Row 5: Configurations accordion pill */}
-          <div className="mt-3.5 flex items-center justify-between rounded-full border border-slate-200/90 bg-white px-5 py-2.5 text-[12px] text-[#475569] shadow-2xs">
-            <span className="truncate">
-              Comes with 4bedrooms, 4bedrooms, 4balconies ...
-            </span>
-            <span className="text-[#1865F2] text-[10px] shrink-0 ml-2 font-bold">▼</span>
+          {/* Row 5: Configurations accordion pill with Expandable Drawer */}
+          <div className="mt-3.5 flex flex-col">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowConfig((prev) => !prev);
+              }}
+              className="flex items-center justify-between rounded-full border border-slate-200/90 bg-white px-5 py-2.5 text-[12px] text-[#475569] shadow-2xs hover:border-blue-300 transition-all cursor-pointer w-full text-left"
+            >
+              <span className="truncate font-medium">
+                Comes with {chips?.[0] || "3-4 Bedrooms"}, {props.baths || "3 Bathrooms"}, 3 Balconies ...
+              </span>
+              <span
+                className={cn(
+                  "text-[#1865F2] text-[10px] shrink-0 ml-2 font-bold transition-transform duration-200",
+                  showConfig && "rotate-180"
+                )}
+              >
+                ▼
+              </span>
+            </button>
+
+            {/* Expandable Specifications Drawer */}
+            {showConfig && (
+              <div className="mt-2.5 rounded-2xl border border-blue-100 bg-[#F8FBFF] p-3.5 sm:p-4 text-xs animate-in slide-in-from-top-2 duration-200">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Bedrooms</span>
+                    <span className="text-xs font-bold text-slate-800">{chips?.[0] || "3-4 Bedrooms"}</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Bathrooms</span>
+                    <span className="text-xs font-bold text-slate-800">{props.baths || "3-4 Bathrooms"}</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Balconies</span>
+                    <span className="text-xs font-bold text-slate-800">{props.balconies || "3 Balconies"}</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Super Area</span>
+                    <span className="text-xs font-bold text-slate-800">{infoChips?.[0]?.value || "3,200"} Sq. Ft</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Facing</span>
+                    <span className="text-xs font-bold text-slate-800">{props.facing || "North-East"}</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Floor</span>
+                    <span className="text-xs font-bold text-slate-800">{props.floor || "14th of 28"}</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Furnishing</span>
+                    <span className="text-xs font-bold text-slate-800">{props.furnishing || "Semi-Furnished"}</span>
+                  </div>
+                  <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Parking</span>
+                    <span className="text-xs font-bold text-slate-800">{props.parking || "2 Covered"}</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Row 6: Pricing & View Details CTA */}
@@ -396,9 +580,23 @@ export const PropertyCard = (props: Property) => {
                   {originalPrice || "₹1.58 Cr"}
                 </span>
               </div>
-              <span className="block text-[11px] text-[#64748B] font-normal mt-0.5">
-                Get upto 33L Off on this property
-              </span>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="text-[11px] text-[#64748B] font-normal">
+                  Get upto 33L Off
+                </span>
+                <span className="text-slate-300">·</span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setEmiModalOpen(true);
+                  }}
+                  className="text-[11px] font-bold text-[#1865F2] hover:underline cursor-pointer"
+                >
+                  Calculate EMI ›
+                </button>
+              </div>
             </div>
 
             <Link
@@ -410,6 +608,42 @@ export const PropertyCard = (props: Property) => {
             </Link>
           </div>
         </div>
+
+        {/* Interactive Modals */}
+        <PropertyContactModal
+          isOpen={contactModalOpen}
+          onClose={() => setContactModalOpen(false)}
+          property={{
+            id,
+            title,
+            location,
+            price,
+            image: propertyImage,
+            phone,
+            dealerName: "Goyal Assar",
+          }}
+        />
+
+        <PropertyMapModal
+          isOpen={mapModalOpen}
+          onClose={() => setMapModalOpen(false)}
+          property={{
+            id,
+            title,
+            location,
+            city: props.city,
+            price,
+            image: propertyImage,
+          }}
+        />
+
+        <PropertyEmiCalculatorModal
+          isOpen={emiModalOpen}
+          onClose={() => setEmiModalOpen(false)}
+          propertyTitle={title}
+          propertyLocation={location}
+          initialPrice={price}
+        />
       </div>
     );
   }
@@ -474,18 +708,21 @@ export const PropertyCard = (props: Property) => {
               </button>
               <button
                 type="button"
-                aria-label="Verified"
-                onClick={(e) => e.preventDefault()}
-                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
+                aria-label="Compare"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleCompare(props);
+                }}
+                className={cn(
+                  "flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full shadow-sm transition-transform hover:scale-110 cursor-pointer",
+                  inCompare
+                    ? "bg-[#1865F2] text-white shadow-blue-500/30"
+                    : "bg-white text-slate-600 hover:text-[#1865F2]"
+                )}
+                title={inCompare ? "Remove from comparison" : "Add to compare"}
               >
-                <Image
-                  src="/icon/card_verified_badge.png"
-                  alt="Verified"
-                  width={15}
-                  height={15}
-                  className="w-[14px] h-[14px] object-contain"
-                  unoptimized
-                />
+                <ArrowLeftRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
@@ -504,13 +741,18 @@ export const PropertyCard = (props: Property) => {
               <h3 className="text-[14px] sm:text-[15px] font-bold text-[#0B132B] tracking-tight truncate min-w-0 flex-1">
                 {title || "NBCC Aspire Silicon City"}
               </h3>
-              <a
-                href={`tel:${phone}`}
-                aria-label="Call Agent"
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setContactModalOpen(true);
+                }}
+                aria-label="Contact Agent"
                 className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full bg-[#1865F2] text-white shadow-md shadow-blue-500/25 transition-transform hover:scale-105 hover:bg-blue-700 cursor-pointer ml-1"
               >
                 <PhoneCall className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white" />
-              </a>
+              </button>
             </div>
 
             {/* Location */}
@@ -605,6 +847,29 @@ export const PropertyCard = (props: Property) => {
             </Link>
           </div>
         </div>
+
+        {/* Contact Modal */}
+        <PropertyContactModal
+          isOpen={contactModalOpen}
+          onClose={() => setContactModalOpen(false)}
+          property={{
+            id,
+            title,
+            location,
+            price,
+            image: propertyImage,
+            phone,
+            dealerName: "Goyal Assar",
+          }}
+        />
+
+        <PropertyEmiCalculatorModal
+          isOpen={emiModalOpen}
+          onClose={() => setEmiModalOpen(false)}
+          propertyTitle={title}
+          propertyLocation={location}
+          initialPrice={price}
+        />
       </div>
     );
   }

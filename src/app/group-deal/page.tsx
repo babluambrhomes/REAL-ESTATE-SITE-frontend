@@ -28,6 +28,7 @@ import {
   BadgeCheck,
   HelpCircle,
 } from "lucide-react";
+import { propertyApi } from "@/lib/features/property/propertyApi";
 
 export default function GroupDealPage() {
   const [formData, setFormData] = useState({
@@ -37,24 +38,39 @@ export default function GroupDealPage() {
     unitType: "4BHK + Servant (3342 sq.ft.)",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [claimedCode, setClaimedCode] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
+
+    const voucherCode = `ROOFIN-COBUY-76${Math.floor(10 + Math.random() * 90)}`;
+    setClaimedCode(voucherCode);
+
     try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email?.trim() || `deal_${formData.phone.replace(/\D/g, "")}@roofin.com`,
-          phone: formData.phone.trim(),
-          message: `Group Deal Reservation: Aspire Silicon City, Sector 76 Noida - ${formData.unitType}`,
-        }),
+      await propertyApi.submitEnquiry({
+        name: formData.name.trim(),
+        email: formData.email?.trim() || `deal_${formData.phone.replace(/\D/g, "")}@roofin.com`,
+        phone: formData.phone.trim(),
+        message: `Group Deal Reservation: Aspire Silicon City, Sector 76 Noida - ${formData.unitType} (Voucher: ${voucherCode})`,
       });
     } catch (err) {
       console.warn("Group deal lead sync error:", err);
     }
+
+    try {
+      const existingOffers = JSON.parse(localStorage.getItem("roofin_claimed_offers") || "[]");
+      const newVoucher = {
+        id: `deal-voucher-${Date.now()}`,
+        title: `Group Deal Slot - Aspire Silicon City (${formData.unitType})`,
+        discount: "15% Developer Tier OFF",
+        code: voucherCode,
+        validUntil: "30 Nov 2026",
+        claimedAt: new Date().toISOString(),
+      };
+      localStorage.setItem("roofin_claimed_offers", JSON.stringify([newVoucher, ...existingOffers]));
+    } catch {}
+
     setSubmitted(true);
   };
 
@@ -387,17 +403,48 @@ export default function GroupDealPage() {
                   </p>
                 </form>
               ) : (
-                <div className="py-8 text-center space-y-3">
+                <div className="py-6 text-center space-y-4">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <h4 className="text-xl font-black text-slate-900">
-                    Slot Reserved Successfully!
-                  </h4>
-                  <p className="text-xs text-slate-600">
-                    Congratulations <span className="font-bold text-slate-900">{formData.name}</span>. Your slot has been pre-locked under group ID <span className="font-mono font-bold text-blue-600">ROOFIN-GD-76{Math.floor(10 + Math.random() * 90)}</span>.
-                  </p>
-                  <p className="text-[11px] text-slate-500">
+                  <div className="space-y-1">
+                    <h4 className="text-xl font-black text-slate-900">
+                      Slot Reserved Successfully!
+                    </h4>
+                    <p className="text-xs text-slate-600">
+                      Congratulations <span className="font-bold text-slate-900">{formData.name}</span>. Your cohort slot has been pre-locked.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-50 border border-dashed border-blue-300 rounded-2xl p-4 text-center max-w-sm mx-auto space-y-2">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                      Your Exclusive Group Voucher Code
+                    </span>
+                    <div className="font-mono text-base font-extrabold text-[#1865F2] bg-white py-1.5 px-3 rounded-lg border border-slate-200 inline-block shadow-2xs">
+                      {claimedCode}
+                    </div>
+                    <p className="text-[10.5px] text-emerald-700 font-medium">
+                      ✓ Saved to your Roofin Account Vouchers
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+                    <Link
+                      href="/u/me?tab=offers"
+                      className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-colors"
+                    >
+                      View in My Vouchers
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-xs hover:bg-slate-50 transition-colors"
+                    >
+                      Reserve Another Unit
+                    </button>
+                  </div>
+
+                  <p className="text-[11px] text-slate-500 pt-1">
                     Our Senior Relationship Manager will call your number ({formData.phone}) within 15 minutes.
                   </p>
                 </div>

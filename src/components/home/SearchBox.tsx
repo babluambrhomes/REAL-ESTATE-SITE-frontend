@@ -158,6 +158,16 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
   }, [suggestionsData]);
 
   const handleSearch = () => {
+    if (activeTab === "agent") {
+      const q = locality
+        ? `?city=${encodeURIComponent(selectedCity?.value || "")}&q=${encodeURIComponent(locality)}`
+        : selectedCity?.value
+        ? `?city=${encodeURIComponent(selectedCity.value)}`
+        : "";
+      router.push(`/agents${q}`);
+      return;
+    }
+
     const params = new URLSearchParams();
     if (activeTab) params.set("purpose", activeTab);
     if (selectedCity?.value) params.set("city", selectedCity.value);

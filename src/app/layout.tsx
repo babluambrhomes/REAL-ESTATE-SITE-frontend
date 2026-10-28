@@ -52,7 +52,7 @@ export default function RootLayout({
     >
 
 
-      <body className="min-h-full">
+      <body className="min-h-full font-poppins">
         <Providers>
           {children}
           <Footer />

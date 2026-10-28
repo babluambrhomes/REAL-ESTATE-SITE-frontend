@@ -25,17 +25,17 @@ const ViewMap = dynamic(() => import("@/components/common/ViewMap"), {
 
 const slides = [
   {
-    image: "/banner/hero-banners.jpg",
+    image: "/banner/bannerr.png",
     title: "Find Your Dream Home",
     subtitle: "Explore luxury properties in the most desirable locations.",
   },
   {
-    image: "/banner/hero-banners.jpg",
+    image: "/banner/bannerr.png",
     title: "Luxury Living Redefined",
     subtitle: "Modern designs crafted for comfort and elegance.",
   },
   {
-    image: "/banner/hero-banners.jpg",
+    image: "/banner/bannerr.png",
     title: "Invest In Your Future",
     subtitle: "High-growth opportunities with guaranteed returns.",
   },
@@ -73,7 +73,7 @@ export const HeroSlider = () => {
                     fill
                     priority={index === 0}
                     sizes="(max-width: 1024px) 100vw, 73vw"
-                    className="object-cover object-center"
+                    className="object-contain object-left-top"
                   />
 
                 </div>
@@ -81,19 +81,45 @@ export const HeroSlider = () => {
             ))}
           </Swiper>
 
+          {/* 3 Vertical Circular Dots shifted to Banner Left */}
+          {/* Previous centered position with shadows:
+          <div className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-1.5 sm:gap-2 pointer-events-auto">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => swiperRef.current?.slideToLoop(index)}
+                className={`rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
+                  ? "h-2.5 w-2.5 sm:h-3 sm:w-3 bg-[#1865F2] shadow-[0_2px_8px_rgba(24,101,242,0.5)] scale-110"
+                  : "h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] hover:bg-slate-50"
+                  }`}
+              />
+            ))}
+          </div>
+          */}
+          <div className="absolute left-3 sm:left-5 top-[60%] sm:top-[62%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 pointer-events-auto">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => swiperRef.current?.slideToLoop(index)}
+                className={`rounded-full transition-colors duration-200 cursor-pointer ${
+                  activeIndex === index
+                    ? "h-2.5 w-2.5 sm:h-3 sm:w-3 bg-[#1865F2]"
+                    : "h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white border border-slate-300 hover:bg-[#1865F2] hover:border-[#1865F2]"
+                }`}
+              />
+            ))}
+          </div>
+
           {/* Right-side shade fade — banner blends into map */}
-          <div
-            className="absolute inset-y-0 right-0 hidden lg:block w-[160px] pointer-events-none z-10"
-            style={{
-              background:
-                "linear-gradient(to right, transparent 0%, rgba(207,232,249,0.45) 30%, rgba(220,239,251,0.72) 52%, rgba(230,244,252,0.88) 70%, #eaf2fb 100%)",
-            }}
-          />
 
           {/* Left Overlay Text Content */}
-          <div className="absolute inset-0 z-10 flex items-center pointer-events-none font-rounded-mplus">
+          {/* <div className="absolute inset-0 z-10 flex items-center pointer-events-none font-rounded-mplus">
             <div className="w-full px-6 sm:px-12 lg:px-16 pointer-events-auto">
-              {/* Trust Badge */}
+             
               <div className="inline-flex items-center gap-2.5 rounded-full bg-white px-3.5 py-1.5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-slate-100">
                 <Image
                   src="/icon/hero/trusted_buyers_shield_v2.png"
@@ -109,21 +135,20 @@ export const HeroSlider = () => {
                 </span>
               </div>
 
-              {/* Headline */}
               <h1 className="mt-3.5 text-2xl sm:text-3xl lg:text-[38px] xl:text-[40px] font-bold tracking-tight text-black leading-[1.16] lg:leading-[46px] max-w-[420px]">
                 BUY PROPERTY <br />
                 <span className="text-[#1865F2]">LOWER THAN</span> <br />
                 MARKET PRICE
               </h1>
 
-              {/* Subtitle - Exact Figma Specs: Poppins, 400 Regular, 30px, Line-height 100%, Letter-spacing 0%, #000000 */}
+             
               <p className="mt-3 font-poppins text-lg sm:text-2xl lg:text-[24px] font-normal text-[#000000] leading-none tracking-normal">
                 India’s Most Trusted Buying platform
               </p>
 
-              {/* Trust Badges */}
+            
               <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-7">
-                {/* Badge 1: Verified Properties */}
+               
                 <Link href="/properties?verified=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-slate-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] shrink-0 p-2">
                     <Image
@@ -142,7 +167,7 @@ export const HeroSlider = () => {
                   </div>
                 </Link>
 
-                {/* Badge 2: Trusted Agents */}
+ 
                 <Link href="/properties?agent=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-slate-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] shrink-0 p-2">
                     <Image
@@ -161,7 +186,7 @@ export const HeroSlider = () => {
                   </div>
                 </Link>
 
-                {/* Badge 3: Best Deals */}
+              
                 <Link href="/properties?deal=true" className="flex items-center gap-2.5 sm:gap-3 shrink-0 hover:opacity-90 transition-opacity">
                   <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-slate-100 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] shrink-0 p-2">
                     <Image
@@ -181,8 +206,35 @@ export const HeroSlider = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
+        {/* <div className="relative">
+          <div
+            className="absolute top-0 w-8 h-[480px] sm:h-[530px] lg:h-[580px] z-12 pointer-events-none  "
+            style={{
+              backgroundImage: "url('/banner/shadow.png')"
+
+            }}
+          />
+        </div> */}
+
+        <div className="relative">
+          <div
+            className=" -left-[16px] absolute top-0 w-8 h-[480px] sm:h-[530px] lg:h-[580px] opacity-[0.6] z-12 pointer-events-none bg-gradient-to-r from-transparent via-gray-100 to-transparent"
+          />
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         {/* 2. Right Side: Interactive Map */}
         <div className="relative hidden lg:block lg:w-[27%] h-full bg-[#f1f6fc] overflow-hidden">
@@ -200,26 +252,40 @@ export const HeroSlider = () => {
 
 
             {/* Top Floating Badge: Premium Living (Subtle 10px corner radius matching Figma) */}
-            <div className="absolute top-24 left-4 z-30 w-[172px] rounded-[10px] border border-slate-100/90 bg-white p-2.5 sm:p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
+            <div className="absolute top-24 left-4 z-30 w-[152px] max-h-[90px] rounded-[10px] border border-slate-100/80 bg-white p-2.5 sm:p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
               <div className="flex items-center gap-2.5">
                 <div className="relative h-[34px] w-[34px] shrink-0">
                   <Image
-                    src="/icon/hero/premium_living_icon.png"
+                    src="/layout/nav/side.svg"
                     alt="Premium Living"
-                    width={68}
-                    height={68}
+                    width={58}
+                    height={58}
                     unoptimized
                     priority
                     className="h-full w-full object-contain"
                   />
                 </div>
                 <div>
-                  <p className="text-[12px] font-semibold text-slate-800 leading-tight">Premium Living</p>
-                  <p className="text-[10px] text-slate-500 font-normal leading-tight mt-0.5">In Greater Noida</p>
+                  <p className="text-[10px] font-medium text-slate-800 leading-tight">Premium Living</p>
+                  <p className="text-[8px] text-slate-500 font-normal leading-tight mt-0.5">In Greater Noida</p>
                 </div>
               </div>
-              <div className="mt-2.5 flex items-center justify-between pt-0.5">
-                <p className="text-[19px] sm:text-[20px] font-semibold text-slate-900 tracking-tight leading-none">
+              {/* Bottom Row: Price & Arrow Button (Shifted slightly upward) */}
+              {/* Previous:
+              <div className="mt-1.5 flex items-center justify-between pt-0.5">
+                <p className="text-[19px] sm:text-[20px] font-medium text-slate-900 tracking-tight leading-none">
+                  1.25 cr
+                </p>
+                <Link
+                  href="/properties?location=Greater+Noida"
+                  className="flex h-[30px] w-[30px] sm:h-[32px] sm:w-[32px] items-center justify-center rounded-full bg-[#1865F2] text-white shadow-sm transition-transform hover:scale-105 shrink-0"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+              */}
+              <div className="mt-1 -translate-y-0.5 sm:-translate-y-1 flex items-center justify-between">
+                <p className="text-[19px] sm:text-[20px] font-medium text-slate-900 tracking-tight leading-none">
                   1.25 cr
                 </p>
                 <Link
@@ -233,12 +299,11 @@ export const HeroSlider = () => {
 
             {/* Bottom Floating Area: Explore on Map Button + 3 Vertical Circular Dots (Exact Match) */}
             <div className="absolute bottom-[76px] lg:bottom-[80px] right-4 sm:right-6 z-30 flex items-center gap-2.5 sm:gap-3 pointer-events-auto">
-              {/* Explore on Map Button - Compact & Sleek */}
-              <Link
+              {/* Explore on Map Button - Temporarily commented out as requested */}
+              {/* <Link
                 href="/properties?map=true"
                 className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#1865F2] to-[#029BE5] px-3.5 py-2 text-[12px] sm:text-[12.5px] font-medium text-white shadow-[0_4px_16px_rgba(24,101,242,0.35)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_6px_20px_rgba(24,101,242,0.45)] shrink-0"
               >
-                {/* Folded Map with Pin icon */}
                 <svg
                   className="h-4 w-4 shrink-0 text-white"
                   viewBox="0 0 24 24"
@@ -251,29 +316,27 @@ export const HeroSlider = () => {
                   <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
                   <line x1="9" y1="3" x2="9" y2="18" />
                   <line x1="15" y1="6" x2="15" y2="21" />
-                  {/* Pin in the middle panel */}
                   <path d="M12 8.5C10.9 8.5 10 9.4 10 10.5C10 12 12 14 12 14C12 14 14 12 14 10.5C14 9.4 13.1 8.5 12 8.5Z" fill="currentColor" stroke="none" />
                   <circle cx="12" cy="10.5" r="0.8" fill="#1865F2" />
                 </svg>
                 <span className="tracking-tight whitespace-nowrap">Explore on Map</span>
-              </Link>
+              </Link> */}
 
-              {/* 3 Vertical Circular Dots */}
-              <div className="flex flex-col items-center gap-1.5 sm:gap-2">
+              {/* 3 Vertical Circular Dots - (Previous position on map, now moved to banner left) */}
+              {/* <div className="flex flex-col items-center gap-1.5 sm:gap-2">
                 {slides.map((_, index) => (
                   <button
                     key={index}
                     type="button"
                     aria-label={`Go to slide ${index + 1}`}
                     onClick={() => swiperRef.current?.slideToLoop(index)}
-                    className={`rounded-full transition-all duration-300 cursor-pointer ${
-                      activeIndex === index
-                        ? "h-2.5 w-2.5 sm:h-3 sm:w-3 bg-[#1865F2] shadow-[0_2px_8px_rgba(24,101,242,0.5)] scale-110"
-                        : "h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] hover:bg-slate-50"
-                    }`}
+                    className={`rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
+                      ? "h-2.5 w-2.5 sm:h-3 sm:w-3 bg-[#1865F2] shadow-[0_2px_8px_rgba(24,101,242,0.5)] scale-110"
+                      : "h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white shadow-[0_2px_6px_rgba(0,0,0,0.2)] hover:bg-slate-50"
+                      }`}
                   />
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

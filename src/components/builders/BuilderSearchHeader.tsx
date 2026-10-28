@@ -163,7 +163,7 @@ export const BuilderSearchHeader = ({
             <Link
               href="/login"
               aria-label="Wishlist"
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0"
             >
               <Image
                 src="/layout/nav/nav_heart.png"
@@ -179,7 +179,7 @@ export const BuilderSearchHeader = ({
             <Link
               href="/login"
               aria-label="Notifications"
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0"
             >
               <Image
                 src="/layout/nav/nav_bell.png"
@@ -196,7 +196,7 @@ export const BuilderSearchHeader = ({
               type="button"
               aria-label="User Profile"
               onClick={() => setSidebarOpen(true)}
-              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0"
             >
               {isMounted && isAuthenticated && user ? (
                 user?.person?.avatarUrl ? (
@@ -228,9 +228,32 @@ export const BuilderSearchHeader = ({
             </button>
 
             {/* Post Property Free Button matching site layout */}
+            {/* Previous Post Property Button:
             <Link
               href="/post-property"
-              className="group relative flex h-[38px] sm:h-[40px] items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-2.5 sm:pl-3 pr-1 sm:pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
+              className="group relative flex h-[38px] sm:h-[40px] right-[-10px] items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-2.5 sm:pl-3 pr-1 sm:pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
+            >
+              <svg 
+                className="h-[18px] w-[18px] shrink-0" 
+                viewBox="0 0 26 26" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M4.5 1C4.5 2.8 3.2 4 1.5 4C3.2 4 4.5 5.2 4.5 7C4.5 5.2 5.8 4 7.5 4C5.8 4 4.5 2.8 4.5 1Z" fill="#00D084" />
+                <path d="M20 1C20 3.3 18 5 15.5 5C18 5 20 6.7 20 9C20 6.7 22 5 24.5 5C22 5 20 3.3 20 1Z" stroke="#00D084" strokeWidth="1.4" strokeLinejoin="round" fill="none" />
+                <path d="M11.5 6C11.5 12 7 16 1.5 16C7 16 11.5 20 11.5 26C11.5 20 16 16 21.5 16C16 16 11.5 12 11.5 6Z" fill="#00D084" />
+              </svg>
+              <span className="text-[13px] sm:text-[13.5px] font-medium text-white tracking-normal whitespace-nowrap">
+                Post Property
+              </span>
+              <span className="h-[24px] w-[40px] rounded-full bg-white px-2.5 sm:px-3 py-1 text-[12px] sm:text-[11px] font-semibold text-[#1865F2] shadow-xs leading-none">
+                Free
+              </span>
+            </Link>
+            */}
+            <Link
+              href="/post-property"
+              className="group relative flex h-[38px] sm:h-[40px] translate-x-2 sm:translate-x-3.5 items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-3 sm:pl-3.5 pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
             >
               {/* Sparkle icon */}
               <svg 
@@ -248,7 +271,8 @@ export const BuilderSearchHeader = ({
                 Post Property
               </span>
 
-              <span className="rounded-full bg-white px-2.5 sm:px-3 py-1 text-[12px] sm:text-[12.5px] font-semibold text-[#1865F2] shadow-xs leading-none">
+              {/* White Free Badge with increased height and reduced width */}
+              <span className="flex items-center justify-center h-[28px] sm:h-[30px] px-2 sm:px-2.5 rounded-full bg-white text-[11.5px] sm:text-[12px] font-bold text-[#1865F2] shadow-xs leading-none">
                 Free
               </span>
             </Link>

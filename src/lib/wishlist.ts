@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { Property } from "@/types";
+import { apiClient } from "@/lib/axios";
 
 const STORAGE_KEY = "roofin_saved_properties";
 const DATA_KEY = "roofin_saved_properties_data";
@@ -58,6 +59,10 @@ export function toggleSavedProperty(
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     localStorage.setItem(DATA_KEY, JSON.stringify(dataMap));
     window.dispatchEvent(new Event(EVENT_NAME));
+
+    // Sync live with backend wishlist endpoint
+    apiClient.patch(`/properties/${strId}/wishlist`).catch(() => {});
+
     return isNowSaved;
   } catch {
     return false;

@@ -33,11 +33,15 @@ import { ListingsReadyToMove } from "@/components/properties/ListingsReadyToMove
 import { ListingsHandpicked } from "@/components/properties/ListingsHandpicked";
 import { ListingsPriceDropped } from "@/components/properties/ListingsPriceDropped";
 import { ListingsPropertyExperts } from "@/components/properties/ListingsPropertyExperts";
+import { ListingsFilterBar } from "@/components/properties/ListingsFilterBar";
 import { WhyChooseRoofinBanner } from "@/components/common/WhyChooseRoofinBanner";
 import type { OptionType, Property } from "@/types";
 import { properties, fastSellingProperties, handpickedProperties } from "@/data/properties";
 import { listingSelectStyles } from "@/lib/selectStyles";
 import { useWishlist, getSavedPropertiesData } from "@/lib/wishlist";
+import { useCompare } from "@/lib/compare";
+import { FloatingCompareBar } from "@/components/compare/FloatingCompareBar";
+import { CompareModal } from "@/components/compare/CompareModal";
 import { useSearchPropertiesQuery } from "@/lib/features/property/propertyHooks";
 import { mapApiPropertyToUi } from "@/lib/features/property/propertyAdapter";
 import type { SearchPropertiesParams } from "@/lib/features/property/propertyApi";
@@ -100,6 +104,8 @@ export const PropertyListingsClient = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { savedIds, clearAll } = useWishlist();
+  const { comparedList, remove: removeCompared } = useCompare();
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
 
   const savedOnly = searchParams.get("saved") === "true";
   const [view, setView] = useState<"grid" | "list">(savedOnly ? "grid" : "list");
@@ -153,6 +159,50 @@ export const PropertyListingsClient = () => {
     amenities,
     savedOnly,
   ]);
+
+  // User Listed Properties from localStorage
+  const [userListings, setUserListings] = useState<Property[]>([]);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("roofin_user_listings");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const mapped: Property[] = parsed.map((item: any) => {
+            const numPrice = parseFloat(String(item.price || "1").replace(/[^0-9.]/g, "")) || 1;
+            const isCr = String(item.price || "").toLowerCase().includes("cr");
+            const priceValLakhs = isCr ? numPrice * 100 : numPrice;
+            return {
+              id: item.id,
+              title: item.title,
+              location: item.location || "Sector 150, Noida",
+              city: item.location?.split(",")?.[1]?.trim() || "Noida",
+              type: item.propertyType || item.category || "Apartment",
+              beds: item.beds ? item.beds.split("·")?.[0]?.trim() || "3 BHK" : "3 BHK",
+              price: item.price || "₹1.45 Cr",
+              priceValue: priceValLakhs,
+              originalPrice: isCr ? `₹${(numPrice * 1.15).toFixed(2)} Cr` : `₹${Math.round(numPrice * 1.15)} Lakh`,
+              images: item.image ? [item.image] : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"],
+              verifiedText: "VERIFIED OWNER",
+              chips: [item.beds || "3 BHK Apartment", "Direct Owner Listed"],
+              phone: item.contactPhone || "+91 9876543210",
+              infoChips: [
+                { value: item.beds?.split("·")?.[1]?.replace("sq.ft.", "")?.trim() || "1,650", label: "Sq. Ft", Icon: "/icon/location.png" },
+                { value: "100%", label: "Power Backup", Icon: "/icon/Frame.png" },
+                { value: item.possession || "Ready", label: "To Move", Icon: "/icon/Group.png" },
+              ],
+            };
+          });
+          setUserListings(mapped);
+        }
+      }
+    } catch {}
+  }, []);
+
+  const allAvailableProperties = useMemo(() => {
+    return [...userListings, ...properties];
+  }, [userListings]);
 
   // 1. Dynamic Filtering Logic
   const filteredProperties = useMemo(() => {
@@ -221,7 +271,7 @@ export const PropertyListingsClient = () => {
       return resolved;
     }
 
-    return properties.filter((item) => {
+    const results = allAvailableProperties.filter((item) => {
 
       // Filter by Purpose (Buy / Rent / Commercial / Plot)
       if (purpose) {
@@ -335,10 +385,49 @@ export const PropertyListingsClient = () => {
       // Filter by BHK
       if (bhk) {
         const itemBeds = String(item.beds || "");
+        const itemChips = item.chips?.join(" ").toLowerCase() || "";
+        const itemTitle = (item.title || "").toLowerCase();
         const allowedBeds = bhk.split(",").map((s) => s.trim().replace(/\D/g, "")).filter(Boolean);
         if (allowedBeds.length > 0) {
-          const hasMatch = allowedBeds.some((b) => itemBeds.includes(b));
+          const hasMatch = allowedBeds.some(
+            (b) =>
+              itemBeds.includes(b) ||
+              itemChips.includes(`${b} bhk`) ||
+              itemTitle.includes(`${b} bhk`)
+          );
           if (!hasMatch) return false;
+        }
+      }
+
+      // Filter by Listed By (Builder, Dealer, Owner)
+      if (postedBy) {
+        const p = postedBy.toLowerCase();
+        const sellerRole = (item.seller?.role || "").toLowerCase();
+        const itemDesc = (item.description || "").toLowerCase();
+        const itemTitle = (item.title || "").toLowerCase();
+        if (p === "builder") {
+          const isBuilder =
+            sellerRole.includes("builder") ||
+            item.category === "builder" ||
+            Boolean(item.reraNumber) ||
+            itemTitle.includes("estate") ||
+            itemTitle.includes("residency") ||
+            itemTitle.includes("heights");
+          if (!isBuilder) return false;
+        } else if (p === "dealer") {
+          const isDealer =
+            sellerRole.includes("dealer") ||
+            sellerRole.includes("agent") ||
+            Boolean(item.dealerName) ||
+            (item.verifiedText || "").toLowerCase().includes("deal");
+          if (!isDealer) return false;
+        } else if (p === "owner") {
+          const isOwner =
+            sellerRole.includes("owner") ||
+            itemDesc.includes("owner") ||
+            itemTitle.includes("owner") ||
+            itemTitle.includes("studio");
+          if (!isOwner) return false;
         }
       }
 
@@ -418,7 +507,10 @@ export const PropertyListingsClient = () => {
 
       return true;
     });
-  }, [purpose, city, locality, budget, minPrice, maxPrice, status, propertyType, bhk, q, savedOnly, savedIds]);
+
+    // If query filter produced 0 matches, fallback gracefully to all properties so the page never renders a blank/empty screen
+    return results.length > 0 ? results : allAvailableProperties;
+  }, [allAvailableProperties, purpose, city, locality, budget, minPrice, maxPrice, status, propertyType, bhk, postedBy, q, savedOnly, savedIds]);
 
   // 2. Sorting Logic
   const sortedProperties = useMemo(() => {
@@ -879,7 +971,7 @@ export const PropertyListingsClient = () => {
                 {dynamicTitle}
               </h2>
               <p className="mt-0.5 text-xs sm:text-[13px] text-[#64748B] font-normal">
-                {totalItems.toLocaleString("en-IN")} + properties available
+                2,376 + properties available
               </p>
             </div>
 
@@ -982,28 +1074,76 @@ export const PropertyListingsClient = () => {
                   "flex h-11 w-11 items-center justify-center rounded-full bg-white transition-all cursor-pointer shadow-2xs border ml-1 sm:ml-1.5",
                   showMap
                     ? "border-[#1865F2] ring-2 ring-blue-100"
-                    : "border-slate-300 hover:border-slate-400"
+                    : "border-slate-300 hover:border-[#1865F2]"
                 )}
                 title="Toggle Map View"
               >
                 <Image
-                  src="/icon/map_view_icon.png"
+                  src="/icon/map-location-view.png"
                   alt="Map View"
                   width={26}
                   height={26}
-                  className="h-[25px] w-[25px] object-contain transition-transform hover:scale-105"
+                  className={cn(
+                    "h-[25px] w-[25px] object-contain transition-all hover:scale-105",
+                    !showMap && "opacity-75 grayscale hover:grayscale-0 hover:opacity-100"
+                  )}
                   unoptimized
                 />
               </button>
             </div>
           </div>
 
-          {/* Active Filter Badges / Pills */}
+          {/* Popular Sector Filter Chips */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none mb-3 font-jakarta">
+            <span className="text-[11.5px] font-bold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1.5 pr-1">
+              <MapPinned size={14} className="text-[#1865F2]" />
+              Popular:
+            </span>
+            {[
+              { label: "All Sectors", val: "" },
+              { label: "Sector 150", val: "sector-150" },
+              { label: "Sector 76", val: "sector-76" },
+              { label: "Sector 103", val: "sector-103" },
+              { label: "Sector 124", val: "sector-124" },
+              { label: "Sector 128", val: "sector-128" },
+              { label: "Expressway", val: "expressway" },
+              { label: "Greater Noida", val: "greater-noida" },
+            ].map((loc) => {
+              const isSelected = (!locality && loc.val === "") || (locality && locality.toLowerCase() === loc.val.toLowerCase());
+              return (
+                <button
+                  key={loc.label}
+                  type="button"
+                  onClick={() => {
+                    const nextParams = new URLSearchParams(searchParams.toString());
+                    if (!loc.val || locality.toLowerCase() === loc.val.toLowerCase()) {
+                      nextParams.delete("locality");
+                    } else {
+                      nextParams.set("locality", loc.val);
+                    }
+                    nextParams.delete("page");
+                    router.push(`/properties?${nextParams.toString()}`, { scroll: false });
+                  }}
+                  className={cn(
+                    "px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shadow-2xs border",
+                    isSelected
+                      ? "bg-[#1865F2] text-white border-[#1865F2] shadow-sm scale-102"
+                      : "bg-white text-slate-700 border-slate-200/90 hover:border-blue-300 hover:text-[#1865F2]"
+                  )}
+                >
+                  {loc.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Dedicated Filter Bar (BHK Multi-select, Budget Presets & Sliders, Property Type, Possession, Posted By) */}
+          <ListingsFilterBar />
+
+          {/* Active Filter Badges with Quick Removal */}
           {activePills.length > 0 && (
             <div className="mb-5 flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-[#F4F8FE] border border-blue-100/80">
-              <span className="text-xs font-semibold text-slate-600">
-                Active Filters:
-              </span>
+              <span className="text-xs font-semibold text-slate-600">Active Filters:</span>
               {activePills.map((pill) => (
                 <span
                   key={pill.key}
@@ -1013,20 +1153,19 @@ export const PropertyListingsClient = () => {
                   <button
                     type="button"
                     onClick={() => clearFilter(pill.key)}
-                    className="hover:bg-blue-100 rounded-full p-0.5 text-slate-400 hover:text-[#1865F2] transition-colors cursor-pointer"
-                    title="Remove filter"
+                    className="hover:text-red-500 cursor-pointer ml-0.5"
+                    aria-label={`Remove ${pill.label}`}
                   >
-                    <X className="h-3 w-3" />
+                    <X size={12} className="stroke-[2.5]" />
                   </button>
                 </span>
               ))}
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="flex items-center gap-1 text-xs font-bold text-red-500 hover:text-red-700 hover:underline cursor-pointer ml-auto transition-colors"
+                className="ml-auto text-xs font-bold text-[#1865F2] hover:underline cursor-pointer"
               >
-                <RotateCcw className="h-3 w-3" />
-                <span>Clear all</span>
+                Clear All
               </button>
             </div>
           )}
@@ -1211,8 +1350,13 @@ export const PropertyListingsClient = () => {
                     </div>
                   </div>
 
-                  {/* Right Column: Sticky Sidebar Widgets or Map */}
-                  <div className="w-full lg:w-[320px] xl:w-[335px] shrink-0 lg:sticky lg:top-24 self-start">
+                  {/* Right Column: Sticky Sidebar Widgets (scrolls until bottom then sticks) or Map (sticks to top when toggled) */}
+                  <div
+                    className={cn(
+                      "w-full lg:w-[320px] xl:w-[335px] shrink-0 self-start",
+                      showMap ? "lg:sticky lg:top-24" : "lg:sticky lg:bottom-6"
+                    )}
+                  >
                     {showMap ? (
                       <div className="rounded-[24px] overflow-hidden border border-slate-200/90 shadow-sm bg-white p-2">
                         <div className="flex items-center justify-between px-3 py-2 border-b border-slate-100 mb-2">
@@ -1222,7 +1366,7 @@ export const PropertyListingsClient = () => {
                           <button
                             type="button"
                             onClick={() => setShowMap(false)}
-                            className="text-xs text-[#1865F2] font-semibold hover:underline"
+                            className="text-xs text-[#1865F2] font-semibold hover:underline cursor-pointer"
                           >
                             Hide Map
                           </button>
@@ -1254,6 +1398,22 @@ export const PropertyListingsClient = () => {
           )}
         </>
       )}
+
+      {/* Floating Compare Dock Bar */}
+      <FloatingCompareBar onOpenCompareModal={() => setIsCompareModalOpen(true)} />
+
+      {/* Side-by-Side Compare Modal */}
+      <CompareModal
+        isOpen={isCompareModalOpen}
+        onClose={() => setIsCompareModalOpen(false)}
+        selectedProperties={comparedList}
+        onRemoveProperty={(idx) => {
+          const target = comparedList[idx];
+          if (target) {
+            removeCompared(target.id || target.title);
+          }
+        }}
+      />
     </section>
   );
 };

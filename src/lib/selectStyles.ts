@@ -33,6 +33,7 @@ export const headerSelectStyles: StylesConfig<
     fontSize: '16px',
     letterSpacing: '-0.019em',
     whiteSpace: 'nowrap',
+    fontFamily: 'var(--font-poppins), sans-serif',
   }),
   singleValue: (base) => ({
     ...base,
@@ -42,6 +43,7 @@ export const headerSelectStyles: StylesConfig<
     letterSpacing: '-0.019em',
     whiteSpace: 'nowrap',
     margin: 0,
+    fontFamily: 'var(--font-poppins), sans-serif',
   }),
 
   menu: (base) => ({

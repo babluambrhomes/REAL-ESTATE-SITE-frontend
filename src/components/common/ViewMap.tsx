@@ -10,6 +10,7 @@ import { PropertyCard } from "@/components/card/PropertyCard";
 export default function ViewMap({
   height = "250px",
   properties = [],
+  navPosition = "bottom-right",
 }: MapComponentProps) {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -194,7 +195,9 @@ export default function ViewMap({
       zoom: 12,
     });
 
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
+    // Previous navigation control position:
+    // map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.addControl(new maplibregl.NavigationControl(), navPosition || "bottom-right");
     mapRef.current = map;
 
     map.on("load", () => {

@@ -139,6 +139,10 @@ export const propertyApi = {
       .get<PropertyListResponse>("/users/wishlist", { params })
       .then((res) => res.data),
 
+  // Helper to validate UUID
+  isUUID: (str?: string) =>
+    Boolean(str && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str)),
+
   // Submit enquiry lead to seller / dealer
   submitEnquiry: (data: {
     name: string;
@@ -147,10 +151,20 @@ export const propertyApi = {
     message?: string;
     propertyId?: string;
     sellerId?: string;
-  }) =>
-    apiClient
-      .post("/enquiries", data)
-      .then((res) => res.data),
+  }) => {
+    const isUUID = (str?: string) =>
+      Boolean(str && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str));
+    const payload: any = {
+      name: data.name.trim(),
+      email: data.email.trim(),
+      phone: data.phone?.trim() || undefined,
+      message: data.message?.trim() || undefined,
+    };
+    if (isUUID(data.propertyId)) payload.propertyId = data.propertyId;
+    if (isUUID(data.sellerId)) payload.sellerId = data.sellerId;
+
+    return apiClient.post("/enquiries", payload).then((res) => res.data);
+  },
 
   // Book a site tour
   bookSiteVisit: (data: {
@@ -163,8 +177,65 @@ export const propertyApi = {
     phone?: string;
     email?: string;
     message?: string;
-  }) =>
+  }) => {
+    const isUUID = (str?: string) =>
+      Boolean(str && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str));
+    const payload: any = {
+      visitDate: data.visitDate,
+      startTime: data.startTime,
+      endTime: data.endTime,
+      name: data.name?.trim(),
+      phone: data.phone?.trim(),
+      email: data.email?.trim(),
+      message: data.message?.trim(),
+    };
+    if (isUUID(data.propertyId)) payload.propertyId = data.propertyId;
+    if (isUUID(data.sellerId)) payload.sellerId = data.sellerId;
+
+    return apiClient.post("/site-visits", payload).then((res) => res.data);
+  },
+
+  // Create new property listing (Verified Seller)
+  createProperty: (data: any) =>
     apiClient
-      .post("/site-visits", data)
+      .post("/properties", data)
+      .then((res) => res.data),
+
+  // Upload images for a property
+  uploadPropertyImages: (propertyId: string, formData: FormData) =>
+    apiClient
+      .post(`/properties/${propertyId}/images`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => res.data),
+
+  // Get current logged-in seller's properties
+  getMyProperties: (params?: Record<string, any>) =>
+    apiClient
+      .get("/properties/my", { params })
+      .then((res) => res.data),
+
+  // Get specific seller property by ID
+  getMyProperty: (id: string) =>
+    apiClient
+      .get(`/properties/my/${id}`)
+      .then((res) => res.data),
+
+  // Update property listing
+  updateProperty: (id: string, data: any) =>
+    apiClient
+      .patch(`/properties/${id}`, data)
+      .then((res) => res.data),
+
+  // Update property status (AVAILABLE, UNDER_OFFER, SOLD, RENTED, etc.)
+  updatePropertyStatus: (id: string, status: string) =>
+    apiClient
+      .patch(`/properties/${id}/status`, { propertyStatus: status })
+      .then((res) => res.data),
+
+  // Delete property listing
+  deleteProperty: (id: string) =>
+    apiClient
+      .delete(`/properties/${id}`)
       .then((res) => res.data),
 };

@@ -104,13 +104,13 @@ export const CompareHowItWorks = ({ onStartComparing }: CompareHowItWorksProps) 
             </h2>
 
             <p className="text-[14px] sm:text-[15.5px] text-slate-500 font-normal">
-              Compare Properties In Just A Few Simple Steps.
+              Compare Properties In Just 3 Simple Steps
             </p>
           </div>
 
-          {/* 4 Steps Grid (2x2) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-1">
-            {steps.map((step) => (
+          {/* 3 Steps Vertical List matching Figma */}
+          <div className="space-y-4 pt-1">
+            {steps.slice(0, 3).map((step) => (
               <div key={step.num} className="flex items-start gap-3.5">
                 <div className="w-8 h-8 rounded-full bg-[#1865F2] text-white font-bold text-[14px] flex items-center justify-center shrink-0 shadow-sm">
                   {step.num}

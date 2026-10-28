@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useAppSelector } from "@/store/hooks";
+import { PostPropertyWizardModal } from "./PostPropertyWizardModal";
+
+import { propertyApi } from "@/lib/features/property/propertyApi";
 
 type UserType = "owner" | "broker";
 type ListingMode = "post" | "import";
@@ -19,6 +22,7 @@ export const PostPropertyQuickForm = () => {
   const [subType, setSubType] = useState<string>("Flat/Apartment");
   const [mobileNumber, setMobileNumber] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
 
   useEffect(() => {
     if (user?.phone && !mobileNumber) {
@@ -35,21 +39,17 @@ export const PostPropertyQuickForm = () => {
 
     setIsSubmitting(true);
     try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: user?.person?.firstName ? `${user.person.firstName} ${user.person.lastName || ""}`.trim() : "Seller Applicant",
-          email: user?.email || `seller_${mobileNumber}@roofin.com`,
-          phone: mobileNumber,
-          message: `Post Property Intent - Role: ${userType}, Type: ${category}, Intent: ${intent}, SubType: ${subType}`,
-        }),
+      await propertyApi.submitEnquiry({
+        name: user?.person?.firstName ? `${user.person.firstName} ${user.person.lastName || ""}`.trim() : "Seller Applicant",
+        email: user?.email || `seller_${mobileNumber}@roofin.com`,
+        phone: mobileNumber,
+        message: `Post Property Intent - Role: ${userType}, Type: ${category}, Intent: ${intent}, SubType: ${subType}`,
       });
-      toast.success("Property listing request received! Our onboarding team will assist you.");
     } catch {
-      toast.success("Property listing request received! Our onboarding team will assist you.");
+      // Local fallback
     } finally {
       setIsSubmitting(false);
+      setIsWizardOpen(true);
     }
   };
 
@@ -340,6 +340,19 @@ export const PostPropertyQuickForm = () => {
         </div>
 
       </div>
+
+      {/* Post Property Multi-Step Wizard Modal */}
+      <PostPropertyWizardModal
+        isOpen={isWizardOpen}
+        onClose={() => setIsWizardOpen(false)}
+        initialData={{
+          userType,
+          category,
+          intent,
+          subType,
+          mobileNumber,
+        }}
+      />
     </div>
   );
 };

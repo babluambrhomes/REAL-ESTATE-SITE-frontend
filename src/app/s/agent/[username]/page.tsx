@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, useEffect, use } from "react";
 import { Plus } from "lucide-react";
 import { TopAnnouncementBar } from "@/components/layout/TopAnnouncementBar";
 import { SearchHeader } from "@/components/layout/SearchHeader";
@@ -12,6 +12,9 @@ import { BrokerRecentPosts } from "@/components/broker-profile/BrokerRecentPosts
 import { BrokerVideosSection } from "@/components/broker-profile/BrokerVideosSection";
 import { BrokerAboutSection } from "@/components/broker-profile/BrokerAboutSection";
 import { BrokerSidebar } from "@/components/broker-profile/BrokerSidebar";
+import { apiClient } from "@/lib/axios";
+
+import { Footer } from "@/components/layout/Footer";
 
 interface AgentProfilePageProps {
   params: Promise<{ username: string }>;
@@ -21,6 +24,21 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
   const { username } = use(params);
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const [activeTab, setActiveTab] = useState("overview");
+  const [sellerData, setSellerData] = useState<any>(null);
+
+  useEffect(() => {
+    if (!username) return;
+    apiClient
+      .get(`/sellers/${username}`)
+      .then((res) => {
+        if (res.data?.data) {
+          setSellerData(res.data.data);
+        }
+      })
+      .catch(() => {
+        // Fallback gracefully to default Figma mock data
+      });
+  }, [username]);
 
   return (
     <div className="min-h-screen flex flex-col font-jakarta bg-[#F8FAFC]">
@@ -34,7 +52,9 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
       <div 
         className="w-full relative pt-3 pb-24 sm:pb-28 overflow-hidden"
         style={{
-          background: "linear-gradient(90deg, #B5F2E3 0%, #BCE7FD 50%, #A9C7FA 100%)",
+          background: sellerData?.coverUrl
+            ? `url(${sellerData.coverUrl}) center/cover no-repeat`
+            : "linear-gradient(90deg, #B5F2E3 0%, #BCE7FD 50%, #A9C7FA 100%)",
         }}
       >
         {/* Mint / Emerald green ambient glow on the left */}
@@ -67,7 +87,21 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
       <main className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20 pb-16 relative z-20">
         
         {/* Profile Hero Card */}
-        <BrokerHeroSection />
+        <BrokerHeroSection
+          name={
+            sellerData?.organization?.name ||
+            (sellerData?.user?.person
+              ? `${sellerData.user.person.firstName} ${sellerData.user.person.lastName || ""}`.trim()
+              : undefined)
+          }
+          role={sellerData?.headline}
+          avatarUrl={sellerData?.logoUrl || sellerData?.user?.person?.avatarUrl}
+          isVerified={sellerData?.verificationStatus === "VERIFIED"}
+          followers={sellerData?._count?.followers}
+          sellerId={sellerData?.id}
+          rating={sellerData?.averageRating || undefined}
+          reviewCount={sellerData?.ratingCount || undefined}
+        />
 
         {/* Separate Standalone Highlights Metrics Card */}
         <BrokerHighlightsRow />
@@ -85,7 +119,7 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
               {/* Dynamic Content Based on Tab */}
               {activeTab === "overview" && (
                 <>
-                  <BrokerPostedProperties />
+                  <BrokerPostedProperties title="Posted Properties(120)" limit={3} />
                   <div className="pt-3 border-t border-slate-100">
                     <BrokerRecentPosts />
                   </div>
@@ -93,7 +127,7 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
               )}
               {activeTab === "videos" && <BrokerVideosSection />}
               {(activeTab === "properties-listed" || activeTab === "listed-properties") && (
-                <BrokerPostedProperties />
+                <BrokerPostedProperties title="Properties Listed" limit={4} />
               )}
               {activeTab === "about" && <BrokerAboutSection />}
               {activeTab === "post" && <BrokerRecentPosts isFullGrid={true} />}
@@ -109,6 +143,9 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
         </div>
 
       </main>
+
+      {/* Global Roofin Footer (handled by RootLayout) */}
+      {/* <Footer /> */}
 
     </div>
   );

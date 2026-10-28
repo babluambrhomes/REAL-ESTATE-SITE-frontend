@@ -31,8 +31,8 @@ export const CompareHero = ({ onAddProperty }: CompareHeroProps) => {
           <div className="lg:col-span-7 space-y-6">
             
             <div className="space-y-4">
-              <h1 className="text-[30px] sm:text-[38px] lg:text-[42px] font-bold text-[#0B132B] tracking-tight leading-[1.2]">
-                Compare Home In India :  At Roofin
+              <h1 className="text-[32px] sm:text-[40px] lg:text-[46px] font-bold text-[#0B132B] tracking-tight leading-[1.15]">
+                Compare Home
               </h1>
 
               <p className="text-[14px] sm:text-[15.5px] text-slate-700 leading-relaxed max-w-[620px]">

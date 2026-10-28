@@ -9,6 +9,11 @@ interface TopBarProps {
   propertyTitle?: string;
   activeTab: string;
   onTabChange: (tab: string) => void;
+  onOpenReport?: () => void;
+  onOpenCompare?: () => void;
+  onNavigatePrev?: () => void;
+  onNavigateNext?: () => void;
+  urnCode?: string;
 }
 
 const TABS = [
@@ -112,6 +117,11 @@ export const PropertyDetailTopBar = ({
   propertyTitle = "The terraces at Estate 361",
   activeTab,
   onTabChange,
+  onOpenReport,
+  onOpenCompare,
+  onNavigatePrev,
+  onNavigateNext,
+  urnCode = "URN : P35",
 }: TopBarProps) => {
   const [showNotice, setShowNotice] = useState(true);
 
@@ -182,7 +192,7 @@ export const PropertyDetailTopBar = ({
 
           {/* URN Identifier on Right */}
           <div className="text-[13px] font-bold text-[#1865F2] tracking-wide shrink-0">
-            URN : P35
+            {urnCode}
           </div>
         </div>
       </div>
@@ -213,12 +223,22 @@ export const PropertyDetailTopBar = ({
 
             {/* Compare & Report buttons */}
             <div className="flex items-center gap-4">
-              <button className="flex items-center gap-1.5 text-[#334155] hover:text-[#1865F2] font-semibold transition-colors cursor-pointer">
+              <button
+                type="button"
+                onClick={onOpenCompare}
+                className="flex items-center gap-1.5 text-[#334155] hover:text-[#1865F2] font-semibold transition-colors cursor-pointer"
+                title="Add to comparison matrix"
+              >
                 <CompareShuffleIcon className="h-4 w-4 text-[#334155]" />
                 <span>Compare</span>
               </button>
 
-              <button className="flex items-center gap-1.5 text-[#334155] hover:text-[#1865F2] font-semibold transition-colors cursor-pointer">
+              <button
+                type="button"
+                onClick={onOpenReport}
+                className="flex items-center gap-1.5 text-[#334155] hover:text-rose-600 font-semibold transition-colors cursor-pointer"
+                title="Report inaccurate details or fraud"
+              >
                 <ReportDocumentIcon className="h-4 w-4 text-slate-500" />
                 <span>Report Property</span>
               </button>
@@ -227,12 +247,22 @@ export const PropertyDetailTopBar = ({
 
           {/* Right Action: Combined Dual Prev/Next Capsule Button matching Figma 1:1 */}
           <div className="flex items-center rounded-full bg-gradient-to-r from-[#1865F2] via-[#0092CC] to-[#00A86B] text-white shadow-xs overflow-hidden px-4 py-1.5 text-[13px] font-bold">
-            <button className="flex items-center gap-1 hover:opacity-90 transition-opacity cursor-pointer">
+            <button
+              type="button"
+              onClick={onNavigatePrev}
+              className="flex items-center gap-1 hover:opacity-90 transition-opacity cursor-pointer active:scale-95"
+              title="View previous property"
+            >
               <ChevronLeft size={16} className="stroke-[3]" />
               <span>Previous</span>
             </button>
             <span className="mx-2 opacity-30 text-white font-normal">|</span>
-            <button className="flex items-center gap-1 hover:opacity-90 transition-opacity cursor-pointer">
+            <button
+              type="button"
+              onClick={onNavigateNext}
+              className="flex items-center gap-1 hover:opacity-90 transition-opacity cursor-pointer active:scale-95"
+              title="View next property"
+            >
               <span>Next</span>
               <ChevronRight size={16} className="stroke-[3]" />
             </button>

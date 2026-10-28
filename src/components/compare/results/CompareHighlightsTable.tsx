@@ -7,11 +7,19 @@ interface PropertySummary {
   title: string;
   location: string;
   image: string;
+  beds?: string;
+  type?: string;
+  area?: string;
+  status?: string;
+  price?: string;
+  builder?: string;
+  floor?: string;
 }
 
 interface CompareHighlightsTableProps {
   prop1?: PropertySummary;
   prop2?: PropertySummary;
+  highlightDifferencesOnly?: boolean;
 }
 
 export const CompareHighlightsTable = ({
@@ -25,15 +33,20 @@ export const CompareHighlightsTable = ({
     location: "Sector 124, Noida",
     image: "/images/properties/tower-popular-figma.jpg",
   },
+  highlightDifferencesOnly = false,
 }: CompareHighlightsTableProps) => {
-  const rows = [
-    { label: "Property Type", val1: "Apartment", val2: "Apartment" },
-    { label: "Configuration", val1: "3 BHK", val2: "4 BHK" },
-    { label: "Super Area", val1: "1,621 sq.ft", val2: "2,450 sq.ft" },
-    { label: "Status", val1: "Ready to move", val2: "Ready to move" },
-    { label: "Floor", val1: "3rd Floor", val2: "2nd Floor" },
-    { label: "Builder", val1: "ATS", val2: "M3M" },
+  const allRows = [
+    { label: "Property Type", val1: prop1.type || "Apartment", val2: prop2.type || "Apartment" },
+    { label: "Configuration", val1: prop1.beds || "3 BHK", val2: prop2.beds || "4 BHK" },
+    { label: "Super Area", val1: prop1.area || "1,621 sq.ft", val2: prop2.area || "2,450 sq.ft" },
+    { label: "Status", val1: prop1.status || "Ready to move", val2: prop2.status || "Ready to move" },
+    { label: "Floor", val1: prop1.floor || "3rd Floor", val2: prop2.floor || "2nd Floor" },
+    { label: "Builder", val1: prop1.builder || "ATS Group", val2: prop2.builder || "M3M India" },
   ];
+
+  const rows = highlightDifferencesOnly
+    ? allRows.filter((r) => r.val1.toLowerCase() !== r.val2.toLowerCase())
+    : allRows;
 
   return (
     <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-jakarta">

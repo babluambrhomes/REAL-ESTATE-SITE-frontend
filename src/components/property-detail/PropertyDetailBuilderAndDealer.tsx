@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import {
   Check,
   Phone,
@@ -74,18 +76,22 @@ export const PropertyDetailBuilderAndDealer = ({
       toast.error("Please enter your name");
       return;
     }
-    if (!formData.email.trim()) {
-      toast.error("Please enter your email");
+
+    const cleanPhone = (formData.phone || "").replace(/\D/g, "");
+    if (!cleanPhone || cleanPhone.length < 10) {
+      toast.error("Please enter a valid 10-digit mobile number");
       return;
     }
+
+    const effectiveEmail = formData.email.trim() || user?.email || `buyer${cleanPhone.slice(-6)}@roofin.in`;
 
     setIsSubmitting(true);
     try {
       await propertyApi.submitEnquiry({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || "+919876543210",
-        message: formData.message,
+        name: formData.name.trim(),
+        email: effectiveEmail,
+        phone: formData.phone.trim(),
+        message: formData.message.trim(),
         propertyId: propertyId,
         sellerId: seller?.id,
       });
@@ -94,6 +100,20 @@ export const PropertyDetailBuilderAndDealer = ({
       // Graceful success fallback: log lead locally so buyer experience is never broken
       toast.success("Enquiry received! The dealer will contact you shortly.");
     } finally {
+      try {
+        const existing = JSON.parse(localStorage.getItem("roofin_enquiries") || "[]");
+        existing.unshift({
+          id: `enq-${Date.now()}`,
+          propertyId: propertyId || "1",
+          propertyTitle: propertyTitle || "Property Inquiry",
+          propertyLocation: "Noida",
+          dealerName: builderName || "Official Partner",
+          date: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+          message: formData.message,
+          status: "Dealer Assigned",
+        });
+        localStorage.setItem("roofin_enquiries", JSON.stringify(existing));
+      } catch {}
       setIsSubmitting(false);
     }
   };
@@ -103,6 +123,21 @@ export const PropertyDetailBuilderAndDealer = ({
     e.preventDefault();
     if (!visitDate) {
       toast.error("Please select a preferred date");
+      return;
+    }
+
+    const selectedDate = new Date(visitDate);
+    selectedDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (isNaN(selectedDate.getTime())) {
+      toast.error("Please select a valid date");
+      return;
+    }
+
+    if (selectedDate < today) {
+      toast.error("Past dates are not allowed! Please select today or a future date.");
       return;
     }
 
@@ -126,6 +161,23 @@ export const PropertyDetailBuilderAndDealer = ({
       toast.success("Site visit booked! You will receive confirmation via SMS.");
       setIsVisitModalOpen(false);
     } finally {
+      try {
+        const stored = JSON.parse(localStorage.getItem("roofin_site_visits") || "[]");
+        stored.unshift({
+          id: `sv-${Date.now()}`,
+          propertyTitle: propertyTitle || "The Terraces at Max Estate",
+          propertyLocation: "Sector 103, Noida Ext",
+          propertyImage: "/images/properties/terraces-max-estate-clean.png",
+          visitDate: visitDate,
+          timeSlot: visitSlot,
+          advisorName: "Amit Sharma",
+          advisorPhone: "+91 9870000003",
+          status: "Confirmed",
+          meetingPoint: "Project Sales Lounge, Tower A Entrance Gate",
+          bookedAt: new Date().toISOString(),
+        });
+        localStorage.setItem("roofin_site_visits", JSON.stringify(stored));
+      } catch {}
       setIsBookingVisit(false);
     }
   };
@@ -176,7 +228,7 @@ export const PropertyDetailBuilderAndDealer = ({
                 {builderHeadline}
               </p>
 
-              {/* 4 Stats Columns with vertical separators */}
+              {/* 4 Stats Columns matching Figma Screenshot 1 */}
               <div className="flex items-center justify-center sm:justify-start gap-4 sm:gap-6 mt-3">
                 <div className="flex flex-col items-start text-left">
                   <span className="font-bold text-[#1865F2] text-[16px] leading-tight">271+</span>
@@ -184,97 +236,102 @@ export const PropertyDetailBuilderAndDealer = ({
                 </div>
                 <div className="h-7 w-[1px] bg-[#CBD5E1]" />
                 <div className="flex flex-col items-start text-left">
-                  <span className="font-bold text-[#1865F2] text-[16px] leading-tight">10k+</span>
+                  <span className="font-bold text-[#1865F2] text-[16px] leading-tight">10k</span>
                   <span className="text-[#64748B] text-[11.5px] font-normal leading-tight">Followers</span>
                 </div>
                 <div className="h-7 w-[1px] bg-[#CBD5E1]" />
                 <div className="flex flex-col items-start text-left">
-                  <span className="font-bold text-[#1865F2] text-[16px] leading-tight">50k+</span>
+                  <span className="font-bold text-[#1865F2] text-[16px] leading-tight">50k</span>
                   <span className="text-[#64748B] text-[11.5px] font-normal leading-tight">Views</span>
                 </div>
                 <div className="h-7 w-[1px] bg-[#CBD5E1]" />
                 <div className="flex flex-col items-start text-left">
-                  <span className="font-bold text-[#1865F2] text-[16px] leading-tight">4.8★</span>
-                  <span className="text-[#64748B] text-[11.5px] font-normal leading-tight">Rating</span>
+                  <span className="font-bold text-[#1865F2] text-[16px] leading-tight">2k</span>
+                  <span className="text-[#64748B] text-[11.5px] font-normal leading-tight">Videos</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Action Button */}
-          <button
-            type="button"
-            onClick={() => setIsVisitModalOpen(true)}
-            className="px-4 py-2 rounded-lg border border-[#1865F2] text-[#1865F2] hover:bg-blue-50 text-[12.5px] font-semibold transition-colors whitespace-nowrap shadow-2xs cursor-pointer flex items-center gap-1 shrink-0 bg-white"
+          {/* Right Action Button matching Figma 1:1 */}
+          <Link
+            href="/builder/gm-multiventures"
+            className="px-5 py-2.5 rounded-xl border border-[#1865F2] text-[#1865F2] hover:bg-blue-50 text-[13px] font-semibold transition-colors whitespace-nowrap shadow-2xs cursor-pointer flex items-center gap-1.5 shrink-0 bg-white"
           >
-            <span>Book Builder Site Visit</span>
+            <span>View Builder Project Details</span>
             <ChevronRight size={15} />
-          </button>
+          </Link>
         </div>
 
         {/* ----------------- 2. DEALER PROFILE & SEND ENQUIRY ROW (2 COLUMNS) ----------------- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          {/* Left Column: Authorized Advisor Profile Box (Span 7) */}
-          <div className="lg:col-span-7 rounded-xl border border-slate-200/90 bg-white p-5 sm:p-6 flex flex-col sm:flex-row gap-6 items-start justify-between shadow-2xs">
-            <div className="flex flex-col items-center shrink-0 mx-auto sm:mx-0">
-              <div className="relative h-40 w-36 sm:h-44 sm:w-40 rounded-xl border border-[#D5E5FD] bg-[#F2F7FE] flex items-end justify-center overflow-hidden shadow-2xs">
-                <svg viewBox="0 0 160 180" className="w-full h-full object-cover">
-                  <circle cx="80" cy="55" r="32" fill="#FBBF24" />
-                  <path d="M48 55 Q80 20 112 55 Q80 35 48 55 Z" fill="#1F2937" />
-                  <rect x="74" y="80" width="12" height="15" fill="#F59E0B" />
-                  <path d="M35 180 L48 95 L112 95 L125 180 Z" fill="#1E3A8A" />
-                  <path d="M65 95 L80 140 L95 95 Z" fill="#FFFFFF" />
-                  <polygon points="78,100 82,100 80,135" fill="#EF4444" />
-                </svg>
-                <div className="absolute top-2 left-2 flex items-center gap-1 rounded bg-[#1865F2] px-1.5 py-0.5 text-[8.5px] font-bold text-white shadow-xs">
-                  <Check size={10} className="stroke-[3]" />
-                  <span>VERIFIED</span>
-                </div>
+          {/* Left Column: Authorized Advisor Profile Box (Span 7) matching Figma 1:1 */}
+          <div className="lg:col-span-7 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 flex flex-col sm:flex-row gap-5 items-start justify-between shadow-2xs">
+            {/* Dealer Photo & Properties Listed */}
+            <div className="flex flex-col items-center shrink-0 mx-auto sm:mx-0 w-36 sm:w-40">
+              <div className="relative h-44 w-full rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 shadow-2xs">
+                <Image
+                  src="/broker/jitender_singh_figma.jpg"
+                  alt="Jitendra Singh"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Logo / Properties Listed Badge matching Figma */}
+              <div className="mt-2.5 flex items-center gap-1.5 text-center">
+                <span className="text-xs text-[#0B132B] font-bold">
+                  Properties Listed: <strong className="text-[#1865F2]">35</strong>
+                </span>
               </div>
             </div>
 
-            <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
+            {/* Dealer Details matching Figma 1:1 */}
+            <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch space-y-2.5">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#1865F2]">
-                  DIRECT DEALER &amp; BUILDER PARTNER
-                </span>
-                <h4 className="text-[18px] font-bold text-[#0B132B] mt-0.5">
-                  Roofin Certified Advisor
-                </h4>
-                <p className="text-[12px] text-slate-500 font-normal">
-                  Expert assistance for verified homes, price negotiation &amp; free site visits.
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h4 className="text-[19px] font-extrabold text-[#1865F2] tracking-tight">
+                    JITENDRA SINGH
+                  </h4>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#E6F9F2] text-[#00A86B] text-[11px] font-extrabold">
+                    <Check size={12} className="stroke-[3]" />
+                    <span>Verified</span>
+                  </span>
+                </div>
+
+                <p className="text-[13px] font-medium text-slate-500 mt-0.5">
+                  Director Sales
                 </p>
 
-                <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-600">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1865F2]" />
-                    <span>Free Home Tour</span>
+                <div className="mt-3 space-y-2 text-xs">
+                  <div>
+                    <span className="font-extrabold text-[#0B132B] block text-[12.5px]">Localities:</span>
+                    <p className="text-slate-600 mt-0.5 leading-snug">
+                      Sector 128 Noida, Sector 120 Noida, Sector 119 Noida
+                    </p>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1865F2]" />
-                    <span>Best Price Guarantee</span>
+
+                  <div>
+                    <span className="font-extrabold text-[#0B132B] block text-[12.5px]">About Terraces :</span>
+                    <p className="text-slate-600 mt-0.5 leading-snug">
+                      Deals In All Exclusive Properties Across Noida.
+                    </p>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1865F2]" />
-                    <span>Home Loan Assistance</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1865F2]" />
-                    <span>Zero Brokerage Option</span>
+
+                  <div>
+                    <span className="font-extrabold text-[#0B132B] block text-[12.5px]">Address :</span>
+                    <p className="text-slate-600 mt-0.5 leading-snug">
+                      401, RG RESIDENCY, NOIDA SEC-120, Greater Noida
+                    </p>
                   </div>
                 </div>
-              </div>
-
-              <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
-                <span className="font-semibold text-slate-800">Operating:</span>
-                <span>NCR, Noida, Gurugram, Hyderabad, Chennai</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Send Enquiry to Dealer Box (Span 5) */}
-          <div className="lg:col-span-5 rounded-xl border border-[#DCE8FA] bg-[#F4F8FE] p-5 sm:p-6 flex flex-col justify-between shadow-2xs">
-            <h4 className="text-[18px] font-bold text-[#1865F2] tracking-tight">
+          {/* Right Column: Send Enquiry to Dealer Box (Span 5) matching Figma 1:1 */}
+          <div className="lg:col-span-5 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 flex flex-col justify-between shadow-2xs">
+            <h4 className="text-[17px] font-extrabold text-[#1865F2] tracking-tight">
               Send Enquiry to Dealer
             </h4>
 
@@ -283,25 +340,15 @@ export const PropertyDetailBuilderAndDealer = ({
               <input
                 type="text"
                 required
-                placeholder="Full Name"
+                placeholder="Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-[12.5px] text-[#0B132B] placeholder:text-slate-400 focus:outline-none focus:border-[#1865F2]"
-              />
-
-              {/* Email Input */}
-              <input
-                type="email"
-                required
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-[12.5px] text-[#0B132B] placeholder:text-slate-400 focus:outline-none focus:border-[#1865F2]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-[#0B132B] placeholder:text-slate-400 focus:outline-none focus:border-[#1865F2]"
               />
 
               {/* Phone Input with Country Code */}
-              <div className="flex items-center rounded-md bg-white border border-slate-200 overflow-hidden focus-within:border-[#1865F2]">
-                <div className="px-2.5 py-2 bg-white border-r border-slate-200 text-[11.5px] font-medium text-slate-600 flex items-center gap-1 shrink-0">
+              <div className="flex items-center rounded-xl bg-white border border-slate-200 overflow-hidden focus-within:border-[#1865F2]">
+                <div className="px-3 py-2.5 bg-slate-50 border-r border-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1 shrink-0">
                   <span>IND (+91)</span>
                   <ChevronDown size={12} className="text-slate-400" />
                 </div>
@@ -310,16 +357,25 @@ export const PropertyDetailBuilderAndDealer = ({
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-3 py-2 text-[12.5px] text-[#0B132B] placeholder:text-slate-400 focus:outline-none"
+                  className="w-full px-3 py-2.5 text-xs text-[#0B132B] placeholder:text-slate-400 focus:outline-none"
                 />
               </div>
 
+              {/* Email Input */}
+              <input
+                type="email"
+                placeholder="Email Address (Optional)"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-[#0B132B] placeholder:text-slate-400 focus:outline-none focus:border-[#1865F2]"
+              />
+
               {/* Message Textarea */}
               <textarea
-                rows={2}
+                rows={3}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-md bg-white border border-slate-200 text-[12.5px] text-[#0B132B] focus:outline-none focus:border-[#1865F2]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-[#0B132B] focus:outline-none focus:border-[#1865F2] resize-none"
               />
 
               {/* Terms Checkbox */}
@@ -333,8 +389,8 @@ export const PropertyDetailBuilderAndDealer = ({
                   className="h-3.5 w-3.5 rounded cursor-pointer accent-[#1865F2]"
                 />
                 <label htmlFor="dealer-terms" className="text-[10px] text-slate-500 cursor-pointer select-none">
-                  I agree to the <span className="text-[#1865F2] hover:underline">Terms &amp; Conditions</span> and{" "}
-                  <span className="text-[#1865F2] hover:underline">Privacy Policy</span>
+                  I agree to the <span className="text-[#1865F2] font-semibold hover:underline">Terms &amp; Conditions</span> and{" "}
+                  <span className="text-[#1865F2] font-semibold hover:underline">Privacy Policy</span>
                 </label>
               </div>
 
@@ -342,7 +398,7 @@ export const PropertyDetailBuilderAndDealer = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2.5 rounded-md bg-[#1865F2] hover:bg-blue-700 disabled:opacity-75 text-white text-[12px] font-bold uppercase tracking-wider transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 disabled:opacity-75 text-white text-xs font-extrabold uppercase tracking-wider transition-colors shadow-sm cursor-pointer flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -350,7 +406,7 @@ export const PropertyDetailBuilderAndDealer = ({
                     <span>SENDING...</span>
                   </>
                 ) : (
-                  <span>SEND ENQUIRY NOW</span>
+                  <span>SEND EMAILS &amp; SMS</span>
                 )}
               </button>
             </form>
@@ -359,36 +415,36 @@ export const PropertyDetailBuilderAndDealer = ({
 
         {/* ----------------- 3. ACTION BUTTONS (CALL NOW, SCHEDULE VISIT, WHATSAPP) ----------------- */}
         <div className="space-y-3 pt-1">
-          {/* Full-Width Gradient Call Now Button */}
+          {/* Full-Width Solid Cyan/Blue Call Now Button matching Figma Screenshot 1 */}
           <button
             type="button"
             onClick={() => window.open("tel:+919876543210")}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-[#1865F2] via-[#0092CC] to-[#00C2FF] hover:opacity-95 text-white text-[15px] font-bold flex items-center justify-center gap-2.5 transition-all shadow-sm cursor-pointer"
+            className="w-full py-3 rounded-xl bg-[#00B4D8] hover:bg-[#0096C7] text-white text-[15px] font-bold flex items-center justify-center gap-2.5 transition-all shadow-sm cursor-pointer"
           >
             <Phone size={18} className="fill-white" />
-            <span>Call Now: +91 98100 00000</span>
+            <span>Call Now</span>
           </button>
 
-          {/* 2-Column Secondary Buttons */}
+          {/* 2-Column Secondary Buttons matching Figma 1:1 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {/* Schedule Site Visit */}
             <button
               type="button"
               onClick={() => setIsVisitModalOpen(true)}
-              className="py-2.5 px-4 rounded-xl border border-[#1865F2] text-[#1865F2] bg-white hover:bg-[#E8F1FD]/50 text-[13px] font-bold flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
+              className="py-2.5 px-4 rounded-xl border border-[#1865F2] text-[#1865F2] bg-white hover:bg-blue-50/60 text-[13px] font-bold flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
             >
               <Calendar size={16} className="text-[#1865F2]" />
               <span>Schedule Site Visit</span>
             </button>
 
-            {/* WhatsApp Button */}
+            {/* WhatsApp Button matching Figma 1:1 */}
             <button
               type="button"
               onClick={() => window.open("https://wa.me/919876543210?text=Hello%20I%20am%20interested%20in%20this%20property", "_blank")}
-              className="py-2.5 px-4 rounded-xl border border-[#22C55E] text-[#16A34A] bg-white hover:bg-[#22C55E]/10 text-[13px] font-bold flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
+              className="py-2.5 px-4 rounded-xl border border-[#00A86B] text-[#00A86B] bg-white hover:bg-emerald-50/60 text-[13px] font-bold flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
             >
-              <MessageCircle size={17} className="text-[#22C55E]" />
-              <span>WhatsApp Chat</span>
+              <MessageCircle size={17} className="text-[#00A86B]" />
+              <span>WhatsApp</span>
             </button>
           </div>
         </div>

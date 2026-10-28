@@ -46,7 +46,7 @@ export const BrokerRecentPosts = ({
       time: "2 days ago",
       comments: 10,
       views: 6,
-      image: "/builders/figma_photo_noida.png",
+      image: "/images/properties/luxury-living-room.jpg",
       fullContent:
         "Experience supreme luxury with ultra-spacious balconies, panoramic green views, Italian marble flooring, and 50+ modern club amenities at ABC Greens Noida Extension.",
     },
@@ -58,7 +58,7 @@ export const BrokerRecentPosts = ({
       time: "2 days ago",
       comments: 10,
       views: 6,
-      image: "/builders/figma_photo_gurgaon.png",
+      image: "/images/properties/luxury-living-room.jpg",
       fullContent:
         "Exclusive gated community with Olympic-sized swimming pool, squash court, EV charging bays, and high-speed elevator towers designed by world-renowned architects.",
     },
@@ -70,7 +70,7 @@ export const BrokerRecentPosts = ({
       time: "2 days ago",
       comments: 10,
       views: 6,
-      image: "/builders/thumb_noida_luxury.png",
+      image: "/images/properties/luxury-living-room.jpg",
       fullContent:
         "Smart home automation ready residences with touch controls, video door phone, 24/7 high-grade security, and round-the-clock water supply.",
     },
@@ -82,7 +82,7 @@ export const BrokerRecentPosts = ({
       time: "2 days ago",
       comments: 10,
       views: 6,
-      image: "/builders/figma_photo_delhi.png",
+      image: "/images/properties/luxury-living-room.jpg",
       fullContent:
         "Located 5 minutes from FNG Expressway and 10 minutes from central Noida metro stations. Excellent connectivity to commercial hubs and premier schools.",
     },
@@ -94,7 +94,7 @@ export const BrokerRecentPosts = ({
       time: "2 days ago",
       comments: 10,
       views: 6,
-      image: "/builders/figma_photo_noida.png",
+      image: "/images/properties/luxury-living-room.jpg",
       fullContent:
         "Special pre-launch payment plans (20:80) available with guaranteed zero PLC and free covered car parking for the first 50 buyers.",
     },
@@ -302,9 +302,9 @@ export const BrokerRecentPosts = ({
                   </span>
                 </button>
 
-                {/* Views */}
+                {/* Messages / Comments */}
                 <div className="flex items-center gap-1">
-                  <Eye className="w-3 h-3" />
+                  <MessageCircle className="w-3 h-3" />
                   <span>{post.views}</span>
                 </div>
               </div>

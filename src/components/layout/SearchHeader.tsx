@@ -12,6 +12,7 @@ import { SEARCH_HEADER } from '@/data/headerData'
 import { cn } from '@/lib/utils'
 import { useWishlist } from '@/lib/wishlist'
 import { useAppSelector } from '@/store/hooks'
+import { propertyApi } from '@/lib/features/property/propertyApi'
 
 const {
     locations: LOCATIONS,
@@ -72,6 +73,24 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
     useEffect(() => {
         setIsMounted(true);
     }, []);
+
+    const [liveLocations, setLiveLocations] = useState<string[]>(LOCATIONS);
+    const [liveTypes, setLiveTypes] = useState<string[]>(PROPERTY_TYPES);
+
+    useEffect(() => {
+        propertyApi.getSuggestions({ city: selectedCity?.value })
+            .then((res) => {
+                if (res?.data?.cities && res.data.cities.length > 0) {
+                    const dynamicCities = res.data.cities.map((c) => c.city).filter(Boolean);
+                    setLiveLocations((prev) => Array.from(new Set([...prev, ...dynamicCities])));
+                }
+                if (res?.data?.propertyTypes && res.data.propertyTypes.length > 0) {
+                    const dynamicTypes = res.data.propertyTypes.map((t) => t.type).filter(Boolean);
+                    setLiveTypes((prev) => Array.from(new Set([...prev, ...dynamicTypes])));
+                }
+            })
+            .catch(() => {});
+    }, [selectedCity]);
 
     const [filters, setFilters] = useState<FilterState>({
         locations: [],
@@ -260,7 +279,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
     return (
         <>
             <header className={cn(
-                "fixed left-0 right-0 z-50 px-3 sm:px-10 transition-all duration-300 pointer-events-none",
+                "fixed left-0 right-0 z-50 px-3 sm:px-10 transition-all duration-300 pointer-events-none font-poppins",
                 isScrolled
                     ? "top-0 pt-2 pb-1 bg-gradient-to-b from-white/95 via-white/80 to-transparent backdrop-blur-[3px]"
                     : hasAnnouncement ? "top-[44px] sm:top-[48px]" : "top-2 sm:top-3",
@@ -278,7 +297,14 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                             priority
                         />
                     </Link>
-                    <div className="h-6 w-[1px] bg-slate-200" />
+                    <Image
+                        src="/banner/Line 82.svg"
+                        alt="Divider"
+                        width={1}
+                        height={26}
+                        className="h-[26px] w-[1px] shrink-0 select-none self-center"
+                        unoptimized
+                    />
                 </div>
 
                 <div className="flex gap-4 sm:gap-6 text-sm items-center flex-1 min-w-0">
@@ -365,7 +391,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                         {/* Locations In Delhi NCR */}
                                         <div>
                                             <h4 className="text-[16px] font-semibold text-[#0B132B] mb-2.5">Locations In Delhi NCR</h4>
-                                            {renderChips(LOCATIONS, filters.locations, 'locations')}
+                                            {renderChips(liveLocations, filters.locations, 'locations')}
                                         </div>
 
                                         {/* No. Of Bedrooms */}
@@ -405,7 +431,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                             <div>
                                                 <h4 className="text-[16px] font-semibold text-[#0B132B] mb-2.5">Property Types</h4>
                                                 <div className="flex flex-wrap items-center gap-2">
-                                                    {renderChips(PROPERTY_TYPES, filters.propertyTypes, 'propertyTypes')}
+                                                    {renderChips(liveTypes, filters.propertyTypes, 'propertyTypes')}
                                                     <button
                                                         type="button"
                                                         className="text-[#1865F2] text-xs font-semibold hover:underline self-center ml-1 cursor-pointer"
@@ -540,10 +566,10 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                         <Link
                             href="/properties?saved=true"
                             aria-label="Wishlist"
-                            className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0"
+                            className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0"
                         >
                             <Image
-                                src="/layout/nav/nav_heart.png"
+                                src="/layout/nav/nav_heart.svg"
                                 alt="Wishlist"
                                 width={34}
                                 height={30}
@@ -556,9 +582,9 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                 </span>
                             )}
                         </Link>
-                        <Link href="/login" aria-label="Notifications" className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-blue-50/70 transition-colors shrink-0">
+                        <Link href="/login" aria-label="Notifications" className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors shrink-0">
                             <Image
-                                src="/layout/nav/nav_bell.png"
+                                src="/layout/nav/nav_bell.svg"
                                 alt="Notifications"
                                 width={28}
                                 height={37}
@@ -566,7 +592,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                 unoptimized
                             />
                         </Link>
-                        <button onClick={() => setSidebarOpen(true)} aria-label="User Profile" className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#edf5ff] hover:bg-[#e0edff] transition-colors cursor-pointer shrink-0 border border-blue-100">
+                        <button onClick={() => setSidebarOpen(true)} aria-label="User Profile" className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full hover:bg-[#edf5ff] transition-colors cursor-pointer shrink-0">
                             {isMounted && isAuthenticated && user ? (
                                 user?.person?.avatarUrl ? (
                                     <Image
@@ -583,39 +609,38 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                                 )
                             ) : (
                                 <Image
-                                    src="/layout/nav/nav_user.png"
+                                    src="/layout/nav/nav_user.svg"
                                     alt="User Profile"
-                                    width={18}
-                                    height={18}
-                                    className="w-[16px] h-auto object-contain"
+                                    width={23}
+                                    height={24}
+                                    className="w-[18px] sm:w-[20px] h-auto object-contain hover:scale-105 transition-transform"
                                     style={{ width: "auto", height: "auto" }}
+                                    unoptimized
                                 />
                             )}
                             {isMounted && isAuthenticated && (
                                 <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 ring-2 ring-white" />
                             )}
                         </button>
-                        <Link
+                        {/* <Link
                             href="/post-property"
-                            className="group relative flex h-[38px] sm:h-[40px] items-center gap-2 rounded-full bg-gradient-to-r from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-2.5 sm:pl-3 pr-1 sm:pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
+                            className="group relative flex h-[38px] sm:h-[40px] items-center gap-2 rounded-full bg-gradient-to-r left-[20px] from-[#1865F2] via-[#104ECC] to-[#073299] border-[1.5px] border-[#00D084] pl-2.5 sm:pl-3 pr-1 sm:pr-1 text-white shadow-[0_2px_10px_rgba(0,208,132,0.2)] transition-all duration-200 hover:scale-[1.02] shrink-0"
                         >
-                            <svg 
-                                className="h-[18px] w-[18px] shrink-0" 
-                                viewBox="0 0 26 26" 
-                                fill="none" 
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path d="M4.5 1C4.5 2.8 3.2 4 1.5 4C3.2 4 4.5 5.2 4.5 7C4.5 5.2 5.8 4 7.5 4C5.8 4 4.5 2.8 4.5 1Z" fill="#00D084" />
-                                <path d="M20 1C20 3.3 18 5 15.5 5C18 5 20 6.7 20 9C20 6.7 22 5 24.5 5C22 5 20 3.3 20 1Z" stroke="#00D084" strokeWidth="1.4" strokeLinejoin="round" fill="none" />
-                                <path d="M11.5 6C11.5 12 7 16 1.5 16C7 16 11.5 20 11.5 26C11.5 20 16 16 21.5 16C16 16 11.5 12 11.5 6Z" fill="#00D084" />
-                            </svg>
+                            <Image
+                                src="/layout/nav/nav_sparkle.svg"
+                                alt="Sparkle"
+                                width={27}
+                                height={29}
+                                className="h-[18px] w-auto shrink-0"
+                                unoptimized
+                            />
                             <span className="text-[13px] sm:text-[13.5px] font-medium text-white tracking-normal whitespace-nowrap">
                                 Post Property
                             </span>
                             <span className="rounded-full bg-white px-2.5 sm:px-3 py-1 text-[12px] sm:text-[12.5px] font-semibold text-[#1865F2] shadow-xs leading-none">
                                 Free
                             </span>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             </div>

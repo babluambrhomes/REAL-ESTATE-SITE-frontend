@@ -88,7 +88,7 @@ export const BrokerAboutSection = () => {
           <p className="text-slate-800 font-bold">
             Experience:{" "}
             <span className="font-semibold text-slate-600">
-              6+ Years in Real Estate Advisory
+              5+ Years in Real Estate Advisory (change if needed)
             </span>
           </p>
         </div>

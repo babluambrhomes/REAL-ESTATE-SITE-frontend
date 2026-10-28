@@ -16,27 +16,53 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const BrokerHeroSection = () => {
+import { apiClient } from "@/lib/axios";
+
+export interface BrokerHeroSectionProps {
+  name?: string;
+  role?: string;
+  avatarUrl?: string;
+  isVerified?: boolean;
+  followers?: number;
+  phone?: string;
+  sellerId?: string;
+  experience?: string;
+  rating?: number;
+  reviewCount?: number;
+}
+
+export const BrokerHeroSection = ({
+  name = "Jitender singh",
+  role = "Senior Property Consultant",
+  avatarUrl = "/broker/broker.png",
+  isVerified = true,
+  followers = 2985,
+  phone = "+91 98765 43210",
+  sellerId,
+  experience = "12+ Years",
+  rating = 4.9,
+  reviewCount = 1420,
+}: BrokerHeroSectionProps) => {
   const [isFollowing, setIsFollowing] = useState(false);
-  const [followersCount, setFollowersCount] = useState(2985);
+  const [followersCount, setFollowersCount] = useState(followers);
   const [callbackRequested, setCallbackRequested] = useState(false);
 
   const handleToggleFollow = () => {
     if (isFollowing) {
       setIsFollowing(false);
       setFollowersCount((prev) => prev - 1);
-      toast.success("Unfollowed Jitender Singh");
+      toast.success(`Unfollowed ${name}`);
     } else {
       setIsFollowing(true);
       setFollowersCount((prev) => prev + 1);
-      toast.success("You are now following Jitender Singh!");
+      toast.success(`You are now following ${name}!`);
     }
   };
 
   const handleShare = () => {
     const fullUrl = typeof window !== "undefined" ? window.location.href : "";
     if (navigator.share) {
-      navigator.share({ title: "Jitender Singh - Verified Broker on Roofin", url: fullUrl }).catch(() => {});
+      navigator.share({ title: `${name} - Verified Broker on Roofin`, url: fullUrl }).catch(() => {});
     } else if (navigator.clipboard) {
       navigator.clipboard.writeText(fullUrl);
       toast.success("Broker profile link copied to clipboard!");
@@ -46,19 +72,17 @@ export const BrokerHeroSection = () => {
   const handleRequestCallback = async () => {
     setCallbackRequested(true);
     try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: "Buyer Applicant",
-          email: "callback_request@roofin.com",
-          message: "Request callback for broker Jitender Singh",
-        }),
+      await apiClient.post("/enquiries", {
+        name: "Buyer Applicant",
+        email: "callback_request@roofin.com",
+        phone: phone.replace(/\s+/g, ""),
+        sellerId,
+        message: `Request callback for broker ${name}`,
       });
     } catch {
       // Ignore network fallback
     }
-    toast.success("Callback request sent! Jitender Singh will call you shortly.");
+    toast.success(`Callback request sent! ${name} will call you shortly.`);
   };
 
   const highlights = [
@@ -128,8 +152,8 @@ export const BrokerHeroSection = () => {
               <div className="relative w-[155px] h-[155px] sm:w-[185px] sm:h-[185px] rounded-[28px] overflow-hidden p-1 bg-white shadow-[0_8px_30px_rgba(0,209,255,0.28)] border-[3.5px] border-[#00D1FF]">
                 <div className="relative w-full h-full rounded-[22px] overflow-hidden bg-slate-100">
                   <Image
-                    src="/broker/broker.png"
-                    alt="Jitender Singh"
+                    src={avatarUrl}
+                    alt={name}
                     fill
                     priority
                     className="object-cover object-top"
@@ -148,18 +172,20 @@ export const BrokerHeroSection = () => {
             <div className="flex-1 min-w-0 text-center sm:text-left space-y-2">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <h1 className="text-2xl sm:text-[28px] font-black text-[#0B132B] tracking-tight">
-                  Jitender singh
+                  {name}
                 </h1>
                 {/* Verified Blue Badge */}
-                <div className="w-5 h-5 rounded-full bg-[#1865F2] flex items-center justify-center text-white shrink-0 shadow-2xs">
-                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-                  </svg>
-                </div>
+                {isVerified && (
+                  <div className="w-5 h-5 rounded-full bg-[#1865F2] flex items-center justify-center text-white shrink-0 shadow-2xs">
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                    </svg>
+                  </div>
+                )}
               </div>
 
               <p className="text-sm font-semibold text-slate-500">
-                Senior Property Consultant
+                {role}
               </p>
 
               {/* Action Buttons: Fallow, Share, More */}
@@ -223,8 +249,8 @@ export const BrokerHeroSection = () => {
                 {/* Primary CTA Buttons: Contact Broker & Request Callback */}
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-3">
                   <a
-                    href="tel:+919876543210"
-                    className="px-6 py-2.5 bg-gradient-to-r from-[#00C49F] via-[#00B4D8] to-[#0284C7] hover:from-[#00B4D8] hover:to-[#0284C7] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-[0_4px_14px_rgba(0,196,159,0.35)] transition-all cursor-pointer"
+                    href={`tel:${phone.replace(/\s+/g, "")}`}
+                    className="px-6 py-2.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-[0_4px_14px_rgba(24,101,242,0.35)] transition-all cursor-pointer"
                   >
                     <Phone className="w-3.5 h-3.5" />
                     <span>Contact Broker</span>

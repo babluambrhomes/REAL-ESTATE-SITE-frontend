@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,13 +12,24 @@ import {
   Play,
   ChevronDown,
   ArrowRight,
+  Check,
+  Plus,
+  Calculator,
 } from "lucide-react";
+import toast from "react-hot-toast";
 import { Property } from "@/types";
+import { useWishlist } from "@/lib/wishlist";
+import { useCompare } from "@/lib/compare";
+import { PropertyShareModal } from "./PropertyShareModal";
+import { PropertyBrochureModal } from "./PropertyBrochureModal";
+import { PropertyMapModal } from "@/components/card/PropertyMapModal";
+import { PropertyEmiCalculatorModal } from "@/components/properties/PropertyEmiCalculatorModal";
 
 interface PropertyDetailHeroProps {
   property: Property;
   onOpenGallery?: () => void;
   onOpenVideo?: () => void;
+  onOpenCompare?: () => void;
 }
 
 // 1. Exact 13% OFF Ticket Badge Matching Screenshot 1
@@ -108,11 +119,64 @@ export const PropertyDetailHero = ({
   property,
   onOpenGallery,
   onOpenVideo,
+  onOpenCompare,
 }: PropertyDetailHeroProps) => {
   const [activeImageIdx, setActiveImageIdx] = useState(0);
-  const [liked, setLiked] = useState(false);
   const [configOpen, setConfigOpen] = useState(false);
   const [showMapPopup, setShowMapPopup] = useState(true);
+
+  // Modals state
+  const [isBrochureOpen, setIsBrochureOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  const [isEmiOpen, setIsEmiOpen] = useState(false);
+
+  // Real Wishlist
+  const { isSaved, toggle: toggleWishlist } = useWishlist();
+  const propertyId = property.id !== undefined ? property.id : 0;
+  const isPropertyLiked = isSaved(propertyId);
+
+  // Real Comparison
+  const { isCompared, toggle: toggleCompare } = useCompare();
+  const isPropertyCompared = isCompared(propertyId);
+
+  // Live Distance Calculation
+  const [distanceText, setDistanceText] = useState<string>("Calculating...");
+
+  useEffect(() => {
+    // Property Target Coordinates (Default: Noida Sector 103 / 76 coordinates if not in property)
+    const targetLat = property.coordinates?.[1] || 28.541;
+    const targetLng = property.coordinates?.[0] || 77.382;
+
+    const calcDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+      const R = 6371; // km
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLon = ((lon2 - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+          Math.cos((lat2 * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return (R * c).toFixed(1);
+    };
+
+    if (typeof window !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const d = calcDistance(pos.coords.latitude, pos.coords.longitude, targetLat, targetLng);
+          setDistanceText(`${d} km Away`);
+        },
+        () => {
+          setDistanceText("15.1 km Away");
+        },
+        { timeout: 1200, maximumAge: 300000 }
+      );
+    } else {
+      setDistanceText("15.1 km Away");
+    }
+  }, [property.coordinates]);
 
   const fallbackGallery = [
     "/images/properties/max-estate-tower-figma.jpg",
@@ -126,14 +190,35 @@ export const PropertyDetailHero = ({
 
   const currentMainImage = galleryImages[activeImageIdx] || galleryImages[0] || fallbackGallery[0];
 
+  const handleToggleWishlist = () => {
+    const isNowSaved = toggleWishlist(propertyId, property);
+    if (isNowSaved) {
+      toast.success("Saved to your shortlisted properties!");
+    } else {
+      toast("Removed from wishlist", { icon: "🗑️" });
+    }
+  };
+
+  const handleToggleCompare = () => {
+    if (isPropertyCompared) {
+      if (onOpenCompare) {
+        onOpenCompare();
+      } else {
+        toast.success("Already added to comparison matrix!");
+      }
+    } else {
+      toggleCompare(property);
+    }
+  };
+
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch my-2">
       {/* ----------------- LEFT COLUMN: GALLERY (Span 7) ----------------- */}
       <div className="lg:col-span-7 flex flex-col justify-between gap-3.5">
         {/* Main Large Image Container */}
-        <div className="relative w-full flex-1 min-h-[460px] sm:min-h-[500px] md:min-h-[530px] rounded-[24px] border border-[#CDCDCD] shadow-sm bg-slate-900 group overflow-hidden">
-          {/* Clipped Image Wrapper */}
-          <div className="relative w-full h-full">
+        <div className="relative w-full flex-1 min-h-[460px] sm:min-h-[500px] md:min-h-[530px] rounded-[24px] border border-[#CDCDCD] shadow-sm bg-slate-900 group">
+          {/* Clipped Inner Image Wrapper */}
+          <div className="absolute inset-0 rounded-[24px] overflow-hidden">
             <Image
               src={currentMainImage}
               alt={property.title}
@@ -145,31 +230,35 @@ export const PropertyDetailHero = ({
             />
           </div>
 
-          {/* Top-Left DOWN LOAD BROCHURE Ribbon Badge */}
-          <div className="absolute top-5 -left-2 z-30 flex flex-col items-start">
+          {/* Top-Left DOWNLOAD BROCHURE Ribbon Badge with 3D Folded Ribbon Corner */}
+          <div className="absolute top-6 -left-3 z-30 flex flex-col items-start drop-shadow-md">
             <button
-              onClick={() => alert("Downloading Brochure...")}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-r-md bg-black text-white text-[11px] font-bold tracking-wider uppercase shadow-xl cursor-pointer hover:bg-black/90 transition-all"
+              type="button"
+              onClick={() => setIsBrochureOpen(true)}
+              className="flex items-center gap-2 pl-4 pr-3.5 py-2 rounded-r-lg bg-[#0B132B] text-white text-[11px] font-bold tracking-wider uppercase shadow-xl cursor-pointer hover:bg-slate-900 transition-all hover:scale-102"
+              title="Download verified property brochure"
             >
-              <span>DOWN LOAD BROCHURE</span>
-              <Download size={13} className="text-white stroke-[2.5]" />
+              <span>DOWNLOAD BROCHURE</span>
+              <Download size={14} className="text-white stroke-[2.5]" />
             </button>
-            <div className="w-0 h-0 border-t-[8px] border-t-[#1865F2] border-l-[10px] border-l-transparent" />
+            {/* 3D Folded Ribbon Triangle under the protruding left tab matching Figma */}
+            <div className="w-0 h-0 border-t-[9px] border-t-[#0074E8] border-l-[12px] border-l-transparent" />
           </div>
 
           {/* Top-Right Floating Interaction Badges */}
           <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
-            {/* Likes */}
+            {/* Likes / Wishlist Button */}
             <button
-              onClick={() => setLiked(!liked)}
+              onClick={handleToggleWishlist}
               className="flex items-center justify-center flex-col w-9 h-9 rounded-full bg-white hover:bg-slate-50 text-[#1865F2] hover:text-red-500 shadow-md transition-all cursor-pointer border border-slate-100"
+              title={isPropertyLiked ? "Remove from wishlist" : "Save to wishlist"}
             >
               <Heart
                 size={15}
-                className={liked ? "fill-red-500 text-red-500" : "text-[#1865F2]"}
+                className={isPropertyLiked ? "fill-red-500 text-red-500" : "text-[#1865F2]"}
               />
               <span className="text-[8.5px] font-bold text-[#0B132B] leading-none mt-0.5">
-                {liked ? "10.1k" : "10k"}
+                {isPropertyLiked ? "Saved" : "Save"}
               </span>
             </button>
 
@@ -183,39 +272,60 @@ export const PropertyDetailHero = ({
 
             {/* Share */}
             <button
-              onClick={() => alert("Link copied to clipboard!")}
-              className="flex items-center justify-center flex-col w-9 h-9 rounded-full bg-white hover:bg-slate-50 text-[#1865F2] shadow-md transition-all cursor-pointer border border-slate-100"
+              onClick={() => setIsShareOpen(true)}
+              className="flex items-center justify-center flex-col w-9 h-9 rounded-full bg-white hover:bg-slate-50 text-[#1865F2] shadow-md transition-all cursor-pointer border border-slate-100 hover:scale-105"
+              title="Share property details"
             >
               <Share2 size={14} className="text-[#1865F2]" />
               <span className="text-[8.5px] font-bold text-[#0B132B] leading-none mt-0.5">
-                5k
+                Share
               </span>
             </button>
           </div>
 
           {/* Bottom Left 1/25 Indicator */}
-          <div className="absolute bottom-13 left-4 z-20 px-2.5 py-0.5 rounded-md bg-black/80 text-white text-[11px] font-bold">
+          <div className="absolute bottom-15 left-4 z-20 px-2.5 py-0.5 rounded-md bg-black/80 text-white text-[11px] font-bold">
             {activeImageIdx + 1}/{galleryImages.length}
           </div>
 
           {/* Bottom Right View Photo Gallery Button */}
           <button
             onClick={onOpenGallery}
-            className="absolute bottom-13 right-4 z-20 flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-white hover:bg-slate-50 text-[#0B132B] text-[11.5px] font-bold shadow-md transition-all cursor-pointer"
+            className="absolute bottom-15 right-4 z-20 flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-white hover:bg-slate-50 text-[#0B132B] text-[11.5px] font-bold shadow-md transition-all cursor-pointer"
           >
             <Eye size={14} className="text-[#1865F2]" />
             <span>View Photo Gallery</span>
           </button>
 
-          {/* Bottom Blue Bar */}
-          <div className="absolute bottom-0 inset-x-0 h-10 bg-[#1865F2] text-white flex items-center justify-around text-[12.5px] font-bold tracking-wide z-20 shadow-xs">
-            <span className="flex items-center gap-1.5">
-              <span className="text-[#00E5FF] font-bold">↔</span> 15 km Away
-            </span>
-            <div className="h-4 w-[1px] bg-white/30" />
-            <button className="flex items-center gap-1.5 hover:underline cursor-pointer font-bold">
-              <MapPin size={14} className="text-[#00E5FF] fill-[#00E5FF]" />
-              <span>View on Map</span>
+          {/* Bottom Blue Bar with clean 1px border and centered vertical divider */}
+          <div className="absolute bottom-0 inset-x-0 h-11 sm:h-12 bg-[#1865F2] rounded-b-[24px] border-t border-white/30 z-20 shadow-xs flex items-center justify-between">
+            {/* Left Half: Distance */}
+            <div className="flex-1 flex items-center justify-center gap-2 px-3">
+              <span className="text-[#00E5FF] font-bold text-sm sm:text-base select-none">↔</span>
+              <span className="text-white text-xs sm:text-[13px] font-bold tracking-wide">
+                {distanceText}
+              </span>
+            </div>
+
+            {/* Subtle Vertical White Divider Line matching Figma */}
+            <div className="h-5 w-[1px] bg-white/70 shrink-0" />
+
+            {/* Right Half: View on Map */}
+            <button
+              type="button"
+              onClick={() => setIsMapModalOpen(true)}
+              className="flex-1 flex items-center justify-center gap-2 px-3 text-white hover:bg-blue-600/40 transition-colors cursor-pointer group/map"
+              title="Open interactive Google Map"
+            >
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#00E5FF] text-[#1865F2] shadow-2xs group-hover/map:scale-110 transition-transform">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="#00E5FF" />
+                  <circle cx="12" cy="10" r="3" fill="#1865F2" stroke="none" />
+                </svg>
+              </div>
+              <span className="text-white text-xs sm:text-[13px] font-bold tracking-wide group-hover/map:underline">
+                View on Map
+              </span>
             </button>
           </div>
         </div>
@@ -334,14 +444,28 @@ export const PropertyDetailHero = ({
             <div className="mt-1.5 flex flex-wrap items-center gap-3">
               {property.originalPrice && (
                 <span className="text-[13.5px] text-[#94A3B8] line-through font-normal">
-                  MRP {property.originalPrice}
+                  MRP {property.originalPrice.includes("Cr") || property.originalPrice.includes("Lakh") ? property.originalPrice : `${property.originalPrice} Cr`}
                 </span>
               )}
               <span className="text-[26px] sm:text-[28px] font-bold text-[#0B132B] leading-none">
-                {property.price}
+                {property.price
+                  ? property.price.includes("Cr") || property.price.includes("Lakh") || property.price.includes("Lac") || property.price.toLowerCase().includes("l")
+                    ? property.price
+                    : `${property.price} Cr`
+                  : "₹1.25 Cr"}
               </span>
 
               {property.discount && <DiscountTicketBadge />}
+
+              <button
+                type="button"
+                onClick={() => setIsEmiOpen(true)}
+                className="text-[11.5px] font-bold text-[#1865F2] hover:bg-blue-100/80 flex items-center gap-1.5 cursor-pointer bg-blue-50/90 px-3 py-1.5 rounded-xl border border-blue-200/80 transition-colors shadow-2xs"
+                title="Calculate monthly EMI & all-inclusive cost"
+              >
+                <Calculator size={13} className="text-[#1865F2]" />
+                <span>Calculate EMI &amp; Costs</span>
+              </button>
             </div>
           </div>
 
@@ -530,20 +654,87 @@ export const PropertyDetailHero = ({
         {/* 3. Property Comparison */}
         <div className="space-y-1.5 shrink-0">
           <div>
-            <h4 className="text-[13.5px] font-bold text-[#0B132B]">
+            <h4 className="text-[14px] font-bold text-[#0B132B]">
               Property Comparison
             </h4>
-            <p className="text-[10.5px] text-[#64748B] font-normal">
+            <p className="text-[11px] text-[#64748B] font-normal">
               Add up-to 3 Property to compare
             </p>
           </div>
 
-          <button className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#00B4D8] via-[#0096E6] to-[#0074E8] hover:opacity-95 text-white text-[13.5px] font-bold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer">
-            <span className="text-[17px] leading-none font-normal">+</span>
-            <span>Add property</span>
+          <button
+            type="button"
+            onClick={handleToggleCompare}
+            className={`w-full py-2.5 rounded-xl text-white text-[13.5px] font-bold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer ${
+              isPropertyCompared
+                ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20"
+                : "bg-[#1865F2] hover:bg-blue-700 shadow-blue-500/20"
+            }`}
+          >
+            {isPropertyCompared ? (
+              <>
+                <Check className="h-4 w-4 stroke-[3]" />
+                <span>Added to Compare (View Comparison)</span>
+              </>
+            ) : (
+              <>
+                <Plus className="h-4 w-4 stroke-[3]" />
+                <span>Add property</span>
+              </>
+            )}
           </button>
         </div>
       </div>
+
+      {/* Real Interactive Modals */}
+      <PropertyBrochureModal
+        isOpen={isBrochureOpen}
+        onClose={() => setIsBrochureOpen(false)}
+        property={{
+          id: property.id,
+          title: property.title,
+          location: property.location,
+          price: property.price,
+          city: property.city,
+          type: property.type,
+          beds: property.beds,
+          description: property.description,
+          reraNumber: property.reraNumber,
+        }}
+      />
+
+      <PropertyShareModal
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        property={{
+          id: property.id,
+          title: property.title,
+          location: property.location,
+          price: property.price,
+          city: property.city,
+        }}
+      />
+
+      <PropertyMapModal
+        isOpen={isMapModalOpen}
+        onClose={() => setIsMapModalOpen(false)}
+        property={{
+          id: property.id,
+          title: property.title,
+          location: property.location,
+          price: property.price,
+          city: property.city,
+          image: property.images?.[0],
+        }}
+      />
+
+      <PropertyEmiCalculatorModal
+        isOpen={isEmiOpen}
+        onClose={() => setIsEmiOpen(false)}
+        propertyTitle={property.title}
+        propertyLocation={property.location}
+        initialPrice={property.price}
+      />
     </div>
   );
 };

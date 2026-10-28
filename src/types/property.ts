@@ -38,9 +38,16 @@ export interface Property {
   reraNumber?: string;
   amenities?: string[];
   videoUrl?: string;
+  balconies?: number | string;
+  facing?: string;
+  floor?: string;
+  furnishing?: string;
+  parking?: string;
+  dealerName?: string;
 }
 
 export interface MapComponentProps {
   height?: string;
   properties?: Property[];
+  navPosition?: "top-right" | "bottom-right" | "bottom-left" | "top-left";
 }

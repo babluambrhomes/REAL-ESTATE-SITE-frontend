@@ -7,12 +7,16 @@ interface CompareSeeDifferenceBarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
   onSearch?: (query: string) => void;
+  highlightDifferencesOnly?: boolean;
+  onToggleDifferences?: () => void;
 }
 
 export const CompareSeeDifferenceBar = ({
   activeTab,
   onTabChange,
   onSearch,
+  highlightDifferencesOnly = false,
+  onToggleDifferences,
 }: CompareSeeDifferenceBarProps) => {
   const [searchVal, setSearchVal] = useState("");
 
@@ -66,7 +70,7 @@ export const CompareSeeDifferenceBar = ({
         </div>
       </div>
 
-      {/* 3 Quick Filter Pill Tabs */}
+      {/* 3 Quick Filter Pill Tabs & Highlight Differences Toggle */}
       <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -98,6 +102,26 @@ export const CompareSeeDifferenceBar = ({
             </button>
           );
         })}
+
+        {/* Differences Only Toggle Pill */}
+        {onToggleDifferences && (
+          <button
+            type="button"
+            onClick={onToggleDifferences}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-[13px] font-bold transition-all cursor-pointer border ${
+              highlightDifferencesOnly
+                ? "bg-amber-50 text-amber-900 border-amber-300 shadow-sm"
+                : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
+            }`}
+          >
+            <span
+              className={`w-2.5 h-2.5 rounded-full ${
+                highlightDifferencesOnly ? "bg-amber-500 animate-pulse" : "bg-slate-300"
+              }`}
+            />
+            <span>Highlight Differences Only</span>
+          </button>
+        )}
       </div>
     </section>
   );

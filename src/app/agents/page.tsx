@@ -1,8 +1,5 @@
-"use client";
-
-import AllBuildersPage from "../builders/page";
+import { BuildersPageContent } from "@/components/builders/BuildersPageContent";
 
 export default function AgentsPage() {
-  return <AllBuildersPage initialTab="agents" />;
+  return <BuildersPageContent initialTab="agents" />;
 }
-

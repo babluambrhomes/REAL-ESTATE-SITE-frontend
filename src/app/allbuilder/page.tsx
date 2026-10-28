@@ -1,5 +1,5 @@
-import AllBuildersPage from "@/app/builders/page";
+import { BuildersPageContent } from "@/components/builders/BuildersPageContent";
 
 export default function AllBuilderRoutePage() {
-  return <AllBuildersPage />;
+  return <BuildersPageContent initialTab="builders" />;
 }

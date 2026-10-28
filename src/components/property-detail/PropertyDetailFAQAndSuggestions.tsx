@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Plus,
   Minus,
@@ -166,9 +167,13 @@ export const PropertyDetailFAQAndSuggestions = () => {
               </p>
             </div>
 
-            <button className="w-full mt-6 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 text-white text-[12.5px] font-semibold shadow-xs transition-opacity cursor-pointer flex items-center justify-center">
-              Send a Direct Mail
-            </button>
+            <a
+              href="mailto:help@roofin.in?subject=Property%20Enquiry%20-%203%20BHK%20Assistance"
+              className="w-full mt-6 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 text-white text-[12.5px] font-semibold shadow-xs transition-opacity cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              <Mail size={14} />
+              <span>Send a Direct Mail</span>
+            </a>
           </div>
         </div>
       </div>
@@ -248,9 +253,12 @@ export const PropertyDetailFAQAndSuggestions = () => {
                 <span className="text-[10px] text-slate-400 font-normal">
                   {item.postedDate}
                 </span>
-                <button className="px-4 py-1.5 rounded-lg text-[11.5px] font-semibold text-white bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 transition-opacity shadow-2xs cursor-pointer">
+                <Link
+                  href={`/properties/${item.id}`}
+                  className="px-4 py-1.5 rounded-lg text-[11.5px] font-semibold text-white bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 transition-opacity shadow-2xs cursor-pointer inline-block"
+                >
                   View Details
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -282,10 +290,13 @@ export const PropertyDetailFAQAndSuggestions = () => {
           </p>
 
           <div className="pt-2">
-            <button className="px-6 py-2.5 rounded-full bg-white text-[#1865F2] hover:bg-slate-50 text-[13px] font-semibold inline-flex items-center gap-2 shadow-md transition-all cursor-pointer">
+            <a
+              href="tel:1800766346"
+              className="px-6 py-2.5 rounded-full bg-white text-[#1865F2] hover:bg-slate-50 text-[13px] font-semibold inline-flex items-center gap-2 shadow-md transition-all cursor-pointer"
+            >
               <PhoneCall size={15} className="fill-[#1865F2] text-[#1865F2]" />
               <span>Call Now</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

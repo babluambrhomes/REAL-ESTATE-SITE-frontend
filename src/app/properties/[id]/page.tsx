@@ -34,10 +34,26 @@ export default function PropertyDetailPage() {
     return mapApiPropertyToUi(detailData.data);
   }, [detailData]);
 
-  // Lookup property by live API, fallback to numeric id / static properties
+  const decodedParamId = useMemo(() => {
+    try {
+      return decodeURIComponent(paramId).toLowerCase().trim();
+    } catch {
+      return paramId.toLowerCase().trim();
+    }
+  }, [paramId]);
+
+  // Lookup property by live API, fallback to slug / title / numeric id / static properties
   const property: Property =
     apiAdaptedProperty ||
-    properties.find((p) => String(p.id) === paramId || p.slug === paramId) ||
+    properties.find(
+      (p) =>
+        String(p.id) === paramId ||
+        p.slug === paramId ||
+        p.slug?.toLowerCase() === decodedParamId ||
+        p.title.toLowerCase().trim() === decodedParamId ||
+        decodedParamId.includes(p.title.toLowerCase().trim()) ||
+        p.title.toLowerCase().trim().includes(decodedParamId)
+    ) ||
     (!isNaN(numericId) && properties[numericId] ? properties[numericId] : properties[0]);
 
   const handleTabChange = (tabId: string) => {
