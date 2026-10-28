@@ -120,7 +120,7 @@ export const PriceTrendsAnalysisModal = ({
             <div className="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100">
               <span className="text-[10px] font-bold uppercase text-slate-500">12-Month Growth</span>
               <p className="text-lg font-extrabold text-[#00BA7A] mt-0.5">+9.2%</p>
-              <span className="text-[10px] text-emerald-600 font-semibold flex items-center">
+              <span className="text-[10px] text-emerald-600 font-medium flex items-center">
                 ▲ Above city avg
               </span>
             </div>
@@ -177,7 +177,7 @@ export const PriceTrendsAnalysisModal = ({
             </h4>
             <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-medium">
                   <tr>
                     <th className="py-2.5 px-3">Sector / Micro-Market</th>
                     <th className="py-2.5 px-3">Avg Rate</th>
@@ -189,8 +189,8 @@ export const PriceTrendsAnalysisModal = ({
                   {sectorComparisons.map((sec, idx) => (
                     <tr key={idx} className={idx === 0 ? "bg-blue-50/40 font-bold" : "hover:bg-slate-50/60"}>
                       <td className="py-2.5 px-3 text-slate-900">{sec.sector}</td>
-                      <td className="py-2.5 px-3 font-semibold text-[#1865F2]">{sec.price}</td>
-                      <td className="py-2.5 px-3 font-semibold text-[#00BA7A]">{sec.growth}</td>
+                      <td className="py-2.5 px-3 font-medium text-[#1865F2]">{sec.price}</td>
+                      <td className="py-2.5 px-3 font-medium text-[#00BA7A]">{sec.growth}</td>
                       <td className="py-2.5 px-3">
                         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-700">
                           {sec.demand}

@@ -86,9 +86,9 @@ export default function GroupDealPage() {
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
-          <span className="text-slate-800 font-semibold">Exclusive Group Deal</span>
+          <span className="text-slate-800 font-medium">Exclusive Group Deal</span>
           <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
-          <span className="text-[#1865F2] font-semibold">Aspire Silicon City, Sector 76, Noida</span>
+          <span className="text-[#1865F2] font-medium">Aspire Silicon City, Sector 76, Noida</span>
         </div>
       </nav>
 
@@ -147,7 +147,7 @@ export default function GroupDealPage() {
                 <p className="text-xl sm:text-2xl font-black text-[#1865F2] mt-0.5">
                   ₹7.52 Cr+
                 </p>
-                <span className="text-[10.5px] text-emerald-600 font-semibold flex items-center gap-0.5 mt-0.5">
+                <span className="text-[10.5px] text-emerald-600 font-medium flex items-center gap-0.5 mt-0.5">
                   <TrendingDown className="h-3 w-3" />
                   ~₹47L Saved / Unit
                 </span>

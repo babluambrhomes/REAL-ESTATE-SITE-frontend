@@ -145,10 +145,10 @@ export const ListingsHandpicked = () => {
               {/* 2-Column Info matching Figma */}
               <div className="mt-3 px-1">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-[15px] sm:text-[15.5px] font-semibold text-[#0B132B] truncate">
+                  <h4 className="text-[15px] sm:text-[15.5px] font-medium text-[#0B132B] truncate">
                     {item.title}
                   </h4>
-                  <span className="text-[13px] font-semibold text-[#1865F2] shrink-0">
+                  <span className="text-[13px] font-medium text-[#1865F2] shrink-0">
                     {item.rating}
                   </span>
                 </div>
@@ -157,7 +157,7 @@ export const ListingsHandpicked = () => {
                   <p className="text-[12px] text-[#64748B] font-normal truncate">
                     {item.location}
                   </p>
-                  <p className="text-[13.5px] font-semibold text-[#1865F2] shrink-0">
+                  <p className="text-[13.5px] font-medium text-[#1865F2] shrink-0">
                     {item.price}
                   </p>
                 </div>

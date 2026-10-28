@@ -60,7 +60,7 @@ export const CompareFacilitiesTable = ({
     : facilityRows;
 
   return (
-    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 font-jakarta">
+    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 font-poppins">
       <div className="bg-white rounded-[24px] border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden">
         
         {/* Table Header Bar with Uniform #EFF4FA background & vertical divider lines */}
@@ -137,7 +137,7 @@ export const CompareFacilitiesTable = ({
         {/* 22 Facilities Rows with Continuous Column 2 Highlight */}
         <div className="divide-y divide-slate-100">
           {filteredRows.length === 0 ? (
-            <div className="text-center py-8 text-slate-500 text-xs font-semibold">
+            <div className="text-center py-8 text-slate-500 text-xs font-medium">
               No facilities found matching &quot;{searchQuery}&quot;
             </div>
           ) : (
@@ -175,7 +175,7 @@ export const CompareFacilitiesTable = ({
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </div>
-                      <span className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#334155]">Yes</span>
+                      <span className="text-[12.5px] sm:text-[13.5px] font-medium text-[#334155]">Yes</span>
                     </>
                   ) : (
                     <>
@@ -185,7 +185,7 @@ export const CompareFacilitiesTable = ({
                           <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
                       </div>
-                      <span className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#475569]">No</span>
+                      <span className="text-[12.5px] sm:text-[13.5px] font-medium text-[#475569]">No</span>
                     </>
                   )}
                 </div>
@@ -199,7 +199,7 @@ export const CompareFacilitiesTable = ({
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </div>
-                      <span className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#334155]">Yes</span>
+                      <span className="text-[12.5px] sm:text-[13.5px] font-medium text-[#334155]">Yes</span>
                     </>
                   ) : (
                     <>
@@ -209,7 +209,7 @@ export const CompareFacilitiesTable = ({
                           <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
                       </div>
-                      <span className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#475569]">No</span>
+                      <span className="text-[12.5px] sm:text-[13.5px] font-medium text-[#475569]">No</span>
                     </>
                   )}
                 </div>

@@ -176,7 +176,7 @@ export default function SellerPage() {
                 type="button"
                 onClick={() => setActiveTab(tab)}
                 className={cn(
-                  "cursor-pointer rounded-full px-6 py-2 text-sm font-semibold capitalize transition-all duration-200",
+                  "cursor-pointer rounded-full px-6 py-2 text-sm font-medium capitalize transition-all duration-200",
                   activeTab === tab
                     ? "bg-white text-primary shadow-md"
                     : "text-gray-600 hover:text-gray-900"
@@ -192,7 +192,7 @@ export default function SellerPage() {
               type="button"
               onClick={() => setFilterOpen((prev) => !prev)}
               className={cn(
-                "flex items-center gap-2 rounded-full border px-5 py-2 text-sm font-semibold shadow-sm transition-all duration-200",
+                "flex items-center gap-2 rounded-full border px-5 py-2 text-sm font-medium shadow-sm transition-all duration-200",
                 filterOpen
                   ? "border-primary bg-primary text-white shadow-lg shadow-primary/25"
                   : "border-primary/30 bg-white text-primary hover:bg-primary/5"
@@ -287,13 +287,13 @@ export default function SellerPage() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
-                    className="cursor-pointer flex-1 rounded-xl border border-gray-200 bg-white py-2 text-sm font-semibold text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900"
+                    className="cursor-pointer flex-1 rounded-xl border border-gray-200 bg-white py-2 text-sm font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900"
                   >
                     Reset
                   </button>
                   <button
                     type="button"
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-secondary py-2 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-transform hover:scale-[1.02]"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-secondary py-2 text-sm font-medium text-white shadow-lg shadow-primary/25 transition-transform hover:scale-[1.02]"
                   >
                     <Check className="h-4 w-4" />
                     Apply

@@ -196,7 +196,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold uppercase tracking-wide text-white">
+            <h4 className="text-lg font-medium uppercase tracking-wide text-white">
               Quick Links
             </h4>
             <ul className="mt-4 text-base space-y-2 text-white">
@@ -214,7 +214,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold uppercase tracking-wide text-white">
+            <h4 className="text-lg font-medium uppercase tracking-wide text-white">
               Resources
             </h4>
             <ul className="mt-4 text-base space-y-2 text-white">
@@ -232,7 +232,7 @@ export const Footer = () => {
           </div>
 
           <div className="flex flex-col">
-            <h4 className="text-lg font-semibold uppercase tracking-wide text-white">
+            <h4 className="text-lg font-medium uppercase tracking-wide text-white">
               Company
             </h4>
             <ul className="mt-4 text-base space-y-2 text-white">
@@ -250,7 +250,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold uppercase tracking-wide text-white">
+            <h4 className="text-lg font-medium uppercase tracking-wide text-white">
               Contact Us
             </h4>
             <ul className="mt-4 text-base space-y-2 text-white">

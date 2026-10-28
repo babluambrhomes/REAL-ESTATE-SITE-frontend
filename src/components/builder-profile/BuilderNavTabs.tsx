@@ -20,7 +20,7 @@ export const BuilderNavTabs = ({
   ];
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1 font-jakarta">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-1 font-poppins">
       <div className="bg-white rounded-[22px] border border-slate-200/90 p-2 shadow-xs overflow-x-auto no-scrollbar">
         <div className="flex items-center gap-2 min-w-max">
           {tabs.map((tab) => {

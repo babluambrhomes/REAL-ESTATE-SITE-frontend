@@ -9,7 +9,7 @@ function PortalLayoutInner({ children }: { children: React.ReactNode }) {
   const { activeView, setActiveView } = usePortal();
 
   return (
-    <div className="min-h-screen bg-[#F4F7FB] font-jakarta antialiased flex">
+    <div className="min-h-screen bg-[#F4F7FB] font-poppins antialiased flex">
       {/* 1. Deep Royal Blue Collapsible Sidebar matching Figma */}
       <PortalSidebar
         collapsed={collapsed}

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const WhyGoPremiumSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white via-[#F0F9FF] to-white py-16 sm:py-24 font-jakarta">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white via-[#F0F9FF] to-white py-16 sm:py-24 font-poppins">
       {/* Figma Ambient background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] max-w-[95vw] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.22)_0%,rgba(45,212,191,0.14)_45%,transparent_75%)] blur-3xl pointer-events-none" />
 
@@ -83,7 +83,7 @@ export const WhyGoPremiumSection = () => {
                 <p className="text-base sm:text-lg font-bold text-slate-800">
                   Your Investment Should Work For You
                 </p>
-                <p className="text-sm sm:text-base font-semibold text-slate-500 italic">
+                <p className="text-sm sm:text-base font-medium text-slate-500 italic">
                   Paisa wahi lagao, jahan se business aage badhe.
                 </p>
               </div>

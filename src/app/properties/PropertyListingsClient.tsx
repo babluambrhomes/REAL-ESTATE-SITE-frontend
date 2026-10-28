@@ -675,7 +675,7 @@ export const PropertyListingsClient = () => {
   }, [q, city, propertyType, purpose, savedOnly]);
 
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 pt-5 pb-16 sm:px-8 font-jakarta">
+    <section className="mx-auto w-full max-w-[1440px] px-4 pt-5 pb-16 sm:px-8 font-poppins">
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* CASE A: DEDICATED SAVED PROPERTIES / WISHLIST VIEW                 */}
       {/* ─────────────────────────────────────────────────────────────────── */}
@@ -699,7 +699,7 @@ export const PropertyListingsClient = () => {
 
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-semibold backdrop-blur-md mb-3 border border-white/20">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-medium backdrop-blur-md mb-3 border border-white/20">
                   <Heart className="h-3.5 w-3.5 text-rose-300 fill-rose-300" />
                   <span>My Shortlisted Collection</span>
                 </div>
@@ -725,7 +725,7 @@ export const PropertyListingsClient = () => {
                   <button
                     type="button"
                     onClick={handleClearAllSaved}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-white/15 hover:bg-rose-500/80 text-white px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer backdrop-blur-md border border-white/20"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white/15 hover:bg-rose-500/80 text-white px-4 py-2.5 text-xs sm:text-sm font-medium transition-all cursor-pointer backdrop-blur-md border border-white/20"
                     title="Remove all saved properties"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -844,7 +844,7 @@ export const PropertyListingsClient = () => {
 
                   <Link
                     href="/compare"
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 shadow-xs transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50 shadow-xs transition-colors cursor-pointer"
                   >
                     <ArrowLeftRight className="h-4 w-4 text-[#1865F2]" />
                     <span>Compare Top Properties</span>
@@ -1093,57 +1093,10 @@ export const PropertyListingsClient = () => {
             </div>
           </div>
 
-          {/* Popular Sector Filter Chips */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none mb-3 font-jakarta">
-            <span className="text-[11.5px] font-bold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1.5 pr-1">
-              <MapPinned size={14} className="text-[#1865F2]" />
-              Popular:
-            </span>
-            {[
-              { label: "All Sectors", val: "" },
-              { label: "Sector 150", val: "sector-150" },
-              { label: "Sector 76", val: "sector-76" },
-              { label: "Sector 103", val: "sector-103" },
-              { label: "Sector 124", val: "sector-124" },
-              { label: "Sector 128", val: "sector-128" },
-              { label: "Expressway", val: "expressway" },
-              { label: "Greater Noida", val: "greater-noida" },
-            ].map((loc) => {
-              const isSelected = (!locality && loc.val === "") || (locality && locality.toLowerCase() === loc.val.toLowerCase());
-              return (
-                <button
-                  key={loc.label}
-                  type="button"
-                  onClick={() => {
-                    const nextParams = new URLSearchParams(searchParams.toString());
-                    if (!loc.val || locality.toLowerCase() === loc.val.toLowerCase()) {
-                      nextParams.delete("locality");
-                    } else {
-                      nextParams.set("locality", loc.val);
-                    }
-                    nextParams.delete("page");
-                    router.push(`/properties?${nextParams.toString()}`, { scroll: false });
-                  }}
-                  className={cn(
-                    "px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shadow-2xs border",
-                    isSelected
-                      ? "bg-[#1865F2] text-white border-[#1865F2] shadow-sm scale-102"
-                      : "bg-white text-slate-700 border-slate-200/90 hover:border-blue-300 hover:text-[#1865F2]"
-                  )}
-                >
-                  {loc.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Dedicated Filter Bar (BHK Multi-select, Budget Presets & Sliders, Property Type, Possession, Posted By) */}
-          <ListingsFilterBar />
-
           {/* Active Filter Badges with Quick Removal */}
           {activePills.length > 0 && (
             <div className="mb-5 flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-[#F4F8FE] border border-blue-100/80">
-              <span className="text-xs font-semibold text-slate-600">Active Filters:</span>
+              <span className="text-xs font-medium text-slate-600">Active Filters:</span>
               {activePills.map((pill) => (
                 <span
                   key={pill.key}
@@ -1194,7 +1147,7 @@ export const PropertyListingsClient = () => {
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="flex items-center gap-2 rounded-xl bg-[#1865F2] px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-blue-700 transition-all cursor-pointer"
+                className="flex items-center gap-2 rounded-xl bg-[#1865F2] px-6 py-2.5 text-sm font-medium text-white shadow-md hover:bg-blue-700 transition-all cursor-pointer"
               >
                 <RotateCcw className="h-4 w-4" />
                 <span>Reset All Filters</span>
@@ -1237,7 +1190,7 @@ export const PropertyListingsClient = () => {
                           <button
                             type="button"
                             onClick={() => setShowMap(false)}
-                            className="text-xs text-[#1865F2] font-semibold hover:underline"
+                            className="text-xs text-[#1865F2] font-medium hover:underline"
                           >
                             Hide Map
                           </button>
@@ -1366,7 +1319,7 @@ export const PropertyListingsClient = () => {
                           <button
                             type="button"
                             onClick={() => setShowMap(false)}
-                            className="text-xs text-[#1865F2] font-semibold hover:underline cursor-pointer"
+                            className="text-xs text-[#1865F2] font-medium hover:underline cursor-pointer"
                           >
                             Hide Map
                           </button>

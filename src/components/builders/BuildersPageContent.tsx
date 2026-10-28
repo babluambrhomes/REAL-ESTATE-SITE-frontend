@@ -57,7 +57,7 @@ export function BuildersPageContent({ initialTab = "builders" }: BuildersPageCon
   const [activeTab, setActiveTab] = useState<"agents" | "builders">(initialTab);
 
   return (
-    <div className="min-h-screen bg-[#FAFCFF] flex flex-col font-jakarta">
+    <div className="min-h-screen bg-[#FAFCFF] flex flex-col font-poppins">
       {/* 1. Top Announcement Bar */}
       {showAnnouncement && (
         <TopAnnouncementBar isFixed={false} onClose={() => setShowAnnouncement(false)} />

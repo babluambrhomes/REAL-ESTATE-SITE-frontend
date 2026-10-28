@@ -184,7 +184,7 @@ export const HandpickedProperties = () => {
             <div className="p-4 sm:p-5 flex flex-col justify-between flex-1">
               <div>
                 {/* BHK Pill Tag */}
-                <span className="inline-block rounded-full bg-[#EEF5FF] px-2.5 py-0.5 text-[11px] font-semibold text-[#1865F2]">
+                <span className="inline-block rounded-full bg-[#EEF5FF] px-2.5 py-0.5 text-[11px] font-medium text-[#1865F2]">
                   {item.tag}
                 </span>
 
@@ -234,7 +234,7 @@ export const HandpickedProperties = () => {
 
                 <Link
                   href={`/properties/${encodeURIComponent(item.title)}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1865F2] hover:bg-[#1250C4] px-5 sm:px-6 py-2.5 text-[13px] sm:text-[14px] font-semibold text-white shadow-xs transition-all duration-200 hover:scale-105 cursor-pointer shrink-0"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1865F2] hover:bg-[#1250C4] px-5 sm:px-6 py-2.5 text-[13px] sm:text-[14px] font-medium text-white shadow-xs transition-all duration-200 hover:scale-105 cursor-pointer shrink-0"
                 >
                   <span>View Details</span>
                   <ArrowRight className="h-4 w-4 stroke-[2.5]" />

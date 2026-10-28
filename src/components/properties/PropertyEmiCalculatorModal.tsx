@@ -224,13 +224,13 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                 <h3 className="text-lg sm:text-xl font-black text-[#0B132B]">
                   Home Loan EMI Calculator
                 </h3>
-                <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                   <Sparkles className="h-3 w-3" /> Real-time Estimate
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5 flex items-center gap-2 flex-wrap">
                 {propertyTitle && (
-                  <span className="font-semibold text-slate-700 truncate max-w-[260px] sm:max-w-[400px]">
+                  <span className="font-medium text-slate-700 truncate max-w-[260px] sm:max-w-[400px]">
                     {propertyTitle}
                   </span>
                 )}
@@ -270,7 +270,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                 onChange={(e) => setPropertyPrice(Number(e.target.value))}
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#1865F2]"
               />
-              <div className="flex justify-between text-[10px] font-semibold text-slate-400 mt-1">
+              <div className="flex justify-between text-[10px] font-medium text-slate-400 mt-1">
                 <span>₹15 Lakh</span>
                 <span>₹5 Cr</span>
                 <span>₹15 Cr</span>
@@ -282,7 +282,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                     key={val}
                     type="button"
                     onClick={() => setPropertyPrice(val)}
-                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border transition-all ${
+                    className={`text-[10px] font-medium px-2 py-0.5 rounded-full border transition-all ${
                       propertyPrice === val
                         ? "bg-[#1865F2] text-white border-[#1865F2]"
                         : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300"
@@ -320,7 +320,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                 onChange={(e) => setDownPaymentPercent(Number(e.target.value))}
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#00BA7A]"
               />
-              <div className="flex justify-between text-[10px] font-semibold text-slate-400 mt-1">
+              <div className="flex justify-between text-[10px] font-medium text-slate-400 mt-1">
                 <span>10% (Min)</span>
                 <span>20% (Standard)</span>
                 <span>40%</span>
@@ -349,7 +349,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                   onChange={(e) => setInterestRate(Number(e.target.value))}
                   className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#1865F2]"
                 />
-                <div className="flex justify-between text-[10px] font-semibold text-slate-400 mt-1">
+                <div className="flex justify-between text-[10px] font-medium text-slate-400 mt-1">
                   <span>7.0%</span>
                   <span>10.5%</span>
                   <span>14.0%</span>
@@ -375,7 +375,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                   onChange={(e) => setTenureYears(Number(e.target.value))}
                   className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#1865F2]"
                 />
-                <div className="flex justify-between text-[10px] font-semibold text-slate-400 mt-1">
+                <div className="flex justify-between text-[10px] font-medium text-slate-400 mt-1">
                   <span>5 Yrs</span>
                   <span>15 Yrs</span>
                   <span>30 Yrs</span>
@@ -400,7 +400,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                         : "bg-white/60 border-slate-200 hover:bg-white"
                     }`}
                   >
-                    <div className="text-[10px] font-semibold text-slate-600 truncate">
+                    <div className="text-[10px] font-medium text-slate-600 truncate">
                       {bank.name}
                     </div>
                     <div className="text-xs font-black text-[#1865F2]">{bank.rate}%</div>
@@ -421,12 +421,12 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
                 <span className="text-3xl sm:text-4xl font-black text-[#00BA7A] tracking-tight">
                   ₹{monthlyEmi.toLocaleString("en-IN")}
                 </span>
-                <span className="text-xs font-semibold text-slate-500">/ month</span>
+                <span className="text-xs font-medium text-slate-500">/ month</span>
               </div>
 
               {/* Progress Bar Distribution */}
               <div className="mt-5">
-                <div className="flex justify-between text-[11px] font-semibold mb-1.5">
+                <div className="flex justify-between text-[11px] font-medium mb-1.5">
                   <span className="text-[#1865F2]">Principal ({principalPercent}%)</span>
                   <span className="text-[#00BA7A]">Interest ({interestPercent}%)</span>
                 </div>
@@ -513,7 +513,7 @@ export const PropertyEmiCalculatorModal: React.FC<PropertyEmiCalculatorModalProp
           <button
             type="button"
             onClick={onClose}
-            className="font-semibold text-slate-600 hover:text-slate-900 cursor-pointer"
+            className="font-medium text-slate-600 hover:text-slate-900 cursor-pointer"
           >
             Close
           </button>

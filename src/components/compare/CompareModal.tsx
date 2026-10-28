@@ -100,7 +100,7 @@ export const CompareModal = ({
       label: "RERA Approved",
       key: "rera",
       render: () => (
-        <span className="text-[#00D084] font-semibold text-xs flex items-center gap-1">
+        <span className="text-[#00D084] font-medium text-xs flex items-center gap-1">
           <Check className="w-3.5 h-3.5" /> Yes (Registered)
         </span>
       ),
@@ -183,7 +183,7 @@ export const CompareModal = ({
             {/* Top Cards Row */}
             <div className="grid grid-cols-4 gap-4 pb-6 border-b border-slate-200">
               <div className="flex flex-col justify-end p-2">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
                   Features &amp; Specifications
                 </span>
                 <p className="text-sm font-bold text-[#0B132B]">
@@ -258,7 +258,7 @@ export const CompareModal = ({
                   key={idx}
                   className="grid grid-cols-4 gap-4 py-3 items-center hover:bg-slate-50/60 transition-colors px-2 rounded-lg"
                 >
-                  <div className="text-[12.5px] font-semibold text-slate-600">
+                  <div className="text-[12.5px] font-medium text-slate-600">
                     {attr.label}
                   </div>
                   {selectedProperties.map((prop, pIdx) => (
@@ -276,14 +276,14 @@ export const CompareModal = ({
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between shrink-0">
           <div className="text-xs text-slate-500">
             Need personalized advisory? Call our verified expert at{" "}
-            <span className="font-semibold text-slate-800">+91 98765 43210</span>
+            <span className="font-medium text-slate-800">+91 98765 43210</span>
           </div>
 
           <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+              className="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
             >
               Close
             </button>

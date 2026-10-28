@@ -58,7 +58,7 @@ export const AgentNearBy = () => {
   };
 
   return (
-    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-jakarta">
+    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-poppins">
       {/* Section Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export const AgentNearBy = () => {
                 <p className="text-[11px] font-black text-slate-900 tracking-tight leading-none truncate">
                   {item.company}
                 </p>
-                <p className="text-[10px] text-slate-500 font-semibold truncate mt-0.5">
+                <p className="text-[10px] text-slate-500 font-medium truncate mt-0.5">
                   {item.agent}
                 </p>
               </div>

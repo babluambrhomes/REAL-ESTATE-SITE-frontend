@@ -5,7 +5,7 @@ import { Sparkles, ArrowUpRight, ShieldCheck, TrendingUp } from "lucide-react";
 
 export const StandOutSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-16 sm:py-24 font-jakarta">
+    <section className="relative w-full overflow-hidden bg-white py-16 sm:py-24 font-poppins">
       {/* Exact Fine Contour Mesh Vector Lines (Figma Background Asset) */}
       <div className="absolute -bottom-10 left-0 w-[480px] h-[480px] pointer-events-none opacity-20 mix-blend-multiply z-0">
         <Image

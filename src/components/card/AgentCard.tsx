@@ -66,7 +66,7 @@ export const AgentCard = ({
 
       <Link
         href="/agents"
-        className="block uppercase text-center whitespace-nowrap rounded-lg w-full bg-secondary px-6 py-2 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+        className="block uppercase text-center whitespace-nowrap rounded-lg w-full bg-secondary px-6 py-2 text-sm font-medium text-white shadow-lg transition-transform hover:scale-105"
       >
         View Profile
       </Link>

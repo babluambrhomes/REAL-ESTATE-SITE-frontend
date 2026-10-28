@@ -27,7 +27,7 @@ export const CompareFeatureStrip = () => {
   ];
 
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 font-poppins">
       <div className="rounded-[20px] bg-white border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-slate-200">
         {features.map((feat, idx) => (
           <div key={idx} className="flex items-center gap-3.5 lg:px-6 first:pl-2 last:pr-2">

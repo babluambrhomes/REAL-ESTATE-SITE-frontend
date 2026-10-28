@@ -172,7 +172,7 @@ export const BuilderSidebarLeadForm = () => {
   ];
 
   return (
-    <div className="w-full space-y-4 font-jakarta">
+    <div className="w-full space-y-4 font-poppins">
       {/* 1. Card: Interested in this builder ? */}
       <div id="builder-lead-form" className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
         {isSubmitted ? (
@@ -191,7 +191,7 @@ export const BuilderSidebarLeadForm = () => {
               Your request for <span className="font-bold text-[#0B132B]">{lastSubmittedLead?.project}</span> has been forwarded to ATS Infrastructure official sales desk.
             </p>
             <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 my-3 text-left">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-700">
                 <Building2 className="w-4 h-4 text-[#1865F2] shrink-0" />
                 <span>Assigned: ATS Corporate Advisor</span>
               </div>

@@ -113,24 +113,20 @@ export default function Home() {
         <SearchHeader />
       </div>
 
-      <main className="min-h-screen bg-[#fafbfc]">
+      <main className="min-h-screen bg-white">
         {/* 1. Hero Section (Immediate) */}
         <HeroSlider />
 
-        {/* 2 & 3. Abstract Background Wrapper covering Category Chips & Exclusive New Launches (Immediate) */}
+        {/* 2 & 3. Category Chips & Exclusive New Launches (Immediate) */}
         <div className="relative w-full z-20">
-          {/* Abstract Wave Mesh Background Image (Soft faded) */}
-          <div className="absolute inset-x-0 top-20 sm:top-24 bottom-0 -z-10 overflow-hidden pointer-events-none">
-            <Image
-              src="/layout/abstract_bg.jpg"
-              alt="Abstract background"
-              fill
-              priority
-              className="object-cover object-top opacity-25"
-            />
-            {/* Soft gradient overlay for subtle aesthetic fade */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60 pointer-events-none" />
-          </div>
+          {/* Subtle Top-to-Bottom Gradient Background (#EEF6FE fading to White) - Starts strictly below the banner */}
+          <div
+            className="absolute inset-x-0 top-[45px] sm:top-[64px] md:top-[70px] h-[580px] sm:h-[610px] lg:h-[630px] -z-10 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(180deg, #EEF6FE 0%, rgba(238, 246, 254, 0.65) 45%, rgba(238, 246, 254, 0.15) 75%, #FFFFFF 100%)",
+            }}
+          />
 
           {/* Floating Search Box (Floats Half Over Hero Banner) */}
           <SearchBox ref={searchBoxRef} />

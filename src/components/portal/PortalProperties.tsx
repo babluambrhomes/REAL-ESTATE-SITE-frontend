@@ -476,7 +476,7 @@ export const PortalProperties = ({
   });
 
   return (
-    <div className="rounded-2xl border border-slate-200/80 bg-white shadow-2xs font-jakarta overflow-hidden">
+    <div className="rounded-2xl border border-slate-200/80 bg-white shadow-2xs font-poppins overflow-hidden">
       {/* 1. Horizontal Navigation Tabs Strip (Figma 1:1) */}
       <div className="border-b border-slate-200 px-6 pt-3 flex items-center gap-7 overflow-x-auto no-scrollbar">
         {NAV_TABS.map((tab) => {
@@ -524,7 +524,7 @@ export const PortalProperties = ({
             <button
               type="button"
               onClick={onPostProperty}
-              className="px-6 py-2.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-semibold text-[13px] shadow-sm transition-all cursor-pointer active:scale-98"
+              className="px-6 py-2.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-medium text-[13px] shadow-sm transition-all cursor-pointer active:scale-98"
             >
               Post Property
             </button>
@@ -553,7 +553,7 @@ export const PortalProperties = ({
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveFilterTab(tab.id)}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
                     activeFilterTab === tab.id
                       ? "bg-[#EAF2FF] text-[#1865F2]"
                       : "bg-[#F8FAFC] text-slate-700 hover:bg-slate-100"
@@ -627,7 +627,7 @@ export const PortalProperties = ({
                     setFilterLocation("Location");
                     setActiveFilterTab("All");
                   }}
-                  className="h-8.5 px-3 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white"
+                  className="h-8.5 px-3 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:text-slate-900 bg-white"
                 >
                   Reset
                 </button>
@@ -699,7 +699,7 @@ export const PortalProperties = ({
 
                       <div className="min-w-[80px]">
                         <span
-                          className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-semibold text-center ${
+                          className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-medium text-center ${
                             isUnderReview
                               ? "bg-amber-50 text-amber-600 border border-amber-200"
                               : isSold
@@ -740,7 +740,7 @@ export const PortalProperties = ({
                         <button
                           type="button"
                           onClick={() => handleEditProperty(p)}
-                          className="px-4 py-1.5 rounded-lg border border-blue-100 bg-[#F0F5FF] hover:bg-blue-100 text-[#1865F2] text-[12px] font-semibold transition-colors cursor-pointer"
+                          className="px-4 py-1.5 rounded-lg border border-blue-100 bg-[#F0F5FF] hover:bg-blue-100 text-[#1865F2] text-[12px] font-medium transition-colors cursor-pointer"
                         >
                           Edit
                         </button>
@@ -798,7 +798,7 @@ export const PortalProperties = ({
                               <button
                                 type="button"
                                 onClick={() => handleDeleteProperty(p.id)}
-                                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-rose-600 hover:bg-rose-50 font-semibold transition-colors cursor-pointer text-left"
+                                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-rose-600 hover:bg-rose-50 font-medium transition-colors cursor-pointer text-left"
                               >
                                 <Trash2 size={14} className="text-rose-500" />
                                 <span>Delete Listing</span>
@@ -834,7 +834,7 @@ export const PortalProperties = ({
             <button
               type="button"
               onClick={() => setIsAddProjectModalOpen(true)}
-              className="px-5 py-2.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-2 shadow-sm cursor-pointer transition-all active:scale-98"
+              className="px-5 py-2.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-medium text-xs flex items-center gap-2 shadow-sm cursor-pointer transition-all active:scale-98"
             >
               <PlusCircle size={15} />
               <span>Add New Project</span>
@@ -877,7 +877,7 @@ export const PortalProperties = ({
                     </p>
 
                     <div className="mt-4 pt-3 border-t border-slate-100 space-y-2">
-                      <div className="flex items-center justify-between text-xs font-semibold">
+                      <div className="flex items-center justify-between text-xs font-medium">
                         <span className="text-slate-500">Inventory Sold</span>
                         <span className="text-[#0B132B]">
                           {proj.soldUnits} / {proj.totalUnits} Units ({percentSold}%)
@@ -937,7 +937,7 @@ export const PortalProperties = ({
                   key={st}
                   type="button"
                   onClick={() => setLeadStatusFilter(st)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                     leadStatusFilter === st
                       ? "bg-[#1865F2] text-white"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -981,7 +981,7 @@ export const PortalProperties = ({
                     <a
                       href={`tel:${lead.phone}`}
                       onClick={() => toast.success(`Calling ${lead.name}...`)}
-                      className="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 hover:border-blue-400 hover:text-[#1865F2] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 hover:border-blue-400 hover:text-[#1865F2] text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <Phone size={13} className="text-[#1865F2]" />
                       <span>Call</span>
@@ -990,7 +990,7 @@ export const PortalProperties = ({
                       href={`https://wa.me/${lead.phone.replace(/[^\d]/g, "")}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <MessageSquare size={13} />
                       <span>WhatsApp</span>
@@ -998,7 +998,7 @@ export const PortalProperties = ({
                     <button
                       type="button"
                       onClick={() => onSelectLead?.(lead.id)}
-                      className="px-4 py-1.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white text-xs font-semibold transition-colors cursor-pointer"
+                      className="px-4 py-1.5 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white text-xs font-medium transition-colors cursor-pointer"
                     >
                       Full Profile
                     </button>
@@ -1118,7 +1118,7 @@ export const PortalProperties = ({
                     <ArrowUpRight size={14} />
                     {card.growth}
                   </span>
-                  <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-blue-50 text-[#1865F2]">
+                  <span className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-blue-50 text-[#1865F2]">
                     {card.tag}
                   </span>
                 </div>
@@ -1253,7 +1253,7 @@ export const PortalProperties = ({
             <button
               type="button"
               onClick={() => toast.success("Select a buyer from your CRM to schedule a new site visit")}
-              className="px-4 py-2 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-semibold text-xs cursor-pointer shadow-sm"
+              className="px-4 py-2 rounded-xl bg-[#1865F2] hover:bg-blue-700 text-white font-medium text-xs cursor-pointer shadow-sm"
             >
               + Schedule Visit
             </button>
@@ -1296,14 +1296,14 @@ export const PortalProperties = ({
                     <button
                       type="button"
                       onClick={() => handleConfirmSiteVisit(sv.id)}
-                      className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold cursor-pointer transition-colors"
+                      className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-medium cursor-pointer transition-colors"
                     >
                       Confirm Visit
                     </button>
                   )}
                   <a
                     href={`tel:${sv.phone}`}
-                    className="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 hover:text-[#1865F2] text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 hover:text-[#1865F2] text-xs font-medium flex items-center gap-1.5 cursor-pointer"
                   >
                     <Phone size={13} className="text-[#1865F2]" />
                     <span>Call Buyer</span>
@@ -1332,7 +1332,7 @@ export const PortalProperties = ({
 
             <form onSubmit={handleAddProject} className="space-y-3.5 text-xs">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">Project Name *</label>
+                <label className="block font-medium text-slate-700 mb-1">Project Name *</label>
                 <input
                   type="text"
                   placeholder="e.g. ATS Knightsbridge Phase 2"
@@ -1344,7 +1344,7 @@ export const PortalProperties = ({
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">Locality / Sector</label>
+                <label className="block font-medium text-slate-700 mb-1">Locality / Sector</label>
                 <input
                   type="text"
                   placeholder="e.g. Sector 128, Noida"
@@ -1356,7 +1356,7 @@ export const PortalProperties = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Price Range</label>
+                  <label className="block font-medium text-slate-700 mb-1">Price Range</label>
                   <input
                     type="text"
                     placeholder="e.g. ₹ 2 Cr - 4 Cr"
@@ -1366,7 +1366,7 @@ export const PortalProperties = ({
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Total Units</label>
+                  <label className="block font-medium text-slate-700 mb-1">Total Units</label>
                   <input
                     type="number"
                     placeholder="e.g. 150"
@@ -1381,7 +1381,7 @@ export const PortalProperties = ({
                 <button
                   type="button"
                   onClick={() => setIsAddProjectModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-medium cursor-pointer"
                 >
                   Cancel
                 </button>

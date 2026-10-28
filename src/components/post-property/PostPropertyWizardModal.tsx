@@ -265,7 +265,7 @@ export const PostPropertyWizardModal: React.FC<WizardProps> = ({
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200 font-jakarta">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 bg-slate-950/70 backdrop-blur-md animate-in fade-in duration-200 font-poppins">
       <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[92vh]">
         
         {/* Header Bar */}

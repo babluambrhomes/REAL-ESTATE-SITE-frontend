@@ -101,7 +101,7 @@ export const PropertyDetailAboutAndAmenities = ({
               <button
                 key={tab.id}
                 onClick={() => scrollToSection(tab.id)}
-                className={`px-5 py-1.5 rounded-full text-[13px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
+                className={`px-5 py-1.5 rounded-full text-[13px] font-medium transition-all whitespace-nowrap cursor-pointer ${
                   isActive
                     ? "bg-[#1865F2] text-white shadow-2xs"
                     : "text-[#475569] hover:text-[#0B132B] hover:bg-slate-100/80"
@@ -116,8 +116,8 @@ export const PropertyDetailAboutAndAmenities = ({
 
       {/* ----------------- 1. ABOUT PROPERTY SECTION ----------------- */}
       <div id="about" className="space-y-2.5 scroll-mt-28">
-        <p className="text-[13.5px] font-semibold text-[#0B132B]">
-          Overview : <span className="font-semibold text-[#0284C7]">Verified Property Details</span>
+        <p className="text-[13.5px] font-medium text-[#0B132B]">
+          Overview : <span className="font-medium text-[#0284C7]">Verified Property Details</span>
         </p>
 
         <p className="text-[13px] text-[#475569] leading-relaxed">
@@ -133,7 +133,7 @@ export const PropertyDetailAboutAndAmenities = ({
               )}
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-[#1865F2] font-semibold ml-1.5 hover:underline cursor-pointer inline-flex items-center"
+                className="text-[#1865F2] font-medium ml-1.5 hover:underline cursor-pointer inline-flex items-center"
               >
                 {isExpanded ? "Less <<<" : "More >>>"}
               </button>
@@ -157,7 +157,7 @@ export const PropertyDetailAboutAndAmenities = ({
             </p>
           </div>
 
-          <button className="px-5 py-2 rounded-lg bg-[#1865F2] hover:bg-blue-700 text-white text-[12.5px] font-semibold transition-all shadow-2xs cursor-pointer">
+          <button className="px-5 py-2 rounded-lg bg-[#1865F2] hover:bg-blue-700 text-white text-[12.5px] font-medium transition-all shadow-2xs cursor-pointer">
             View All Amenities
           </button>
         </div>
@@ -190,7 +190,7 @@ export const PropertyDetailAboutAndAmenities = ({
                 <p className="text-[12.5px] sm:text-[13px] text-[#475569] font-normal leading-tight truncate">
                   {item.label}
                 </p>
-                <p className="text-[16px] sm:text-[18px] font-semibold text-[#0B132B] mt-1 leading-tight truncate">
+                <p className="text-[16px] sm:text-[18px] font-medium text-[#0B132B] mt-1 leading-tight truncate">
                   {item.value}
                 </p>
               </div>
@@ -269,7 +269,7 @@ export const PropertyDetailAboutAndAmenities = ({
                   {stat.value}
                 </span>
                 {stat.sub && (
-                  <span className="text-[11px] text-[#1865F2] font-semibold ml-1 leading-none">
+                  <span className="text-[11px] text-[#1865F2] font-medium ml-1 leading-none">
                     {stat.sub}
                   </span>
                 )}
@@ -298,7 +298,7 @@ export const PropertyDetailAboutAndAmenities = ({
                 />
               </div>
               <div>
-                <h4 className="text-[13.5px] font-semibold text-[#0B132B] leading-tight">
+                <h4 className="text-[13.5px] font-medium text-[#0B132B] leading-tight">
                   {feature.title}
                 </h4>
                 <p className="text-[11.5px] text-[#64748B] leading-tight mt-0.5 font-normal">

@@ -311,7 +311,7 @@ export const ListingsFilterBar = () => {
   }, [currentPostedBy]);
 
   return (
-    <div className="mb-6 rounded-[24px] border border-slate-200/90 bg-white p-3.5 sm:p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] font-jakarta transition-all">
+    <div className="mb-6 rounded-[24px] border border-slate-200/90 bg-white p-3.5 sm:p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] font-poppins transition-all">
       {/* Top Row: Refine Title, BHK Pills & Reset Button */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
         {/* Left: Section Label & BHK Multi-Select Chips */}
@@ -355,7 +355,7 @@ export const ListingsFilterBar = () => {
             <button
               type="button"
               onClick={handleResetFilters}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:underline cursor-pointer transition-colors"
+              className="inline-flex items-center gap-1 text-xs font-medium text-rose-600 hover:text-rose-700 hover:underline cursor-pointer transition-colors"
             >
               <RotateCcw className="h-3 w-3" />
               <span>Reset Filters</span>
@@ -372,7 +372,7 @@ export const ListingsFilterBar = () => {
             type="button"
             onClick={() => setOpenDropdown(openDropdown === "budget" ? null : "budget")}
             className={cn(
-              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-semibold transition-all cursor-pointer shadow-2xs",
+              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-medium transition-all cursor-pointer shadow-2xs",
               (currentMinPrice || currentMaxPrice || currentBudget)
                 ? "bg-blue-50/80 border-[#1865F2] text-[#1865F2]"
                 : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
@@ -406,7 +406,7 @@ export const ListingsFilterBar = () => {
 
               {/* Quick Presets */}
               <div className="py-3">
-                <p className="text-[11px] font-semibold text-slate-500 mb-2 uppercase">
+                <p className="text-[11px] font-medium text-slate-500 mb-2 uppercase">
                   Popular Presets
                 </p>
                 <div className="grid grid-cols-2 gap-1.5">
@@ -425,7 +425,7 @@ export const ListingsFilterBar = () => {
 
               {/* Custom Min / Max Selectors */}
               <div className="pt-3 border-t border-slate-100">
-                <p className="text-[11px] font-semibold text-slate-500 mb-2 uppercase">
+                <p className="text-[11px] font-medium text-slate-500 mb-2 uppercase">
                   Or Custom Range (₹ Lakhs / Cr)
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -434,7 +434,7 @@ export const ListingsFilterBar = () => {
                     <select
                       value={tempMin}
                       onChange={(e) => setTempMin(Number(e.target.value))}
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 p-1.5 text-xs font-semibold text-slate-800 focus:border-[#1865F2] focus:bg-white focus:outline-none"
+                      className="w-full rounded-lg border border-slate-200 bg-slate-50 p-1.5 text-xs font-medium text-slate-800 focus:border-[#1865F2] focus:bg-white focus:outline-none"
                     >
                       {MIN_PRICES.map((p) => (
                         <option key={p.value} value={p.value}>
@@ -449,7 +449,7 @@ export const ListingsFilterBar = () => {
                     <select
                       value={tempMax}
                       onChange={(e) => setTempMax(Number(e.target.value))}
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 p-1.5 text-xs font-semibold text-slate-800 focus:border-[#1865F2] focus:bg-white focus:outline-none"
+                      className="w-full rounded-lg border border-slate-200 bg-slate-50 p-1.5 text-xs font-medium text-slate-800 focus:border-[#1865F2] focus:bg-white focus:outline-none"
                     >
                       {MAX_PRICES.map((p) => (
                         <option key={p.value} value={p.value}>
@@ -470,7 +470,7 @@ export const ListingsFilterBar = () => {
                       updateQuery({ minPrice: null, maxPrice: null, budget: null });
                       setOpenDropdown(null);
                     }}
-                    className="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-800"
+                    className="px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-800"
                   >
                     Clear Budget
                   </button>
@@ -493,7 +493,7 @@ export const ListingsFilterBar = () => {
             type="button"
             onClick={() => setOpenDropdown(openDropdown === "type" ? null : "type")}
             className={cn(
-              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-semibold transition-all cursor-pointer shadow-2xs",
+              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-medium transition-all cursor-pointer shadow-2xs",
               currentType
                 ? "bg-blue-50/80 border-[#1865F2] text-[#1865F2]"
                 : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
@@ -520,7 +520,7 @@ export const ListingsFilterBar = () => {
                     setOpenDropdown(null);
                   }}
                   className={cn(
-                    "w-full text-left px-3 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer flex items-center justify-between",
+                    "w-full text-left px-3 py-2 text-xs font-medium rounded-xl transition-colors cursor-pointer flex items-center justify-between",
                     currentType === t.value
                       ? "bg-[#1865F2] text-white"
                       : "text-slate-700 hover:bg-slate-50 hover:text-[#1865F2]"
@@ -540,7 +540,7 @@ export const ListingsFilterBar = () => {
             type="button"
             onClick={() => setOpenDropdown(openDropdown === "status" ? null : "status")}
             className={cn(
-              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-semibold transition-all cursor-pointer shadow-2xs",
+              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-medium transition-all cursor-pointer shadow-2xs",
               currentStatus
                 ? "bg-blue-50/80 border-[#1865F2] text-[#1865F2]"
                 : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
@@ -567,7 +567,7 @@ export const ListingsFilterBar = () => {
                     setOpenDropdown(null);
                   }}
                   className={cn(
-                    "w-full text-left px-3 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer flex items-center justify-between",
+                    "w-full text-left px-3 py-2 text-xs font-medium rounded-xl transition-colors cursor-pointer flex items-center justify-between",
                     currentStatus === s.value
                       ? "bg-[#1865F2] text-white"
                       : "text-slate-700 hover:bg-slate-50 hover:text-[#1865F2]"
@@ -587,7 +587,7 @@ export const ListingsFilterBar = () => {
             type="button"
             onClick={() => setOpenDropdown(openDropdown === "postedBy" ? null : "postedBy")}
             className={cn(
-              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-semibold transition-all cursor-pointer shadow-2xs",
+              "flex h-10 items-center gap-2 rounded-xl border px-3.5 text-xs sm:text-[13px] font-medium transition-all cursor-pointer shadow-2xs",
               currentPostedBy
                 ? "bg-blue-50/80 border-[#1865F2] text-[#1865F2]"
                 : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
@@ -614,7 +614,7 @@ export const ListingsFilterBar = () => {
                     setOpenDropdown(null);
                   }}
                   className={cn(
-                    "w-full text-left px-3 py-2 text-xs font-semibold rounded-xl transition-colors cursor-pointer flex items-center justify-between",
+                    "w-full text-left px-3 py-2 text-xs font-medium rounded-xl transition-colors cursor-pointer flex items-center justify-between",
                     currentPostedBy === p.value
                       ? "bg-[#1865F2] text-white"
                       : "text-slate-700 hover:bg-slate-50 hover:text-[#1865F2]"

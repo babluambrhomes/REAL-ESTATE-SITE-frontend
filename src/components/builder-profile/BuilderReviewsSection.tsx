@@ -79,7 +79,7 @@ export const BuilderReviewsSection = () => {
   const displayedReviews = showAll ? reviewList : reviewList.slice(0, 2);
 
   return (
-    <div className="w-full bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)] font-jakarta">
+    <div className="w-full bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)] font-poppins">
       {/* Header with Write Review */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-base sm:text-lg font-black text-[#1865F2] tracking-tight">
@@ -152,7 +152,7 @@ export const BuilderReviewsSection = () => {
             <button
               type="button"
               onClick={() => setIsWriting(false)}
-              className="px-4 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+              className="px-4 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-100 cursor-pointer"
             >
               Cancel
             </button>
@@ -179,7 +179,7 @@ export const BuilderReviewsSection = () => {
               <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             ))}
           </div>
-          <span className="text-xs text-slate-400 font-semibold">
+          <span className="text-xs text-slate-400 font-medium">
             (200 Total Reviews)
           </span>
         </div>

@@ -27,7 +27,7 @@ export const PostPropertyHero = () => {
           
           {/* Left Column: Heading, Subtitle & Value Checklist */}
           <div className="lg:col-span-5 space-y-4">
-            <h1 className="text-[28px] sm:text-[34px] xl:text-[38px] font-bold text-[#1865F2] leading-[1.2] tracking-tight font-jakarta">
+            <h1 className="text-[28px] sm:text-[34px] xl:text-[38px] font-bold text-[#1865F2] leading-[1.2] tracking-tight font-poppins">
               <span className="block whitespace-nowrap">
                 One Platform For Selling &amp; Renting
               </span>
@@ -70,7 +70,7 @@ export const PostPropertyHero = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-[13.5px] sm:text-[14px] font-semibold text-slate-700">
+                  <span className="text-[13.5px] sm:text-[14px] font-medium text-slate-700">
                     {text}
                   </span>
                 </div>

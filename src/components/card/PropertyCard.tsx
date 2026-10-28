@@ -68,11 +68,11 @@ const ReadyToMoveIcon = ({ className }: { className?: string }) => (
 
 const BlueLocationPinIcon = ({ className = "h-4 w-3.5 shrink-0" }: { className?: string }) => (
   <Image
-    src="/icon/location_pin_blue.png"
+    src="/icon/frame (2).svg"
     alt="Location"
-    width={34}
-    height={43}
-    className={cn("object-contain", className)}
+    width={18}
+    height={23}
+    className={cn("object-contain shrink-0", className)}
     unoptimized
   />
 );
@@ -315,7 +315,7 @@ export const PropertyCard = (props: Property) => {
               type="button"
               onClick={handleCalculateDistance}
               title="Click to calculate distance from your current location"
-              className="flex items-center justify-center gap-2 text-[12.5px] font-semibold flex-1 border-r-2 border-white px-2 hover:bg-white/15 transition-colors cursor-pointer"
+              className="flex items-center justify-center gap-2 text-[12.5px] font-medium flex-1 border-r-2 border-white px-2 hover:bg-white/15 transition-colors cursor-pointer"
             >
               <Image
                 src="/icon/card_distance_arrow.png"
@@ -336,7 +336,7 @@ export const PropertyCard = (props: Property) => {
                 e.stopPropagation();
                 setMapModalOpen(true);
               }}
-              className="flex items-center justify-center gap-2 text-[12.5px] font-semibold hover:bg-white/15 transition-colors cursor-pointer flex-1 px-2"
+              className="flex items-center justify-center gap-2 text-[12.5px] font-medium hover:bg-white/15 transition-colors cursor-pointer flex-1 px-2"
               title="View on Map"
             >
               <Image
@@ -532,35 +532,35 @@ export const PropertyCard = (props: Property) => {
               <div className="mt-2.5 rounded-2xl border border-blue-100 bg-[#F8FBFF] p-3.5 sm:p-4 text-xs animate-in slide-in-from-top-2 duration-200">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Bedrooms</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Bedrooms</span>
                     <span className="text-xs font-bold text-slate-800">{chips?.[0] || "3-4 Bedrooms"}</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Bathrooms</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Bathrooms</span>
                     <span className="text-xs font-bold text-slate-800">{props.baths || "3-4 Bathrooms"}</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Balconies</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Balconies</span>
                     <span className="text-xs font-bold text-slate-800">{props.balconies || "3 Balconies"}</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Super Area</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Super Area</span>
                     <span className="text-xs font-bold text-slate-800">{infoChips?.[0]?.value || "3,200"} Sq. Ft</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Facing</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Facing</span>
                     <span className="text-xs font-bold text-slate-800">{props.facing || "North-East"}</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Floor</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Floor</span>
                     <span className="text-xs font-bold text-slate-800">{props.floor || "14th of 28"}</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Furnishing</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Furnishing</span>
                     <span className="text-xs font-bold text-slate-800">{props.furnishing || "Semi-Furnished"}</span>
                   </div>
                   <div className="rounded-xl bg-white p-2 border border-slate-200/70 shadow-2xs">
-                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">Parking</span>
+                    <span className="text-[10px] text-slate-400 block font-medium uppercase">Parking</span>
                     <span className="text-xs font-bold text-slate-800">{props.parking || "2 Covered"}</span>
                   </div>
                 </div>
@@ -651,7 +651,7 @@ export const PropertyCard = (props: Property) => {
   // Vertical Card Layout (Matches Reference Design 1:1: Compact, sleek proportions)
   if (layout === "vertical") {
     return (
-      <div className="group flex flex-col justify-between overflow-hidden rounded-[22px] border border-slate-200/90 bg-gradient-to-b from-white via-white to-[#F0F5FF]/70 p-2 sm:p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.03),0_16px_32px_-4px_rgba(24,101,242,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05),0_22px_40px_-4px_rgba(24,101,242,0.26)] hover:border-blue-300/80 h-[395px] sm:h-[405px] w-full">
+      <div className="group flex flex-col justify-between overflow-hidden rounded-[20px] sm:rounded-[22px] border border-slate-200/90 border-b-[#BFDBFE] bg-gradient-to-b from-white via-white via-[65%] to-[#E4ECFD] p-2.5 shadow-[0_4px_24px_rgba(37,99,235,0.12),0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(37,99,235,0.2)] hover:border-[#93C5FD] transition-all duration-300 h-[395px] sm:h-[405px] w-full">
         {/* Top Image & Floating Badges */}
         <div className="relative h-[148px] sm:h-[155px] w-full overflow-hidden rounded-[16px] bg-slate-100 shrink-0">
           <Image
@@ -665,7 +665,7 @@ export const PropertyCard = (props: Property) => {
 
           <div className="absolute inset-x-0 top-0 flex items-start justify-between p-2 z-10">
             {/* Verified Deal Green Pill Badge (#05A579) */}
-            <span className="flex items-center gap-1 rounded-full bg-[#05A579] px-2 py-0.5 text-[8.5px] font-extrabold uppercase tracking-wide text-white shadow-md">
+            <span className="flex items-center gap-1 rounded-full bg-[#05A579] px-2.5 py-0.5 text-[8.5px] font-extrabold uppercase tracking-wide text-white shadow-md">
               <ShieldCheck className="h-2.5 w-2.5 stroke-[2.5]" />
               <span>{verifiedText || "VERIFIED DEAL"}</span>
             </span>
@@ -702,27 +702,29 @@ export const PropertyCard = (props: Property) => {
                   alt="Share"
                   width={15}
                   height={15}
-                  className="w-[14px] h-[14px] object-contain"
+                  className="w-[13px] h-[13px] object-contain"
                   unoptimized
                 />
               </button>
               <button
                 type="button"
-                aria-label="Compare"
+                aria-label="Brochure"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  toggleCompare(props);
+                  toast.success("Brochure downloaded / opened!");
                 }}
-                className={cn(
-                  "flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full shadow-sm transition-transform hover:scale-110 cursor-pointer",
-                  inCompare
-                    ? "bg-[#1865F2] text-white shadow-blue-500/30"
-                    : "bg-white text-slate-600 hover:text-[#1865F2]"
-                )}
-                title={inCompare ? "Remove from comparison" : "Add to compare"}
+                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
+                title="Download Brochure"
               >
-                <ArrowLeftRight className="w-3.5 h-3.5" />
+                <Image
+                  src="/icon/brochure_action.png"
+                  alt="Brochure"
+                  width={15}
+                  height={15}
+                  className="w-[13px] h-[13px] object-contain"
+                  unoptimized
+                />
               </button>
             </div>
           </div>
@@ -732,13 +734,13 @@ export const PropertyCard = (props: Property) => {
         <div className="p-0.5 pt-1.5 flex flex-col justify-between flex-1 min-w-0">
           {/* BHK Pill Tag */}
           <div>
-            <div className="inline-block rounded-full bg-[#EEF5FF] border border-[#BFDBFE] px-2 py-0.5 text-[10px] font-medium text-[#1865F2] max-w-full truncate">
+            <div className="inline-block rounded-full bg-[#EEF5FF] border border-[#BFDBFE] px-2.5 py-0.5 text-[10px] sm:text-[10.5px] font-semibold text-[#1865F2] max-w-full truncate">
               {formatPropertyChip(chips)}
             </div>
 
             {/* Title & Phone Call Button */}
             <div className="mt-1 flex items-center justify-between gap-1.5 min-w-0">
-              <h3 className="text-[14px] sm:text-[15px] font-bold text-[#0B132B] tracking-tight truncate min-w-0 flex-1">
+              <h3 className="text-[14px] sm:text-[15px] font-bold text-[#000000] tracking-tight truncate min-w-0 flex-1">
                 {title || "NBCC Aspire Silicon City"}
               </h3>
               <button
@@ -749,24 +751,31 @@ export const PropertyCard = (props: Property) => {
                   setContactModalOpen(true);
                 }}
                 aria-label="Contact Agent"
-                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-full bg-[#1865F2] text-white shadow-md shadow-blue-500/25 transition-transform hover:scale-105 hover:bg-blue-700 cursor-pointer ml-1"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1865F2] hover:bg-[#1250C4] text-white shadow-md shadow-blue-500/25 transition-transform hover:scale-105 cursor-pointer ml-1"
               >
-                <PhoneCall className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white" />
+                <PhoneCall className="h-3.5 w-3.5 text-white" />
               </button>
             </div>
 
             {/* Location */}
-            <p className="mt-0.5 flex items-center gap-1 text-[10.5px] sm:text-[11px] text-[#64748B] font-normal min-w-0">
-              <BlueLocationPinIcon className="h-3 w-2.5 shrink-0" />
+            <p className="mt-0.5 flex items-center gap-1.5 text-[11px] sm:text-[11.5px] text-[#475569] font-medium min-w-0">
+              <BlueLocationPinIcon className="h-[18px] w-[14px] shrink-0" />
               <span className="truncate">{location || "Sector 76, Noida"}</span>
             </p>
 
             {/* 3 Spec Features Box (Matches Reference Design 1:1 with soft blue shadow) */}
-            <div className="mt-1.5 rounded-[10px] border border-[#BFDBFE] bg-gradient-to-b from-[#F8FAFF] to-[#EDF4FE] py-1.5 px-1.5 shadow-[0_3px_10px_-2px_rgba(24,101,242,0.1)]">
+            <div className="mt-1.5 rounded-[10px] border border-[#BFDBFE] bg-gradient-to-b from-[#F8FAFF] to-[#EDF4FE] py-1.5 px-2 shadow-[0_2px_8px_rgba(24,101,242,0.06)]">
               <div className="flex items-center justify-between gap-0.5">
                 {/* 1. Sq. Ft */}
                 <div className="flex items-center gap-1 min-w-0 flex-1">
-                  <AreaBlueprintIcon className="w-5.5 h-5 shrink-0" />
+                  <Image
+                    src="/icon/location.png"
+                    alt="Sq. Ft"
+                    width={32}
+                    height={26}
+                    className="w-7 h-6 object-contain shrink-0"
+                    unoptimized
+                  />
                   <div className="min-w-0 flex-1">
                     <p className="text-[10px] font-bold text-[#0B132B] leading-tight truncate">
                       {infoChips?.[0]?.value || "3,200-4,500"}
@@ -778,11 +787,18 @@ export const PropertyCard = (props: Property) => {
                 </div>
 
                 {/* Divider 1 */}
-                <div className="h-4 w-[1px] bg-[#3B82F6]/40 shrink-0 mx-0.5" />
+                <div className="h-4 w-[1px] bg-[#93C5FD]/60 shrink-0 mx-0.5" />
 
                 {/* 2. Amenities */}
                 <div className="flex items-center gap-1 min-w-0 flex-1 justify-center">
-                  <AmenitiesClipboardIcon className="w-5 h-5 shrink-0" />
+                  <Image
+                    src="/icon/Frame.png"
+                    alt="Amenities"
+                    width={26}
+                    height={26}
+                    className="w-6 h-6 object-contain shrink-0"
+                    unoptimized
+                  />
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold text-[#0B132B] leading-tight truncate">
                       {infoChips?.[1]?.value || "60%"}
@@ -794,11 +810,18 @@ export const PropertyCard = (props: Property) => {
                 </div>
 
                 {/* Divider 2 */}
-                <div className="h-4 w-[1px] bg-[#3B82F6]/40 shrink-0 mx-0.5" />
+                <div className="h-4 w-[1px] bg-[#93C5FD]/60 shrink-0 mx-0.5" />
 
                 {/* 3. Ready To Move */}
                 <div className="flex items-center gap-1 min-w-0 flex-1 justify-end">
-                  <ReadyToMoveIcon className="w-5 h-5 shrink-0" />
+                  <Image
+                    src="/icon/Group.png"
+                    alt="Ready To Move"
+                    width={30}
+                    height={26}
+                    className="w-7 h-6 object-contain shrink-0"
+                    unoptimized
+                  />
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold text-[#0B132B] leading-tight truncate">
                       {infoChips?.[2]?.value || "Ready"}
@@ -816,31 +839,31 @@ export const PropertyCard = (props: Property) => {
           <div className="mt-2 flex items-center justify-between gap-1.5 pt-0.5 min-w-0">
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline flex-wrap gap-x-1.5 gap-y-0 leading-none">
-                <span className="text-[16px] sm:text-[17px] font-bold text-[#0B132B] tracking-tight whitespace-nowrap leading-none">
+                <span className="text-[16px] sm:text-[17px] font-bold text-[#000000] tracking-tight whitespace-nowrap leading-none">
                   {price || "₹1.25* Cr"}
                 </span>
                 {originalPrice && (
-                  <span className="text-[10px] text-[#94A3B8] line-through font-normal whitespace-nowrap leading-none">
+                  <span className="text-[10.5px] text-[#94A3B8] line-through font-normal whitespace-nowrap leading-none ml-1">
                     {originalPrice}
                   </span>
                 )}
               </div>
-              <div className="mt-0.5 min-w-0">
+              <div className="mt-1 min-w-0">
                 <div className="flex items-center gap-1 min-w-0">
-                  <DiscountBadgeIcon className="h-3 w-3 shrink-0" />
+                  <DiscountBadgeIcon className="h-3.5 w-3.5 shrink-0" />
                   <p className="text-[10px] sm:text-[10.5px] font-bold text-[#05A579] leading-none whitespace-nowrap truncate">
                     Up to 33L off
                   </p>
                 </div>
                 <span className="block text-[8.5px] text-[#64748B] font-normal mt-0.5 whitespace-nowrap truncate">
-                  Get upto 13% discount
+                  Get upto 13% discount on this property
                 </span>
               </div>
             </div>
 
             <Link
               href={propertyUrl}
-              className="inline-flex items-center justify-center gap-1 rounded-[8px] sm:rounded-[10px] bg-gradient-to-r from-[#1E6BFF] to-[#1865F2] hover:from-[#1865F2] hover:to-[#1250C4] px-2.5 py-1.5 text-[10.5px] sm:text-[11px] font-semibold text-white shadow-sm shadow-blue-500/25 transition-all hover:gap-1.5 cursor-pointer shrink-0 whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-1 rounded-[8px] bg-[#1865F2] hover:bg-[#1250C4] px-3.5 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-all hover:gap-1.5 cursor-pointer shrink-0 whitespace-nowrap"
             >
               <span>View Details</span>
               <ArrowRight className="h-3 w-3 stroke-[2.5]" />
@@ -895,7 +918,7 @@ export const PropertyCard = (props: Property) => {
       </div>
 
       <div className="p-1 pt-1.5">
-        <div className="inline-block max-w-full truncate rounded-full bg-blue-50 border border-blue-200 px-1.5 py-0.5 text-[8px] font-semibold text-[#2563EB] leading-none">
+        <div className="inline-block max-w-full truncate rounded-full bg-blue-50 border border-blue-200 px-1.5 py-0.5 text-[8px] font-medium text-[#2563EB] leading-none">
           {chips?.[0] || "2, 3 & 4 BHK Apartments"}
         </div>
         <h3 className="mt-1 text-[10.5px] font-bold text-slate-900 truncate leading-tight">
@@ -907,7 +930,7 @@ export const PropertyCard = (props: Property) => {
         </p>
         <Link
           href={propertyUrl}
-          className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-md bg-[#2563EB] py-1 text-[9.5px] font-semibold text-white shadow-xs transition-all hover:bg-blue-700 active:scale-[0.98]"
+          className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-md bg-[#2563EB] py-1 text-[9.5px] font-medium text-white shadow-xs transition-all hover:bg-blue-700 active:scale-[0.98]"
         >
           <span>View Details</span>
           <ArrowRight className="h-2.5 w-2.5" />

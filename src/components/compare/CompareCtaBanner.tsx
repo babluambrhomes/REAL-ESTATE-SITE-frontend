@@ -9,7 +9,7 @@ interface CompareCtaBannerProps {
 
 export const CompareCtaBanner = ({ onStartComparing }: CompareCtaBannerProps) => {
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4 font-poppins">
       <div className="relative w-full rounded-[20px] sm:rounded-[24px] overflow-hidden bg-gradient-to-r from-[#0B1528] via-[#0F1E38] to-[#0A162B] text-white p-6 sm:p-8 lg:p-9 shadow-[0_16px_40px_rgba(11,21,40,0.35)]">
         
         {/* Background Building Image Blended on Right with Sunset Glow */}

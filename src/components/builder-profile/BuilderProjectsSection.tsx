@@ -104,7 +104,7 @@ export const BuilderProjectsSection = () => {
       : projects.filter((p) => p.status === activeFilter);
 
   return (
-    <div className="w-full space-y-4 font-jakarta">
+    <div className="w-full space-y-4 font-poppins">
       {/* 1. Header & Filter Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-1">
         <h2 className="text-lg sm:text-xl font-black text-[#0B132B] tracking-tight">
@@ -205,7 +205,7 @@ export const BuilderProjectsSection = () => {
                   <h3 className="text-base sm:text-[17px] font-black text-[#0B132B] tracking-tight group-hover:text-[#1865F2] transition-colors">
                     {proj.title}
                   </h3>
-                  <p className="text-xs font-semibold text-slate-500 mt-0.5 flex items-center gap-1">
+                  <p className="text-xs font-medium text-slate-500 mt-0.5 flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5 text-[#1865F2] shrink-0" />
                     <span>{proj.location}</span>
                   </p>
@@ -231,7 +231,7 @@ export const BuilderProjectsSection = () => {
 
                 {/* Bottom Stats Bar & View Details CTA */}
                 <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-100 gap-2">
-                  <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
+                  <div className="flex items-center gap-4 text-[11px] font-medium text-slate-500">
                     <button
                       type="button"
                       onClick={() => toggleLike(proj.id, proj.title)}

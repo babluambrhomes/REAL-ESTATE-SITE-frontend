@@ -55,7 +55,7 @@ export const PostPropertyQuickForm = () => {
 
   return (
     <div 
-      className="relative w-full max-w-[379px] font-jakarta"
+      className="relative w-full max-w-[379px] font-poppins"
       style={{
         filter: "drop-shadow(0 20px 40px rgba(59, 130, 246, 0.28))",
       }}
@@ -108,7 +108,7 @@ export const PostPropertyQuickForm = () => {
             <button
               type="button"
               onClick={() => setListingMode("post")}
-              className={`font-semibold pb-1 cursor-pointer transition-colors ${
+              className={`font-medium pb-1 cursor-pointer transition-colors ${
                 listingMode === "post"
                   ? "text-[#1865F2]"
                   : "text-slate-500 hover:text-slate-800"
@@ -122,7 +122,7 @@ export const PostPropertyQuickForm = () => {
 
             <div className="flex items-center gap-1.5 text-slate-600 select-none">
               <span className="font-normal text-slate-600 text-[13.5px]">Import listing</span>
-              <span className="text-[9.5px] font-semibold bg-[#FEF3C7] text-[#92400E] px-2 py-0.2 rounded-[4px] border border-[#FDE68A]">
+              <span className="text-[9.5px] font-medium bg-[#FEF3C7] text-[#92400E] px-2 py-0.2 rounded-[4px] border border-[#FDE68A]">
                 Coming
               </span>
             </div>
@@ -144,7 +144,7 @@ export const PostPropertyQuickForm = () => {
                   }}
                   className={`flex-1 py-1.5 px-3 rounded-[10px] text-[13px] transition-all cursor-pointer ${
                     category === "residential"
-                      ? "bg-gradient-to-r from-[#B9E5E8]/80 to-[#DCEBFE] text-[#1865F2] font-semibold border border-[#93C5FD]/60 shadow-2xs"
+                      ? "bg-gradient-to-r from-[#B9E5E8]/80 to-[#DCEBFE] text-[#1865F2] font-medium border border-[#93C5FD]/60 shadow-2xs"
                       : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                   }`}
                 >
@@ -158,7 +158,7 @@ export const PostPropertyQuickForm = () => {
                   }}
                   className={`flex-1 py-1.5 px-3 rounded-[10px] text-[13px] transition-all cursor-pointer ${
                     category === "commercial"
-                      ? "bg-gradient-to-r from-[#B9E5E8]/80 to-[#DCEBFE] text-[#1865F2] font-semibold border border-[#93C5FD]/60 shadow-2xs"
+                      ? "bg-gradient-to-r from-[#B9E5E8]/80 to-[#DCEBFE] text-[#1865F2] font-medium border border-[#93C5FD]/60 shadow-2xs"
                       : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                   }`}
                 >
@@ -187,7 +187,7 @@ export const PostPropertyQuickForm = () => {
                       onClick={() => setIntent(type)}
                       className={`flex-1 py-1.5 px-2 rounded-[10px] text-[13px] transition-all cursor-pointer ${
                         isSelected
-                          ? "bg-gradient-to-r from-[#B9E5E8]/80 to-[#DCEBFE] text-[#1865F2] font-semibold border border-[#93C5FD]/60 shadow-2xs"
+                          ? "bg-gradient-to-r from-[#B9E5E8]/80 to-[#DCEBFE] text-[#1865F2] font-medium border border-[#93C5FD]/60 shadow-2xs"
                           : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                       }`}
                     >
@@ -211,7 +211,7 @@ export const PostPropertyQuickForm = () => {
                     onClick={() => setSubType("Flat/Apartment")}
                     className={`py-1.5 px-3.5 rounded-full text-[12px] transition-all cursor-pointer ${
                       subType === "Flat/Apartment"
-                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-semibold"
+                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-medium"
                         : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                     }`}
                   >
@@ -222,7 +222,7 @@ export const PostPropertyQuickForm = () => {
                     onClick={() => setSubType("Independent House/Villa")}
                     className={`flex-1 py-1.5 px-3.5 rounded-full text-[12px] transition-all cursor-pointer text-center truncate ${
                       subType === "Independent House/Villa"
-                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-semibold"
+                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-medium"
                         : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                     }`}
                   >
@@ -237,7 +237,7 @@ export const PostPropertyQuickForm = () => {
                     onClick={() => setSubType("Builder Floor")}
                     className={`py-1.5 px-3.5 rounded-full text-[12px] transition-all cursor-pointer ${
                       subType === "Builder Floor"
-                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-semibold"
+                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-medium"
                         : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                     }`}
                   >
@@ -248,7 +248,7 @@ export const PostPropertyQuickForm = () => {
                     onClick={() => setSubType("Serviced Apartment")}
                     className={`flex-1 py-1.5 px-3.5 rounded-full text-[12px] transition-all cursor-pointer text-center truncate ${
                       subType === "Serviced Apartment"
-                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-semibold"
+                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-medium"
                         : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                     }`}
                   >
@@ -263,7 +263,7 @@ export const PostPropertyQuickForm = () => {
                     onClick={() => setSubType("Farmhouse")}
                     className={`py-1.5 px-4 rounded-full text-[12px] transition-all cursor-pointer ${
                       subType === "Farmhouse"
-                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-semibold"
+                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-medium"
                         : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                     }`}
                   >
@@ -274,7 +274,7 @@ export const PostPropertyQuickForm = () => {
                     onClick={() => setSubType("Other")}
                     className={`py-1.5 px-5 rounded-full text-[12px] transition-all cursor-pointer ${
                       subType === "Other"
-                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-semibold"
+                        ? "bg-[#DCEBFE] text-[#1865F2] border border-[#1865F2]/50 font-medium"
                         : "bg-white text-slate-800 border border-slate-300 hover:border-slate-400 font-normal"
                     }`}
                   >
@@ -305,7 +305,7 @@ export const PostPropertyQuickForm = () => {
               <div className="flex items-center justify-between mt-1 text-[11px]">
                 <span className="text-slate-800">
                   Are you a registered user?{" "}
-                  <Link href="/login" className="font-semibold text-[#1865F2] hover:underline">
+                  <Link href="/login" className="font-medium text-[#1865F2] hover:underline">
                     Login
                   </Link>
                 </span>
@@ -331,7 +331,7 @@ export const PostPropertyQuickForm = () => {
                 </svg>
               </span>
               <span className="text-[11px]">Post property via Whatsapp</span>
-              <span className="text-[9.5px] font-semibold bg-[#FEF3C7] text-[#92400E] px-1.5 py-0.2 rounded-[4px] border border-[#FDE68A] ml-0.5">
+              <span className="text-[9.5px] font-medium bg-[#FEF3C7] text-[#92400E] px-1.5 py-0.2 rounded-[4px] border border-[#FDE68A] ml-0.5">
                 Coming
               </span>
             </div>

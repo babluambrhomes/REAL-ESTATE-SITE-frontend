@@ -101,7 +101,7 @@ export const SpecializationBuilders = () => {
   };
 
   return (
-    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-jakarta">
+    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-poppins">
       
       {/* Section Header */}
       <div className="flex items-center justify-between mb-4">

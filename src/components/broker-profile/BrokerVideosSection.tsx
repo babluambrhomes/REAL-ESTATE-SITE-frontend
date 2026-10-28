@@ -88,7 +88,7 @@ export const BrokerVideosSection = () => {
   ];
 
   return (
-    <div className="w-full space-y-6 font-jakarta">
+    <div className="w-full space-y-6 font-poppins">
       {/* Header */}
       <div className="flex items-center justify-between pb-1">
         <h2 className="text-base sm:text-[17px] font-black text-[#0B132B] tracking-tight">
@@ -139,7 +139,7 @@ export const BrokerVideosSection = () => {
               <h3 className="text-xs sm:text-[12.5px] font-black text-[#0B132B] line-clamp-2 leading-snug group-hover:text-[#1865F2] transition-colors">
                 {vid.title}
               </h3>
-              <div className="flex items-center justify-between text-[10.5px] text-slate-500 font-semibold pt-0.5">
+              <div className="flex items-center justify-between text-[10.5px] text-slate-500 font-medium pt-0.5">
                 <span>{vid.views}</span>
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3 text-slate-400" />

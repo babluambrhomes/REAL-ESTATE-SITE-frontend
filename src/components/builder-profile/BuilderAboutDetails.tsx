@@ -31,7 +31,7 @@ export const BuilderAboutDetails = () => {
   ];
 
   return (
-    <div className="w-full bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)] font-jakarta">
+    <div className="w-full bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)] font-poppins">
       <h3 className="text-base sm:text-lg font-black text-[#1865F2] mb-3 tracking-tight">
         About
       </h3>

@@ -29,7 +29,7 @@ export const AgentFilterModal = ({
   };
 
   return (
-    <div className="absolute right-4 sm:right-6 lg:right-8 top-full mt-2 w-[280px] sm:w-[300px] bg-white rounded-[18px] border border-slate-200/90 shadow-[0_12px_36px_rgba(0,0,0,0.14)] p-4 sm:p-5 z-50 font-jakarta animate-in fade-in zoom-in-95 duration-150">
+    <div className="absolute right-4 sm:right-6 lg:right-8 top-full mt-2 w-[280px] sm:w-[300px] bg-white rounded-[18px] border border-slate-200/90 shadow-[0_12px_36px_rgba(0,0,0,0.14)] p-4 sm:p-5 z-50 font-poppins animate-in fade-in zoom-in-95 duration-150">
       
       {/* Top Handle / Close */}
       <div className="flex items-center justify-between mb-3">
@@ -52,7 +52,7 @@ export const AgentFilterModal = ({
             <button
               type="button"
               onClick={() => setLocation("Delhi NCR")}
-              className="text-[10px] font-semibold text-[#8B5CF6] hover:underline cursor-pointer"
+              className="text-[10px] font-medium text-[#8B5CF6] hover:underline cursor-pointer"
             >
               Reset
             </button>
@@ -61,7 +61,7 @@ export const AgentFilterModal = ({
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
+              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
             >
               <option value="Noida">🟢 Noida</option>
               <option value="Delhi NCR">Delhi NCR</option>
@@ -79,7 +79,7 @@ export const AgentFilterModal = ({
             <button
               type="button"
               onClick={() => setExpertise("All")}
-              className="text-[10px] font-semibold text-[#8B5CF6] hover:underline cursor-pointer"
+              className="text-[10px] font-medium text-[#8B5CF6] hover:underline cursor-pointer"
             >
               Reset
             </button>
@@ -88,7 +88,7 @@ export const AgentFilterModal = ({
             <select
               value={expertise}
               onChange={(e) => setExpertise(e.target.value)}
-              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
+              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
             >
               <option value="Mohan Sharma">Mohan Sharma</option>
               <option value="Amit Sharma">Amit Sharma</option>
@@ -105,7 +105,7 @@ export const AgentFilterModal = ({
             <button
               type="button"
               onClick={() => setPropertyType("All")}
-              className="text-[10px] font-semibold text-[#8B5CF6] hover:underline cursor-pointer"
+              className="text-[10px] font-medium text-[#8B5CF6] hover:underline cursor-pointer"
             >
               Reset
             </button>
@@ -114,7 +114,7 @@ export const AgentFilterModal = ({
             <select
               value={propertyType}
               onChange={(e) => setPropertyType(e.target.value)}
-              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
+              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
             >
               <option value="Residential">Residential</option>
               <option value="Commercial">Commercial</option>
@@ -132,7 +132,7 @@ export const AgentFilterModal = ({
             <button
               type="button"
               onClick={() => setExperience("1 year")}
-              className="text-[10px] font-semibold text-[#8B5CF6] hover:underline cursor-pointer"
+              className="text-[10px] font-medium text-[#8B5CF6] hover:underline cursor-pointer"
             >
               Reset
             </button>
@@ -141,7 +141,7 @@ export const AgentFilterModal = ({
             <select
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
-              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
+              className="w-full appearance-none bg-slate-50/80 border border-slate-200/90 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#1865F2] cursor-pointer"
             >
               <option value="2 year">2 year</option>
               <option value="5 year">5 year</option>

@@ -46,7 +46,7 @@ export const CompareResultsHeader = ({
   ];
 
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 lg:pt-38 pb-10 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 lg:pt-38 pb-10 font-poppins">
       {/* Main Heading with Wavy Blue Brush Stroke under Property */}
       <div className="text-center mb-10 sm:mb-12">
         <h1 className="text-[32px] sm:text-[42px] lg:text-[46px] font-extrabold text-[#0B132B] tracking-tight leading-[1.18] inline-block text-center relative">
@@ -135,7 +135,7 @@ export const CompareResultsHeader = ({
               <span>{selectedProperties[0].location}</span>
             </p>
             <div className="pt-1">
-              <span className="inline-block px-3 py-0.5 rounded-md bg-[#D1FAE5] text-[#059669] font-semibold text-[10.5px]">
+              <span className="inline-block px-3 py-0.5 rounded-md bg-[#D1FAE5] text-[#059669] font-medium text-[10.5px]">
                 {selectedProperties[0].status}
               </span>
             </div>
@@ -210,7 +210,7 @@ export const CompareResultsHeader = ({
               <span>{selectedProperties[1].location}</span>
             </p>
             <div className="pt-1">
-              <span className="inline-block px-3 py-0.5 rounded-md bg-[#D1FAE5] text-[#059669] font-semibold text-[10.5px]">
+              <span className="inline-block px-3 py-0.5 rounded-md bg-[#D1FAE5] text-[#059669] font-medium text-[10.5px]">
                 {selectedProperties[1].status}
               </span>
             </div>

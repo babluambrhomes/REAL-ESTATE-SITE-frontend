@@ -186,7 +186,7 @@ Reference ID: ROOFIN-DOC-${Math.floor(10000 + Math.random() * 90000)}
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 sm:p-7 shadow-2xl border border-slate-100 z-10 font-jakarta animate-in fade-in zoom-in-95 duration-150">
+      <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 sm:p-7 shadow-2xl border border-slate-100 z-10 font-poppins animate-in fade-in zoom-in-95 duration-150">
         {/* Close Button */}
         <button
           type="button"
@@ -215,7 +215,7 @@ Reference ID: ROOFIN-DOC-${Math.floor(10000 + Math.random() * 90000)}
             <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-4 text-left flex items-start gap-3">
               <Sparkles className="h-5 w-5 text-[#1865F2] shrink-0 mt-0.5" />
               <div className="text-xs text-slate-600 space-y-1">
-                <p className="font-semibold text-slate-800">
+                <p className="font-medium text-slate-800">
                   WhatsApp Prospectus Delivery:
                 </p>
                 <p>

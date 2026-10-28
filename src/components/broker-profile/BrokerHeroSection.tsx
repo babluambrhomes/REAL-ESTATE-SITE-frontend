@@ -137,7 +137,7 @@ export const BrokerHeroSection = ({
   ];
 
   return (
-    <div className="w-full font-jakarta">
+    <div className="w-full font-poppins">
       {/* Pure White Profile Card Main Container with Rounded 28px Corners */}
       <div className="relative bg-white rounded-[28px] border border-[#D8E6FC] shadow-[0_12px_40px_rgba(24,101,242,0.06)] p-6 sm:p-8 pt-8">
         
@@ -184,7 +184,7 @@ export const BrokerHeroSection = ({
                 )}
               </div>
 
-              <p className="text-sm font-semibold text-slate-500">
+              <p className="text-sm font-medium text-slate-500">
                 {role}
               </p>
 
@@ -243,7 +243,7 @@ export const BrokerHeroSection = ({
 
                 <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-slate-700 font-bold">
                   <MapPin className="w-3.5 h-3.5 text-[#1865F2]" />
-                  <span>Operating in: <span className="font-semibold text-slate-600">Noida, Greater Noida, Ghaziabad</span></span>
+                  <span>Operating in: <span className="font-medium text-slate-600">Noida, Greater Noida, Ghaziabad</span></span>
                 </div>
 
                 {/* Primary CTA Buttons: Contact Broker & Request Callback */}

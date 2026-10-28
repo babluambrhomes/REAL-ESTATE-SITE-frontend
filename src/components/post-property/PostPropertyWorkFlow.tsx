@@ -4,7 +4,7 @@ import React from "react";
 
 export const PostPropertyWorkFlow = () => {
   return (
-    <section className="relative pt-10 pb-20 sm:pt-14 sm:pb-28 bg-white font-jakarta select-none overflow-hidden">
+    <section className="relative pt-10 pb-20 sm:pt-14 sm:pb-28 bg-white font-poppins select-none overflow-hidden">
       
       {/* Background Blueprint Grid Lines (Exact Figma Grid) */}
       <div 
@@ -128,7 +128,7 @@ export const PostPropertyWorkFlow = () => {
               <h3 className="text-[19px] font-extrabold text-[#2563EB] leading-tight">
                 Verified <br /> Account
               </h3>
-              <p className="text-[13px] text-[#1E293B] font-semibold mt-3 leading-[1.4]">
+              <p className="text-[13px] text-[#1E293B] font-medium mt-3 leading-[1.4]">
                 Quick mobile verification to create your account
               </p>
             </div>
@@ -157,7 +157,7 @@ export const PostPropertyWorkFlow = () => {
               <h3 className="text-[19px] font-extrabold text-[#2563EB] leading-tight">
                 Post Property
               </h3>
-              <p className="text-[13px] text-[#1E293B] font-semibold mt-3 leading-[1.4]">
+              <p className="text-[13px] text-[#1E293B] font-medium mt-3 leading-[1.4]">
                 Add property details, photos, videos &amp; price
               </p>
             </div>
@@ -186,7 +186,7 @@ export const PostPropertyWorkFlow = () => {
               <h3 className="text-[19px] font-extrabold text-[#2563EB] leading-tight">
                 Get Verified <br /> Leads
               </h3>
-              <p className="text-[13px] text-[#1E293B] font-semibold mt-3 leading-[1.4]">
+              <p className="text-[13px] text-[#1E293B] font-medium mt-3 leading-[1.4]">
                 Receive genuine call &amp; inquiries from buyers
               </p>
             </div>
@@ -215,7 +215,7 @@ export const PostPropertyWorkFlow = () => {
               <h3 className="text-[19px] font-extrabold text-[#2563EB] leading-tight">
                 Manage <br /> Dashboard
               </h3>
-              <p className="text-[13px] text-[#1E293B] font-semibold mt-3 leading-[1.4]">
+              <p className="text-[13px] text-[#1E293B] font-medium mt-3 leading-[1.4]">
                 Track own profile, respones &amp; property performance
               </p>
             </div>
@@ -244,7 +244,7 @@ export const PostPropertyWorkFlow = () => {
               <h3 className="text-[19px] font-extrabold text-[#2563EB] leading-tight">
                 Close Deals
               </h3>
-              <p className="text-[13px] text-[#1E293B] font-semibold mt-3 leading-[1.4]">
+              <p className="text-[13px] text-[#1E293B] font-medium mt-3 leading-[1.4]">
                 Receive genuine call &amp; inquiries from buyers
               </p>
             </div>
@@ -283,7 +283,7 @@ export const PostPropertyWorkFlow = () => {
               <h3 className="text-[16px] font-extrabold text-[#2563EB] pt-1">
                 {item.title}
               </h3>
-              <p className="text-[12px] text-[#1E293B] font-semibold mt-1.5 leading-relaxed">
+              <p className="text-[12px] text-[#1E293B] font-medium mt-1.5 leading-relaxed">
                 {item.desc}
               </p>
             </div>

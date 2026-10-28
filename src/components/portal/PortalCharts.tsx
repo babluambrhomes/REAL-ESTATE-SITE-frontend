@@ -70,7 +70,7 @@ export const PortalCharts = () => {
   const [timeRange, setTimeRange] = useState("Last 30 Days");
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 font-jakarta">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 font-poppins">
       {/* 1. Leads Performance Card (Span 8) */}
       <div className="lg:col-span-8 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs flex flex-col justify-between">
         {/* Top Header */}

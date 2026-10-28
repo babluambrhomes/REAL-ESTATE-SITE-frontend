@@ -136,7 +136,7 @@ export const PropertyMapModal = ({
                 <Train className="h-3.5 w-3.5" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-semibold text-slate-400">Metro Station</p>
+                <p className="text-[10px] font-medium text-slate-400">Metro Station</p>
                 <p className="text-[11px] font-bold text-slate-800 truncate">1.2 km Away</p>
               </div>
             </div>
@@ -146,7 +146,7 @@ export const PropertyMapModal = ({
                 <Compass className="h-3.5 w-3.5" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-semibold text-slate-400">Expressway</p>
+                <p className="text-[10px] font-medium text-slate-400">Expressway</p>
                 <p className="text-[11px] font-bold text-slate-800 truncate">0.8 km Away</p>
               </div>
             </div>
@@ -156,7 +156,7 @@ export const PropertyMapModal = ({
                 <HeartPulse className="h-3.5 w-3.5" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-semibold text-slate-400">Hospital</p>
+                <p className="text-[10px] font-medium text-slate-400">Hospital</p>
                 <p className="text-[11px] font-bold text-slate-800 truncate">2.4 km Away</p>
               </div>
             </div>
@@ -166,7 +166,7 @@ export const PropertyMapModal = ({
                 <GraduationCap className="h-3.5 w-3.5" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-semibold text-slate-400">Top School</p>
+                <p className="text-[10px] font-medium text-slate-400">Top School</p>
                 <p className="text-[11px] font-bold text-slate-800 truncate">1.5 km Away</p>
               </div>
             </div>

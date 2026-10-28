@@ -164,7 +164,7 @@ export const ExploreLifestyle = () => {
                 </div>
                 {/* 40% Bottom Text Area */}
                 <div className="flex h-[40%] w-full items-center justify-between px-3.5 sm:px-4 py-2">
-                  <span className="text-[13px] sm:text-[14px] font-semibold text-[#0F172A] leading-snug group-hover:text-[#1865F2] transition-colors">
+                  <span className="text-[13px] sm:text-[14px] font-medium text-[#0F172A] leading-snug group-hover:text-[#1865F2] transition-colors">
                     {item.displayTitle}
                   </span>
                   <ArrowRight className="h-4 w-4 text-[#0F172A] group-hover:text-[#1865F2] group-hover:translate-x-0.5 transition-all shrink-0 ml-1.5" />

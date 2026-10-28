@@ -43,7 +43,7 @@ export const AllPropertyExpertsGrid = () => {
   }));
 
   return (
-    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 font-jakarta">
+    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 font-poppins">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div>
@@ -53,7 +53,7 @@ export const AllPropertyExpertsGrid = () => {
               All Property Expert
             </h2>
           </div>
-          <p className="text-xs text-slate-500 font-semibold mt-0.5 ml-3.5">
+          <p className="text-xs text-slate-500 font-medium mt-0.5 ml-3.5">
             Showing 1-15 Of 224 Expert
           </p>
         </div>
@@ -106,7 +106,7 @@ export const AllPropertyExpertsGrid = () => {
                 <p className="text-[10.5px] font-black text-slate-900 tracking-tight leading-none truncate">
                   {exp.company}
                 </p>
-                <p className="text-[9px] text-slate-500 font-semibold truncate mt-0.5">
+                <p className="text-[9px] text-slate-500 font-medium truncate mt-0.5">
                   {exp.agent}
                 </p>
               </div>

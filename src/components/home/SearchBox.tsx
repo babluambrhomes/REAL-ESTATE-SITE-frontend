@@ -183,15 +183,15 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
   };
 
   return (
-    <section ref={ref} className="relative z-30 mx-auto -mt-20 sm:-mt-24 w-full max-w-[940px] px-4 sm:px-6">
+    <section ref={ref} className="relative z-30 mx-auto -mt-[55px] sm:-mt-[64px] md:-mt-[70px] w-full max-w-[940px] px-4 sm:px-6">
       <div className="relative">
         {/* Bottom-Only Gradient Underlay (Exact same width as white card) */}
-        <div className="absolute inset-x-0 -bottom-2 h-full rounded-[22px] sm:rounded-[24px] bg-gradient-to-r from-[#1865F2] via-[#2A5AF0] to-[#4338CA] -z-10 opacity-90" />
+        <div className="absolute inset-x-0 -bottom-1.5 h-full rounded-[20px] sm:rounded-[22px] bg-gradient-to-r from-[#1865F2] via-[#2A5AF0] to-[#4338CA] -z-10 opacity-90" />
 
         {/* Main Floating Search Card */}
-        <div className="relative rounded-[22px] sm:rounded-[24px] bg-white p-3.5 sm:p-5 shadow-[0_12px_40px_rgba(24,101,242,0.12),0_2px_10px_rgba(0,0,0,0.03)] border border-[#DCE8FE]">
+        <div className="relative rounded-[20px] sm:rounded-[22px] bg-white px-3.5 py-3 sm:px-5 sm:py-3.5 shadow-[0_12px_40px_rgba(24,101,242,0.12),0_2px_10px_rgba(0,0,0,0.03)] border border-[#DCE8FE]">
           {/* Top Category Tabs */}
-          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide">
             {tabsList.map((tab) => {
               const isActive = activeTab === tab.value;
               return (
@@ -202,8 +202,8 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                   className={cn(
                     "flex items-center gap-1 sm:gap-1.5 cursor-pointer rounded-full transition-all duration-200 shrink-0",
                     isActive
-                      ? "bg-[#1865F2] text-white px-2.5 py-1.5 sm:px-3 sm:py-1.5 text-[12px] sm:text-[12.5px] font-medium shadow-md shadow-blue-500/25"
-                      : "text-slate-700 hover:text-slate-900 px-1.5 py-1.5 sm:px-2 sm:py-1.5 text-[12px] sm:text-[12.5px] font-medium hover:bg-slate-50"
+                      ? "bg-[#1865F2] text-white px-2.5 py-1 sm:px-3 sm:py-1 text-[11.5px] sm:text-[12px] font-medium shadow-md shadow-blue-500/25"
+                      : "text-slate-700 hover:text-slate-900 px-1.5 py-1 sm:px-2 sm:py-1 text-[11.5px] sm:text-[12px] font-medium hover:bg-slate-50"
                   )}
                 >
                   <tab.Icon
@@ -219,13 +219,13 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
           </div>
 
           {/* Straight Horizontal Line Above Filter Labels */}
-          <div className="h-px mt-3 sm:mt-3.5 mb-3 w-full bg-[#E2E8F0]" />
+          <div className="h-px mt-2 sm:mt-2.5 mb-2 sm:mb-2.5 w-full bg-[#E2E8F0]" />
 
           {/* 4 Filter Dropdowns + Search Button Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 items-end">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-2.5 items-end">
             {/* 1. CITY */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-[16.5px]">
+              <label className="mb-1 block text-[10.5px] sm:text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-tight">
                 CITY
               </label>
               <Select<OptionType, false>
@@ -244,7 +244,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
 
             {/* 2. LOCALITY */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-[16.5px]">
+              <label className="mb-1 block text-[10.5px] sm:text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-tight">
                 LOCALITY
               </label>
               <div className="relative">
@@ -252,14 +252,14 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                   value={locality}
                   onChange={(e) => setLocality(e.target.value)}
                   placeholder="Select Locality"
-                  className="h-[46px] w-full rounded-[12px] border border-[#E2E8F0] bg-[#F8FAFC] pl-3.5 pr-8 text-[13.5px] font-normal text-slate-900 outline-none transition-colors placeholder:text-[#334155] hover:border-[#1865F2] focus:border-[#1865F2] focus:ring-1 focus:ring-blue-100"
+                  className="h-[42px] w-full rounded-[12px] border border-[#E2E8F0] bg-[#F8FAFC] pl-3.5 pr-8 text-[13px] font-normal text-slate-900 outline-none transition-colors placeholder:text-[#334155] hover:border-[#1865F2] focus:border-[#1865F2] focus:ring-1 focus:ring-blue-100"
                 />
               </div>
             </div>
 
             {/* 3. BUDGET */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-[16.5px]">
+              <label className="mb-1 block text-[10.5px] sm:text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-tight">
                 BUDGET
               </label>
               <Select<OptionType, false>
@@ -276,7 +276,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
 
             {/* 4. PROPERTY TYPE */}
             <div className="w-full">
-              <label className="mb-1.5 block text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-[16.5px]">
+              <label className="mb-1 block text-[10.5px] sm:text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-tight">
                 PROPERTY TYPE
               </label>
               <Select<OptionType, false>
@@ -296,7 +296,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="flex h-[46px] w-full items-center justify-center gap-1.5 rounded-[12px] bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-4 text-[13.5px] sm:text-[14px] font-semibold text-white shadow-[0_3px_10px_rgba(30,80,240,0.25)] transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_4px_14px_rgba(30,80,240,0.3)] cursor-pointer"
+                className="flex h-[42px] w-full items-center justify-center gap-1.5 rounded-[12px] bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-4 text-[13.5px] font-medium text-white shadow-[0_3px_10px_rgba(30,80,240,0.25)] transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_4px_14px_rgba(30,80,240,0.3)] cursor-pointer"
               >
                 <Search className="h-4 w-4 stroke-[2.2]" />
                 <span>Search</span>
@@ -305,8 +305,8 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
           </div>
 
           {/* Bottom Popular Searches Row */}
-          <div className="mt-4 flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-[12.5px] sm:text-[13px] font-normal text-slate-400 shrink-0">
+          <div className="mt-2.5 sm:mt-3 flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5">
+            <span className="text-[12px] font-normal text-slate-400 shrink-0">
               Popular:
             </span>
             {popularList.map((search) => (
@@ -314,7 +314,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                 key={search}
                 type="button"
                 onClick={() => handlePopularSearch(search)}
-                className="rounded-full bg-[#F8FAFC] hover:bg-blue-50 px-4 py-1.5 text-[12.5px] sm:text-[13px] font-normal text-slate-700 hover:text-[#1865F2] transition-colors border border-[#E2E8F0] cursor-pointer"
+                className="rounded-full bg-[#F8FAFC] hover:bg-blue-50 px-3.5 py-1 text-[11.5px] sm:text-[12px] font-normal text-slate-700 hover:text-[#1865F2] transition-colors border border-[#E2E8F0] cursor-pointer"
               >
                 {search}
               </button>

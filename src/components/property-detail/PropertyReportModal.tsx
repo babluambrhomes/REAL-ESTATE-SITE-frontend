@@ -108,7 +108,7 @@ export const PropertyReportModal = ({
       />
 
       {/* Modal Card */}
-      <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 sm:p-7 shadow-2xl border border-slate-100 z-10 font-jakarta animate-in fade-in zoom-in-95 duration-150">
+      <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 sm:p-7 shadow-2xl border border-slate-100 z-10 font-poppins animate-in fade-in zoom-in-95 duration-150">
         <button
           type="button"
           onClick={onClose}
@@ -133,7 +133,7 @@ export const PropertyReportModal = ({
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-700 space-y-1">
-              <p className="font-semibold text-slate-900">Ticket Reference ID:</p>
+              <p className="font-medium text-slate-900">Ticket Reference ID:</p>
               <code className="text-xs font-mono font-bold text-[#1865F2]">{reportedRef}</code>
               <p className="text-[11px] text-slate-500 pt-1">
                 Our Trust & Quality verification team will investigate this listing within 24 business hours.
@@ -224,7 +224,7 @@ export const PropertyReportModal = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800"
+                  className="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-800"
                 >
                   Cancel
                 </button>

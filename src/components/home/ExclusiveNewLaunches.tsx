@@ -22,42 +22,42 @@ const ALL_LOCALITIES: LocalityTab[] = [
   {
     id: "sec-150",
     name: "Noida Sec 150",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/sec-150.png",
   },
   {
     id: "expressway",
     name: "Noida Express...",
-    image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/expressway.png",
   },
   {
     id: "central-noida",
     name: "Central Noida",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/central-noida.png",
   },
   {
     id: "knowledge-park",
     name: "Knowledge Park",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/knowledge-park.png",
   },
   {
     id: "yamuna-exp",
     name: "Yamuna Expre...",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/yamuna-exp.png",
   },
   {
     id: "greater-noida",
     name: "Greater Noida",
-    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/sec-150.png",
   },
   {
     id: "dwarka-exp",
     name: "Dwarka Exp...",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/expressway.png",
   },
   {
     id: "golf-course",
     name: "Golf Course Ext",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=400&q=80",
+    image: "/images/localities/yamuna-exp.png",
   },
 ];
 
@@ -367,24 +367,27 @@ export const ExclusiveNewLaunches = ({
       {/* =========================================================
           TOP HEADER WITH LOCALITY TABS (MATCHES FIGMA EXACTLY)
       ========================================================== */}
-      <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        {/* HEADING & SUBTITLE */}
+      <div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        {/* HEADING & SUBTITLE (MATCHES FIGMA 1:1) */}
         <div className="shrink-0">
-          <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-snug whitespace-nowrap">
-            Exclusive <span className="text-[#2563EB]">New Launches</span>
+          <h2 className="text-2xl sm:text-3xl md:text-[32px] font-bold tracking-tight text-[#000000] leading-tight whitespace-nowrap">
+            Exclusive <span className="text-[#1865F2]">New Launches</span>
           </h2>
-          <div className="mt-2 border-l-[3px] border-[#2563EB] pl-3 py-0.5">
-            <p className="text-[12px] sm:text-[13px] font-normal text-slate-800 leading-snug">
-              Explore handpicked premium properties across Delhi NCR
-            </p>
-            <p className="text-[12px] sm:text-[13px] font-normal text-slate-800 leading-snug mt-0.5">
-              Luxury living redefined for you
-            </p>
+          <div className="mt-2.5 flex items-start gap-2.5">
+            <div className="w-[3px] h-[36px] bg-[#1865F2] rounded-full shrink-0 mt-0.5" />
+            <div>
+              <p className="text-[12.5px] sm:text-[13px] font-normal text-slate-800 leading-tight">
+                Explore handpicked premium properties across Delhi NCR
+              </p>
+              <p className="text-[12.5px] sm:text-[13px] font-normal text-slate-800 leading-tight mt-1">
+                Luxury living redefined for you
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* DYNAMIC LOCALITY THUMBNAILS + STACKED MORE CARDS DECK */}
-        <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 overflow-x-auto pt-2.5 pb-1.5 pr-2 scrollbar-hide no-scrollbar [&::-webkit-scrollbar]:hidden shrink-0">
+        {/* DYNAMIC LOCALITY THUMBNAILS + STACKED MORE CARDS DECK (FIGMA 1:1) */}
+        <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 overflow-x-auto pt-5 pb-2 pr-8 scrollbar-hide no-scrollbar [&::-webkit-scrollbar]:hidden shrink-0">
           {visibleLocalities.map((loc) => {
             const isActive = activeLocality === loc.id;
             return (
@@ -392,25 +395,25 @@ export const ExclusiveNewLaunches = ({
                 key={loc.id}
                 type="button"
                 onClick={() => handleSelectLocality(loc.id)}
-                className={`group flex flex-col items-center w-[88px] sm:w-[94px] md:w-[98px] h-[92px] sm:h-[96px] md:h-[100px] shrink-0 rounded-[8px] sm:rounded-[10px] bg-white p-1.5 transition-all duration-200 cursor-pointer ${
+                className={`group flex flex-col items-center w-[76px] sm:w-[80px] h-[82px] sm:h-[86px] shrink-0 rounded-[10px] bg-white p-1 sm:p-1.5 transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? "border-[2px] border-[#2563EB] shadow-md ring-2 ring-blue-100/80"
-                    : "border border-slate-200/90 hover:border-blue-300 shadow-xs hover:shadow-sm"
+                    ? "border-[2px] border-[#1865F2] shadow-sm"
+                    : "border border-[#D1D5DB] hover:border-slate-400 shadow-2xs hover:shadow-xs"
                 }`}
               >
-                <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100">
+                <div className="relative h-[48px] sm:h-[52px] w-full overflow-hidden rounded-[8px] bg-slate-100">
                   <Image
                     src={loc.image}
                     alt={loc.name}
                     fill
-                    sizes="100px"
+                    sizes="80px"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     unoptimized
                   />
                 </div>
                 <p
-                  className={`mt-1.5 w-full truncate text-center text-[10.5px] sm:text-[11px] font-semibold ${
-                    isActive ? "text-[#2563EB]" : "text-slate-700"
+                  className={`mt-1 w-full truncate text-center text-[10.5px] sm:text-[11px] font-medium leading-tight ${
+                    isActive ? "text-[#1865F2]" : "text-[#475569]"
                   }`}
                 >
                   {loc.name}
@@ -419,54 +422,60 @@ export const ExclusiveNewLaunches = ({
             );
           })}
 
-          {/* 3D STACKED "MORE" CARDS DECK (FIGMA 1:1) */}
+          {/* 3D STACKED "MORE" CARDS DECK (3 INDIVIDUAL DOM CARDS) */}
           <div
             onClick={handleCycleLocalities}
-            className="relative h-[92px] sm:h-[96px] md:h-[100px] w-[88px] sm:w-[94px] md:w-[98px] shrink-0 cursor-pointer group select-none ml-0.5 mr-2"
+            className="relative w-[76px] sm:w-[80px] h-[82px] sm:h-[86px] shrink-0 cursor-pointer group select-none ml-2 mr-8"
             title="Click to view more localities"
           >
-            {/* Card Layer 1 (Deep Back: Rotated +6deg & Translated Top-Right) */}
-            <div className="absolute inset-0 rounded-[8px] sm:rounded-[10px] border border-slate-200/90 bg-white p-1 shadow-xs transition-transform duration-200 translate-x-2 -translate-y-1.5 rotate-[6deg] group-hover:translate-x-2.5 group-hover:-translate-y-2">
-              <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100 opacity-75">
+            {/* Card 1 (Back Card: Upright, shifted up & slightly right) */}
+            <div className="absolute inset-0 z-10 flex flex-col items-center w-[76px] sm:w-[80px] h-[82px] sm:h-[86px] rounded-[10px] bg-white p-1 sm:p-1.5 border border-[#D1D5DB] shadow-xs transition-transform duration-200 translate-x-2 -translate-y-4 group-hover:translate-x-2.5 group-hover:-translate-y-5">
+              <div className="relative h-[48px] sm:h-[52px] w-full overflow-hidden rounded-[8px] bg-slate-100">
                 <Image
-                  src={stackedLocalities[2]?.image || ALL_LOCALITIES[0].image}
-                  alt="More Locality"
+                  src="/images/localities/yamuna-exp.png"
+                  alt="Yamuna Expressway"
                   fill
-                  sizes="100px"
+                  sizes="80px"
                   className="object-cover"
                   unoptimized
                 />
               </div>
+              <p className="mt-1 w-full truncate text-center text-[10.5px] sm:text-[11px] font-medium leading-tight text-[#475569]">
+                Yamuna Expre...
+              </p>
             </div>
 
-            {/* Card Layer 2 (Middle: Rotated +3deg & Translated Top-Right) */}
-            <div className="absolute inset-0 rounded-[8px] sm:rounded-[10px] border border-slate-200/90 bg-white p-1 shadow-xs transition-transform duration-200 translate-x-1 -translate-y-0.5 rotate-[3deg] group-hover:translate-x-1.5 group-hover:-translate-y-1">
-              <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100 opacity-85">
+            {/* Card 2 (Middle Card: Rotated +12deg clockwise, shifted right) */}
+            <div className="absolute inset-0 z-20 flex flex-col items-center w-[76px] sm:w-[80px] h-[82px] sm:h-[86px] rounded-[10px] bg-white p-1 sm:p-1.5 border border-[#D1D5DB] shadow-xs transition-transform duration-200 translate-x-[18px] sm:translate-x-[20px] -translate-y-1 rotate-[12deg] origin-bottom-left group-hover:translate-x-[22px] group-hover:-translate-y-1.5 group-hover:rotate-[14deg]">
+              <div className="relative h-[48px] sm:h-[52px] w-full overflow-hidden rounded-[8px] bg-slate-100">
                 <Image
-                  src={stackedLocalities[1]?.image || ALL_LOCALITIES[1].image}
-                  alt="More Locality"
+                  src="/images/localities/expressway.png"
+                  alt="Noida Expressway"
                   fill
-                  sizes="100px"
+                  sizes="80px"
                   className="object-cover"
                   unoptimized
                 />
               </div>
+              <p className="mt-1 w-full truncate text-center text-[10.5px] sm:text-[11px] font-medium leading-tight text-[#475569]">
+                Noida Express...
+              </p>
             </div>
 
-            {/* Card Layer 3 (Front Top Card: Crisp & Clickable) */}
-            <div className="relative z-10 flex flex-col items-center h-full w-full rounded-[8px] sm:rounded-[10px] border border-slate-200/95 bg-white p-1.5 shadow-sm transition-all duration-200 group-hover:border-blue-300">
-              <div className="relative h-[54px] sm:h-[58px] md:h-[62px] w-full overflow-hidden rounded-[6px] sm:rounded-[7px] bg-slate-100">
+            {/* Card 3 (Front Card: Sits straight in front at baseline) */}
+            <div className="relative z-30 flex flex-col items-center w-[76px] sm:w-[80px] h-[82px] sm:h-[86px] rounded-[10px] bg-white p-1 sm:p-1.5 border border-[#D1D5DB] shadow-sm transition-transform duration-200 group-hover:scale-[1.02]">
+              <div className="relative h-[48px] sm:h-[52px] w-full overflow-hidden rounded-[8px] bg-slate-100">
                 <Image
-                  src={stackedLocalities[0]?.image || ALL_LOCALITIES[2].image}
-                  alt={stackedLocalities[0]?.name || "More"}
+                  src="/images/localities/sec-150.png"
+                  alt="Noida Sec 150"
                   fill
-                  sizes="100px"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="80px"
+                  className="object-cover"
                   unoptimized
                 />
               </div>
-              <p className="mt-1.5 w-full truncate text-center text-[10.5px] sm:text-[11px] font-semibold text-slate-700">
-                {stackedLocalities[0]?.name || "Noida Sec 150"}
+              <p className="mt-1 w-full truncate text-center text-[10.5px] sm:text-[11px] font-medium leading-tight text-[#475569]">
+                Noida Sec 150
               </p>
             </div>
           </div>
@@ -503,7 +512,7 @@ export const ExclusiveNewLaunches = ({
                 <div className="relative h-[375px] sm:h-[415px] w-full pl-2">
                   {/* 3D RIBBON NEW LAUNCH BADGE (1:1 EXACT FIGMA MATCH) */}
                   <div className="absolute left-0 top-6 z-20 select-none">
-                    <div className="relative flex items-center bg-[#E60049] px-3.5 py-1.5 shadow-md">
+                    <div className="relative flex items-center bg-[#EC003F] px-3.5 py-1.5 shadow-md">
                       <span className="text-[11px] font-extrabold uppercase tracking-wider text-white">
                         NEW LAUNCH
                       </span>
@@ -513,7 +522,7 @@ export const ExclusiveNewLaunches = ({
                         viewBox="0 0 8.5 8"
                         fill="none"
                       >
-                        <path d="M0 0 L8.5 0 L8.5 8 Z" fill="#9F1239" />
+                        <path d="M0 0 L8.5 0 L8.5 8 Z" fill="#990029" />
                       </svg>
                     </div>
                   </div>
@@ -535,25 +544,25 @@ export const ExclusiveNewLaunches = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
 
                     {/* FLOATING BOTTOM RIGHT DETAIL CARD (1:1 FIGMA PROPORTIONS) */}
-                    <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 w-[285px] sm:w-[315px] max-w-[calc(100%-1.5rem)] h-[146px] sm:h-[154px] flex flex-col justify-between rounded-[16px] sm:rounded-[18px] bg-white p-3 sm:p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.14)] border border-[#E2E8F0]">
+                    <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 w-[300px] sm:w-[335px] max-w-[calc(100%-1.5rem)] min-h-[162px] sm:min-h-[172px] flex flex-col justify-between rounded-[18px] sm:rounded-[20px] bg-white p-3.5 sm:p-4 shadow-[0_10px_28px_rgba(0,0,0,0.14)] border border-[#E2E8F0]">
                       {/* TOP SECTION: TITLE & LOCATION */}
                       <div className="min-w-0">
                         {/* TITLE */}
                         <h3
                           title={project.title}
-                          className="text-[15px] sm:text-[16px] font-bold text-[#000000] leading-snug tracking-tight truncate"
+                          className="text-[16px] sm:text-[17.5px] font-bold text-[#000000] leading-snug tracking-tight truncate"
                         >
                           {project.title}
                         </h3>
 
                         {/* LOCATION */}
-                        <div className="mt-1 flex items-center gap-1.5 text-[11.5px] sm:text-[12px] font-medium text-slate-700 leading-tight min-w-0">
+                        <div className="mt-1 flex items-center gap-2 text-[13px] sm:text-[14px] font-semibold text-[#1F2937] leading-tight min-w-0">
                           <Image
-                            src="/icon/launch_card_pin.png"
+                            src="/icon/frame (2).svg"
                             alt="Location"
-                            width={14}
-                            height={18}
-                            className="h-3.5 w-3 shrink-0 object-contain"
+                            width={19}
+                            height={25}
+                            className="w-[17px] h-[22px] sm:w-[19px] sm:h-[25px] shrink-0 object-contain"
                             unoptimized
                           />
                           <span className="truncate" title={project.location}>
@@ -563,17 +572,17 @@ export const ExclusiveNewLaunches = ({
                       </div>
 
                       {/* MIDDLE SECTION: STARTING FROM, PRICE & BHK PILLS */}
-                      <div className="min-w-0">
+                      <div className="min-w-0 my-0.5">
                         {/* STARTING FROM HEADING */}
-                        <p className="text-[9px] sm:text-[9.5px] font-semibold text-slate-500 uppercase leading-none tracking-wider">
+                        <p className="text-[10px] sm:text-[10.5px] font-semibold text-[#000000] uppercase leading-none tracking-wider">
                           STARTING FROM
                         </p>
 
                         {/* PRICE & BHK PILLS ROW */}
-                        <div className="mt-1 flex items-center gap-1.5 min-w-0 overflow-visible">
+                        <div className="mt-1.5 flex items-center gap-2 min-w-0 overflow-visible">
                           {/* PRICE WITH SUPERSCRIPT BLUE STAR */}
                           <div className="flex items-center shrink-0 leading-none">
-                            <span className="text-[15.5px] sm:text-[16.5px] font-bold text-[#2563EB] leading-none shrink-0 whitespace-nowrap">
+                            <span className="text-[17px] sm:text-[18.5px] font-bold text-[#2563EB] leading-none shrink-0 whitespace-nowrap">
                               {(project.price || "₹ 4.17 Lakh").replace(/\*/g, "").trim()}
                             </span>
                             <span className="inline-flex self-start -mt-0.5 ml-0.5 shrink-0 overflow-visible">
@@ -591,11 +600,11 @@ export const ExclusiveNewLaunches = ({
 
                           {/* BHK PILL TAGS */}
                           <div className="flex items-center gap-1.5 overflow-hidden flex-nowrap min-w-0 flex-1">
-                            {(project.chips || ["3 BHK Apartment", "4 BHK Apartment"]).slice(0, 2).map((chip) => (
+                            {(project.chips || ["3 BHK Luxury", "4 BHK Grand"]).slice(0, 2).map((chip) => (
                               <span
                                 key={chip}
                                 title={chip}
-                                className="inline-flex items-center rounded-[4px] bg-[#E8F1FF] px-2 py-0.5 text-[10px] sm:text-[10.5px] font-semibold text-[#2563EB] leading-none whitespace-nowrap truncate min-w-0 max-w-[85px] sm:max-w-[95px]"
+                                className="inline-flex items-center rounded-[6px] bg-[#E8F1FD] px-2 sm:px-2.5 py-1 text-[10.5px] sm:text-[11px] font-medium text-[#2563EB] leading-none whitespace-nowrap truncate min-w-0 max-w-[95px] sm:max-w-[105px]"
                               >
                                 {chip}
                               </span>
@@ -604,11 +613,11 @@ export const ExclusiveNewLaunches = ({
                         </div>
                       </div>
 
-                      {/* BOTTOM SECTION: KNOW MORE BUTTON WITH BLUE GRADIENT */}
+                      {/* BOTTOM SECTION: KNOW MORE BUTTON (FIGMA MATCHING SOLID BLUE) */}
                       <div>
                         <Link
                           href={project.id ? `/properties/${project.id}` : `/properties/${encodeURIComponent(project.title)}`}
-                          className="inline-flex items-center gap-1.5 rounded-[7px] bg-gradient-to-r from-[#163C8F] via-[#1D4EB8] to-[#235EE0] hover:brightness-110 active:scale-[0.98] px-3.5 py-1.5 text-[11.5px] sm:text-[12px] font-semibold text-white shadow-sm transition-all cursor-pointer leading-none"
+                          className="inline-flex items-center gap-1.5 rounded-[7px] bg-gradient-to-r from-[#163C8F] via-[#1D4EB8] to-[#235EE0] hover:brightness-110 active:scale-[0.98] px-3.5 py-1.5 text-[11.5px] sm:text-[12px] font-medium text-white shadow-sm transition-all cursor-pointer leading-none"
                         >
                           <span>Know More</span>
                           <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />

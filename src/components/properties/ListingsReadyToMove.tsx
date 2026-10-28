@@ -155,13 +155,13 @@ export const ListingsReadyToMove = () => {
 
               {/* Text info below matching Figma */}
               <div className="mt-3 text-center">
-                <h4 className="text-[15.5px] font-semibold text-[#0B132B] truncate leading-tight">
+                <h4 className="text-[15.5px] font-medium text-[#0B132B] truncate leading-tight">
                   {item.title}
                 </h4>
                 <p className="text-[12px] text-[#64748B] font-medium truncate mt-1 leading-tight">
                   {item.location}
                 </p>
-                <p className="text-[14px] font-semibold text-[#0B132B] mt-1.5 leading-tight">
+                <p className="text-[14px] font-medium text-[#0B132B] mt-1.5 leading-tight">
                   {item.price}
                 </p>
               </div>

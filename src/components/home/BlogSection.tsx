@@ -70,7 +70,7 @@ export const BlogSection = () => {
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
-              className={`rounded-full px-5 sm:px-6 py-2 text-[13px] sm:text-[14px] font-semibold transition-all cursor-pointer ${
+              className={`rounded-full px-5 sm:px-6 py-2 text-[13px] sm:text-[14px] font-medium transition-all cursor-pointer ${
                 isActive
                   ? "bg-[#0088FF] text-white shadow-sm"
                   : "border border-[#BBD7FF] bg-[#F3F8FF] text-[#2563EB] hover:bg-blue-100/60"

@@ -170,7 +170,7 @@ export const PropertyVideoModal = ({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-6 transition-opacity font-jakarta"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-6 transition-opacity font-poppins"
       onClick={onClose}
     >
       <div
@@ -291,7 +291,7 @@ export const PropertyVideoModal = ({
                       {activeRoom.dimensions}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 font-semibold mb-2">
+                  <p className="text-xs text-slate-300 font-medium mb-2">
                     Floor: <span className="text-white font-normal">{activeRoom.finish}</span>
                   </p>
                   <ul className="space-y-1 text-[11px] text-slate-300">

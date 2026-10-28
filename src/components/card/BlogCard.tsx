@@ -65,7 +65,7 @@ export const BlogCard = ({
 
               {/* Date Badge */}
               <div>
-                <span className="inline-block rounded-[5px] bg-[#001D4A]/55 backdrop-blur-xs px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold text-white">
+                <span className="inline-block rounded-[5px] bg-[#001D4A]/55 backdrop-blur-xs px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-white">
                   {date}
                 </span>
               </div>
@@ -94,7 +94,7 @@ export const BlogCard = ({
 
               {/* Date Badge */}
               <div>
-                <span className="inline-block rounded-[5px] bg-[#001D4A]/55 backdrop-blur-xs px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold text-white">
+                <span className="inline-block rounded-[5px] bg-[#001D4A]/55 backdrop-blur-xs px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-white">
                   {date}
                 </span>
               </div>

@@ -50,4 +50,5 @@ export interface MapComponentProps {
   height?: string;
   properties?: Property[];
   navPosition?: "top-right" | "bottom-right" | "bottom-left" | "top-left";
+  zoomPosition?: "top-right" | "bottom-right" | "bottom-left" | "top-left" | "bottom-right-hero";
 }

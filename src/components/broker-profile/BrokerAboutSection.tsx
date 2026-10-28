@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const BrokerAboutSection = () => {
   return (
-    <div className="w-full space-y-5 font-jakarta text-left text-slate-700">
+    <div className="w-full space-y-5 font-poppins text-left text-slate-700">
       {/* Header */}
       <div className="flex items-center justify-between pb-1 border-b border-slate-100">
         <h2 className="text-base sm:text-[18px] font-black text-[#0B132B] tracking-tight">
@@ -43,7 +43,7 @@ export const BrokerAboutSection = () => {
         <div className="pt-1">
           <p className="text-xs sm:text-[13px] text-slate-800 font-bold">
             Specialization:{" "}
-            <span className="font-semibold text-slate-600">
+            <span className="font-medium text-slate-600">
               Residential Properties • Plots/Land • Builder Floors • Investment
               Properties
             </span>
@@ -83,11 +83,11 @@ export const BrokerAboutSection = () => {
         <div className="space-y-1.5 pt-2 border-t border-slate-100 text-xs sm:text-[13px]">
           <p className="text-slate-800 font-bold">
             Languages:{" "}
-            <span className="font-semibold text-slate-600">Hindi, English</span>
+            <span className="font-medium text-slate-600">Hindi, English</span>
           </p>
           <p className="text-slate-800 font-bold">
             Experience:{" "}
-            <span className="font-semibold text-slate-600">
+            <span className="font-medium text-slate-600">
               5+ Years in Real Estate Advisory (change if needed)
             </span>
           </p>

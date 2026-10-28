@@ -16,11 +16,11 @@ export const TopAnnouncementBar = ({ onClose, isFixed = true }: TopAnnouncementB
   return (
     <aside
       aria-label="Announcement"
-      className={`w-full bg-[#1656DC] text-white py-2 px-4 text-[11.5px] sm:text-xs font-semibold tracking-wide z-50 overflow-hidden ${
+      className={`w-full bg-[#1656DC] text-white py-2 px-4 text-[11.5px] sm:text-xs font-medium tracking-wide z-50 overflow-hidden ${
         isFixed ? "fixed top-0 left-0 right-0 h-[44px] sm:h-[48px] flex items-center" : "relative"
       }`}
     >
-      <div className="max-w-[1360px] mx-auto w-full flex items-center justify-between gap-4 font-jakarta">
+      <div className="max-w-[1360px] mx-auto w-full flex items-center justify-between gap-4 font-poppins">
         <div className="flex-1 text-center truncate text-[11px] sm:text-xs">
           <span>Find Your Dream Home</span>
           <span className="mx-2 text-white/50">•</span>

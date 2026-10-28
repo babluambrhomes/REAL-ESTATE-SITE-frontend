@@ -189,7 +189,7 @@ export const PropertyContactModal = ({
                 </p>
                 <div className="flex items-center gap-1 mt-0.5">
                   <ShieldCheck className="h-3 w-3 text-[#00BA7A]" />
-                  <span className="text-[10.5px] font-semibold text-[#00BA7A]">
+                  <span className="text-[10.5px] font-medium text-[#00BA7A]">
                     Verified Featured Dealer
                   </span>
                 </div>
@@ -229,7 +229,7 @@ export const PropertyContactModal = ({
                 Callback Requested!
               </h4>
               <p className="text-xs text-slate-600 mt-1 max-w-xs">
-                Thank you, <span className="font-semibold text-slate-900">{name}</span>. The verified dealer will call you at <span className="font-semibold text-slate-900">{mobile}</span> during the {timeSlot.toLowerCase()} slot.
+                Thank you, <span className="font-medium text-slate-900">{name}</span>. The verified dealer will call you at <span className="font-medium text-slate-900">{mobile}</span> during the {timeSlot.toLowerCase()} slot.
               </p>
               <button
                 type="button"
@@ -248,7 +248,7 @@ export const PropertyContactModal = ({
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                <label className="block text-[11px] font-medium text-slate-600 mb-1">
                   Your Full Name
                 </label>
                 <div className="relative">
@@ -265,7 +265,7 @@ export const PropertyContactModal = ({
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                <label className="block text-[11px] font-medium text-slate-600 mb-1">
                   10-Digit Mobile Number
                 </label>
                 <div className="relative">
@@ -285,7 +285,7 @@ export const PropertyContactModal = ({
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                <label className="block text-[11px] font-medium text-slate-600 mb-1">
                   Preferred Call Time
                 </label>
                 <div className="grid grid-cols-2 gap-2 text-xs">
@@ -301,7 +301,7 @@ export const PropertyContactModal = ({
                       onClick={() => setTimeSlot(slot)}
                       className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-[11px] font-medium transition-all text-left ${
                         timeSlot === slot
-                          ? "border-[#1865F2] bg-blue-50/80 text-[#1865F2] font-semibold shadow-2xs"
+                          ? "border-[#1865F2] bg-blue-50/80 text-[#1865F2] font-medium shadow-2xs"
                           : "border-slate-200 text-slate-600 hover:bg-slate-50"
                       }`}
                     >

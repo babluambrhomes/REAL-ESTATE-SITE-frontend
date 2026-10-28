@@ -11,7 +11,7 @@ export default function PricingPage() {
   const [showAnnouncement, setShowAnnouncement] = useState(true);
 
   return (
-    <div className="min-h-screen bg-white relative flex flex-col font-jakarta overflow-x-clip">
+    <div className="min-h-screen bg-white relative flex flex-col font-poppins overflow-x-clip">
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* 1. Top Announcement Bar */}
         {showAnnouncement && (

@@ -8,7 +8,7 @@ interface BuilderHeroBannerProps {
 
 export const BuilderHeroBanner = ({ onGetExpert }: BuilderHeroBannerProps) => {
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4 font-jakarta">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4 font-poppins">
       <div className="relative w-full aspect-[1024/240] min-h-[220px] sm:min-h-[270px] md:min-h-[300px] rounded-[24px] overflow-hidden shadow-[0_6px_28px_rgba(24,101,242,0.06)] border border-[#D5E6FA]">
         
         {/* Exact Master Figma Hero Banner */}

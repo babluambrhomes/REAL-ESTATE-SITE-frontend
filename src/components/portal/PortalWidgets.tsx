@@ -69,7 +69,7 @@ export const PortalWidgets = ({ onPostProperty, onSelectView }: PortalWidgetsPro
   const [selectedMarket, setSelectedMarket] = useState("Delhi NCR");
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 font-jakarta">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 font-poppins">
       {/* 1. Today's Buyer Demand (Span 4) */}
       <div className="lg:col-span-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs flex flex-col justify-between">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -79,7 +79,7 @@ export const PortalWidgets = ({ onPostProperty, onSelectView }: PortalWidgetsPro
           <button
             type="button"
             onClick={() => onSelectView?.("my-projects")}
-            className="text-[12px] font-semibold text-[#1865F2] hover:underline flex items-center gap-1 cursor-pointer"
+            className="text-[12px] font-medium text-[#1865F2] hover:underline flex items-center gap-1 cursor-pointer"
           >
             <span>View All</span>
             <ArrowRight size={13} />
@@ -112,7 +112,7 @@ export const PortalWidgets = ({ onPostProperty, onSelectView }: PortalWidgetsPro
               {/* Demand Tag & Count */}
               <div className="flex items-center gap-2.5 shrink-0">
                 <span
-                  className={`px-2.5 py-0.5 rounded-md text-[10.5px] font-semibold ${item.tagColor}`}
+                  className={`px-2.5 py-0.5 rounded-md text-[10.5px] font-medium ${item.tagColor}`}
                 >
                   {item.tag}
                 </span>
@@ -135,7 +135,7 @@ export const PortalWidgets = ({ onPostProperty, onSelectView }: PortalWidgetsPro
             <select
               value={selectedMarket}
               onChange={(e) => setSelectedMarket(e.target.value)}
-              className="h-7 pl-2.5 pr-6 rounded-lg border border-slate-200 text-[11px] font-semibold text-slate-700 bg-white appearance-none cursor-pointer shadow-2xs focus:outline-none"
+              className="h-7 pl-2.5 pr-6 rounded-lg border border-slate-200 text-[11px] font-medium text-slate-700 bg-white appearance-none cursor-pointer shadow-2xs focus:outline-none"
             >
               <option value="Delhi NCR">Delhi NCR</option>
               <option value="Noida">Noida</option>
@@ -217,7 +217,7 @@ export const PortalWidgets = ({ onPostProperty, onSelectView }: PortalWidgetsPro
             </div>
 
             {/* BHK Tag */}
-            <span className="inline-block px-2 py-0.5 rounded-full bg-[#EAF2FF] text-[#1865F2] text-[9.5px] font-semibold mb-1">
+            <span className="inline-block px-2 py-0.5 rounded-full bg-[#EAF2FF] text-[#1865F2] text-[9.5px] font-medium mb-1">
               2, 3 & 4 BHK Apartments
             </span>
 
@@ -233,7 +233,7 @@ export const PortalWidgets = ({ onPostProperty, onSelectView }: PortalWidgetsPro
             {/* View Details Button */}
             <Link
               href="/properties/1"
-              className="mt-2.5 block w-full py-1.5 text-center bg-[#1865F2] hover:bg-blue-700 text-white font-semibold text-[11px] rounded-lg transition-colors shadow-2xs"
+              className="mt-2.5 block w-full py-1.5 text-center bg-[#1865F2] hover:bg-blue-700 text-white font-medium text-[11px] rounded-lg transition-colors shadow-2xs"
             >
               View Details ➔
             </Link>

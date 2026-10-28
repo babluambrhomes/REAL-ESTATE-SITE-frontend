@@ -128,7 +128,7 @@ export const CompareLikedPairs = ({ onComparePair }: CompareLikedPairsProps) => 
   ];
 
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-8 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-8 font-poppins">
       {/* Title with cyan vertical line indicator */}
       <div className="flex items-center gap-2.5 mb-6">
         <div className="w-[3.5px] h-6 bg-[#00D084] rounded-full" />
@@ -170,7 +170,7 @@ export const CompareLikedPairs = ({ onComparePair }: CompareLikedPairsProps) => 
                       <span className="truncate">{pair.prop1.location}</span>
                     </p>
                     <div className="pt-0.5">
-                      <span className="inline-block px-3 py-0.5 rounded-md bg-[#A7F3D0] text-[#065F46] font-semibold text-[10.5px]">
+                      <span className="inline-block px-3 py-0.5 rounded-md bg-[#A7F3D0] text-[#065F46] font-medium text-[10.5px]">
                         {pair.prop1.status}
                       </span>
                     </div>
@@ -197,7 +197,7 @@ export const CompareLikedPairs = ({ onComparePair }: CompareLikedPairsProps) => 
                       <span className="truncate">{pair.prop2.location}</span>
                     </p>
                     <div className="pt-0.5">
-                      <span className="inline-block px-3 py-0.5 rounded-md bg-[#A7F3D0] text-[#065F46] font-semibold text-[10.5px]">
+                      <span className="inline-block px-3 py-0.5 rounded-md bg-[#A7F3D0] text-[#065F46] font-medium text-[10.5px]">
                         {pair.prop2.status}
                       </span>
                     </div>
@@ -211,7 +211,7 @@ export const CompareLikedPairs = ({ onComparePair }: CompareLikedPairsProps) => 
             <button
               type="button"
               onClick={() => onComparePair(pair)}
-              className="w-full py-3.5 rounded-[12px] bg-[#EAF2FE] hover:bg-[#D9E8FD] active:scale-[0.99] text-[#1865F2] font-semibold text-[14.5px] flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+              className="w-full py-3.5 rounded-[12px] bg-[#EAF2FE] hover:bg-[#D9E8FD] active:scale-[0.99] text-[#1865F2] font-medium text-[14.5px] flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs"
             >
               <span>Compare</span>
               <ArrowUpRight className="w-4 h-4 text-[#1865F2] stroke-[2.5]" />

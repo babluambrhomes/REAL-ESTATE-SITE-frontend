@@ -37,7 +37,7 @@ export const Pagination = ({
   const pages = getPageWindow(currentPage, totalPages);
 
   const navButton =
-    "flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-xs font-semibold text-slate-600 shadow-2xs transition-all hover:border-[#1865F2] hover:text-[#1865F2] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
+    "flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-xs font-medium text-slate-600 shadow-2xs transition-all hover:border-[#1865F2] hover:text-[#1865F2] disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
 
   const start =
     totalItems != null && perPage != null
@@ -130,11 +130,11 @@ export const Pagination = ({
         {start != null && end != null ? (
           <>
             Showing{" "}
-            <span className="font-semibold text-[#0B132B]">
+            <span className="font-medium text-[#0B132B]">
               {start} to {end}
             </span>{" "}
             of{" "}
-            <span className="font-semibold text-[#0B132B]">
+            <span className="font-medium text-[#0B132B]">
               {totalItems!.toLocaleString("en-IN")}
             </span>{" "}
             {text}

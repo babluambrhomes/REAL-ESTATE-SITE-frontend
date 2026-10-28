@@ -135,7 +135,7 @@ export const ListingsPriceDropped = () => {
                     <span className="truncate">{item.location}</span>
                   </p>
                   <p className="text-[12.5px] font-bold text-[#0B132B] mt-0.5">
-                    {item.oldPrice} <span className="text-[#0B132B] font-semibold mx-0.5">→</span> {item.newPrice}
+                    {item.oldPrice} <span className="text-[#0B132B] font-medium mx-0.5">→</span> {item.newPrice}
                   </p>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export const ListingsPriceDropped = () => {
                     <span className="truncate">{item.location}</span>
                   </p>
                   <p className="text-[12.5px] font-bold text-[#0B132B] mt-0.5">
-                    {item.oldPrice} <span className="text-[#0B132B] font-semibold mx-0.5">→</span> {item.newPrice}
+                    {item.oldPrice} <span className="text-[#0B132B] font-medium mx-0.5">→</span> {item.newPrice}
                   </p>
                 </div>
               </div>

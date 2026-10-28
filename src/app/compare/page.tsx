@@ -125,7 +125,7 @@ export default function ComparePage() {
   const [showAnnouncement, setShowAnnouncement] = useState(true);
 
   return (
-    <main className="min-h-screen bg-white font-jakarta">
+    <main className="min-h-screen bg-white font-poppins">
       {/* 1. Top Announcement Bar */}
       {showAnnouncement && (
         <PostPropertyTopAnnouncement onClose={() => setShowAnnouncement(false)} />

@@ -49,7 +49,7 @@ export const ContactHero = () => {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#eaf6fe] via-[#eafbf6] to-white pt-36 sm:pt-40 md:pt-44 pb-20 sm:pb-28 min-h-[500px] sm:min-h-[560px] flex flex-col justify-between font-jakarta">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#eaf6fe] via-[#eafbf6] to-white pt-36 sm:pt-40 md:pt-44 pb-20 sm:pb-28 min-h-[500px] sm:min-h-[560px] flex flex-col justify-between font-poppins">
       
       {/* Ambient background glow */}
       <div className="absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] max-w-[95vw] h-[360px] bg-[radial-gradient(ellipse_at_center,rgba(52,211,153,0.40)_0%,rgba(45,212,191,0.28)_35%,rgba(96,165,250,0.12)_65%,transparent_75%)] pointer-events-none blur-3xl z-0" />
@@ -84,7 +84,7 @@ export const ContactHero = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-[#1865F2] tracking-tight mb-3 drop-shadow-2xs leading-tight">
           Contact Us
         </h1>
-        <p className="text-sm sm:text-base md:text-[17px] font-semibold text-[#0B132B] max-w-xl mx-auto tracking-normal">
+        <p className="text-sm sm:text-base md:text-[17px] font-medium text-[#0B132B] max-w-xl mx-auto tracking-normal">
           Any question or remarks? Just write us a message!
         </p>
       </div>

@@ -49,7 +49,7 @@ export const BuilderTrustAndStats = () => {
   ];
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-3 font-jakarta">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-3 font-poppins">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
         
         {/* 1. Left Card: Roofin Trust Score (Col 4) */}
@@ -69,7 +69,7 @@ export const BuilderTrustAndStats = () => {
             </span>
             <span className="text-sm font-bold text-slate-400">/10</span>
           </div>
-          <p className="text-[11px] font-semibold text-slate-400">
+          <p className="text-[11px] font-medium text-slate-400">
             Top 5% Builder in NCR
           </p>
 

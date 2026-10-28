@@ -174,7 +174,7 @@ export const PropertyDetailTopBar = ({
                   onClick={() => onTabChange(tab.id)}
                   className={`text-[13.5px] transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                     isActive
-                      ? "px-3.5 py-1 rounded-full border-[1.5px] border-[#00B4D8] text-[#0B132B] font-semibold bg-white shadow-2xs"
+                      ? "px-3.5 py-1 rounded-full border-[1.5px] border-[#00B4D8] text-[#0B132B] font-medium bg-white shadow-2xs"
                       : "text-[#475569] font-medium hover:text-[#0B132B]"
                   }`}
                 >
@@ -214,7 +214,7 @@ export const PropertyDetailTopBar = ({
                 Property in Noida
               </Link>
               <span className="text-slate-400 font-bold">&gt;</span>
-              <span className="font-semibold text-[#0B132B] truncate max-w-[200px] sm:max-w-none">
+              <span className="font-medium text-[#0B132B] truncate max-w-[200px] sm:max-w-none">
                 {propertyTitle}
               </span>
             </nav>
@@ -226,7 +226,7 @@ export const PropertyDetailTopBar = ({
               <button
                 type="button"
                 onClick={onOpenCompare}
-                className="flex items-center gap-1.5 text-[#334155] hover:text-[#1865F2] font-semibold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-[#334155] hover:text-[#1865F2] font-medium transition-colors cursor-pointer"
                 title="Add to comparison matrix"
               >
                 <CompareShuffleIcon className="h-4 w-4 text-[#334155]" />
@@ -236,7 +236,7 @@ export const PropertyDetailTopBar = ({
               <button
                 type="button"
                 onClick={onOpenReport}
-                className="flex items-center gap-1.5 text-[#334155] hover:text-rose-600 font-semibold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-[#334155] hover:text-rose-600 font-medium transition-colors cursor-pointer"
                 title="Report inaccurate details or fraud"
               >
                 <ReportDocumentIcon className="h-4 w-4 text-slate-500" />

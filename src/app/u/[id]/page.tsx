@@ -601,7 +601,7 @@ export default function UserProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-jakarta">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-poppins">
       {/* 1. Global Header */}
       <SearchHeader />
 
@@ -672,7 +672,7 @@ export default function UserProfilePage() {
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm font-semibold text-slate-500">
+                <p className="text-xs sm:text-sm font-medium text-slate-500">
                   {displayRole}
                 </p>
 
@@ -1215,7 +1215,7 @@ export default function UserProfilePage() {
                     <h3 className="text-base sm:text-lg font-black text-[#0B132B] truncate">
                       {enq.propertyTitle}
                     </h3>
-                    <p className="text-xs font-semibold text-slate-500">
+                    <p className="text-xs font-medium text-slate-500">
                       Dealer Contact: <strong className="text-slate-700">{enq.dealerName}</strong>
                     </p>
                     <p className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 italic">
@@ -1295,7 +1295,7 @@ export default function UserProfilePage() {
                         <span className="rounded-full bg-emerald-100 text-emerald-800 px-3 py-0.5 text-xs font-black uppercase tracking-wider">
                           {offer.discount}
                         </span>
-                        <span className="text-[11px] font-semibold text-slate-400">
+                        <span className="text-[11px] font-medium text-slate-400">
                           Valid till {offer.validUntil}
                         </span>
                       </div>

@@ -103,7 +103,7 @@ export default function CompareSideBySidePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FDFEFE] font-jakarta pb-16">
+    <main className="min-h-screen bg-[#FDFEFE] font-poppins pb-16">
       {/* 1. Top Announcement Header Bar */}
       {showAnnouncement && (
         <PostPropertyTopAnnouncement onClose={() => setShowAnnouncement(false)} />

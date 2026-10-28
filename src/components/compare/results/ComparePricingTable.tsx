@@ -27,7 +27,7 @@ export const ComparePricingTable = ({
   },
 }: ComparePricingTableProps) => {
   return (
-    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-jakarta">
+    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-poppins">
       <div className="bg-white rounded-[24px] border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] overflow-hidden">
         
         {/* Table Header Bar */}

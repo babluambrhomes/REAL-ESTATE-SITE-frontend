@@ -57,7 +57,7 @@ export default function PropertyOwnerProfilePage() {
               {/* Name & Actions */}
               <div className="flex-1 text-center sm:text-left pb-1">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <h1 className="text-lg sm:text-xl font-semibold text-gray-800">
+                  <h1 className="text-lg sm:text-xl font-medium text-gray-800">
                     Jitender Singh
                   </h1>
                   <Image src='/broker/verified_tick.png' alt='' width={16} height={16} />
@@ -93,19 +93,19 @@ export default function PropertyOwnerProfilePage() {
                 <div className="flex items-center gap-6 text-center">
                   <div>
                     <p className="text-[11px] text-gray-500 font-medium">Followers</p>
-                    <p className="text-base font-semibold text-primary">200</p>
+                    <p className="text-base font-medium text-primary">200</p>
                   </div>
                   <div>
                     <p className="text-[11px] text-gray-500 font-medium">Views</p>
-                    <p className="text-base font-semibold text-primary">132</p>
+                    <p className="text-base font-medium text-primary">132</p>
                   </div>
                   <div>
                     <p className="text-[11px] text-gray-500 font-medium">Listing</p>
-                    <p className="text-base font-semibold text-primary">500</p>
+                    <p className="text-base font-medium text-primary">500</p>
                   </div>
                   <div>
                     <p className="text-[11px] text-gray-500 font-medium">Videos</p>
-                    <p className="text-base font-semibold text-primary">20</p>
+                    <p className="text-base font-medium text-primary">20</p>
                   </div>
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function PropertyOwnerProfilePage() {
 
             <div className="grid grid-cols-2 gap-6 pt-14 ">
               <div className="space-y-2">
-                <h4 className="flex items-center gap-2 text-sm font-semibold text-gray-800"> <Image src='/broker/verified.png' alt="" width={20} height={20} /> 12+ years of experience</h4>
+                <h4 className="flex items-center gap-2 text-sm font-medium text-gray-800"> <Image src='/broker/verified.png' alt="" width={20} height={20} /> 12+ years of experience</h4>
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-0.5 text-amber-500 text-sm">
                     {[1, 2, 3, 4, 5].map((i) => {
@@ -128,7 +128,7 @@ export default function PropertyOwnerProfilePage() {
                       );
                     })}
                   </div>
-                  <span className="text-sm font-semibold text-primary">4.5/5</span>
+                  <span className="text-sm font-medium text-primary">4.5/5</span>
                   <span className="text-xs text-gray-500">(320 Verified Reviews)</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-sm text-gray-600">

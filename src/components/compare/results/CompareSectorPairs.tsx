@@ -118,7 +118,7 @@ export const CompareSectorPairs = ({ onComparePair }: CompareSectorPairsProps) =
   ];
 
   return (
-    <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-20 font-jakarta">
+    <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-20 font-poppins">
       
       {/* Section Title with Cyan Vertical Pipe */}
       <div className="flex items-center gap-2.5 mb-8">

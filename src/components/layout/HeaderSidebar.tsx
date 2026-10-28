@@ -64,7 +64,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
 
       {/* Slide-over Profile Drawer matching Figma */}
       <aside
-        className={`fixed right-2 sm:right-4 top-16 sm:top-20 bottom-3 sm:bottom-4 rounded-3xl z-50 max-w-[390px] w-full bg-white shadow-2xl border border-slate-200/90 transition-transform duration-300 ease-in-out overflow-hidden flex flex-col font-jakarta ${
+        className={`fixed right-2 sm:right-4 top-16 sm:top-20 bottom-3 sm:bottom-4 rounded-3xl z-50 max-w-[390px] w-full bg-white shadow-2xl border border-slate-200/90 transition-transform duration-300 ease-in-out overflow-hidden flex flex-col font-poppins ${
           open ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
         }`}
       >
@@ -106,7 +106,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
                           Active
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 font-semibold truncate">{userContact}</p>
+                      <p className="text-xs text-slate-500 font-medium truncate">{userContact}</p>
                     </div>
                   </div>
 
@@ -539,7 +539,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
               </button>
             </form>
             <p className="text-[11px] font-bold text-slate-700">
-              Contact Number : <span className="font-semibold text-slate-900">{contactNumber}</span>
+              Contact Number : <span className="font-medium text-slate-900">{contactNumber}</span>
             </p>
           </div>
 

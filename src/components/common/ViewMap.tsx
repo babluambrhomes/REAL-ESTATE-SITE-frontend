@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { Maximize, Minimize, X } from "lucide-react";
+import { Maximize, Minimize, X, Plus, Minus, Map as MapIcon } from "lucide-react";
 import type { Property, MapComponentProps } from "@/types";
 import { PropertyCard } from "@/components/card/PropertyCard";
 
@@ -11,6 +11,7 @@ export default function ViewMap({
   height = "250px",
   properties = [],
   navPosition = "bottom-right",
+  zoomPosition = "bottom-right",
 }: MapComponentProps) {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -24,6 +25,17 @@ export default function ViewMap({
 
   const toggleFullscreen = () => {
     setIsFullscreen((prev) => !prev);
+  };
+
+  const handleResetNormalMap = () => {
+    const center = properties[0]?.coordinates || [77.209, 28.6139];
+    mapRef.current?.flyTo({
+      center,
+      zoom: 12,
+      bearing: 0,
+      pitch: 0,
+      duration: 500,
+    });
   };
 
   useEffect(() => {
@@ -195,9 +207,6 @@ export default function ViewMap({
       zoom: 12,
     });
 
-    // Previous navigation control position:
-    // map.addControl(new maplibregl.NavigationControl(), "top-right");
-    map.addControl(new maplibregl.NavigationControl(), navPosition || "bottom-right");
     mapRef.current = map;
 
     map.on("load", () => {
@@ -326,6 +335,50 @@ export default function ViewMap({
             </div>
           </div>
         )}
+      </div>
+
+      {/* Zoom In (+), Normal Map, and Zoom Out (-) Controls */}
+      <div
+        className={`absolute z-20 flex flex-col items-center bg-white/95 backdrop-blur-xs rounded-[18px] sm:rounded-[20px] shadow-[0_4px_18px_rgba(0,0,0,0.12)] border border-slate-200/90 overflow-hidden transition-all w-[34px] sm:w-[36px] ${
+          isFullscreen
+            ? "bottom-6 right-6"
+            : zoomPosition === "bottom-right-hero"
+            ? "bottom-[100px] sm:bottom-[108px] right-3.5 sm:right-4"
+            : "bottom-4 right-4"
+        }`}
+      >
+        {/* Zoom In (+) */}
+        <button
+          type="button"
+          onClick={() => mapRef.current?.zoomIn({ duration: 300 })}
+          aria-label="Zoom In"
+          title="Zoom In (+)"
+          className="flex h-[32px] sm:h-[34px] w-full items-center justify-center text-slate-700 hover:text-[#1865F2] hover:bg-slate-50 border-b border-slate-100 transition-colors cursor-pointer"
+        >
+          <Plus className="h-4 w-4 stroke-[2.3]" />
+        </button>
+
+        {/* Normal Map View (Reset) */}
+        <button
+          type="button"
+          onClick={handleResetNormalMap}
+          aria-label="Normal Map View"
+          title="Normal Map View"
+          className="flex h-[30px] sm:h-[32px] w-full items-center justify-center text-slate-600 hover:text-[#1865F2] hover:bg-slate-50 border-b border-slate-100 transition-colors cursor-pointer"
+        >
+          <MapIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2]" />
+        </button>
+
+        {/* Zoom Out (-) */}
+        <button
+          type="button"
+          onClick={() => mapRef.current?.zoomOut({ duration: 300 })}
+          aria-label="Zoom Out"
+          title="Zoom Out (-)"
+          className="flex h-[32px] sm:h-[34px] w-full items-center justify-center text-slate-700 hover:text-[#1865F2] hover:bg-slate-50 transition-colors cursor-pointer"
+        >
+          <Minus className="h-4 w-4 stroke-[2.3]" />
+        </button>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { properties } from "@/data/properties";
 const ViewMap = dynamic(() => import("@/components/common/ViewMap"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full w-full items-center justify-center bg-slate-100 text-sm font-semibold text-slate-500">
+    <div className="flex h-full w-full items-center justify-center bg-slate-100 text-sm font-medium text-slate-500">
       <div className="flex items-center gap-2">
         <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
         <span>Loading Interactive Map...</span>
@@ -31,7 +31,7 @@ export const CompareLocationMap = () => {
   ];
 
   return (
-    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-jakarta">
+    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-poppins">
       <div className="bg-white rounded-[26px] border border-slate-200/90 shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-3 sm:p-4 overflow-hidden relative">
         
         {/* Real Interactive Map Container */}

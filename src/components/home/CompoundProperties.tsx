@@ -186,31 +186,31 @@ export const CompoundProperties = () => {
   return (
     <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-8 sm:py-10">
       {/* Section Header: | Properties ... < > */}
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <span className="h-6 sm:h-7 w-1.5 rounded-full bg-[#05A579] shrink-0" />
-          <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#2563EB] leading-tight">
+      <div className="mb-5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="h-6 sm:h-7 w-[3.5px] rounded-full bg-[#00D084] shrink-0" />
+          <h2 className="text-2xl sm:text-[26px] md:text-[28px] font-bold tracking-tight text-[#1865F2] leading-tight">
             Properties
           </h2>
         </div>
 
-        {/* Carousel Arrow Controls */}
+        {/* Carousel Arrow Controls (Exact Figma: Light gray prev, soft blue next, borderless) */}
         <div className="flex items-center gap-2">
           <button
             type="button"
             aria-label="Previous"
             onClick={() => swiperRef.current?.slidePrev()}
-            className="flex h-8 w-8 sm:h-8.5 sm:w-8.5 items-center justify-center rounded-full border border-slate-200/90 text-[#155DFC] shadow-xs transition-colors hover:bg-[#155DFC] hover:text-white cursor-pointer"
+            className="flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#F1F5F9] text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer"
           >
-            <ChevronLeft className="h-4 w-4 stroke-[2]" />
+            <ChevronLeft className="h-4.5 w-4.5 stroke-[2.2]" />
           </button>
           <button
             type="button"
             aria-label="Next"
             onClick={() => swiperRef.current?.slideNext()}
-            className="flex h-8 w-8 sm:h-8.5 sm:w-8.5 items-center justify-center rounded-full border border-slate-200/90 text-[#155DFC] shadow-xs transition-colors hover:bg-[#155DFC] hover:text-white cursor-pointer"
+            className="flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#EBF3FF] text-[#1865F2] hover:bg-blue-100 transition-colors cursor-pointer"
           >
-            <ChevronRight className="h-4 w-4 stroke-[2]" />
+            <ChevronRight className="h-4.5 w-4.5 stroke-[2.2]" />
           </button>
         </div>
       </div>
@@ -222,6 +222,10 @@ export const CompoundProperties = () => {
           spaceBetween={16}
           slidesPerView={1}
           breakpoints={{
+            640: {
+              slidesPerView: 1.15,
+              spaceBetween: 16,
+            },
             1024: {
               slidesPerView: 2,
               spaceBetween: 20,
@@ -230,7 +234,7 @@ export const CompoundProperties = () => {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          className="!pb-8 !pt-1 !px-2 -mx-2"
+          className="!pb-6 !pt-1 !px-2 -mx-2"
         >
           {COMPOUND_UNITS.map((unit) => (
             <SwiperSlide key={unit.id} className="!h-auto">
@@ -238,8 +242,8 @@ export const CompoundProperties = () => {
               <div className="flex w-full flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
                 {/* 1. Big Card (Box 1) - Exact Figma bg #F2F6FD, Left blue accent & light bottom shadow */}
                 <div className="compound-big-card group relative flex h-[202px] sm:h-[210px] flex-1 w-full flex-row items-center gap-2.5 sm:gap-3 overflow-hidden rounded-[20px] bg-[#F2F6FD] p-2 sm:p-2.5">
-                  {/* Left Image (Wide ~65%) */}
-                  <div className="relative h-full w-[62%] sm:w-[65%] shrink-0 overflow-hidden rounded-[14px] sm:rounded-[16px] bg-slate-100">
+                  {/* Left Image (Wide ~60%) */}
+                  <div className="relative h-full w-[58%] sm:w-[61%] shrink-0 overflow-hidden rounded-[14px] sm:rounded-[16px] bg-slate-100">
                     <Image
                       src={unit.big.image}
                       alt={unit.big.title}
@@ -250,8 +254,8 @@ export const CompoundProperties = () => {
                     />
 
                     {/* Top Left Verified Badge */}
-                    <div className="absolute top-2 left-2 z-10 flex items-center gap-1 rounded-full bg-black/55 backdrop-blur-md px-2.5 py-0.5 text-[9px] font-normal tracking-wide text-white shadow-sm">
-                      <ShieldCheck className="h-3 w-3 text-[#05A579] stroke-[2]" />
+                    <div className="absolute top-2 left-2 z-10 flex items-center gap-1 rounded-full bg-black/50 backdrop-blur-md px-2 py-0.5 text-[9px] font-medium tracking-wide text-white shadow-sm">
+                      <ShieldCheck className="h-3 w-3 text-[#22BC90] stroke-[2.5]" />
                       <span>Verified</span>
                     </div>
 
@@ -275,18 +279,20 @@ export const CompoundProperties = () => {
                     </button>
 
                     {/* Bottom Right 3BHK Badge */}
-                    <div className="absolute bottom-2 right-2 z-10 rounded-md bg-black/60 backdrop-blur-md px-1.5 py-0.5 text-[8.5px] font-normal text-white">
+                    <div className="absolute bottom-2 right-2 z-10 rounded-sm bg-black/60 backdrop-blur-md px-1.5 py-0.5 text-[8.5px] font-medium text-white leading-none">
                       {unit.big.beds}
                     </div>
                   </div>
 
-                  {/* Right Info (~35%) */}
+                  {/* Right Info (~40%) */}
                   <div className="flex h-full flex-1 flex-col justify-between py-1 min-w-0 pr-0.5">
                     <div>
-                      <h3 className="text-[14px] sm:text-[15.5px] font-bold text-[#155DFC] leading-tight tracking-tight line-clamp-2">
-                        {unit.big.title}
+                      <h3 className="text-[14.5px] sm:text-[15.5px] font-bold text-[#1865F2] leading-[1.2] tracking-tight">
+                        <span>NBCC Aspire</span>
+                        <br />
+                        <span>Silicon City</span>
                       </h3>
-                      <p className="mt-0.5 flex items-center gap-1 text-[10px] sm:text-[11px] text-[#64748B] font-normal whitespace-nowrap">
+                      <p className="mt-1 flex items-center gap-1 text-[10px] sm:text-[10.5px] text-[#64748B] font-normal whitespace-nowrap">
                         <Image
                           src="/icon/location_pin_blue.png"
                           alt="Location"
@@ -301,17 +307,17 @@ export const CompoundProperties = () => {
 
                     <div className="pt-0.5">
                       <div>
-                        <p className="text-[15.5px] sm:text-[16.5px] font-bold text-[#0B132B] tracking-tight leading-none">
+                        <p className="text-[16px] sm:text-[17px] font-bold text-[#0B132B] tracking-tight leading-none">
                           {unit.big.price}
                         </p>
-                        <span className="block text-[9.5px] text-[#64748B] font-normal mt-0.5 leading-tight">
+                        <span className="block text-[9px] sm:text-[9.5px] text-[#64748B] font-normal mt-0.5 leading-none">
                           Starting From
                         </span>
                       </div>
 
                       <Link
                         href={`/properties/${encodeURIComponent(unit.big.title)}`}
-                        className="mt-1.5 inline-flex items-center justify-center gap-1 rounded-[8px] bg-[#155DFC] hover:bg-[#1250c4] px-3.5 py-1.5 text-[10.5px] font-bold text-white shadow-xs transition-all hover:gap-1.5 cursor-pointer w-fit uppercase tracking-wider leading-none"
+                        className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-[7px] bg-[#1865F2] hover:bg-blue-700 px-3.5 py-1.5 text-[10px] font-bold text-white shadow-xs transition-all cursor-pointer w-fit uppercase tracking-wider leading-none"
                       >
                         <span>CONTACT</span>
                         <ArrowRight className="h-3 w-3 stroke-[2.5]" />
@@ -321,16 +327,16 @@ export const CompoundProperties = () => {
                 </div>
 
                 {/* 2. Stacked 2 Small Cards (Box 2 & Box 3) - Exact Figma bg #F2F6FD, Right blue accent & light bottom shadow */}
-                <div className="flex h-[202px] sm:h-[210px] w-full sm:w-[175px] lg:w-[190px] shrink-0 flex-col justify-between gap-2 sm:gap-2.5">
+                <div className="flex h-[202px] sm:h-[210px] w-full sm:w-[170px] lg:w-[185px] shrink-0 flex-col justify-between gap-2 sm:gap-2.5">
                   {unit.minis.map((mini, miniIdx) => (
                     <div
                       key={`${mini.id}-${miniIdx}`}
-                      className="compound-small-card group flex h-[97px] sm:h-[100px] w-full flex-row items-center justify-between gap-2 rounded-[18px] bg-[#F2F6FD] p-2"
+                      className="compound-small-card group flex h-[97px] sm:h-[100px] w-full flex-row items-center justify-between gap-2 rounded-[18px] bg-[#F2F6FD] p-2 sm:p-2.5"
                     >
                       {/* Left Info */}
                       <div className="flex h-full flex-1 flex-col justify-between py-0.5 min-w-0">
                         <div>
-                          <h4 className="text-[11.5px] sm:text-[12px] font-bold text-[#155DFC] truncate tracking-tight leading-tight">
+                          <h4 className="text-[11.5px] sm:text-[12px] font-bold text-[#1865F2] truncate tracking-tight leading-tight">
                             {mini.title}
                           </h4>
                           <p className="text-[12.5px] sm:text-[13px] font-bold text-[#0B132B] mt-0.5 leading-none">
@@ -340,14 +346,14 @@ export const CompoundProperties = () => {
 
                         <Link
                           href={`/properties/${encodeURIComponent(mini.title)}`}
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-[#155DFC] text-white shadow-xs hover:scale-110 hover:bg-[#1250c4] transition-all cursor-pointer"
+                          className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1865F2] text-white shadow-xs hover:scale-110 hover:bg-blue-700 transition-all cursor-pointer"
                         >
                           <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.5]" />
                         </Link>
                       </div>
 
                       {/* Right Image */}
-                      <div className="relative h-full w-[80px] sm:w-[88px] shrink-0 overflow-hidden rounded-[12px] sm:rounded-[14px] bg-slate-100">
+                      <div className="relative h-full w-[82px] sm:w-[90px] shrink-0 overflow-hidden rounded-[12px] sm:rounded-[14px] bg-slate-100">
                         <Image
                           src={mini.image}
                           alt={mini.title}
@@ -374,8 +380,8 @@ export const CompoundProperties = () => {
                             }`}
                           />
                         </button>
-                        {/* Bottom Left 3BHK Badge */}
-                        <div className="absolute bottom-1 left-1 z-10 rounded-sm bg-black/60 backdrop-blur-md px-1 py-0.5 text-[7.5px] font-normal text-white leading-none">
+                        {/* Bottom Center 3BHK Badge */}
+                        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-10 rounded-sm bg-black/60 backdrop-blur-md px-1.5 py-0.5 text-[7.5px] font-medium text-white leading-none whitespace-nowrap">
                           {mini.beds}
                         </div>
                       </div>

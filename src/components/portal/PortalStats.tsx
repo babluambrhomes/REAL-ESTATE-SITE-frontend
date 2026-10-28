@@ -61,7 +61,7 @@ export const PortalStats = ({
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 font-jakarta">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 font-poppins">
       {stats.map((item, idx) => {
         const IconComponent = item.icon;
         return (

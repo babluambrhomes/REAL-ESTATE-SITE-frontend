@@ -124,7 +124,7 @@ export const BrokerPostedProperties = ({
   const displayProperties = limit ? properties.slice(0, limit) : properties;
 
   return (
-    <div className="w-full space-y-4 font-jakarta relative">
+    <div className="w-full space-y-4 font-poppins relative">
       {/* Header */}
       <div className="flex items-center justify-between pb-1">
         <h2 className="text-base sm:text-[18px] font-black text-[#0B132B] tracking-tight">
@@ -217,7 +217,7 @@ export const BrokerPostedProperties = ({
                     </h3>
 
                     {/* Location Pin */}
-                    <p className="text-xs sm:text-[13px] text-slate-600 font-semibold flex items-center gap-1.5 mt-1">
+                    <p className="text-xs sm:text-[13px] text-slate-600 font-medium flex items-center gap-1.5 mt-1">
                       <span className="w-4 h-4 rounded-full bg-[#1865F2] flex items-center justify-center text-white shrink-0">
                         <MapPin className="w-2.5 h-2.5 fill-white text-white" />
                       </span>

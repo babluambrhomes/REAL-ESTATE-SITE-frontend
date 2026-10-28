@@ -182,7 +182,7 @@ export const PortalSidebar = ({
               <button
                 type="button"
                 onClick={() => onSelectView("my-properties")}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2.5 cursor-pointer ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-2.5 cursor-pointer ${
                   activeView === "my-properties" || activeView === "health-score" || activeView === "performance-diagnosis"
                     ? "bg-[#EAF2FF] text-[#1865F2] font-bold"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -195,7 +195,7 @@ export const PortalSidebar = ({
               <button
                 type="button"
                 onClick={() => onSelectView("post-property")}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2.5 cursor-pointer ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-2.5 cursor-pointer ${
                   activeView === "post-property"
                     ? "bg-[#EAF2FF] text-[#1865F2] font-bold"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -208,7 +208,7 @@ export const PortalSidebar = ({
               <button
                 type="button"
                 onClick={() => onSelectView("my-projects")}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2.5 cursor-pointer ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-2.5 cursor-pointer ${
                   activeView === "my-projects"
                     ? "bg-[#EAF2FF] text-[#1865F2] font-bold"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -221,7 +221,7 @@ export const PortalSidebar = ({
               <button
                 type="button"
                 onClick={() => onSelectView("drafts")}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2.5 cursor-pointer ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-2.5 cursor-pointer ${
                   activeView === "drafts"
                     ? "bg-[#EAF2FF] text-[#1865F2] font-bold"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -234,7 +234,7 @@ export const PortalSidebar = ({
               <button
                 type="button"
                 onClick={() => onSelectView("boost-property")}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2.5 cursor-pointer ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-2.5 cursor-pointer ${
                   activeView === "boost-property"
                     ? "bg-[#EAF2FF] text-[#1865F2] font-bold"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -337,7 +337,7 @@ export const PortalSidebar = ({
                   setCrmTab("All Leads");
                   onSelectView("crm-leads");
                 }}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2.5 cursor-pointer ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-2.5 cursor-pointer ${
                   activeView === "crm-leads" || activeView === "lead-detail"
                     ? "bg-[#EAF2FF] text-[#1865F2] font-bold"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -353,7 +353,7 @@ export const PortalSidebar = ({
                   setCrmTab("Contacted");
                   onSelectView("crm-leads");
                 }}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
               >
                 <PhoneCall size={15} className="text-slate-400" />
                 <span>Follow-ups</span>
@@ -365,7 +365,7 @@ export const PortalSidebar = ({
                   setCrmTab("Site Visit");
                   onSelectView("crm-leads");
                 }}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
               >
                 <Building size={15} className="text-slate-400" />
                 <span>Site Visits</span>
@@ -377,7 +377,7 @@ export const PortalSidebar = ({
                   setCrmTab("Negotiation");
                   onSelectView("crm-leads");
                 }}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
               >
                 <Kanban size={15} className="text-slate-400" />
                 <span>Pipeline</span>
@@ -389,7 +389,7 @@ export const PortalSidebar = ({
                   setCrmTab("New");
                   onSelectView("crm-leads");
                 }}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
               >
                 <CheckSquare size={15} className="text-slate-400" />
                 <span>Tasks</span>
@@ -401,7 +401,7 @@ export const PortalSidebar = ({
                   setCrmTab("Converted");
                   onSelectView("crm-leads");
                 }}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
               >
                 <History size={15} className="text-slate-400" />
                 <span>Lead History</span>
@@ -413,7 +413,7 @@ export const PortalSidebar = ({
                   setCrmTab("Not Respond");
                   onSelectView("crm-leads");
                 }}
-                className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
+                className="w-full text-left px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center gap-2.5 cursor-pointer"
               >
                 <Timer size={15} className="text-slate-400" />
                 <span>Response Time</span>
@@ -615,7 +615,7 @@ export const PortalSidebar = ({
         <button
           type="button"
           onClick={handleLogout}
-          className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white bg-[#2563EB] hover:bg-blue-600 transition-colors cursor-pointer shadow-xs ${
+          className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-white bg-[#2563EB] hover:bg-blue-600 transition-colors cursor-pointer shadow-xs ${
             collapsed ? "justify-center px-0" : ""
           }`}
           title="Logout"

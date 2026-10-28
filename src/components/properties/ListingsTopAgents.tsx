@@ -117,7 +117,7 @@ export const ListingsTopAgents = () => {
             {/* Info below photo */}
             <div className="mt-2.5 w-full text-center flex flex-col items-center">
               {/* Role */}
-              <p className="text-[12px] font-semibold text-[#1865F2] leading-tight truncate w-full">
+              <p className="text-[12px] font-medium text-[#1865F2] leading-tight truncate w-full">
                 {agent.role}
               </p>
 
@@ -127,7 +127,7 @@ export const ListingsTopAgents = () => {
                   <Star className="h-3 w-3 fill-[#F59E0B] stroke-[#F59E0B]" />
                   <Star className="h-3 w-3 fill-[#F59E0B] stroke-[#F59E0B]" />
                 </div>
-                <span className="font-semibold text-[#0F172A] ml-0.5">{agent.rating}</span>
+                <span className="font-medium text-[#0F172A] ml-0.5">{agent.rating}</span>
                 <span className="text-[10px] sm:text-[10.5px] text-[#64748B]">
                   ({agent.reviews})
                 </span>

@@ -59,7 +59,7 @@ export const PreviewAsSellerModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-jakarta">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-poppins">
       <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 sm:p-7 space-y-5">
         {/* Header */}
         <div className="flex items-start justify-between">
@@ -204,7 +204,7 @@ export const PreviewAsSellerModal = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
+            className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -293,7 +293,7 @@ export const LeadsPriorityModal = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-jakarta">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-poppins">
       <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 space-y-5">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -368,7 +368,7 @@ export const LeadsPriorityModal = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
+            className="px-5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -414,7 +414,7 @@ export const AddNoteModal = ({ isOpen, onClose, onSave }: AddNoteModalProps) => 
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-jakarta">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-poppins">
       <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -437,7 +437,7 @@ export const AddNoteModal = ({ isOpen, onClose, onSave }: AddNoteModalProps) => 
                 key={t}
                 type="button"
                 onClick={() => setNoteType(t)}
-                className={`px-3 py-1.5 rounded-full text-[11px] font-semibold border transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all cursor-pointer ${
                   noteType === t
                     ? "bg-[#0B132B] text-white border-[#0B132B]"
                     : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
@@ -480,7 +480,7 @@ export const AddNoteModal = ({ isOpen, onClose, onSave }: AddNoteModalProps) => 
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
+            className="px-5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -528,7 +528,7 @@ export const ScheduleSiteVisitModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-jakarta">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-poppins">
       <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 sm:p-7 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -655,7 +655,7 @@ export const ScheduleSiteVisitModal = ({
                 onChange={(e) => setNotifyWhatsapp(e.target.checked)}
                 className="w-4 h-4 rounded text-[#1865F2]"
               />
-              <span className="font-semibold">WhatsApp (Recommended)</span>
+              <span className="font-medium">WhatsApp (Recommended)</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer">
@@ -685,7 +685,7 @@ export const ScheduleSiteVisitModal = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
+            className="px-5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -761,7 +761,7 @@ export const BulkAssignLeadsModal = ({
   const remainder = leadsCount % memberCount;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-jakarta overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200 font-poppins overflow-y-auto">
       <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 sm:p-7 space-y-5 my-8 max-h-[90vh] overflow-y-auto no-scrollbar">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-slate-100 pb-3">
@@ -1034,7 +1034,7 @@ export const BulkAssignLeadsModal = ({
                     <span className="block text-sm font-black text-[#1865F2]">
                       {count} leads
                     </span>
-                    <span className="text-[10px] text-slate-400 font-semibold block">
+                    <span className="text-[10px] text-slate-400 font-medium block">
                       ({pct}%)
                     </span>
                   </div>
@@ -1142,7 +1142,7 @@ export const BulkAssignLeadsModal = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-6 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
+            className="px-6 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
           >
             Cancel
           </button>

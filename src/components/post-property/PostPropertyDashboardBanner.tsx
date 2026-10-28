@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const PostPropertyDashboardBanner = () => {
   return (
-    <section className="py-12 sm:py-16 bg-white font-jakarta select-none">
+    <section className="py-12 sm:py-16 bg-white font-poppins select-none">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Background Canvas (#F5F9FE, Radius: 10px, overflow-hidden so elements stay strictly inside border) */}

@@ -258,7 +258,7 @@ export const VideoSlider = () => {
         <div className="flex items-center gap-4 sm:gap-6 w-full">
           {/* Left Title: Dynamic BHK Title on hover/click */}
           <div className="shrink-0 w-36 sm:w-48 lg:w-56 text-left pl-2 sm:pl-4">
-            <h3 className="text-[17px] sm:text-[20px] lg:text-[22px] font-semibold text-[#0B132B] tracking-tight transition-all duration-200">
+            <h3 className="text-[17px] sm:text-[20px] lg:text-[22px] font-medium text-[#0B132B] tracking-tight transition-all duration-200">
               {displayBhk}
             </h3>
           </div>
@@ -354,7 +354,7 @@ export const VideoSlider = () => {
 
           {/* Right Details: Dynamic Project Name & Location on hover/click */}
           <div className="shrink-0 w-44 sm:w-60 lg:w-68 text-right pr-2 sm:pr-4">
-            <h3 className="text-[16px] sm:text-[18px] lg:text-[20px] font-semibold text-[#0B132B] tracking-tight leading-snug transition-all duration-200">
+            <h3 className="text-[16px] sm:text-[18px] lg:text-[20px] font-medium text-[#0B132B] tracking-tight leading-snug transition-all duration-200">
               {displayProject}
             </h3>
             <p className="mt-1 flex items-center justify-end gap-1.5 text-[12.5px] sm:text-[14px] text-[#64748B] font-normal transition-all duration-200">
@@ -392,7 +392,7 @@ export const VideoSlider = () => {
               />
             </div>
             <div className="p-4 bg-slate-900 text-white">
-              <h4 className="text-base font-semibold">{selectedVideo.title}</h4>
+              <h4 className="text-base font-medium">{selectedVideo.title}</h4>
               <p className="text-xs text-slate-400 mt-0.5">
                 {selectedVideo.project} • {selectedVideo.location}
               </p>

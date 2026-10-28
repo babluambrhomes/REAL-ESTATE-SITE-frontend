@@ -71,7 +71,7 @@ export const PortalBoostProperty = ({ onBack }: PortalBoostPropertyProps) => {
   };
 
   return (
-    <div className="space-y-6 font-jakarta pb-12">
+    <div className="space-y-6 font-poppins pb-12">
       {/* Header */}
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -97,7 +97,7 @@ export const PortalBoostProperty = ({ onBack }: PortalBoostPropertyProps) => {
           <select
             value={selectedProperty}
             onChange={(e) => setSelectedProperty(e.target.value)}
-            className="h-10 px-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 bg-white shadow-2xs focus:outline-none focus:border-[#1865F2]"
+            className="h-10 px-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 bg-white shadow-2xs focus:outline-none focus:border-[#1865F2]"
           >
             <option value="prop-1">3 BHK Apartment • Sector 124, Noida</option>
             <option value="prop-2">3 BHK Villa • Noida Extension</option>

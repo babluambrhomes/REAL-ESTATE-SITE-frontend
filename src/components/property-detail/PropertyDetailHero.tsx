@@ -34,7 +34,7 @@ interface PropertyDetailHeroProps {
 
 // 1. Exact 13% OFF Ticket Badge Matching Screenshot 1
 const DiscountTicketBadge = () => (
-  <div className="relative inline-flex items-center h-7 rounded-sm bg-gradient-to-r from-[#1865F2] via-[#0284C7] to-[#00B4D8] text-white text-[11.5px] font-semibold pl-2 pr-3.5 shadow-2xs select-none">
+  <div className="relative inline-flex items-center h-7 rounded-sm bg-gradient-to-r from-[#1865F2] via-[#0284C7] to-[#00B4D8] text-white text-[11.5px] font-medium pl-2 pr-3.5 shadow-2xs select-none">
     {/* Left Icon: White Rosette with % */}
     <div className="relative mr-1.5 flex items-center justify-center">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white" className="shrink-0">
@@ -409,7 +409,7 @@ export const PropertyDetailHero = ({
               <span className="text-[14px] font-bold leading-none">
                 +{galleryImages.length}
               </span>
-              <span className="text-[11px] font-semibold mt-0.5">Photos</span>
+              <span className="text-[11px] font-medium mt-0.5">Photos</span>
             </div>
           </div>
         </div>
@@ -429,7 +429,7 @@ export const PropertyDetailHero = ({
             <span className="px-3.5 py-1 rounded-full bg-[#1865F2] text-white text-[11.5px] font-bold shadow-2xs">
               {property.chips?.[0] || `${property.beds || "3 BHK"} ${property.type || "Apartment"}`}
             </span>
-            <span className="px-3.5 py-1 rounded-full border border-[#94B8FF] bg-white text-[#1865F2] text-[11.5px] font-semibold">
+            <span className="px-3.5 py-1 rounded-full border border-[#94B8FF] bg-white text-[#1865F2] text-[11.5px] font-medium">
               {property.chips?.[1] || property.type || "For Sale"}
             </span>
           </div>
@@ -583,7 +583,7 @@ export const PropertyDetailHero = ({
             {property?.location?.split(",")?.[1]?.trim() || "Delhi / Haryana"}
           </div>
 
-          <div className="absolute top-2 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#0B132B] text-white text-[8.5px] font-semibold shadow-md z-10 pointer-events-none">
+          <div className="absolute top-2 right-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#0B132B] text-white text-[8.5px] font-medium shadow-md z-10 pointer-events-none">
             <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
             <span>{property?.location?.split(",")?.[0]?.trim() || "Manipal Palam Vihar"}</span>
           </div>
@@ -628,7 +628,7 @@ export const PropertyDetailHero = ({
               </div>
 
               <div className="p-1 pt-1.5 space-y-0.5">
-                <span className="inline-block px-1.5 py-0.5 rounded-full text-[8px] font-semibold bg-[#EFF6FF] text-[#1865F2] leading-none">
+                <span className="inline-block px-1.5 py-0.5 rounded-full text-[8px] font-medium bg-[#EFF6FF] text-[#1865F2] leading-none">
                   {property?.chips?.[0] || "2, 3 & 4 BHK Apartments"}
                 </span>
                 <h5 className="text-[10px] font-bold text-[#0B132B] truncate pt-0.5">
@@ -641,7 +641,7 @@ export const PropertyDetailHero = ({
 
                 <Link
                   href={`/properties/${property?.id || ""}`}
-                  className="w-full mt-1.5 py-1 rounded-md bg-[#1865F2] hover:bg-blue-700 text-white text-[9.5px] font-semibold flex items-center justify-center gap-1 shadow-2xs transition-colors cursor-pointer"
+                  className="w-full mt-1.5 py-1 rounded-md bg-[#1865F2] hover:bg-blue-700 text-white text-[9.5px] font-medium flex items-center justify-center gap-1 shadow-2xs transition-colors cursor-pointer"
                 >
                   <span>View Details</span>
                   <ArrowRight size={10} />

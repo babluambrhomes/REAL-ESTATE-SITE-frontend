@@ -81,7 +81,7 @@ export const PortalHeader = ({ onSearch }: PortalHeaderProps) => {
   };
 
   return (
-    <header className="w-full bg-transparent pb-4 pt-2 flex flex-col md:flex-row md:items-center justify-between gap-4 font-jakarta relative z-30">
+    <header className="w-full bg-transparent pb-4 pt-2 flex flex-col md:flex-row md:items-center justify-between gap-4 font-poppins relative z-30">
       {/* Left: Greeting & Subtitle */}
       <div>
         <h1 className="text-[24px] sm:text-[26px] font-bold text-[#0B132B] tracking-tight">
@@ -134,7 +134,7 @@ export const PortalHeader = ({ onSearch }: PortalHeaderProps) => {
             <div className="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl z-50 animate-in fade-in zoom-in-95">
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                 <span className="text-xs font-bold text-[#0B132B]">Buyer Messages</span>
-                <span className="text-[10px] text-[#1865F2] font-semibold">2 New</span>
+                <span className="text-[10px] text-[#1865F2] font-medium">2 New</span>
               </div>
               <div className="divide-y divide-slate-100 max-h-60 overflow-y-auto">
                 {MESSAGES.map((msg) => (
@@ -147,7 +147,7 @@ export const PortalHeader = ({ onSearch }: PortalHeaderProps) => {
                     className="py-2.5 px-1 hover:bg-slate-50 cursor-pointer rounded-lg transition-colors"
                   >
                     <div className="flex justify-between items-center text-xs">
-                      <strong className="text-slate-800 font-semibold">{msg.sender}</strong>
+                      <strong className="text-slate-800 font-medium">{msg.sender}</strong>
                       <span className="text-[10px] text-slate-400">{msg.time}</span>
                     </div>
                     <p className="text-[11px] text-slate-500 truncate mt-0.5">{msg.text}</p>
@@ -191,7 +191,7 @@ export const PortalHeader = ({ onSearch }: PortalHeaderProps) => {
                 <button
                   type="button"
                   onClick={() => toast.success("All notifications marked as read")}
-                  className="text-[10.5px] text-[#1865F2] font-semibold hover:underline cursor-pointer"
+                  className="text-[10.5px] text-[#1865F2] font-medium hover:underline cursor-pointer"
                 >
                   Mark all read
                 </button>
@@ -240,7 +240,7 @@ export const PortalHeader = ({ onSearch }: PortalHeaderProps) => {
             <button
               type="button"
               onClick={() => setActiveView("account")}
-              className="text-[#1865F2] font-semibold hover:underline flex items-center gap-0.5 shrink-0 cursor-pointer"
+              className="text-[#1865F2] font-medium hover:underline flex items-center gap-0.5 shrink-0 cursor-pointer"
             >
               <span>Complete Now</span>
               <ArrowRight size={10} />

@@ -87,7 +87,7 @@ export const CompareHowItWorks = ({ onStartComparing }: CompareHowItWorksProps) 
   ];
 
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 font-poppins">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         {/* Left: Heading, 4 Steps, Button */}
@@ -206,7 +206,7 @@ export const CompareHowItWorks = ({ onStartComparing }: CompareHowItWorksProps) 
                   {/* Card Meta */}
                   <div className="space-y-2">
                     <div>
-                      <span className="text-[10.5px] text-[#1865F2] font-semibold bg-[#EFF6FF] px-2 py-0.5 rounded">
+                      <span className="text-[10.5px] text-[#1865F2] font-medium bg-[#EFF6FF] px-2 py-0.5 rounded">
                         {card.bhk}
                       </span>
                       <h4 className="text-[15px] font-bold text-[#0B132B] mt-1 leading-tight flex items-center justify-between">
@@ -243,7 +243,7 @@ export const CompareHowItWorks = ({ onStartComparing }: CompareHowItWorksProps) 
                           <span className="text-[15px] font-extrabold text-[#0B132B]">{card.price}</span>
                           <span className="text-[10px] text-slate-400 line-through">{card.originalPrice}</span>
                         </div>
-                        <span className="text-[9.5px] text-[#00D084] font-semibold">
+                        <span className="text-[9.5px] text-[#00D084] font-medium">
                           🏷️ {card.discount}
                         </span>
                       </div>

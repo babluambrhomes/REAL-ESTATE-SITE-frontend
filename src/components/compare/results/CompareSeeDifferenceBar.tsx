@@ -27,7 +27,7 @@ export const CompareSeeDifferenceBar = ({
   ];
 
   return (
-    <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-8 font-jakarta">
+    <section className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-8 font-poppins">
       {/* Title & Subtitle */}
       <div className="text-center mb-6">
         <h2 className="text-[26px] sm:text-[32px] font-extrabold text-[#0B132B] tracking-tight">

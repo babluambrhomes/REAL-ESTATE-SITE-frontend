@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const ContactMapBanner = () => {
   return (
-    <section className="relative w-full overflow-hidden my-2 sm:my-6 font-jakarta">
+    <section className="relative w-full overflow-hidden my-2 sm:my-6 font-poppins">
       {/* Top Smooth Wave Curve Mask */}
       <div className="w-full overflow-hidden leading-none relative z-10 -mb-[2px] pointer-events-none">
         <svg

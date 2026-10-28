@@ -20,7 +20,7 @@ export default function SingleBuilderProfilePage() {
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <div className="min-h-screen bg-[#F0F6FF] relative flex flex-col font-jakarta overflow-x-clip">
+    <div className="min-h-screen bg-[#F0F6FF] relative flex flex-col font-poppins overflow-x-clip">
       {/* Soft Ambient Figma Glow Background */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-10%,rgba(219,234,254,0.6),rgba(240,246,255,0.9))] pointer-events-none z-0" />
 

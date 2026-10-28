@@ -134,7 +134,7 @@ export const TopCities = () => {
                 </div>
                 {/* 40% Bottom Text Area */}
                 <div className="flex h-[40%] w-full flex-col justify-center px-3.5 sm:px-4 py-2">
-                  <h3 className="text-[14px] sm:text-[15px] font-semibold text-[#0F172A] group-hover:text-[#1865F2] transition-colors leading-snug">
+                  <h3 className="text-[14px] sm:text-[15px] font-medium text-[#0F172A] group-hover:text-[#1865F2] transition-colors leading-snug">
                     {city.name}
                   </h3>
                   <p className="text-[11px] sm:text-[12px] text-[#64748B] font-normal mt-0.5">

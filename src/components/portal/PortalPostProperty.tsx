@@ -660,7 +660,7 @@ export const PortalPostProperty = ({
   };
 
   return (
-    <div className="space-y-6 font-jakarta pb-12">
+    <div className="space-y-6 font-poppins pb-12">
       {/* 1. Top Banner: Title + Need Help Guide Box (Figma 1:1) */}
       <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center">
@@ -688,7 +688,7 @@ export const PortalPostProperty = ({
           </div>
           <button
             type="button"
-            className="ml-2 px-3.5 py-1.5 rounded-lg border border-slate-300 hover:border-[#1865F2] text-[11px] font-semibold text-[#1865F2] bg-white transition-colors cursor-pointer whitespace-nowrap shadow-2xs"
+            className="ml-2 px-3.5 py-1.5 rounded-lg border border-slate-300 hover:border-[#1865F2] text-[11px] font-medium text-[#1865F2] bg-white transition-colors cursor-pointer whitespace-nowrap shadow-2xs"
           >
             View Help Guide ➔
           </button>
@@ -712,7 +712,7 @@ export const PortalPostProperty = ({
                     {st.num}
                   </div>
                   <span
-                    className={`text-[13px] font-semibold whitespace-nowrap ${
+                    className={`text-[13px] font-medium whitespace-nowrap ${
                       isCurrent ? "text-[#0B132B] font-bold" : "text-slate-700 font-medium"
                     }`}
                   >
@@ -774,7 +774,7 @@ export const PortalPostProperty = ({
                           if (list[0]) setSelectedSubtype(list[0].label);
                         }
                       }}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all border flex items-center gap-2 cursor-pointer ${
+                      className={`px-4 py-2 rounded-xl text-xs font-medium transition-all border flex items-center gap-2 cursor-pointer ${
                         isSelected
                           ? "border-2 border-[#1865F2] bg-[#EAF2FF] text-[#1865F2] shadow-2xs font-bold"
                           : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
@@ -806,7 +806,7 @@ export const PortalPostProperty = ({
                       key={item.id}
                       type="button"
                       onClick={() => setPropertyCategory(item.id as any)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all border flex items-center gap-2 cursor-pointer ${
+                      className={`px-4 py-2 rounded-xl text-xs font-medium transition-all border flex items-center gap-2 cursor-pointer ${
                         isSelected
                           ? "border-2 border-[#1865F2] bg-[#EAF2FF] text-[#1865F2] shadow-2xs font-bold"
                           : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
@@ -846,7 +846,7 @@ export const PortalPostProperty = ({
                   type="text"
                   readOnly
                   value={listedUserName}
-                  className="w-full text-xs font-semibold text-slate-800 bg-transparent focus:outline-none cursor-default"
+                  className="w-full text-xs font-medium text-slate-800 bg-transparent focus:outline-none cursor-default"
                 />
                 <Lock size={14} className="text-slate-400 shrink-0" />
               </div>
@@ -904,7 +904,7 @@ export const PortalPostProperty = ({
             <button
               type="button"
               onClick={handlePrev}
-              className="px-7 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] hover:bg-slate-100 text-xs font-semibold text-slate-700 transition-colors cursor-pointer flex items-center gap-1.5"
+              className="px-7 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] hover:bg-slate-100 text-xs font-medium text-slate-700 transition-colors cursor-pointer flex items-center gap-1.5"
             >
               <span>← Cancel</span>
             </button>
@@ -1025,7 +1025,7 @@ export const PortalPostProperty = ({
               </div>
 
               {/* Map / Satellite Toggle */}
-              <div className="absolute bottom-3 right-3 flex items-center rounded-xl bg-white/95 border border-slate-200 p-0.5 shadow-md text-xs font-semibold">
+              <div className="absolute bottom-3 right-3 flex items-center rounded-xl bg-white/95 border border-slate-200 p-0.5 shadow-md text-xs font-medium">
                 <button
                   type="button"
                   onClick={() => setMapMode("map")}
@@ -1162,7 +1162,7 @@ export const PortalPostProperty = ({
                     key={val}
                     type="button"
                     onClick={() => setBhk(val)}
-                    className={`px-2 py-1.5 rounded-lg text-[10.5px] font-semibold border transition-colors ${
+                    className={`px-2 py-1.5 rounded-lg text-[10.5px] font-medium border transition-colors ${
                       bhk === val
                         ? "bg-[#1865F2] text-white border-[#1865F2]"
                         : "bg-white text-slate-600 border-slate-200"
@@ -1227,7 +1227,7 @@ export const PortalPostProperty = ({
                     key={st}
                     type="button"
                     onClick={() => setConstructionStatus(st)}
-                    className={`px-2 py-1.5 rounded-lg text-[10.5px] font-semibold border transition-colors whitespace-nowrap ${
+                    className={`px-2 py-1.5 rounded-lg text-[10.5px] font-medium border transition-colors whitespace-nowrap ${
                       constructionStatus === st
                         ? "bg-[#1865F2] text-white border-[#1865F2]"
                         : "bg-white text-slate-600 border-slate-200"
@@ -1249,7 +1249,7 @@ export const PortalPostProperty = ({
               <button
                 type="button"
                 onClick={handleGenerateAiDescription}
-                className="text-[11px] font-semibold text-[#1865F2] hover:text-blue-700 hover:underline flex items-center gap-1 cursor-pointer bg-blue-50/70 border border-blue-200 px-2.5 py-1 rounded-lg transition-colors"
+                className="text-[11px] font-medium text-[#1865F2] hover:text-blue-700 hover:underline flex items-center gap-1 cursor-pointer bg-blue-50/70 border border-blue-200 px-2.5 py-1 rounded-lg transition-colors"
                 title="Generate a description using property details"
               >
                 <Sparkles size={12} />
@@ -1282,7 +1282,7 @@ export const PortalPostProperty = ({
                       key={f}
                       type="button"
                       onClick={() => setFurnishType(f)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
+                      className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors ${
                         furnishType === f
                           ? "bg-[#1865F2] text-white border-[#1865F2]"
                           : "bg-white text-slate-600 border-slate-200"
@@ -1384,7 +1384,7 @@ export const PortalPostProperty = ({
                       type="text"
                       value={salesPrice}
                       onChange={(e) => setSalesPrice(e.target.value)}
-                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#1865F2]"
+                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:border-[#1865F2]"
                     />
                   </div>
                 </div>
@@ -1399,7 +1399,7 @@ export const PortalPostProperty = ({
                       type="text"
                       value={pricePerSqft}
                       onChange={(e) => setPricePerSqft(e.target.value)}
-                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#1865F2]"
+                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:border-[#1865F2]"
                     />
                   </div>
                 </div>
@@ -1416,7 +1416,7 @@ export const PortalPostProperty = ({
                       type="text"
                       value={totalPrice}
                       onChange={(e) => setTotalPrice(e.target.value)}
-                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#1865F2]"
+                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:border-[#1865F2]"
                     />
                   </div>
                 </div>
@@ -1472,7 +1472,7 @@ export const PortalPostProperty = ({
                       type="text"
                       value={maintenanceCharges}
                       onChange={(e) => setMaintenanceCharges(e.target.value)}
-                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
+                      className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800"
                     />
                   </div>
                   <select className="h-10 px-2 rounded-xl border border-slate-200 text-xs text-slate-700 bg-white">
@@ -1492,7 +1492,7 @@ export const PortalPostProperty = ({
                     type="text"
                     value={bookingAmount}
                     onChange={(e) => setBookingAmount(e.target.value)}
-                    className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
+                    className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800"
                   />
                 </div>
               </div>
@@ -1562,7 +1562,7 @@ export const PortalPostProperty = ({
                 }`}
               >
                 <span className="text-xl">{item.icon}</span>
-                <span className="text-[10px] font-semibold text-slate-700 truncate max-w-full">
+                <span className="text-[10px] font-medium text-slate-700 truncate max-w-full">
                   {item.label}
                 </span>
               </div>
@@ -1660,7 +1660,7 @@ export const PortalPostProperty = ({
                 key={m}
                 type="button"
                 onClick={() => setActiveMediaFilter(m)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                   activeMediaFilter === m
                     ? "bg-[#1865F2] text-white border-[#1865F2]"
                     : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
@@ -1806,7 +1806,7 @@ export const PortalPostProperty = ({
                     key={h}
                     type="button"
                     onClick={() => toggleHighlight(h)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer flex items-center gap-1.5 ${
                       isSelected
                         ? "bg-[#1865F2] text-white border-[#1865F2] shadow-2xs"
                         : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
@@ -1845,7 +1845,7 @@ export const PortalPostProperty = ({
                         key={kw}
                         type="button"
                         onClick={() => toggleKeyword(kw)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer flex items-center gap-1.5 ${
                           isSelected
                             ? "bg-[#1865F2] text-white border-[#1865F2]"
                             : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
@@ -1920,7 +1920,7 @@ export const PortalPostProperty = ({
                         onClick={() => {
                           if (type !== "All") setPropertyType(type as any);
                         }}
-                        className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        className={`px-4 py-2 rounded-xl text-xs font-medium transition-all border cursor-pointer ${
                           propertyType === type
                             ? "border-[#1865F2] bg-blue-50/70 text-[#1865F2] shadow-2xs font-bold"
                             : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
@@ -1942,7 +1942,7 @@ export const PortalPostProperty = ({
                         key={cat}
                         type="button"
                         onClick={() => setPropertyCategory(cat)}
-                        className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        className={`px-4 py-2 rounded-xl text-xs font-medium transition-all border cursor-pointer ${
                           propertyCategory === cat
                             ? "border-[#1865F2] bg-blue-50/70 text-[#1865F2] shadow-2xs font-bold"
                             : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
@@ -2120,7 +2120,7 @@ export const PortalPostProperty = ({
                   </div>
 
                   {/* Map / Satellite Toggle */}
-                  <div className="absolute bottom-3 right-3 flex items-center rounded-xl bg-white/95 border border-slate-200 p-0.5 shadow-md text-xs font-semibold">
+                  <div className="absolute bottom-3 right-3 flex items-center rounded-xl bg-white/95 border border-slate-200 p-0.5 shadow-md text-xs font-medium">
                     <button
                       type="button"
                       onClick={() => setMapMode("map")}
@@ -2254,7 +2254,7 @@ export const PortalPostProperty = ({
                         key={val}
                         type="button"
                         onClick={() => setBhk(val)}
-                        className={`px-2 py-1.5 rounded-lg text-[10.5px] font-semibold border transition-colors ${
+                        className={`px-2 py-1.5 rounded-lg text-[10.5px] font-medium border transition-colors ${
                           bhk === val
                             ? "bg-[#1865F2] text-white border-[#1865F2]"
                             : "bg-white text-slate-600 border-slate-200"
@@ -2319,7 +2319,7 @@ export const PortalPostProperty = ({
                         key={st}
                         type="button"
                         onClick={() => setConstructionStatus(st)}
-                        className={`px-2 py-1.5 rounded-lg text-[10.5px] font-semibold border transition-colors whitespace-nowrap ${
+                        className={`px-2 py-1.5 rounded-lg text-[10.5px] font-medium border transition-colors whitespace-nowrap ${
                           constructionStatus === st
                             ? "bg-[#1865F2] text-white border-[#1865F2]"
                             : "bg-white text-slate-600 border-slate-200"
@@ -2363,7 +2363,7 @@ export const PortalPostProperty = ({
                           key={f}
                           type="button"
                           onClick={() => setFurnishType(f)}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
+                          className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-colors ${
                             furnishType === f
                               ? "bg-[#1865F2] text-white border-[#1865F2]"
                               : "bg-white text-slate-600 border-slate-200"
@@ -2493,7 +2493,7 @@ export const PortalPostProperty = ({
                         <div className="w-4 h-4 rounded-full bg-[#1865F2] text-white flex items-center justify-center shrink-0">
                           <Check size={11} strokeWidth={3} />
                         </div>
-                        <span className="text-xs font-semibold text-slate-700">{item}</span>
+                        <span className="text-xs font-medium text-slate-700">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -2551,7 +2551,7 @@ export const PortalPostProperty = ({
                           type="text"
                           value={salesPrice}
                           onChange={(e) => setSalesPrice(e.target.value)}
-                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#1865F2]"
+                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:border-[#1865F2]"
                         />
                       </div>
                     </div>
@@ -2566,7 +2566,7 @@ export const PortalPostProperty = ({
                           type="text"
                           value={pricePerSqft}
                           onChange={(e) => setPricePerSqft(e.target.value)}
-                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#1865F2]"
+                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:border-[#1865F2]"
                         />
                       </div>
                     </div>
@@ -2583,7 +2583,7 @@ export const PortalPostProperty = ({
                           type="text"
                           value={totalPrice}
                           onChange={(e) => setTotalPrice(e.target.value)}
-                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#1865F2]"
+                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:border-[#1865F2]"
                         />
                       </div>
                     </div>
@@ -2640,7 +2640,7 @@ export const PortalPostProperty = ({
                           type="text"
                           value={maintenanceCharges}
                           onChange={(e) => setMaintenanceCharges(e.target.value)}
-                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
+                          className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800"
                         />
                       </div>
                       <select className="h-10 px-2 rounded-xl border border-slate-200 text-xs text-slate-700 bg-white">
@@ -2660,7 +2660,7 @@ export const PortalPostProperty = ({
                         type="text"
                         value={bookingAmount}
                         onChange={(e) => setBookingAmount(e.target.value)}
-                        className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
+                        className="w-full h-10 pl-7 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800"
                       />
                     </div>
                   </div>
@@ -2751,7 +2751,7 @@ export const PortalPostProperty = ({
                     }`}
                   >
                     <span className="text-xl">{item.icon}</span>
-                    <span className="text-[10px] font-semibold text-slate-700 truncate max-w-full">
+                    <span className="text-[10px] font-medium text-slate-700 truncate max-w-full">
                       {item.label}
                     </span>
                   </div>
@@ -2840,7 +2840,7 @@ export const PortalPostProperty = ({
                     "Infrastructure Growth",
                   ].map((mo) => (
                     <div key={mo}>
-                      <span className="block text-[10.5px] font-semibold text-slate-600 mb-1 truncate">
+                      <span className="block text-[10.5px] font-medium text-slate-600 mb-1 truncate">
                         {mo}
                       </span>
                       <select className="w-full h-8 px-2 rounded-xl border border-slate-200 text-xs text-slate-700 bg-white">
@@ -2875,7 +2875,7 @@ export const PortalPostProperty = ({
                     key={m}
                     type="button"
                     onClick={() => setActiveMediaFilter(m)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-colors cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium border transition-colors cursor-pointer ${
                       activeMediaFilter === m
                         ? "bg-[#1865F2] text-white border-[#1865F2]"
                         : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
@@ -2890,7 +2890,7 @@ export const PortalPostProperty = ({
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <h5 className="text-[13px] font-bold text-[#0B132B]">Photos <span className="text-rose-500">*</span></h5>
-                  <button type="button" className="text-xs text-[#1865F2] font-semibold hover:underline">See all</button>
+                  <button type="button" className="text-xs text-[#1865F2] font-medium hover:underline">See all</button>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -2921,7 +2921,7 @@ export const PortalPostProperty = ({
                         <span className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-black/70 text-white text-[9px] font-bold">
                           {idx === 0 ? "Cover" : `0${idx + 1}`}
                         </span>
-                        <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/60 text-white text-[9px] font-semibold truncate max-w-[90%]">
+                        <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/60 text-white text-[9px] font-medium truncate max-w-[90%]">
                           {p.tag}
                         </span>
                         <button
@@ -2958,34 +2958,34 @@ export const PortalPostProperty = ({
                       >
                         ✕
                       </span>
-                      <span className="font-semibold text-slate-700 text-[11px]">Selected: 1 photo</span>
+                      <span className="font-medium text-slate-700 text-[11px]">Selected: 1 photo</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={() => handleTriggerReplacePhoto(selectedPhotoId)}
-                        className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-[11px] font-semibold text-slate-700 flex items-center gap-1 cursor-pointer"
+                        className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-[11px] font-medium text-slate-700 flex items-center gap-1 cursor-pointer"
                       >
                         <span>🔁</span> Replace Photo
                       </button>
                       <button
                         type="button"
                         onClick={() => handleSetCoverPhoto(selectedPhotoId)}
-                        className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-[11px] font-semibold text-slate-700 flex items-center gap-1 cursor-pointer"
+                        className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-[11px] font-medium text-slate-700 flex items-center gap-1 cursor-pointer"
                       >
                         <span>⭐</span> Set as Cover
                       </button>
                       <button
                         type="button"
                         onClick={() => toast.success("Photo caption saved")}
-                        className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-[11px] font-semibold text-slate-700 flex items-center gap-1 cursor-pointer"
+                        className="px-3 py-1 rounded-lg border border-slate-200 hover:bg-slate-50 text-[11px] font-medium text-slate-700 flex items-center gap-1 cursor-pointer"
                       >
                         <span>📝</span> Add Caption
                       </button>
                       <button
                         type="button"
                         onClick={handleDeleteSelectedPhoto}
-                        className="px-3 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-[11px] font-semibold text-rose-600 flex items-center gap-1 cursor-pointer"
+                        className="px-3 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-[11px] font-medium text-rose-600 flex items-center gap-1 cursor-pointer"
                       >
                         <Trash2 size={12} /> Delete
                       </button>
@@ -3226,7 +3226,7 @@ export const PortalPostProperty = ({
             <div className="w-8 h-8 rounded-full bg-[#00A859] text-white flex items-center justify-center shrink-0">
               <Check size={18} strokeWidth={3} />
             </div>
-            <p className="text-xs font-semibold text-slate-800 leading-snug">
+            <p className="text-xs font-medium text-slate-800 leading-snug">
               We Usually Review Approve Listing Within 24 Hours. You Will Be Notified Once Your Property Gets Live.
             </p>
           </div>
@@ -3261,7 +3261,7 @@ export const PortalPostProperty = ({
           <button
             type="button"
             onClick={handlePrev}
-            className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer flex items-center gap-1.5"
           >
             <ArrowLeft size={14} />
             <span>Back</span>
@@ -3271,7 +3271,7 @@ export const PortalPostProperty = ({
             <button
               type="button"
               onClick={handleSaveDraft}
-              className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
+              className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
             >
               <FileText size={14} className="text-slate-400" />
               <span>Save as Draft</span>

@@ -34,9 +34,9 @@ export const CompareWhySection = () => {
   ];
 
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 font-poppins">
       <div className="space-y-2 mb-8">
-        <span className="inline-block px-3.5 py-1 rounded-md bg-[#EFF6FF] text-[#1865F2] font-semibold text-[12px] tracking-wide">
+        <span className="inline-block px-3.5 py-1 rounded-md bg-[#EFF6FF] text-[#1865F2] font-medium text-[12px] tracking-wide">
           Why Compare On Roofin
         </span>
 

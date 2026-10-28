@@ -59,7 +59,7 @@ export const PostPropertyHub = () => {
   const pathRightGrey2 = getAnnularSectorPath(cx, cy, rIn, rOut, 0, 68.5);
 
   return (
-    <section className="relative py-14 sm:py-24 bg-white overflow-hidden font-jakarta select-none">
+    <section className="relative py-14 sm:py-24 bg-white overflow-hidden font-poppins select-none">
       
       {/* ─────────────────────────────────────────────────────────────
           EXACT 8 BACKGROUND LINES (Lines 4 & 5 Converge and Touch at the Center)

@@ -43,7 +43,7 @@ export const BuilderProfileHeader = ({
   };
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 font-jakarta">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 font-poppins">
       {/* 1. Cover Banner */}
       <div className="relative w-full h-[190px] sm:h-[230px] md:h-[270px] rounded-[24px] overflow-hidden border border-slate-200/80 shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-slate-900">
         <Image
@@ -94,7 +94,7 @@ export const BuilderProfileHeader = ({
                 </svg>
               </div>
               <span className="text-[12.5px] font-black text-[#0B132B] tracking-tight leading-none">
-                Reverse<span className="text-[#00D1FF]">EXP</span><span className="text-[9.5px] text-slate-400 font-semibold">.com</span>
+                Reverse<span className="text-[#00D1FF]">EXP</span><span className="text-[9.5px] text-slate-400 font-medium">.com</span>
               </span>
             </div>
 
@@ -131,12 +131,12 @@ export const BuilderProfileHeader = ({
               </div>
             </div>
 
-            <p className="text-xs sm:text-[13px] font-semibold text-slate-500">
+            <p className="text-xs sm:text-[13px] font-medium text-slate-500">
               {subtitle}
             </p>
 
             {/* Badges line with subtle gray dot separators */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-[11px] font-semibold text-slate-500 pt-1">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-[11px] font-medium text-slate-500 pt-1">
               <span className="flex items-center gap-1.5 text-slate-600">
                 <Calendar className="w-3 h-3 text-[#1865F2]" />
                 {founded}

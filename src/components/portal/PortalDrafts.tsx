@@ -38,7 +38,7 @@ export const PortalDrafts = ({
   };
 
   return (
-    <div className="space-y-6 font-jakarta">
+    <div className="space-y-6 font-poppins">
       {/* Header */}
       <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -78,7 +78,7 @@ export const PortalDrafts = ({
             </div>
 
             <div className="flex items-center gap-2 self-end sm:self-auto">
-              <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-semibold flex items-center gap-1.5">
+              <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-medium flex items-center gap-1.5">
                 <Clock size={12} />
                 <span>Step {draft.currentStep || 1} of 7</span>
               </span>
@@ -88,19 +88,19 @@ export const PortalDrafts = ({
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Category</span>
-              <span className="font-semibold text-slate-800">{draft.propertyCategory || "Sell"}</span>
+              <span className="font-medium text-slate-800">{draft.propertyCategory || "Sell"}</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Total Price</span>
-              <span className="font-semibold text-slate-800">₹ {draft.totalPrice || "Not set"}</span>
+              <span className="font-medium text-slate-800">₹ {draft.totalPrice || "Not set"}</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Built-up Area</span>
-              <span className="font-semibold text-slate-800">{draft.builtUpArea || 1270} sq.ft</span>
+              <span className="font-medium text-slate-800">{draft.builtUpArea || 1270} sq.ft</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Last Saved</span>
-              <span className="font-semibold text-slate-800">
+              <span className="font-medium text-slate-800">
                 {draft.savedAt ? new Date(draft.savedAt).toLocaleDateString() : "Today"}
               </span>
             </div>
@@ -110,7 +110,7 @@ export const PortalDrafts = ({
             <button
               type="button"
               onClick={handleDeleteDraft}
-              className="px-4 py-2 rounded-xl text-rose-600 hover:bg-rose-50 border border-rose-200 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl text-rose-600 hover:bg-rose-50 border border-rose-200 font-medium text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Trash2 size={14} />
               <span>Discard Draft</span>

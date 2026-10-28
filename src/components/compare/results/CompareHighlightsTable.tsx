@@ -49,7 +49,7 @@ export const CompareHighlightsTable = ({
     : allRows;
 
   return (
-    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-jakarta">
+    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-14 font-poppins">
       <div className="bg-white rounded-[26px] border border-slate-200/90 shadow-[0_4px_24px_rgba(0,0,0,0.03)] overflow-hidden">
         
         {/* Table Header Bar */}
@@ -130,12 +130,12 @@ export const CompareHighlightsTable = ({
               </div>
 
               {/* Property 1 Value */}
-              <div className="col-span-4 sm:col-span-4 pl-3 sm:pl-4 text-[12.5px] sm:text-[14px] font-semibold text-[#1E293B]">
+              <div className="col-span-4 sm:col-span-4 pl-3 sm:pl-4 text-[12.5px] sm:text-[14px] font-medium text-[#1E293B]">
                 {row.val1}
               </div>
 
               {/* Property 2 Value */}
-              <div className="col-span-4 sm:col-span-5 pl-3 sm:pl-4 text-[12.5px] sm:text-[14px] font-semibold text-[#1E293B]">
+              <div className="col-span-4 sm:col-span-5 pl-3 sm:pl-4 text-[12.5px] sm:text-[14px] font-medium text-[#1E293B]">
                 {row.val2}
               </div>
             </div>

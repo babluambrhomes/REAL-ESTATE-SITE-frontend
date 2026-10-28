@@ -106,7 +106,7 @@ export const PropertyShareModal = ({
       />
 
       {/* Modal Card */}
-      <div className="relative w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl border border-slate-100 z-10 font-jakarta animate-in fade-in zoom-in-95 duration-150">
+      <div className="relative w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl border border-slate-100 z-10 font-poppins animate-in fade-in zoom-in-95 duration-150">
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
@@ -169,7 +169,7 @@ export const PropertyShareModal = ({
 
         {/* Copy Link Input Bar */}
         <div className="pt-2">
-          <label className="text-xs font-semibold text-slate-600 block mb-1.5">
+          <label className="text-xs font-medium text-slate-600 block mb-1.5">
             Or copy shareable link
           </label>
           <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-1.5 focus-within:border-[#1865F2] focus-within:bg-white transition-colors">

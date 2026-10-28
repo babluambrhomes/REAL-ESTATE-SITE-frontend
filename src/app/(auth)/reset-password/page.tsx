@@ -73,7 +73,7 @@ export default function ResetPasswordPage() {
       <div>
         <div className="w-full max-w-md rounded-2xl border border-dashed border-black bg-white p-6 sm:p-8">
           <div className="mb-6 text-center">
-            <h1 className="text-2xl font-semibold leading-tight tracking-tight text-gray-900 [font-family:var(--font-playfair)]">
+            <h1 className="text-2xl font-medium leading-tight tracking-tight text-gray-900 font-poppins">
               Set new password
             </h1>
             <p className="mt-1.5 text-[12px] text-black">

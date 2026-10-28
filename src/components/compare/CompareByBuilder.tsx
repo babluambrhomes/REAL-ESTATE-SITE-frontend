@@ -52,7 +52,7 @@ export const CompareByBuilder = ({ onSelectBuilder }: CompareByBuilderProps) => 
   ];
 
   return (
-    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-8 font-jakarta">
+    <section className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-8 font-poppins">
       {/* Title with cyan vertical line indicator */}
       <div className="flex items-center gap-2.5 mb-6">
         <div className="w-[3.5px] h-6 bg-[#00D084] rounded-full" />

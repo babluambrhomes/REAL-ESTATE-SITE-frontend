@@ -47,7 +47,7 @@ export const ContactFormSection = () => {
   };
 
   return (
-    <section className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 font-jakarta">
+    <section className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 font-poppins">
       <div className="relative bg-white p-4 sm:p-8 lg:p-10">
         
         {/* Social links */}
@@ -180,14 +180,14 @@ export const ContactFormSection = () => {
 
             {/* Contact Details List */}
             <div className="w-full max-w-[360px] sm:max-w-[380px] space-y-4 pt-1">
-              <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-semibold text-slate-700">
+              <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-medium text-slate-700">
                 <div className="w-8 h-8 rounded-full border border-blue-200 text-[#1865F2] flex items-center justify-center shrink-0">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <span>838 Cantt Sialkot, pakistan</span>
               </div>
 
-              <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-semibold text-slate-700">
+              <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-medium text-slate-700">
                 <div className="w-8 h-8 rounded-full border border-blue-200 text-[#1865F2] flex items-center justify-center shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
@@ -196,7 +196,7 @@ export const ContactFormSection = () => {
                 </a>
               </div>
 
-              <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-semibold text-slate-700">
+              <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-medium text-slate-700">
                 <div className="w-8 h-8 rounded-full border border-blue-200 text-[#1865F2] flex items-center justify-center shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>

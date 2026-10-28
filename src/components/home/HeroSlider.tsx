@@ -30,8 +30,8 @@ const slides = [
     subtitle: "Explore luxury properties in the most desirable locations.",
   },
   {
-    image: "/banner/bannerr.png",
-    title: "Luxury Living Redefined",
+    image: "/banner/bannerrr.png",
+    title: "Your Next Home. Our Priority.",
     subtitle: "Modern designs crafted for comfort and elegance.",
   },
   {
@@ -47,9 +47,9 @@ export const HeroSlider = () => {
 
   return (
     <section className="relative w-full overflow-hidden bg-[#eaf2fb]">
-      <div className="relative flex flex-col lg:flex-row h-[480px] sm:h-[530px] lg:h-[580px] w-full">
+      <div className="relative flex flex-col lg:flex-row h-[490px] sm:h-[535px] lg:h-[580px] w-full">
         {/* 1. Left Side: Banner Slider with Overlay Content & Seamless Atmospheric Shade */}
-        <div className="relative w-full lg:w-[73%] h-[350px] sm:h-[420px] lg:h-full overflow-hidden">
+        <div className="relative w-full lg:w-[73%] h-[365px] sm:h-[420px] lg:h-full overflow-hidden">
           <Swiper
             modules={[Autoplay, EffectFade, Pagination]}
             effect="fade"
@@ -66,14 +66,14 @@ export const HeroSlider = () => {
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className="relative h-full w-full">
+                <div className="relative h-full w-full overflow-hidden">
                   <Image
                     src={slide.image}
                     alt={slide.title}
                     fill
                     priority={index === 0}
                     sizes="(max-width: 1024px) 100vw, 73vw"
-                    className="object-contain object-left-top"
+                    className="object-cover object-left origin-left"
                   />
 
                 </div>
@@ -98,7 +98,7 @@ export const HeroSlider = () => {
             ))}
           </div>
           */}
-          <div className="absolute left-3 sm:left-5 top-[60%] sm:top-[62%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 pointer-events-auto">
+          <div className="absolute left-3 sm:left-5 top-[57%] sm:top-[60%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 pointer-events-auto">
             {slides.map((_, index) => (
               <button
                 key={index}
@@ -117,7 +117,7 @@ export const HeroSlider = () => {
           {/* Right-side shade fade — banner blends into map */}
 
           {/* Left Overlay Text Content */}
-          {/* <div className="absolute inset-0 z-10 flex items-center pointer-events-none font-rounded-mplus">
+          {/* <div className="absolute inset-0 z-10 flex items-center pointer-events-none font-poppins">
             <div className="w-full px-6 sm:px-12 lg:px-16 pointer-events-auto">
              
               <div className="inline-flex items-center gap-2.5 rounded-full bg-white px-3.5 py-1.5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-slate-100">
@@ -218,24 +218,6 @@ export const HeroSlider = () => {
           />
         </div> */}
 
-        <div className="relative">
-          <div
-            className=" -left-[16px] absolute top-0 w-8 h-[480px] sm:h-[530px] lg:h-[580px] opacity-[0.6] z-12 pointer-events-none bg-gradient-to-r from-transparent via-gray-100 to-transparent"
-          />
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
         {/* 2. Right Side: Interactive Map */}
         <div className="relative hidden lg:block lg:w-[27%] h-full bg-[#f1f6fc] overflow-hidden">
           {/* Left-side shade on map panel for seamless blend */}
@@ -247,14 +229,12 @@ export const HeroSlider = () => {
             }}
           />
           <div className="relative h-full w-full">
-            <ViewMap height="100%" properties={properties.slice(0, 8)} />
+            <ViewMap height="100%" properties={properties.slice(0, 8)} zoomPosition="bottom-right-hero" />
 
-
-
-            {/* Top Floating Badge: Premium Living (Subtle 10px corner radius matching Figma) */}
-            <div className="absolute top-24 left-4 z-30 w-[152px] max-h-[90px] rounded-[10px] border border-slate-100/80 bg-white p-2.5 sm:p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
+            {/* Top Floating Badge: Premium Living */}
+            <div className="absolute top-20 sm:top-24 left-4 z-30 w-[164px] rounded-2xl border border-slate-100/90 bg-white/95 p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
               <div className="flex items-center gap-2.5">
-                <div className="relative h-[34px] w-[34px] shrink-0">
+                <div className="relative h-[36px] w-[36px] shrink-0">
                   <Image
                     src="/layout/nav/side.svg"
                     alt="Premium Living"
@@ -265,32 +245,20 @@ export const HeroSlider = () => {
                     className="h-full w-full object-contain"
                   />
                 </div>
-                <div>
-                  <p className="text-[10px] font-medium text-slate-800 leading-tight">Premium Living</p>
-                  <p className="text-[8px] text-slate-500 font-normal leading-tight mt-0.5">In Greater Noida</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[12px] font-semibold text-slate-800 leading-tight truncate">Premium Living</p>
+                  <p className="text-[10px] text-slate-500 font-normal leading-tight mt-0.5 truncate">In Greater Noida</p>
                 </div>
               </div>
-              {/* Bottom Row: Price & Arrow Button (Shifted slightly upward) */}
-              {/* Previous:
-              <div className="mt-1.5 flex items-center justify-between pt-0.5">
-                <p className="text-[19px] sm:text-[20px] font-medium text-slate-900 tracking-tight leading-none">
+
+              {/* Bottom Row: Price & Arrow Button */}
+              <div className="mt-2.5 pt-0.5 flex items-center justify-between">
+                <p className="text-[20px] font-bold text-slate-900 tracking-tight leading-none">
                   1.25 cr
                 </p>
                 <Link
                   href="/properties?location=Greater+Noida"
-                  className="flex h-[30px] w-[30px] sm:h-[32px] sm:w-[32px] items-center justify-center rounded-full bg-[#1865F2] text-white shadow-sm transition-transform hover:scale-105 shrink-0"
-                >
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-              */}
-              <div className="mt-1 -translate-y-0.5 sm:-translate-y-1 flex items-center justify-between">
-                <p className="text-[19px] sm:text-[20px] font-medium text-slate-900 tracking-tight leading-none">
-                  1.25 cr
-                </p>
-                <Link
-                  href="/properties?location=Greater+Noida"
-                  className="flex h-[30px] w-[30px] sm:h-[32px] sm:w-[32px] items-center justify-center rounded-full bg-[#1865F2] text-white shadow-sm transition-transform hover:scale-105 shrink-0"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1865F2] hover:bg-blue-600 text-white shadow-sm transition-all hover:scale-105 shrink-0"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </Link>

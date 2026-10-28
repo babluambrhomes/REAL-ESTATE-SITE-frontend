@@ -41,7 +41,7 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
   }, [username]);
 
   return (
-    <div className="min-h-screen flex flex-col font-jakarta bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col font-poppins bg-[#F8FAFC]">
       
       {/* 1. Top Announcement Bar */}
       {showAnnouncement && (

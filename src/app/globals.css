@@ -7,29 +7,30 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
   --font-sans: var(--font-poppins), sans-serif;
-  --font-outfit: var(--font-outfit), sans-serif;
-  --font-jakarta: var(--font-jakarta), sans-serif;
-  --font-rounded-mplus: var(--font-rounded-mplus), sans-serif;
+  --font-poppins: var(--font-poppins), sans-serif;
+  --font-weight-semibold: 500;
+}
+
+*, *::before, *::after {
+  font-family: var(--font-poppins), sans-serif !important;
+}
+
+html {
+  background-color: #ffffff !important;
+  font-family: var(--font-poppins), sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: var(--font-poppins), sans-serif;
-}
-
-.font-rounded-mplus {
-  font-family: var(--font-rounded-mplus), sans-serif;
-}
-
-.font-outfit {
-  font-family: var(--font-outfit), sans-serif;
-}
-
-.font-jakarta {
-  font-family: var(--font-jakarta), sans-serif;
+  background-color: #ffffff !important;
+  font-family: var(--font-poppins), sans-serif !important;
+  color: #0f172a;
 }
 
 .font-poppins {
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--font-poppins), sans-serif !important;
 }
 
 
@@ -58,7 +59,7 @@ body {
   border-radius: 0.5rem;
   border: 1px solid #d1d5db;
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #111827;
   background-color: #fff;
   text-align: center;
@@ -111,6 +112,29 @@ body {
   background: #94a3b8;
 }
 
+@keyframes circular-border-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.circular-rotating-gradient-disc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 320px;
+  margin-top: -160px;
+  margin-left: -160px;
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: circular-border-spin 8s linear infinite;
+  will-change: transform;
+}
+
 @keyframes happyFade {
   from {
     opacity: 0;
@@ -141,21 +165,21 @@ body {
   animation: happySlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 1:1 Figma Compound Properties Cards: One-sided blue line accent & light soft bottom shadow */
+/* 1:1 Figma Compound Properties Cards: Crisp clean blue border & white background */
 .compound-big-card {
-  box-shadow: -3.5px 0px 0px 0px #2563EB, 0 8px 18px -2px rgba(37, 99, 235, 0.12);
+  box-shadow: -2.5px 0px 0px 0px #1865F2, 0 6px 16px -2px rgba(24, 101, 242, 0.08);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .compound-big-card:hover {
   transform: translateY(-2px);
-  box-shadow: -3.5px 0px 0px 0px #2563EB, 0 12px 24px -2px rgba(37, 99, 235, 0.18);
+  box-shadow: -2.5px 0px 0px 0px #1865F2, 0 10px 22px -2px rgba(24, 101, 242, 0.14);
 }
 
 .compound-small-card {
-  box-shadow: 3.5px 0px 0px 0px #2563EB, 0 6px 14px -2px rgba(37, 99, 235, 0.10);
+  box-shadow: 2.5px 0px 0px 0px #1865F2, 0 5px 14px -2px rgba(24, 101, 242, 0.08);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .compound-small-card:hover {
   transform: translateY(-2px);
-  box-shadow: 3.5px 0px 0px 0px #2563EB, 0 10px 20px -2px rgba(37, 99, 235, 0.16);
+  box-shadow: 2.5px 0px 0px 0px #1865F2, 0 8px 18px -2px rgba(24, 101, 242, 0.12);
 }

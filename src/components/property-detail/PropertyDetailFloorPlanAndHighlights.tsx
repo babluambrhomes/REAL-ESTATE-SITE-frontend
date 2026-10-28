@@ -254,7 +254,7 @@ For physical model inspection and booking call 1800-ROOFIN-PRO.
   };
 
   return (
-    <div className="w-full my-6 flex flex-col gap-8 font-jakarta">
+    <div className="w-full my-6 flex flex-col gap-8 font-poppins">
       {/* ----------------- 1. FLOOR PLAN SECTION (FIGMA 1:1) ----------------- */}
       <div id="floor-plan" className="space-y-4 scroll-mt-28">
         <div className="pl-2.5 border-l-4 border-[#00B4D8]">
@@ -400,7 +400,7 @@ For physical model inspection and booking call 1800-ROOFIN-PRO.
                       />
                     </div>
                     <div>
-                      <p className="text-[13px] font-semibold text-[#0B132B] leading-tight">
+                      <p className="text-[13px] font-medium text-[#0B132B] leading-tight">
                         {loc.label}
                       </p>
                       <p className="text-[14px] font-extrabold text-[#0B132B] mt-0.5 leading-tight">

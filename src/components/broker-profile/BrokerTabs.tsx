@@ -15,7 +15,7 @@ export const BrokerTabs = ({ activeTab, onTabChange }: BrokerTabsProps) => {
   ];
 
   return (
-    <div className="border-b border-slate-100 pb-3 font-jakarta overflow-x-auto no-scrollbar">
+    <div className="border-b border-slate-100 pb-3 font-poppins overflow-x-auto no-scrollbar">
       <div className="flex items-center gap-2 sm:gap-3">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;

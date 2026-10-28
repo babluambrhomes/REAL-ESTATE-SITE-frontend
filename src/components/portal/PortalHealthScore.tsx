@@ -31,7 +31,7 @@ export const PortalHealthScore = ({
   const [timeFilter, setTimeFilter] = useState("Last 7 days");
 
   return (
-    <div className="space-y-6 font-jakarta pb-12">
+    <div className="space-y-6 font-poppins pb-12">
       {/* 1. Breadcrumb & Header */}
       <div className="space-y-1">
         <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
@@ -43,7 +43,7 @@ export const PortalHealthScore = ({
             Properties
           </button>
           <ChevronRight size={13} />
-          <span className="text-slate-700 font-semibold truncate">
+          <span className="text-slate-700 font-medium truncate">
             The terraces at max estate 361
           </span>
         </div>
@@ -100,7 +100,7 @@ export const PortalHealthScore = ({
             </span>
             <button
               type="button"
-              className="absolute bottom-2.5 left-2.5 right-2.5 py-1.5 rounded-xl bg-black/60 hover:bg-black/80 text-white text-[11px] font-semibold flex items-center justify-center gap-1.5 backdrop-blur-xs transition-colors cursor-pointer"
+              className="absolute bottom-2.5 left-2.5 right-2.5 py-1.5 rounded-xl bg-black/60 hover:bg-black/80 text-white text-[11px] font-medium flex items-center justify-center gap-1.5 backdrop-blur-xs transition-colors cursor-pointer"
             >
               <Eye size={13} />
               <span>View on portal</span>
@@ -217,21 +217,21 @@ export const PortalHealthScore = ({
                 <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">
                   ✓
                 </div>
-                <span className="font-semibold text-slate-800 text-[11.5px]">Basic</span>
+                <span className="font-medium text-slate-800 text-[11.5px]">Basic</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px]">
                   ✓
                 </div>
-                <span className="font-semibold text-slate-800 text-[11.5px]">Location</span>
+                <span className="font-medium text-slate-800 text-[11.5px]">Location</span>
               </div>
 
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold">
                   !
                 </div>
-                <span className="font-semibold text-slate-800 text-[11.5px]">Details (Recommended)</span>
+                <span className="font-medium text-slate-800 text-[11.5px]">Details (Recommended)</span>
               </div>
 
               <div className="flex items-center gap-2 text-slate-400">
@@ -271,7 +271,7 @@ export const PortalHealthScore = ({
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold text-slate-600">
+            <span className="text-xs font-medium text-slate-600">
               3 out of 16 completed
             </span>
             <div className="w-32 h-2 rounded-full bg-slate-100 overflow-hidden">

@@ -123,7 +123,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               />
             </div>
             <div>
-              <h4 className="text-[14px] font-semibold text-[#0B132B] leading-tight">
+              <h4 className="text-[14px] font-medium text-[#0B132B] leading-tight">
                 Verified Properties
               </h4>
               <p className="text-[12.5px] text-[#475569] mt-1 font-normal leading-tight">
@@ -143,7 +143,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               />
             </div>
             <div>
-              <h4 className="text-[14px] font-semibold text-[#0B132B] leading-tight">
+              <h4 className="text-[14px] font-medium text-[#0B132B] leading-tight">
                 Best Price Promise
               </h4>
               <p className="text-[12.5px] text-[#475569] mt-1 font-normal leading-tight">
@@ -163,7 +163,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               />
             </div>
             <div>
-              <h4 className="text-[14px] font-semibold text-[#0B132B] leading-tight">
+              <h4 className="text-[14px] font-medium text-[#0B132B] leading-tight">
                 After Sales Support
               </h4>
               <p className="text-[12.5px] text-[#475569] mt-1 font-normal leading-tight">
@@ -211,11 +211,11 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               {/* Interest Rates & Processing fee tags */}
               <div className="flex items-center gap-8 mt-2.5">
                 <div>
-                  <span className="text-[#1865F2] block text-[11.5px] font-semibold">Rate Start From</span>
+                  <span className="text-[#1865F2] block text-[11.5px] font-medium">Rate Start From</span>
                   <span className="text-[18px] sm:text-[20px] font-bold text-[#1865F2] leading-none">7.1%</span>
                 </div>
                 <div>
-                  <span className="text-[#1865F2] block text-[11.5px] font-semibold">Processing Fee</span>
+                  <span className="text-[#1865F2] block text-[11.5px] font-medium">Processing Fee</span>
                   <span className="text-[18px] sm:text-[20px] font-bold text-[#1865F2] leading-none">0%</span>
                 </div>
               </div>
@@ -272,7 +272,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setTrendView("locality")}
-              className={`px-3.5 py-1.5 rounded-lg text-[12px] font-semibold transition-all cursor-pointer border ${
+              className={`px-3.5 py-1.5 rounded-lg text-[12px] font-medium transition-all cursor-pointer border ${
                 trendView === "locality"
                   ? "border-[#BFDBFE] text-[#1865F2] bg-[#F0F6FE] shadow-2xs"
                   : "border-slate-200/70 text-[#1865F2]/80 bg-white hover:bg-slate-50"
@@ -282,7 +282,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
             </button>
             <button
               onClick={() => setTrendView("societies")}
-              className={`px-3.5 py-1.5 rounded-lg text-[12px] font-semibold transition-all cursor-pointer border ${
+              className={`px-3.5 py-1.5 rounded-lg text-[12px] font-medium transition-all cursor-pointer border ${
                 trendView === "societies"
                   ? "border-[#BFDBFE] text-[#1865F2] bg-[#F0F6FE] shadow-2xs"
                   : "border-slate-200/70 text-[#1865F2]/80 bg-white hover:bg-slate-50"
@@ -311,10 +311,10 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
             <div className="relative w-full h-64 sm:h-72">
               {/* Floating Tooltip Callout Card matching Figma 1:1 */}
               <div className="absolute top-8 left-[47%] -translate-x-1/2 z-20 bg-white border border-slate-200/90 rounded-xl p-2.5 sm:p-3 shadow-lg text-left pointer-events-none min-w-[130px]">
-                <p className="text-[12.5px] font-semibold text-[#1865F2] leading-tight">
+                <p className="text-[12.5px] font-medium text-[#1865F2] leading-tight">
                   July-Sept, 2023
                 </p>
-                <p className="text-[12px] text-[#0B132B] font-semibold leading-tight mt-1">
+                <p className="text-[12px] text-[#0B132B] font-medium leading-tight mt-1">
                   SEC 103, Noida
                 </p>
                 <p className="text-[11.5px] text-[#64748B] font-normal leading-tight mt-0.5">
@@ -348,7 +348,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
                       borderRadius: "10px",
                       border: "1px solid #E2E8F0",
                       fontSize: "12px",
-                      fontWeight: 600,
+                      fontWeight: 500,
                     }}
                   />
                   <Area
@@ -371,7 +371,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
                 <h4 className="text-[15px] sm:text-[16px] font-bold text-[#0B132B]">
                   Market Outlook
                 </h4>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#E8F8F0] text-[#00C49F] font-semibold text-[11px]">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#E8F8F0] text-[#00C49F] font-medium text-[11px]">
                   Positive
                 </span>
               </div>
@@ -402,7 +402,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               </div>
             </div>
 
-            <button className="w-full mt-5 py-2.5 rounded-xl bg-[#EAEAEA] hover:bg-slate-300 text-[#0B132B] text-[13px] font-semibold transition-colors text-center cursor-pointer">
+            <button className="w-full mt-5 py-2.5 rounded-xl bg-[#EAEAEA] hover:bg-slate-300 text-[#0B132B] text-[13px] font-medium transition-colors text-center cursor-pointer">
               View Market Insights
             </button>
           </div>
@@ -433,17 +433,17 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               </thead>
               <tbody>
                 <tr className="border-b border-slate-50">
-                  <td className="py-3.5 font-semibold text-[#0B132B]">Sector 150</td>
+                  <td className="py-3.5 font-medium text-[#0B132B]">Sector 150</td>
                   <td className="py-3.5 font-medium text-[#475569]">RS 12,450</td>
                   <td className="py-3.5">
-                    <span className="px-2.5 py-0.5 rounded-md bg-[#E8F8F0] text-[#00C49F] font-semibold text-[11px]">
+                    <span className="px-2.5 py-0.5 rounded-md bg-[#E8F8F0] text-[#00C49F] font-medium text-[11px]">
                       +10.8%
                     </span>
                   </td>
                   <td className="py-3.5 font-medium text-[#475569]">33.4%</td>
                   <td className="py-3.5 font-medium text-[#475569]">3.5%</td>
                   <td className="py-3.5 text-right">
-                    <span className="px-3 py-0.5 rounded-md bg-[#EFF6FF] text-[#1865F2] font-semibold text-[11px]">
+                    <span className="px-3 py-0.5 rounded-md bg-[#EFF6FF] text-[#1865F2] font-medium text-[11px]">
                       Positive
                     </span>
                   </td>
@@ -477,7 +477,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
             </button>
           </div>
 
-          <button className="px-6 py-2.5 rounded-xl border border-[#1865F2] text-[#1865F2] bg-white hover:bg-[#1865F2] hover:text-white text-[13.5px] font-semibold transition-all shadow-2xs cursor-pointer">
+          <button className="px-6 py-2.5 rounded-xl border border-[#1865F2] text-[#1865F2] bg-white hover:bg-[#1865F2] hover:text-white text-[13.5px] font-medium transition-all shadow-2xs cursor-pointer">
             Click for More Price Details
           </button>
         </div>
@@ -504,7 +504,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               Stay Updated, Invest Smart With Accurate Data.
             </p>
             <div className="pt-1.5">
-              <button className="px-5 py-2.5 rounded-lg bg-[#1865F2] hover:bg-blue-700 text-white text-[13px] font-semibold inline-flex items-center gap-2 shadow-sm transition-all cursor-pointer group">
+              <button className="px-5 py-2.5 rounded-lg bg-[#1865F2] hover:bg-blue-700 text-white text-[13px] font-medium inline-flex items-center gap-2 shadow-sm transition-all cursor-pointer group">
                 <span>View Sector By Gaph</span>
                 <div className="h-5 w-5 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
                   <ArrowRight size={13} className="text-white" />
@@ -523,7 +523,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
               </h3>
             </div>
 
-            <button className="px-4 py-2 rounded-xl border border-[#1865F2] text-[#1865F2] bg-white hover:bg-blue-50 text-[12.5px] font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
+            <button className="px-4 py-2 rounded-xl border border-[#1865F2] text-[#1865F2] bg-white hover:bg-blue-50 text-[12.5px] font-medium flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer">
               <Plus size={15} />
               <span>Review your society/ locality</span>
             </button>
@@ -571,7 +571,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
                 ))}
               </div>
 
-              <button className="mt-5 px-4 py-2 rounded-xl border border-[#D5E5FD] text-[#1865F2] hover:bg-blue-50 text-[12px] font-semibold transition-colors cursor-pointer">
+              <button className="mt-5 px-4 py-2 rounded-xl border border-[#D5E5FD] text-[#1865F2] hover:bg-blue-50 text-[12px] font-medium transition-colors cursor-pointer">
                 See how ratings are calculated
               </button>
             </div>
@@ -582,7 +582,7 @@ export const PropertyDetailWhyRoofinAndBankOffers = () => {
                 <h4 className="text-[14px] font-bold text-[#1865F2]">
                   ALL Reviews ({REVIEWS_DATA.length})
                 </h4>
-                <button className="text-[12.5px] font-semibold text-[#1865F2] hover:underline cursor-pointer">
+                <button className="text-[12.5px] font-medium text-[#1865F2] hover:underline cursor-pointer">
                   View All
                 </button>
               </div>

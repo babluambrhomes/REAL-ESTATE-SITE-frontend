@@ -20,7 +20,7 @@ export const PricingHeroPlans = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-white pt-28 sm:pt-32 md:pt-36 pb-24 font-jakarta min-h-[900px]">
+    <section className="relative w-full overflow-hidden bg-white pt-28 sm:pt-32 md:pt-36 pb-24 font-poppins min-h-[900px]">
       
       {/* 1. Top Right Corner Curving Wave Lines (Figma Scaled Subtle 1:1) */}
       <div className="absolute top-4 sm:top-8 right-0 lg:right-2 w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] h-[380px] sm:h-[460px] md:h-[520px] pointer-events-none z-0 select-none opacity-85">
@@ -111,7 +111,7 @@ export const PricingHeroPlans = () => {
                     ₹00
                   </span>
                   <div className="text-left">
-                    <span className="text-xs line-through text-slate-400 font-semibold block leading-none">
+                    <span className="text-xs line-through text-slate-400 font-medium block leading-none">
                       ₹450
                     </span>
                     <span className="text-[11px] text-slate-500 font-medium block">
@@ -133,7 +133,7 @@ export const PricingHeroPlans = () => {
                     "Performance Insights",
                     "Premium Profile",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
+                    <li key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
                       <div className="w-4 h-4 rounded-full bg-[#1865F2] text-white flex items-center justify-center shrink-0 shadow-2xs">
                         <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>
@@ -177,7 +177,7 @@ export const PricingHeroPlans = () => {
                     {billingCycle === "monthly" ? "₹5,999" : "₹4,799"}
                   </span>
                   <div className="text-left">
-                    <span className="text-xs line-through text-slate-400 font-semibold block leading-none">
+                    <span className="text-xs line-through text-slate-400 font-medium block leading-none">
                       ₹7,500
                     </span>
                     <span className="text-[11px] text-slate-500 font-medium block">
@@ -201,7 +201,7 @@ export const PricingHeroPlans = () => {
                     "Profile Analytics",
                     "Email & Call Support",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
+                    <li key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
                       <div className="w-4 h-4 rounded-full bg-[#1865F2] text-white flex items-center justify-center shrink-0 shadow-2xs">
                         <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>
@@ -245,7 +245,7 @@ export const PricingHeroPlans = () => {
                     {billingCycle === "monthly" ? "₹11,999" : "₹9,599"}
                   </span>
                   <div className="text-left">
-                    <span className="text-xs line-through text-slate-400 font-semibold block leading-none">
+                    <span className="text-xs line-through text-slate-400 font-medium block leading-none">
                       ₹15,000
                     </span>
                     <span className="text-[11px] text-slate-500 font-medium block">
@@ -270,7 +270,7 @@ export const PricingHeroPlans = () => {
                     "Priority Support",
                     "24/7 Priority Support",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
+                    <li key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
                       <div className="w-4 h-4 rounded-full bg-[#1865F2] text-white flex items-center justify-center shrink-0 shadow-2xs">
                         <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>
@@ -311,7 +311,7 @@ export const PricingHeroPlans = () => {
                     {billingCycle === "monthly" ? "₹23,999" : "₹19,199"}
                   </span>
                   <div className="text-left">
-                    <span className="text-xs line-through text-white/70 font-semibold block leading-none">
+                    <span className="text-xs line-through text-white/70 font-medium block leading-none">
                       ₹30,000
                     </span>
                     <span className="text-[11px] text-white/90 font-medium block">
@@ -336,7 +336,7 @@ export const PricingHeroPlans = () => {
                     "Priority Lead Access",
                     "24/7 Priority Support",
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-white font-semibold">
+                    <li key={i} className="flex items-center gap-2.5 text-white font-medium">
                       <div className="w-4 h-4 rounded-full bg-white text-[#0284C7] flex items-center justify-center shrink-0 shadow-2xs">
                         <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>

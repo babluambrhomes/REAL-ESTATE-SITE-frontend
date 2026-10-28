@@ -256,7 +256,7 @@ export const PropertyDetailBuilderAndDealer = ({
           {/* Right Action Button matching Figma 1:1 */}
           <Link
             href="/builder/gm-multiventures"
-            className="px-5 py-2.5 rounded-xl border border-[#1865F2] text-[#1865F2] hover:bg-blue-50 text-[13px] font-semibold transition-colors whitespace-nowrap shadow-2xs cursor-pointer flex items-center gap-1.5 shrink-0 bg-white"
+            className="px-5 py-2.5 rounded-xl border border-[#1865F2] text-[#1865F2] hover:bg-blue-50 text-[13px] font-medium transition-colors whitespace-nowrap shadow-2xs cursor-pointer flex items-center gap-1.5 shrink-0 bg-white"
           >
             <span>View Builder Project Details</span>
             <ChevronRight size={15} />
@@ -348,7 +348,7 @@ export const PropertyDetailBuilderAndDealer = ({
 
               {/* Phone Input with Country Code */}
               <div className="flex items-center rounded-xl bg-white border border-slate-200 overflow-hidden focus-within:border-[#1865F2]">
-                <div className="px-3 py-2.5 bg-slate-50 border-r border-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1 shrink-0">
+                <div className="px-3 py-2.5 bg-slate-50 border-r border-slate-200 text-xs font-medium text-slate-700 flex items-center gap-1 shrink-0">
                   <span>IND (+91)</span>
                   <ChevronDown size={12} className="text-slate-400" />
                 </div>
@@ -389,8 +389,8 @@ export const PropertyDetailBuilderAndDealer = ({
                   className="h-3.5 w-3.5 rounded cursor-pointer accent-[#1865F2]"
                 />
                 <label htmlFor="dealer-terms" className="text-[10px] text-slate-500 cursor-pointer select-none">
-                  I agree to the <span className="text-[#1865F2] font-semibold hover:underline">Terms &amp; Conditions</span> and{" "}
-                  <span className="text-[#1865F2] font-semibold hover:underline">Privacy Policy</span>
+                  I agree to the <span className="text-[#1865F2] font-medium hover:underline">Terms &amp; Conditions</span> and{" "}
+                  <span className="text-[#1865F2] font-medium hover:underline">Privacy Policy</span>
                 </label>
               </div>
 
@@ -476,7 +476,7 @@ export const PropertyDetailBuilderAndDealer = ({
 
             <form onSubmit={handleBookSiteVisit} className="mt-5 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-medium text-slate-700 mb-1">
                   Preferred Visit Date
                 </label>
                 <input
@@ -490,7 +490,7 @@ export const PropertyDetailBuilderAndDealer = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-medium text-slate-700 mb-1">
                   Preferred Time Slot
                 </label>
                 <div className="grid grid-cols-3 gap-2">
@@ -499,7 +499,7 @@ export const PropertyDetailBuilderAndDealer = ({
                       key={slot}
                       type="button"
                       onClick={() => setVisitSlot(slot)}
-                      className={`py-2 px-2 rounded-lg text-[11px] font-semibold border transition-all cursor-pointer text-center ${
+                      className={`py-2 px-2 rounded-lg text-[11px] font-medium border transition-all cursor-pointer text-center ${
                         visitSlot === slot
                           ? "border-[#1865F2] bg-blue-50 text-[#1865F2] shadow-xs"
                           : "border-slate-200 text-slate-600 hover:bg-slate-50"
@@ -513,7 +513,7 @@ export const PropertyDetailBuilderAndDealer = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-medium text-slate-700 mb-1">
                     Your Name
                   </label>
                   <input
@@ -526,7 +526,7 @@ export const PropertyDetailBuilderAndDealer = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-medium text-slate-700 mb-1">
                     Phone Number
                   </label>
                   <input

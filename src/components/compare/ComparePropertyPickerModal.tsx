@@ -198,7 +198,7 @@ export const ComparePropertyPickerModal = ({
 
   return (
     <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto animate-fade-in font-jakarta"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto animate-fade-in font-poppins"
       onClick={onClose}
     >
       <div
@@ -323,7 +323,7 @@ export const ComparePropertyPickerModal = ({
               </h3>
               <button
                 type="button"
-                className="text-xs font-semibold text-[#1865F2] hover:underline flex items-center gap-1"
+                className="text-xs font-medium text-[#1865F2] hover:underline flex items-center gap-1"
               >
                 <span>View All Project</span>
                 <ArrowRight className="w-3 h-3" />
@@ -391,7 +391,7 @@ export const ComparePropertyPickerModal = ({
                         <span className="truncate">{project.location}</span>
                       </p>
                       <div className="mt-1">
-                        <span className="inline-block px-2 py-0.5 rounded-full bg-[#E6F9F0] text-[#00A859] text-[10px] font-semibold">
+                        <span className="inline-block px-2 py-0.5 rounded-full bg-[#E6F9F0] text-[#00A859] text-[10px] font-medium">
                           {project.status}
                         </span>
                       </div>
@@ -402,7 +402,7 @@ export const ComparePropertyPickerModal = ({
                   <button
                     type="button"
                     onClick={() => handleRemoveProject(pIdx)}
-                    className="text-xs font-semibold text-[#1865F2] hover:underline shrink-0"
+                    className="text-xs font-medium text-[#1865F2] hover:underline shrink-0"
                   >
                     Change Project
                   </button>

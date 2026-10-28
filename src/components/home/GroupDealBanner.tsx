@@ -70,11 +70,11 @@ export const GroupDealBanner = () => {
         {/* ========================================================================= */}
         {/* DESKTOP & WIDE SCREEN (1:1 Exact Figma Match with High-Res Clean Asset) */}
         {/* ========================================================================= */}
-        <div className="hidden lg:block relative overflow-hidden rounded-[20px] xl:rounded-[24px] shadow-[0_16px_40px_rgba(0,102,255,0.2)] border border-blue-400/30">
+        <div className="hidden lg:block relative overflow-hidden rounded-[20px] xl:rounded-[24px] shadow-[0_16px_40px_rgba(0,102,255,0.2)] border border-blue-400/30 bg-[#0551CC]">
           {/* Main Container with High-Res Figma Exported Background */}
           <div className="relative w-full aspect-[1024/340] min-h-[380px] xl:min-h-[400px]">
             <Image
-              src="/images/banner/group_deal_bg.png"
+              src="/icon/hero/Frame_18.png"
               alt="Exclusive Group Deal For Only 20 Units - Roofin"
               fill
               sizes="(max-width: 1440px) 100vw, 1440px"
@@ -242,7 +242,7 @@ export const GroupDealBanner = () => {
                     <Calendar className="h-3.5 w-3.5 text-white" />
                   </div>
                   <div className="flex flex-col text-left leading-tight">
-                    <span className="text-[10px] font-semibold text-white/90">
+                    <span className="text-[10px] font-medium text-white/90">
                       Offer Valid For
                     </span>
                     <span className="text-[11px] font-bold text-[#FFCC00]">
@@ -273,7 +273,7 @@ export const GroupDealBanner = () => {
             {/* Top Row: Roofin Logo + Exclusive Group Deal Badge */}
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-1.5">
-                <span className="text-[28px] sm:text-[34px] font-black tracking-tight text-white font-rounded-mplus">
+                <span className="text-[28px] sm:text-[34px] font-black tracking-tight text-white font-poppins">
                   Roofin
                 </span>
                 <span className="h-2 w-2 rounded-xs bg-[#FFCC00] -mt-4 shadow-xs" />
@@ -306,10 +306,11 @@ export const GroupDealBanner = () => {
             {/* Building Visual on Mobile */}
             <div className="relative w-full h-[180px] sm:h-[240px] rounded-2xl overflow-hidden shadow-md bg-sky-200/20">
               <Image
-                src="/images/banner/group_deal_bg.png"
+                src="/public/icon/hero/Frame 18.svg"
                 alt="Building towers"
                 fill
                 className="object-cover object-right"
+                unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0062E0]/80 via-transparent to-transparent" />
             </div>
@@ -477,7 +478,7 @@ export const GroupDealBanner = () => {
 
                 {/* Deal Quick Highlights Box */}
                 <div className="mt-4 rounded-xl bg-[#F0F6FE] p-3.5 border border-blue-100 text-xs text-slate-700 space-y-1.5">
-                  <div className="flex items-center justify-between font-semibold">
+                  <div className="flex items-center justify-between font-medium">
                     <span className="text-[#1865F2]">Sector 76, Noida • 4BHK + S (3342 sq.ft.)</span>
                     <span className="rounded-md bg-[#10B981] text-white px-2 py-0.5 text-[10px] font-bold">
                       ONLY 4 UNITS LEFT
@@ -571,7 +572,7 @@ export const GroupDealBanner = () => {
                     Group Deal Slot Reserved!
                   </h4>
                   <p className="text-sm text-slate-600">
-                    Thank you, <span className="font-semibold text-slate-900">{formData.name}</span>. Your priority slot for Aspire Silicon City has been pre-locked.
+                    Thank you, <span className="font-medium text-slate-900">{formData.name}</span>. Your priority slot for Aspire Silicon City has been pre-locked.
                   </p>
                 </div>
 

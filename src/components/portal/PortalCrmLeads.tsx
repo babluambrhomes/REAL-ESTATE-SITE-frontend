@@ -73,7 +73,7 @@ const LEADS_DATA = [
     lastActive: "2 Min Ago",
     lastActiveAction: "Enquiry Submitted",
     followUp: "Today At 12:00 PM",
-    followUpColor: "text-slate-800 font-semibold",
+    followUpColor: "text-slate-800 font-medium",
   },
   {
     id: "lead-3",
@@ -90,7 +90,7 @@ const LEADS_DATA = [
     lastActive: "2 Min Ago",
     lastActiveAction: "Enquiry Submitted",
     followUp: "Tommorow At 4:00 PM",
-    followUpColor: "text-emerald-600 font-semibold",
+    followUpColor: "text-emerald-600 font-medium",
   },
   {
     id: "lead-4",
@@ -383,7 +383,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
   });
 
   return (
-    <div className="space-y-6 font-jakarta pb-12">
+    <div className="space-y-6 font-poppins pb-12">
       {/* 1. Header Banner & Buttons (Figma 1:1) */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -405,7 +405,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
               input.onchange = () => toast.success("Leads file selected for import!");
               input.click();
             }}
-            className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
           >
             <Upload size={14} className="text-slate-400" />
             <span>Import Leads</span>
@@ -426,7 +426,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
               a.download = `leads-export-${new Date().toISOString().slice(0, 10)}.csv`;
               a.click();
             }}
-            className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
           >
             <Download size={14} className="text-slate-400" />
             <span>Export</span>
@@ -453,7 +453,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               {stats.total.toLocaleString()}
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Total Leads</span>
+            <span className="text-[11px] font-medium text-slate-400">Total Leads</span>
           </div>
         </div>
 
@@ -465,7 +465,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               {stats.new}
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">New Leads</span>
+            <span className="text-[11px] font-medium text-slate-400">New Leads</span>
           </div>
         </div>
 
@@ -477,7 +477,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               {stats.siteVisit}
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Site Visit</span>
+            <span className="text-[11px] font-medium text-slate-400">Site Visit</span>
           </div>
         </div>
 
@@ -489,7 +489,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               {stats.converted}
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Conversions</span>
+            <span className="text-[11px] font-medium text-slate-400">Conversions</span>
           </div>
         </div>
 
@@ -501,7 +501,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               {stats.cancelled}
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Cancelled</span>
+            <span className="text-[11px] font-medium text-slate-400">Cancelled</span>
           </div>
         </div>
       </div>
@@ -521,7 +521,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             key={tab.label}
             type="button"
             onClick={() => setActiveTab(tab.label)}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-xl text-xs font-medium border transition-all shrink-0 cursor-pointer flex items-center gap-2 ${
               activeTab === tab.label
                 ? "bg-[#1865F2] text-white border-[#1865F2] shadow-2xs font-bold"
                 : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
@@ -594,7 +594,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
         <button
           type="button"
           onClick={() => setBulkAssignModalOpen(true)}
-          className="h-10 px-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors shadow-2xs cursor-pointer"
+          className="h-10 px-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors shadow-2xs cursor-pointer"
         >
           Bulk Assign
         </button>
@@ -829,7 +829,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
                               setActiveLead(row);
                               setSiteVisitModalOpen(true);
                             }}
-                            className="w-full px-3.5 py-2 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer"
+                            className="w-full px-3.5 py-2 hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-2.5 transition-colors cursor-pointer"
                           >
                             <Calendar size={14} className="text-slate-400" />
                             <span>Schedule Follow-up</span>
@@ -842,7 +842,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
                               setActiveLead(row);
                               setSiteVisitModalOpen(true);
                             }}
-                            className="w-full px-3.5 py-2 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer"
+                            className="w-full px-3.5 py-2 hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-2.5 transition-colors cursor-pointer"
                           >
                             <CalendarCheck size={14} className="text-slate-400" />
                             <span>Schedule Site Visit</span>
@@ -855,7 +855,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
                               setActiveLead(row);
                               setPriorityModalOpen(true);
                             }}
-                            className="w-full px-3.5 py-2 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer"
+                            className="w-full px-3.5 py-2 hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-2.5 transition-colors cursor-pointer"
                           >
                             <Flag size={14} className="text-slate-400" />
                             <span>Change Priority</span>
@@ -886,7 +886,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
                               setLeads((prev) => prev.filter((l) => l.id !== row.id));
                               toast.success("Lead removed");
                             }}
-                            className="w-full px-3.5 py-2 hover:bg-rose-50 text-rose-600 text-xs font-semibold flex items-center gap-2.5 transition-colors cursor-pointer"
+                            className="w-full px-3.5 py-2 hover:bg-rose-50 text-rose-600 text-xs font-medium flex items-center gap-2.5 transition-colors cursor-pointer"
                           >
                             <Trash2 size={14} />
                             <span>Delete Lead</span>
@@ -950,7 +950,7 @@ export const PortalCrmLeads = ({ onSelectLead, initialTab }: PortalCrmLeadsProps
             <button
               type="button"
               onClick={() => setSelectedIds([])}
-              className="px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
             >
               Cancel
             </button>

@@ -47,7 +47,7 @@ export default function ForgotPasswordForm() {
           className="hidden h-auto w-full max-w-md object-contain lg:block"
         />
         <div className="w-full max-w-md rounded-2xl border border-dashed border-black bg-white p-6 text-center sm:p-8">
-          <h1 className="text-2xl font-semibold leading-tight tracking-tight text-gray-900 [font-family:var(--font-playfair)]">
+          <h1 className="text-2xl font-medium leading-tight tracking-tight text-gray-900 font-poppins">
             Check your inbox
           </h1>
           <p className="mt-3 text-sm text-gray-600">
@@ -80,7 +80,7 @@ export default function ForgotPasswordForm() {
       <div>
         <div className="w-full max-w-md rounded-2xl border border-dashed border-black bg-white p-6 sm:p-8">
           <div className="mb-6 text-center">
-            <h1 className="text-2xl font-semibold leading-tight tracking-tight text-gray-900 [font-family:var(--font-playfair)]">
+            <h1 className="text-2xl font-medium leading-tight tracking-tight text-gray-900 font-poppins">
               Forgot Password?
             </h1>
             <p className="mt-1.5 text-[12px] text-black">

@@ -37,7 +37,7 @@ import toast from "react-hot-toast";
 // ==========================================
 export const PortalAudience = () => {
   return (
-    <div className="space-y-6 font-jakarta">
+    <div className="space-y-6 font-poppins">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-[22px] font-bold text-[#0B132B]">
@@ -80,7 +80,7 @@ export const PortalAudience = () => {
               { name: "Golf Course Extension (Gurgaon)", pct: 12, count: "1,770 inquiries" },
             ].map((loc, i) => (
               <div key={i} className="space-y-1">
-                <div className="flex justify-between text-xs font-semibold">
+                <div className="flex justify-between text-xs font-medium">
                   <span className="text-slate-700">{loc.name}</span>
                   <span className="text-slate-500">{loc.count} ({loc.pct}%)</span>
                 </div>
@@ -121,7 +121,7 @@ export const PortalAudience = () => {
 // ==========================================
 export const PortalContentManager = () => {
   return (
-    <div className="space-y-6 font-jakarta">
+    <div className="space-y-6 font-poppins">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-[22px] font-bold text-[#0B132B]">
@@ -203,7 +203,7 @@ export const PortalContentManager = () => {
 // ==========================================
 export const PortalAnalyticsView = () => {
   return (
-    <div className="space-y-6 font-jakarta">
+    <div className="space-y-6 font-poppins">
       <div>
         <h2 className="text-[22px] font-bold text-[#0B132B]">
           Performance & Traffic Analytics
@@ -254,7 +254,7 @@ export const PortalAnalyticsView = () => {
                 <span className="w-6 h-6 rounded-full bg-[#1865F2] text-white text-xs font-bold flex items-center justify-center">
                   {idx + 1}
                 </span>
-                <span className="text-xs font-semibold text-slate-800">{fn.step}</span>
+                <span className="text-xs font-medium text-slate-800">{fn.step}</span>
               </div>
               <div className="text-right">
                 <strong className="text-xs font-bold text-[#0B132B]">{fn.count}</strong>
@@ -273,7 +273,7 @@ export const PortalAnalyticsView = () => {
 // ==========================================
 export const PortalInsightsView = () => {
   return (
-    <div className="space-y-6 font-jakarta">
+    <div className="space-y-6 font-poppins">
       <div>
         <h2 className="text-[22px] font-bold text-[#0B132B]">
           Market Intelligence & Competitor Insights
@@ -383,7 +383,7 @@ export const PortalAccountSettings = () => {
   };
 
   return (
-    <div className="space-y-6 font-jakarta max-w-4xl">
+    <div className="space-y-6 font-poppins max-w-4xl">
       <div>
         <h2 className="text-[22px] font-bold text-[#0B132B]">
           Agent Profile & Account Settings
@@ -413,7 +413,7 @@ export const PortalAccountSettings = () => {
         <form onSubmit={handleSave} className="space-y-4 text-xs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Full Name</label>
+              <label className="block font-medium text-slate-700 mb-1">Full Name</label>
               <input
                 type="text"
                 value={name}
@@ -422,7 +422,7 @@ export const PortalAccountSettings = () => {
               />
             </div>
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Phone Number</label>
+              <label className="block font-medium text-slate-700 mb-1">Phone Number</label>
               <input
                 type="text"
                 value={phone}
@@ -431,7 +431,7 @@ export const PortalAccountSettings = () => {
               />
             </div>
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Email Address</label>
+              <label className="block font-medium text-slate-700 mb-1">Email Address</label>
               <input
                 type="email"
                 value={email}
@@ -440,7 +440,7 @@ export const PortalAccountSettings = () => {
               />
             </div>
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Agency / Consultancy Name</label>
+              <label className="block font-medium text-slate-700 mb-1">Agency / Consultancy Name</label>
               <input
                 type="text"
                 value={agency}
@@ -449,7 +449,7 @@ export const PortalAccountSettings = () => {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block font-semibold text-slate-700 mb-1">RERA Agent Registration Number</label>
+              <label className="block font-medium text-slate-700 mb-1">RERA Agent Registration Number</label>
               <input
                 type="text"
                 value={reraNo}

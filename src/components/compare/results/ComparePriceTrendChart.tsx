@@ -34,7 +34,7 @@ export const ComparePriceTrendChart = () => {
   const activePoint = dataPoints[activePointIndex] || dataPoints[3];
 
   return (
-    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-12 font-jakarta">
+    <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-12 font-poppins">
       <div className="bg-white rounded-[26px] border border-slate-200/90 shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-5 sm:p-7 relative overflow-hidden">
         
         {/* Top Header of Chart */}
@@ -216,7 +216,7 @@ export const ComparePriceTrendChart = () => {
           </div>
 
           {/* X-Axis Bottom Year Labels */}
-          <div className="flex justify-between pl-11 sm:pl-14 pr-2 sm:pr-4 pt-3 text-[10.5px] sm:text-[12px] font-semibold text-slate-500 select-none">
+          <div className="flex justify-between pl-11 sm:pl-14 pr-2 sm:pr-4 pt-3 text-[10.5px] sm:text-[12px] font-medium text-slate-500 select-none">
             {dataPoints.map((dp, idx) => (
               <span
                 key={idx}

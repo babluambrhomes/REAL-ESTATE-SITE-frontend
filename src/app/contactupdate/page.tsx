@@ -71,7 +71,7 @@ export default function ContactUpdatePage() {
             <div>
                 <div className="w-full max-w-md bg-white p-6 sm:p-8">
                     <div className="mb-6 text-left">
-                        <h1 className="text-2xl font-semibold leading-tight tracking-tight text-gray-900 [font-family:var(--font-playfair)]">
+                        <h1 className="text-2xl font-medium leading-tight tracking-tight text-gray-900 font-poppins">
                             Add your email
                         </h1>
 

@@ -28,7 +28,7 @@ export const FloatingCompareBar = ({
             </span>
             <div className="leading-tight hidden md:block">
               <p className="text-[11px] font-bold text-slate-800">Compare</p>
-              <p className="text-[9.5px] font-semibold text-[#1865F2]">
+              <p className="text-[9.5px] font-medium text-[#1865F2]">
                 {count}/{maxLimit} Selected
               </p>
             </div>
@@ -84,7 +84,7 @@ export const FloatingCompareBar = ({
           <button
             type="button"
             onClick={clearAll}
-            className="flex items-center gap-1 rounded-full px-2.5 py-1.5 text-[11px] font-semibold text-slate-500 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+            className="flex items-center gap-1 rounded-full px-2.5 py-1.5 text-[11px] font-medium text-slate-500 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
             title="Clear all"
           >
             <Trash2 className="h-3 w-3" />

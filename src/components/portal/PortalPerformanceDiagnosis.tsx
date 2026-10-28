@@ -52,7 +52,7 @@ export const PortalPerformanceDiagnosis = ({
   const [selectedYear, setSelectedYear] = useState("Year");
 
   return (
-    <div className="space-y-6 font-jakarta pb-12">
+    <div className="space-y-6 font-poppins pb-12">
       {/* 1. Header with Breadcrumb */}
       <div className="space-y-1">
         <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
@@ -64,7 +64,7 @@ export const PortalPerformanceDiagnosis = ({
             Properties
           </button>
           <ChevronRight size={13} />
-          <span className="text-slate-700 font-semibold truncate">
+          <span className="text-slate-700 font-medium truncate">
             Performance Diagnosis
           </span>
         </div>
@@ -102,7 +102,7 @@ export const PortalPerformanceDiagnosis = ({
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               1,240
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Views</span>
+            <span className="text-[11px] font-medium text-slate-400">Views</span>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export const PortalPerformanceDiagnosis = ({
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               128
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Enquires</span>
+            <span className="text-[11px] font-medium text-slate-400">Enquires</span>
           </div>
         </div>
 
@@ -128,7 +128,7 @@ export const PortalPerformanceDiagnosis = ({
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               20
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Site Visits</span>
+            <span className="text-[11px] font-medium text-slate-400">Site Visits</span>
           </div>
         </div>
 
@@ -141,7 +141,7 @@ export const PortalPerformanceDiagnosis = ({
             <span className="text-xl font-black text-[#0B132B] block tracking-tight">
               20
             </span>
-            <span className="text-[11px] font-semibold text-slate-400">Booking</span>
+            <span className="text-[11px] font-medium text-slate-400">Booking</span>
           </div>
         </div>
 
@@ -155,7 +155,7 @@ export const PortalPerformanceDiagnosis = ({
               <span className="text-xl font-black text-[#0B132B] tracking-tight">20</span>
               <span className="text-[10px] text-slate-400 font-medium">per/day</span>
             </div>
-            <span className="text-[11px] font-semibold text-slate-400">Avg. enquiry</span>
+            <span className="text-[11px] font-medium text-slate-400">Avg. enquiry</span>
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@ export const PortalPerformanceDiagnosis = ({
             {/* Funnel Steps */}
             <div className="space-y-2.5 pt-4">
               {/* Step 1: Views 100% */}
-              <div className="p-3 rounded-xl bg-blue-100/70 flex items-center justify-between text-xs text-slate-800 font-semibold shadow-2xs">
+              <div className="p-3 rounded-xl bg-blue-100/70 flex items-center justify-between text-xs text-slate-800 font-medium shadow-2xs">
                 <div>
                   <span className="font-extrabold text-sm block">1,240</span>
                   <span className="text-[10px] text-slate-600">Property Views</span>
@@ -184,7 +184,7 @@ export const PortalPerformanceDiagnosis = ({
               </div>
 
               {/* Step 2: Enquiries 10.3% */}
-              <div className="p-3 rounded-xl bg-emerald-100/70 flex items-center justify-between text-xs text-slate-800 font-semibold shadow-2xs ml-4">
+              <div className="p-3 rounded-xl bg-emerald-100/70 flex items-center justify-between text-xs text-slate-800 font-medium shadow-2xs ml-4">
                 <div>
                   <span className="font-extrabold text-sm block">128</span>
                   <span className="text-[10px] text-slate-600">Enquiries</span>
@@ -193,7 +193,7 @@ export const PortalPerformanceDiagnosis = ({
               </div>
 
               {/* Step 3: Site Visits 1.3% */}
-              <div className="p-3 rounded-xl bg-rose-100/70 flex items-center justify-between text-xs text-slate-800 font-semibold shadow-2xs ml-8">
+              <div className="p-3 rounded-xl bg-rose-100/70 flex items-center justify-between text-xs text-slate-800 font-medium shadow-2xs ml-8">
                 <div>
                   <span className="font-extrabold text-sm block">20</span>
                   <span className="text-[10px] text-slate-600">Site visits</span>
@@ -202,7 +202,7 @@ export const PortalPerformanceDiagnosis = ({
               </div>
 
               {/* Step 4: Booking 0.13% */}
-              <div className="p-3 rounded-xl bg-purple-100/70 flex items-center justify-between text-xs text-slate-800 font-semibold shadow-2xs ml-12">
+              <div className="p-3 rounded-xl bg-purple-100/70 flex items-center justify-between text-xs text-slate-800 font-medium shadow-2xs ml-12">
                 <div>
                   <span className="font-extrabold text-sm block">2</span>
                   <span className="text-[10px] text-slate-600">Booking</span>

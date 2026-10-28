@@ -16,7 +16,7 @@ export const BuilderFilterTabs = ({
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   return (
-    <div className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4 font-jakarta">
+    <div className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4 font-poppins">
       
       {/* Left Pill Toggle (Agents vs Builders) */}
       <div className="flex items-center gap-3">

@@ -19,7 +19,7 @@ export const CompareHero = ({ onAddProperty }: CompareHeroProps) => {
 
   return (
     <section 
-      className="relative pt-24 sm:pt-32 lg:pt-36 pb-10 sm:pb-14 overflow-hidden font-jakarta"
+      className="relative pt-24 sm:pt-32 lg:pt-36 pb-10 sm:pb-14 overflow-hidden font-poppins"
       style={{
         background: "linear-gradient(180deg, #F1F7FF 0%, #FFFFFF 100%)",
       }}
@@ -44,7 +44,7 @@ export const CompareHero = ({ onAddProperty }: CompareHeroProps) => {
                   <button
                     type="button"
                     onClick={() => setShowFullText(true)}
-                    className="text-[#1877F2] font-semibold hover:underline cursor-pointer inline-block"
+                    className="text-[#1877F2] font-medium hover:underline cursor-pointer inline-block"
                   >
                     ... See All
                   </button>
@@ -86,14 +86,14 @@ export const CompareHero = ({ onAddProperty }: CompareHeroProps) => {
                         <Check className="w-1.5 h-1.5 text-white stroke-[3.5]" />
                       </span>
                     </div>
-                    <span className="text-[13.5px] font-semibold text-slate-800">
+                    <span className="text-[13.5px] font-medium text-slate-800">
                       {exp.name}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center text-[13.5px] font-semibold text-slate-800 tracking-tight">
+              <div className="flex items-center text-[13.5px] font-medium text-slate-800 tracking-tight">
                 <span>Still Confuse Talk To Our Expert</span>
               </div>
             </div>

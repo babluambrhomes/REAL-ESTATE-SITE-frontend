@@ -171,7 +171,7 @@ export const ClaimOfferModal = ({ isOpen, onClose }: ClaimOfferModalProps) => {
                 Offer Claimed Successfully!
               </h4>
               <p className="text-xs text-slate-600 mt-1 max-w-xs">
-                Your unique voucher code has been registered for <span className="font-semibold">{mobile}</span>:
+                Your unique voucher code has been registered for <span className="font-medium">{mobile}</span>:
               </p>
 
               <div className="mt-4 flex items-center justify-between w-full max-w-xs px-4 py-3 rounded-xl bg-white border-2 border-dashed border-[#FF385C] shadow-xs">
@@ -248,7 +248,7 @@ export const ClaimOfferModal = ({ isOpen, onClose }: ClaimOfferModalProps) => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-600 mb-1">
                     Your Name
                   </label>
                   <input
@@ -261,7 +261,7 @@ export const ClaimOfferModal = ({ isOpen, onClose }: ClaimOfferModalProps) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-medium text-slate-600 mb-1">
                     Mobile Number
                   </label>
                   <div className="relative">

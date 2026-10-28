@@ -55,7 +55,7 @@ export const BrokerHighlightsRow = () => {
   ];
 
   return (
-    <div className="w-full bg-white rounded-[20px] border border-[#D8E6FC] shadow-[0_6px_24px_rgba(24,101,242,0.04)] p-4 sm:p-5 mt-5 font-jakarta overflow-x-auto no-scrollbar">
+    <div className="w-full bg-white rounded-[20px] border border-[#D8E6FC] shadow-[0_6px_24px_rgba(24,101,242,0.04)] p-4 sm:p-5 mt-5 font-poppins overflow-x-auto no-scrollbar">
       <div className="flex items-center divide-x divide-slate-100 min-w-[820px] lg:min-w-0 justify-between">
         {highlights.map((item) => (
           <div

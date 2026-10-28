@@ -32,7 +32,7 @@ export const PostPropertyFAQ = () => {
 
   return (
     <section 
-      className="relative pt-16 pb-24 sm:pb-32 overflow-hidden font-jakarta"
+      className="relative pt-16 pb-24 sm:pb-32 overflow-hidden font-poppins"
       style={{
         background: "linear-gradient(180deg, #FFFFFF 0%, #F5F8FF 45%, #E8F1FF 100%)",
       }}

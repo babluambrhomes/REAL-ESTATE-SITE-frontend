@@ -170,7 +170,7 @@ export const BrokerRecentPosts = ({
   };
 
   return (
-    <div className="w-full space-y-4 font-jakarta relative">
+    <div className="w-full space-y-4 font-poppins relative">
       {/* Header */}
       <div className="flex items-center justify-between pb-1">
         <h2 className="text-base sm:text-[18px] font-black text-[#0B132B] tracking-tight">
@@ -266,7 +266,7 @@ export const BrokerRecentPosts = ({
               </div>
 
               {/* Bottom Engagement Counters */}
-              <div className="flex items-center justify-between pt-2 mt-2 border-t border-slate-100 text-[10px] text-slate-400 font-semibold px-0.5">
+              <div className="flex items-center justify-between pt-2 mt-2 border-t border-slate-100 text-[10px] text-slate-400 font-medium px-0.5">
                 {/* Like button */}
                 <button
                   type="button"

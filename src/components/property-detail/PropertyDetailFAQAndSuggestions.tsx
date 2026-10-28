@@ -116,7 +116,7 @@ export const PropertyDetailFAQAndSuggestions = () => {
                     onClick={() => toggleFAQ(idx)}
                     className="w-full flex items-center justify-between text-left gap-4 cursor-pointer"
                   >
-                    <span className="text-[13.5px] font-semibold text-[#0B132B]">
+                    <span className="text-[13.5px] font-medium text-[#0B132B]">
                       {faq.question}
                     </span>
                     <div className="shrink-0 text-slate-500">
@@ -169,7 +169,7 @@ export const PropertyDetailFAQAndSuggestions = () => {
 
             <a
               href="mailto:help@roofin.in?subject=Property%20Enquiry%20-%203%20BHK%20Assistance"
-              className="w-full mt-6 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 text-white text-[12.5px] font-semibold shadow-xs transition-opacity cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full mt-6 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 text-white text-[12.5px] font-medium shadow-xs transition-opacity cursor-pointer flex items-center justify-center gap-1.5"
             >
               <Mail size={14} />
               <span>Send a Direct Mail</span>
@@ -196,7 +196,7 @@ export const PropertyDetailFAQAndSuggestions = () => {
               {/* Top Tags & Badge */}
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-semibold bg-[#1865F2] text-white">
+                  <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-medium bg-[#1865F2] text-white">
                     {item.tag1}
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full text-[9.5px] font-medium bg-[#EFF6FF] text-[#1865F2] border border-[#BFDBFE]">
@@ -255,7 +255,7 @@ export const PropertyDetailFAQAndSuggestions = () => {
                 </span>
                 <Link
                   href={`/properties/${item.id}`}
-                  className="px-4 py-1.5 rounded-lg text-[11.5px] font-semibold text-white bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 transition-opacity shadow-2xs cursor-pointer inline-block"
+                  className="px-4 py-1.5 rounded-lg text-[11.5px] font-medium text-white bg-gradient-to-r from-[#1865F2] to-[#00B4D8] hover:opacity-95 transition-opacity shadow-2xs cursor-pointer inline-block"
                 >
                   View Details
                 </Link>
@@ -292,7 +292,7 @@ export const PropertyDetailFAQAndSuggestions = () => {
           <div className="pt-2">
             <a
               href="tel:1800766346"
-              className="px-6 py-2.5 rounded-full bg-white text-[#1865F2] hover:bg-slate-50 text-[13px] font-semibold inline-flex items-center gap-2 shadow-md transition-all cursor-pointer"
+              className="px-6 py-2.5 rounded-full bg-white text-[#1865F2] hover:bg-slate-50 text-[13px] font-medium inline-flex items-center gap-2 shadow-md transition-all cursor-pointer"
             >
               <PhoneCall size={15} className="fill-[#1865F2] text-[#1865F2]" />
               <span>Call Now</span>

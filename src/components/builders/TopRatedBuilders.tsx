@@ -80,7 +80,7 @@ export const TopRatedBuilders = () => {
   };
 
   return (
-    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-jakarta">
+    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-poppins">
       
       {/* Header with Title & Arrow Navigation */}
       <div className="flex items-center justify-between mb-4">
@@ -146,7 +146,7 @@ export const TopRatedBuilders = () => {
             </h3>
 
             {/* Listing & Experience with Green Dot */}
-            <p className="text-[10px] text-slate-500 font-semibold flex items-center justify-center gap-1.5 mt-1 mb-3">
+            <p className="text-[10px] text-slate-500 font-medium flex items-center justify-center gap-1.5 mt-1 mb-3">
               <span>{builder.listings}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] inline-block shrink-0" />
               <span>{builder.experience}</span>

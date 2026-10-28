@@ -36,7 +36,7 @@ export const ContactFaqSection = () => {
   };
 
   return (
-    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 font-jakarta">
+    <section className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 font-poppins">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         
         {/* FAQs */}

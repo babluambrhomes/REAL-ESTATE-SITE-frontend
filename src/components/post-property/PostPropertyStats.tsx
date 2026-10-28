@@ -20,7 +20,7 @@ export const PostPropertyStats = () => {
             </svg>
           </div>
           <div>
-            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-jakarta tracking-tight">
+            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-poppins tracking-tight">
               50k+
             </div>
             <div className="text-[13px] sm:text-[14px] font-medium text-[#64748B] leading-tight mt-0.5">
@@ -43,7 +43,7 @@ export const PostPropertyStats = () => {
             </svg>
           </div>
           <div>
-            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-jakarta tracking-tight">
+            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-poppins tracking-tight">
               2L+
             </div>
             <div className="text-[13px] sm:text-[14px] font-medium text-[#64748B] leading-tight mt-0.5">
@@ -63,7 +63,7 @@ export const PostPropertyStats = () => {
             </svg>
           </div>
           <div>
-            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-jakarta tracking-tight">
+            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-poppins tracking-tight">
               10k+
             </div>
             <div className="text-[13px] sm:text-[14px] font-medium text-[#64748B] leading-tight mt-0.5">
@@ -85,7 +85,7 @@ export const PostPropertyStats = () => {
             </svg>
           </div>
           <div>
-            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-jakarta tracking-tight">
+            <div className="text-[22px] sm:text-[24px] font-extrabold text-[#2563EB] leading-tight font-poppins tracking-tight">
               4.8/5
             </div>
             <div className="text-[13px] sm:text-[14px] font-medium text-[#64748B] leading-tight mt-0.5">

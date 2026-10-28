@@ -47,7 +47,7 @@ export const PortalLeadDetail = ({
   const [internalReassignModalOpen, setInternalReassignModalOpen] = useState(false);
   const [leadPriority, setLeadPriority] = useState("Hot");
   return (
-    <div className="space-y-6 font-jakarta pb-12">
+    <div className="space-y-6 font-poppins pb-12">
       {/* 1. Breadcrumbs */}
       <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
         <button
@@ -58,7 +58,7 @@ export const PortalLeadDetail = ({
           Leads
         </button>
         <ChevronRight size={13} />
-        <span className="text-slate-700 font-semibold truncate">
+        <span className="text-slate-700 font-medium truncate">
           Arti Sharma
         </span>
       </div>
@@ -267,7 +267,7 @@ export const PortalLeadDetail = ({
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-semibold">
+                    <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-medium">
                       {prop.type}
                     </span>
                   </div>

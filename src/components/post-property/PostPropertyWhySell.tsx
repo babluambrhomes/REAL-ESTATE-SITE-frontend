@@ -153,7 +153,7 @@ export const PostPropertyWhySell = () => {
   ];
 
   return (
-    <section className="relative py-14 sm:py-20 bg-white font-jakarta select-none">
+    <section className="relative py-14 sm:py-20 bg-white font-poppins select-none">
       
       {/* Background Subtle Blueprint Grid Lines (Top) */}
       <div 
@@ -205,7 +205,7 @@ export const PostPropertyWhySell = () => {
           
           {/* Left Card: Why Sellers Choose Roofin (Exact Donut Chart) */}
           <div className="lg:col-span-6 rounded-[24px] bg-white border-[1.5px] border-[#3B82F6]/50 p-6 sm:p-8 flex flex-col justify-between shadow-[0_4px_20px_rgba(37,99,235,0.03)]">
-            <h3 className="text-[26px] sm:text-[28px] font-bold text-[#1E293B] font-jakarta mb-6">
+            <h3 className="text-[26px] sm:text-[28px] font-bold text-[#1E293B] font-poppins mb-6">
               Why Sellers Choose Roofin
             </h3>
 
@@ -293,7 +293,7 @@ export const PostPropertyWhySell = () => {
                     <span className="font-bold text-[#1E293B] w-12 text-[15px]">
                       {item.percentage}
                     </span>
-                    <span className="text-[#1E293B] font-semibold text-[14.5px]">
+                    <span className="text-[#1E293B] font-medium text-[14.5px]">
                       {item.label}
                     </span>
                   </div>
@@ -305,7 +305,7 @@ export const PostPropertyWhySell = () => {
           {/* Right Card: Need Help? Grid */}
           <div className="lg:col-span-6 rounded-[24px] bg-white border-[1.5px] border-[#3B82F6]/50 p-6 sm:p-8 lg:p-10 flex flex-col justify-between shadow-[0_4px_20px_rgba(37,99,235,0.03)]">
             <div>
-              <h3 className="text-[30px] sm:text-[34px] font-extrabold text-[#1E293B] font-jakarta leading-tight">
+              <h3 className="text-[30px] sm:text-[34px] font-extrabold text-[#1E293B] font-poppins leading-tight">
                 Need Help?
               </h3>
               <p className="text-[15px] sm:text-[16px] text-[#1E293B] font-medium mt-1 mb-8">

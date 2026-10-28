@@ -14,7 +14,7 @@ import {
 
 export const BrokerSidebar = () => {
   return (
-    <aside className="w-full space-y-4 font-jakarta">
+    <aside className="w-full space-y-4 font-poppins">
       
       {/* 1. Need Help Finding The Right Property? Banner */}
       <div className="bg-[#1865F2] rounded-[10px] p-7 sm:p-8 text-white shadow-[0_6px_24px_rgba(24,101,242,0.25)] space-y-5 flex flex-col justify-between min-h-[190px]">
@@ -148,7 +148,7 @@ export const BrokerSidebar = () => {
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               <Star className="w-3.5 h-3.5 text-slate-300" />
             </div>
-            <p className="text-[10px] text-slate-400 font-semibold">
+            <p className="text-[10px] text-slate-400 font-medium">
               (230 Total Reviews)
             </p>
           </div>
