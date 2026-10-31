@@ -15,23 +15,23 @@ interface ExpertGridItem {
 export const AllPropertyExpertsGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Avatar photos extracted from Figma
+  // High-resolution HD portraits avoiding pixelation
   const avatarPool = [
-    "/agents/nearby/grid_avatar_1.png",
-    "/agents/nearby/grid_avatar_2.png",
-    "/agents/nearby/grid_avatar_3.png",
-    "/agents/nearby/grid_avatar_4.png",
-    "/agents/nearby/grid_avatar_5.png",
-    "/agents/nearby/grid_avatar_6.png",
-    "/agents/nearby/grid_avatar_7.png",
-    "/agents/nearby/grid_avatar_8.png",
-    "/agents/nearby/grid_avatar_9.png",
-    "/agents/nearby/grid_avatar_10.png",
-    "/agents/nearby/grid_avatar_11.png",
-    "/agents/nearby/grid_avatar_12.png",
-    "/agents/nearby/grid_avatar_13.png",
-    "/agents/nearby/grid_avatar_14.png",
-    "/agents/nearby/grid_avatar_15.png",
+    "/broker/jitender_singh_figma.jpg",
+    "/agents/radhikha-singh.png",
+    "/agents/aman-singh.png",
+    "/customers/customer_woman_suit.jpg",
+    "/customers/customer_man_laptop.jpg",
+    "/customers/customer_man_phone.jpg",
+    "/broker/jitender_singh_real.jpg",
+    "/agents/agent_photo_1.png",
+    "/agents/agent_photo_2.png",
+    "/agents/agent_photo_3.png",
+    "/agents/agent_photo_4.png",
+    "/agents/agent_photo_5.png",
+    "/customers/customer_handover.jpg",
+    "/blog/thinking_man.jpg",
+    "/icon/user_picture.png",
   ];
 
   // 15 expert items (3 rows of 5 columns) matching Figma Screenshot 2
@@ -92,6 +92,7 @@ export const AllPropertyExpertsGrid = () => {
                 src={exp.avatarSrc}
                 alt={exp.agent}
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="78px"
               />

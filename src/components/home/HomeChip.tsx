@@ -52,7 +52,7 @@ export const HomeChip = () => {
       className="group flex flex-col items-center w-[88px] sm:w-[94px] md:w-[100px] shrink-0 text-center cursor-pointer"
     >
       {/* Dual-layer Category Card: Compact height (Outer radius 30px | Inner radius 20px) */}
-      <div className="flex h-[84px] w-[88px] sm:h-[90px] sm:w-[94px] md:h-[94px] md:w-[100px] items-center justify-center rounded-[30px] border border-white/90 bg-white p-[6px] sm:p-[7px] shadow-[0_4px_16px_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_8px_20px_rgba(24,101,242,0.12)]">
+      <div className="flex h-[84px] w-[88px] sm:h-[90px] sm:w-[94px] md:h-[94px] md:w-[100px] items-center justify-center rounded-[30px] border border-white/90 bg-white p-[6px] sm:p-[7px] transition-all duration-300 group-hover:-translate-y-1">
         <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#F0F8FF] p-1 overflow-hidden">
           <Image
             src={category.image}

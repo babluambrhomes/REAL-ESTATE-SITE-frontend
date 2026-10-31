@@ -20,25 +20,25 @@ const PROPERTY_EXPERTS: PropertyExpert[] = [
   },
   {
     id: 2,
-    name: "PRIYA SHARMA",
+    name: "JITENDRA SINGH",
     role: "Director Sales",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=85",
   },
   {
     id: 3,
-    name: "AMIT VERMA",
-    role: "Senior Consultant",
+    name: "JITENDRA SINGH",
+    role: "Director Sales",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=85",
   },
   {
     id: 4,
-    name: "RAHUL MEHTA",
-    role: "Commercial Head",
+    name: "JITENDRA SINGH",
+    role: "Director Sales",
     image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=85",
   },
   {
     id: 5,
-    name: "VIKRAM MALHOTRA",
+    name: "JITENDRA SINGH",
     role: "Director Sales",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=85",
   },
@@ -153,10 +153,10 @@ export const ListingsPropertyExperts = () => {
             </div>
 
             {/* Name & Role */}
-            <h4 className="text-[13px] font-bold text-[#0B132B] uppercase tracking-wide mt-2.5 text-center truncate w-full group-hover:text-[#1865F2] transition-colors">
+            <h4 className="text-[13px] sm:text-[14px] font-bold text-[#0B132B] uppercase tracking-wide mt-2.5 text-center truncate w-full group-hover:text-[#1865F2] transition-colors">
               {expert.name}
             </h4>
-            <p className="text-[12px] text-[#64748B] font-medium text-center mt-0.5 truncate w-full">
+            <p className="text-[12.5px] sm:text-[13px] text-[#2563EB] font-medium text-center mt-0.5 truncate w-full">
               {expert.role}
             </p>
           </div>

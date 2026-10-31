@@ -53,10 +53,16 @@ export const BlogSection = () => {
   const [activeTab, setActiveTab] = useState("Investment");
 
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-4 sm:px-8 py-8 sm:py-10">
-      {/* Header Section (1:1 Figma Design) */}
-      <div className="border-l-4 border-[#2563EB] pl-3.5 sm:pl-4">
-        <p className="text-[13px] sm:text-[14.5px] md:text-[15px] font-medium text-slate-700 leading-snug">
+    <section className="relative mx-auto w-full max-w-[1440px] px-4 sm:px-8 py-8 sm:py-10">
+      {/* Header Section (1:1 Exact Figma Design) */}
+      <div>
+        <div className="flex items-center gap-2.5">
+          <span className="h-6 sm:h-7 w-1.5 rounded-full bg-[#05A579] shrink-0" />
+          <h2 className="text-xl sm:text-2xl md:text-[26px] lg:text-[28px] font-bold tracking-normal text-[#000000] leading-tight">
+            Unlocking the <span className="text-[#2563EB]">Future of Real Estate Articles</span>
+          </h2>
+        </div>
+        <p className="mt-1 pl-3.5 text-xs sm:text-[13px] text-[#64748B] font-normal">
           Stay updated with the latest property trends, investment tips, and expert market insights.
         </p>
       </div>

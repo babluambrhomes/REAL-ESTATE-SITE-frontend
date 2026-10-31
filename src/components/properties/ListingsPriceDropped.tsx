@@ -134,18 +134,20 @@ export const ListingsPriceDropped = () => {
                     <MapPin className="h-3.5 w-3.5 shrink-0 text-[#1865F2]" />
                     <span className="truncate">{item.location}</span>
                   </p>
-                  <p className="text-[12.5px] font-bold text-[#0B132B] mt-0.5">
-                    {item.oldPrice} <span className="text-[#0B132B] font-medium mx-0.5">→</span> {item.newPrice}
+                  <p className="text-[12.5px] mt-0.5">
+                    <span className="line-through text-[#64748B] font-normal text-[12px]">{item.oldPrice}</span>
+                    <span className="text-[#64748B] font-medium mx-1.5">→</span>
+                    <span className="font-bold text-[#0B132B]">{item.newPrice}</span>
                   </p>
                 </div>
               </div>
 
               {/* Save Badge */}
-              <div className="shrink-0 rounded-[8px] border border-dashed border-[#00A86B]/40 bg-[#E8F8F0] px-2.5 py-1 text-center min-w-[50px]">
-                <span className="block text-[9.5px] font-medium text-[#00A86B] leading-none">
+              <div className="shrink-0 rounded-[6px] border border-[#00BA7A]/30 bg-[#E8F8F0] px-2.5 py-1 text-center min-w-[50px]">
+                <span className="block text-[10px] font-medium text-[#00BA7A] leading-none">
                   Save
                 </span>
-                <span className="block text-[11px] font-bold text-[#00A86B] leading-tight mt-0.5">
+                <span className="block text-[11px] font-bold text-[#00BA7A] leading-tight mt-0.5">
                   {item.saveAmount}
                 </span>
               </div>
@@ -181,18 +183,20 @@ export const ListingsPriceDropped = () => {
                     <MapPin className="h-3.5 w-3.5 shrink-0 text-[#1865F2]" />
                     <span className="truncate">{item.location}</span>
                   </p>
-                  <p className="text-[12.5px] font-bold text-[#0B132B] mt-0.5">
-                    {item.oldPrice} <span className="text-[#0B132B] font-medium mx-0.5">→</span> {item.newPrice}
+                  <p className="text-[12.5px] mt-0.5">
+                    <span className="line-through text-[#64748B] font-normal text-[12px]">{item.oldPrice}</span>
+                    <span className="text-[#64748B] font-medium mx-1.5">→</span>
+                    <span className="font-bold text-[#0B132B]">{item.newPrice}</span>
                   </p>
                 </div>
               </div>
 
               {/* Save Badge */}
-              <div className="shrink-0 rounded-[8px] border border-dashed border-[#00A86B]/40 bg-[#E8F8F0] px-2.5 py-1 text-center min-w-[50px]">
-                <span className="block text-[9.5px] font-medium text-[#00A86B] leading-none">
+              <div className="shrink-0 rounded-[6px] border border-[#00BA7A]/30 bg-[#E8F8F0] px-2.5 py-1 text-center min-w-[50px]">
+                <span className="block text-[10px] font-medium text-[#00BA7A] leading-none">
                   Save
                 </span>
-                <span className="block text-[11px] font-bold text-[#00A86B] leading-tight mt-0.5">
+                <span className="block text-[11px] font-bold text-[#00BA7A] leading-tight mt-0.5">
                   {item.saveAmount}
                 </span>
               </div>

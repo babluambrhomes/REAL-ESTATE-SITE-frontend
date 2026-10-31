@@ -23,42 +23,42 @@ export const TopRatedAgents = () => {
       name: "JITENDRA SINGH",
       listings: "120 Listing",
       experience: "8 Years",
-      photoSrc: "/agents/agent_photo_1.png",
+      photoSrc: "/broker/jitender_singh_figma.jpg",
     },
     {
       id: "ag-2",
       name: "JITENDRA SINGH",
       listings: "120 Listing",
       experience: "8 Years",
-      photoSrc: "/agents/agent_photo_2.png",
+      photoSrc: "/agents/radhikha-singh.png",
     },
     {
       id: "ag-3",
       name: "JITENDRA SINGH",
       listings: "120 Listing",
       experience: "8 Years",
-      photoSrc: "/agents/agent_photo_3.png",
+      photoSrc: "/agents/aman-singh.png",
     },
     {
       id: "ag-4",
       name: "JITENDRA SINGH",
       listings: "120 Listing",
       experience: "8 Years",
-      photoSrc: "/agents/agent_photo_4.png",
+      photoSrc: "/customers/customer_woman_suit.jpg",
     },
     {
       id: "ag-5",
       name: "JITENDRA SINGH",
       listings: "120 Listing",
       experience: "8 Years",
-      photoSrc: "/agents/agent_photo_5.png",
+      photoSrc: "/customers/customer_man_laptop.jpg",
     },
     {
       id: "ag-6",
       name: "JITENDRA SINGH",
       listings: "120 Listing",
       experience: "8 Years",
-      photoSrc: "/agents/agent_photo_2.png",
+      photoSrc: "/agents/agent_photo_4.png",
     },
   ];
 
@@ -121,6 +121,7 @@ export const TopRatedAgents = () => {
                 src={agent.photoSrc}
                 alt={agent.name}
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="175px"
               />

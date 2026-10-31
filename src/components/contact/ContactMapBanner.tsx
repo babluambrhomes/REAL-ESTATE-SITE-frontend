@@ -8,16 +8,16 @@ export const ContactMapBanner = () => {
       {/* Top Smooth Wave Curve Mask */}
       <div className="w-full overflow-hidden leading-none relative z-10 -mb-[2px] pointer-events-none">
         <svg
-          viewBox="0 0 1440 90"
+          viewBox="0 0 1440 80"
           preserveAspectRatio="none"
-          className="w-full h-10 sm:h-16 md:h-20 text-white fill-current"
+          className="w-full h-12 sm:h-16 md:h-20 text-white fill-current"
         >
-          <path d="M0,0 L1440,0 L1440,25 C1150,20 850,75 550,55 C300,40 150,70 0,80 Z" />
+          <path d="M0,0 L1440,0 L1440,20 Q720,75 0,20 Z" />
         </svg>
       </div>
 
       {/* Satellite Map Container */}
-      <div className="relative w-full h-[260px] sm:h-[340px] md:h-[420px] bg-slate-900 overflow-hidden">
+      <div className="relative w-full h-[300px] sm:h-[380px] md:h-[450px] bg-slate-900 overflow-hidden">
         <Image
           src="/images/contact/contact_map_satellite.jpg"
           alt="Roofin Real Estate Locality Satellite Map"
@@ -34,11 +34,11 @@ export const ContactMapBanner = () => {
       {/* Bottom Smooth Wave Curve Mask */}
       <div className="w-full overflow-hidden leading-none relative z-10 -mt-[2px] pointer-events-none">
         <svg
-          viewBox="0 0 1440 90"
+          viewBox="0 0 1440 80"
           preserveAspectRatio="none"
-          className="w-full h-10 sm:h-16 md:h-20 text-white fill-current"
+          className="w-full h-12 sm:h-16 md:h-20 text-white fill-current"
         >
-          <path d="M0,90 L1440,90 L1440,35 C1150,80 850,25 550,60 C320,95 120,45 0,65 Z" />
+          <path d="M0,80 L1440,80 L1440,60 Q720,5 0,60 Z" />
         </svg>
       </div>
     </section>

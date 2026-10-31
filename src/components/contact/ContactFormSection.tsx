@@ -50,8 +50,8 @@ export const ContactFormSection = () => {
     <section className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 font-poppins">
       <div className="relative bg-white p-4 sm:p-8 lg:p-10">
         
-        {/* Social links */}
-        <div className="hidden lg:flex flex-col items-center justify-center gap-5 absolute top-1/2 -translate-y-1/2 right-0 bg-[#1865F2] text-white py-6 px-3.5 rounded-l-2xl shadow-lg z-20">
+        {/* Social links pinned to screen edge matching Figma */}
+        <div className="hidden lg:flex flex-col items-center justify-center gap-5 fixed top-1/2 -translate-y-1/2 right-0 bg-[#1865F2] text-white py-6 px-3.5 rounded-l-2xl shadow-xl z-40">
           <a
             href="https://facebook.com"
             target="_blank"
@@ -100,7 +100,7 @@ export const ContactFormSection = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 pt-2">
+            <form onSubmit={handleSubmit} className="space-y-4 pt-2">
               {/* Name Field */}
               <div className="relative">
                 <input
@@ -111,7 +111,7 @@ export const ContactFormSection = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="w-full py-3.5 text-xs sm:text-[14px] text-slate-800 placeholder:text-slate-400 bg-transparent border-0 border-b-2 border-slate-200 focus:border-[#1865F2] outline-none transition-colors"
+                  className="w-full px-5 py-4 text-xs sm:text-[14px] text-slate-800 placeholder:text-slate-400 bg-white border border-slate-200/90 rounded-[8px] focus:border-[#1865F2] focus:ring-1 focus:ring-[#1865F2]/20 outline-none transition-all shadow-2xs"
                 />
               </div>
 
@@ -125,20 +125,20 @@ export const ContactFormSection = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="w-full py-3.5 text-xs sm:text-[14px] text-slate-800 placeholder:text-slate-400 bg-transparent border-0 border-b-2 border-slate-200 focus:border-[#1865F2] outline-none transition-colors"
+                  className="w-full px-5 py-4 text-xs sm:text-[14px] text-slate-800 placeholder:text-slate-400 bg-white border border-slate-200/90 rounded-[8px] focus:border-[#1865F2] focus:ring-1 focus:ring-[#1865F2]/20 outline-none transition-all shadow-2xs"
                 />
               </div>
 
               {/* Message Field */}
               <div className="relative">
                 <textarea
-                  rows={4}
+                  rows={5}
                   placeholder="Go ahead, We are listening..."
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  className="w-full py-3.5 text-xs sm:text-[14px] text-slate-800 placeholder:text-slate-400 bg-transparent border-0 border-b-2 border-slate-200 focus:border-[#1865F2] outline-none transition-colors resize-none"
+                  className="w-full px-5 py-4 text-xs sm:text-[14px] text-slate-800 placeholder:text-slate-400 bg-white border border-slate-200/90 rounded-[8px] focus:border-[#1865F2] focus:ring-1 focus:ring-[#1865F2]/20 outline-none transition-all shadow-2xs resize-none"
                 />
               </div>
 
@@ -147,7 +147,7 @@ export const ContactFormSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-[320px] md:w-[340px] py-3.5 sm:py-4 bg-gradient-to-r from-[#1865F2] via-[#0EA5E9] to-[#10B981] hover:opacity-95 text-white text-sm sm:text-[15px] font-bold rounded-xl shadow-[0_4px_16px_rgba(24,101,242,0.25)] transition-all flex items-center justify-center cursor-pointer disabled:opacity-70"
+                  className="w-full py-4 bg-gradient-to-r from-[#1865F2] to-[#00C58A] hover:brightness-105 text-white text-sm sm:text-[15px] font-bold rounded-[8px] shadow-sm transition-all flex items-center justify-center cursor-pointer disabled:opacity-70"
                 >
                   {isSubmitting ? (
                     <span>Sending...</span>

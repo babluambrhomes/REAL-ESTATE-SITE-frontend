@@ -141,6 +141,7 @@ export const SpecializationAgents = () => {
                 src={item.photoSrc}
                 alt={item.name}
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="185px"
               />
@@ -175,10 +176,10 @@ export const SpecializationAgents = () => {
 
               {/* 2 Badges */}
               <div className="flex items-center gap-1.5 pt-1">
-                <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-bold text-[9px]">
+                <span className="px-2 py-0.5 rounded-full bg-[#EFF6FF] text-[#1865F2] font-bold text-[9px] border border-blue-100">
                   {item.experience}
                 </span>
-                <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-bold text-[9px]">
+                <span className="px-2 py-0.5 rounded-full bg-[#EFF6FF] text-[#1865F2] font-bold text-[9px] border border-blue-100">
                   {item.listings}
                 </span>
               </div>

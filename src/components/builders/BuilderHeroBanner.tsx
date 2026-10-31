@@ -17,6 +17,7 @@ export const BuilderHeroBanner = ({ onGetExpert }: BuilderHeroBannerProps) => {
           alt="Find The Right Property Expert For Your Next Move"
           fill
           priority
+          unoptimized
           className="object-cover object-center pointer-events-none"
           sizes="(max-width: 1360px) 100vw, 1360px"
         />

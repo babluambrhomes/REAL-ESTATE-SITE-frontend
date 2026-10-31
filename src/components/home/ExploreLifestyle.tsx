@@ -121,7 +121,7 @@ export const ExploreLifestyle = () => {
             type="button"
             aria-label="Next"
             onClick={() => swiperRef.current?.slideNext()}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 shadow-xs transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D3E3FD] bg-white text-slate-500 shadow-none transition-colors hover:border-[#1865F2] hover:text-[#1865F2] cursor-pointer"
           >
             <ChevronRight className="h-4 w-4 stroke-[1.5]" />
           </button>
@@ -149,7 +149,7 @@ export const ExploreLifestyle = () => {
             <SwiperSlide key={idx} className="!h-auto">
               <Link
                 href={item.href}
-                className="group flex h-[195px] sm:h-[205px] flex-col justify-between overflow-hidden rounded-[22px] border border-slate-100 bg-white shadow-[0_6px_16px_-4px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.10)]"
+                className="group flex h-[195px] sm:h-[205px] flex-col justify-between overflow-hidden rounded-[22px] border border-[#E2E8F0]/70 bg-white shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_16px_-4px_rgba(21,93,252,0.25)]"
               >
                 {/* 60% Top Image */}
                 <div className="relative h-[60%] w-full overflow-hidden rounded-t-[20px] bg-slate-100">
@@ -164,10 +164,10 @@ export const ExploreLifestyle = () => {
                 </div>
                 {/* 40% Bottom Text Area */}
                 <div className="flex h-[40%] w-full items-center justify-between px-3.5 sm:px-4 py-2">
-                  <span className="text-[13px] sm:text-[14px] font-medium text-[#0F172A] leading-snug group-hover:text-[#1865F2] transition-colors">
+                  <span className="text-[13px] sm:text-[14px] font-medium text-[#0F172A] leading-snug group-hover:text-[#2563EB] transition-colors">
                     {item.displayTitle}
                   </span>
-                  <ArrowRight className="h-4 w-4 text-[#0F172A] group-hover:text-[#1865F2] group-hover:translate-x-0.5 transition-all shrink-0 ml-1.5" />
+                  <ArrowRight className="h-4 w-4 text-[#0F172A] group-hover:text-[#2563EB] group-hover:translate-x-0.5 transition-all shrink-0 ml-1.5" />
                 </div>
               </Link>
             </SwiperSlide>

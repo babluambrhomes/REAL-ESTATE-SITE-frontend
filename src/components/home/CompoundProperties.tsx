@@ -240,10 +240,10 @@ export const CompoundProperties = () => {
             <SwiperSlide key={unit.id} className="!h-auto">
               {/* One 50% Compound Unit: 1 Big Card (~65% width) + 2 Stacked Small Cards (~35% width) */}
               <div className="flex w-full flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
-                {/* 1. Big Card (Box 1) - Exact Figma bg #F2F6FD, Left blue accent & light bottom shadow */}
-                <div className="compound-big-card group relative flex h-[202px] sm:h-[210px] flex-1 w-full flex-row items-center gap-2.5 sm:gap-3 overflow-hidden rounded-[20px] bg-[#F2F6FD] p-2 sm:p-2.5">
-                  {/* Left Image (Wide ~60%) */}
-                  <div className="relative h-full w-[58%] sm:w-[61%] shrink-0 overflow-hidden rounded-[14px] sm:rounded-[16px] bg-slate-100">
+                {/* 1. Big Card (Box 1) - Exact Figma bg #F2F6FD, Left dark blue accent & bottom-only drop shadow */}
+                <div className="compound-big-card group relative flex h-[185px] sm:h-[192px] flex-1 w-full flex-row items-center gap-2.5 sm:gap-3 overflow-hidden rounded-[20px] bg-[#F2F6FD] p-2 sm:p-2.5">
+                  {/* Left Image (Wide ~56%) */}
+                  <div className="relative h-full w-[54%] sm:w-[56%] shrink-0 overflow-hidden rounded-[14px] sm:rounded-[16px] bg-slate-100">
                     <Image
                       src={unit.big.image}
                       alt={unit.big.title}
@@ -284,15 +284,15 @@ export const CompoundProperties = () => {
                     </div>
                   </div>
 
-                  {/* Right Info (~40%) */}
-                  <div className="flex h-full flex-1 flex-col justify-between py-1 min-w-0 pr-0.5">
+                  {/* Right Info (~44%) */}
+                  <div className="flex h-full flex-1 flex-col justify-between py-0.5 min-w-0 pr-0.5">
                     <div>
-                      <h3 className="text-[14.5px] sm:text-[15.5px] font-bold text-[#1865F2] leading-[1.2] tracking-tight">
+                      <h3 className="text-[14px] sm:text-[15px] font-bold text-[#1865F2] leading-[1.2] tracking-tight">
                         <span>NBCC Aspire</span>
                         <br />
                         <span>Silicon City</span>
                       </h3>
-                      <p className="mt-1 flex items-center gap-1 text-[10px] sm:text-[10.5px] text-[#64748B] font-normal whitespace-nowrap">
+                      <p className="mt-1 flex items-center gap-1 text-[9.5px] sm:text-[10px] text-[#64748B] font-normal whitespace-nowrap">
                         <Image
                           src="/icon/location_pin_blue.png"
                           alt="Location"
@@ -307,17 +307,17 @@ export const CompoundProperties = () => {
 
                     <div className="pt-0.5">
                       <div>
-                        <p className="text-[16px] sm:text-[17px] font-bold text-[#0B132B] tracking-tight leading-none">
+                        <p className="text-[15.5px] sm:text-[16.5px] font-bold text-[#0B132B] tracking-tight leading-none">
                           {unit.big.price}
                         </p>
-                        <span className="block text-[9px] sm:text-[9.5px] text-[#64748B] font-normal mt-0.5 leading-none">
+                        <span className="block text-[8.5px] sm:text-[9px] text-[#64748B] font-normal mt-0.5 leading-none">
                           Starting From
                         </span>
                       </div>
 
                       <Link
                         href={`/properties/${encodeURIComponent(unit.big.title)}`}
-                        className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-[7px] bg-[#1865F2] hover:bg-blue-700 px-3.5 py-1.5 text-[10px] font-bold text-white shadow-xs transition-all cursor-pointer w-fit uppercase tracking-wider leading-none"
+                        className="mt-1.5 inline-flex items-center justify-center gap-1.5 rounded-[7px] bg-[#1865F2] hover:bg-blue-700 px-3 py-1.5 text-[9.5px] font-bold text-white shadow-xs transition-all cursor-pointer w-fit uppercase tracking-wider leading-none"
                       >
                         <span>CONTACT</span>
                         <ArrowRight className="h-3 w-3 stroke-[2.5]" />
@@ -326,17 +326,17 @@ export const CompoundProperties = () => {
                   </div>
                 </div>
 
-                {/* 2. Stacked 2 Small Cards (Box 2 & Box 3) - Exact Figma bg #F2F6FD, Right blue accent & light bottom shadow */}
-                <div className="flex h-[202px] sm:h-[210px] w-full sm:w-[170px] lg:w-[185px] shrink-0 flex-col justify-between gap-2 sm:gap-2.5">
+                {/* 2. Stacked 2 Small Cards (Box 2 & Box 3) - Wider right side (~225px) and matching compact height */}
+                <div className="flex h-[185px] sm:h-[192px] w-full sm:w-[215px] lg:w-[230px] shrink-0 flex-col justify-between gap-2 sm:gap-2.5">
                   {unit.minis.map((mini, miniIdx) => (
                     <div
                       key={`${mini.id}-${miniIdx}`}
-                      className="compound-small-card group flex h-[97px] sm:h-[100px] w-full flex-row items-center justify-between gap-2 rounded-[18px] bg-[#F2F6FD] p-2 sm:p-2.5"
+                      className="compound-small-card group flex h-[88px] sm:h-[91px] w-full flex-row items-center justify-between gap-2 rounded-[20px] bg-[#F2F6FD] p-2 sm:p-2.5"
                     >
                       {/* Left Info */}
                       <div className="flex h-full flex-1 flex-col justify-between py-0.5 min-w-0">
                         <div>
-                          <h4 className="text-[11.5px] sm:text-[12px] font-bold text-[#1865F2] truncate tracking-tight leading-tight">
+                          <h4 className="text-[12px] sm:text-[12.5px] font-bold text-[#1865F2] tracking-tight leading-tight whitespace-nowrap">
                             {mini.title}
                           </h4>
                           <p className="text-[12.5px] sm:text-[13px] font-bold text-[#0B132B] mt-0.5 leading-none">
@@ -353,12 +353,12 @@ export const CompoundProperties = () => {
                       </div>
 
                       {/* Right Image */}
-                      <div className="relative h-full w-[82px] sm:w-[90px] shrink-0 overflow-hidden rounded-[12px] sm:rounded-[14px] bg-slate-100">
+                      <div className="relative h-full w-[88px] sm:w-[98px] shrink-0 overflow-hidden rounded-[12px] sm:rounded-[14px] bg-slate-100">
                         <Image
                           src={mini.image}
                           alt={mini.title}
                           fill
-                          sizes="100px"
+                          sizes="110px"
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                           unoptimized
                         />

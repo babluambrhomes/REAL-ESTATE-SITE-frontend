@@ -3,6 +3,7 @@ import { Property } from "@/types";
 const baseProperties: Property[] = [
   {
     images: [
+      "/images/properties/night-tower-figma.jpg",
       "/images/properties/villa-popular-figma.jpg",
       "/images/properties/terraces-max-estate-clean.png",
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",

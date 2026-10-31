@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { TopAnnouncementBar } from "@/components/layout/TopAnnouncementBar";
 import { SearchHeader } from "@/components/layout/SearchHeader";
 
@@ -34,7 +35,15 @@ export default function SingleBuilderProfilePage() {
         )}
 
         {/* 2. Global Unified Header */}
-        <SearchHeader />
+        <SearchHeader hasAnnouncement={showAnnouncement} />
+
+        {/* Dynamic Spacer so fixed header never overlaps content underneath */}
+        <div
+          className={cn(
+            "w-full transition-all duration-200",
+            showAnnouncement ? "h-[85px] sm:h-[95px]" : "h-[65px] sm:h-[75px]"
+          )}
+        />
 
         {/* Main Content Area */}
         <main className="flex-1 pb-16">

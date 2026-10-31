@@ -19,31 +19,31 @@ export const AgentNearBy = () => {
       id: "anb-1",
       company: "E-BUILDER",
       agent: "Smiriti Singh",
-      photoSrc: "/agents/nearby/nearby_agent_1.png",
+      photoSrc: "/agents/radhikha-singh.png",
     },
     {
       id: "anb-2",
       company: "E-BUILDER",
       agent: "Smiriti Singh",
-      photoSrc: "/agents/nearby/nearby_agent_2.png",
+      photoSrc: "/customers/customer_woman_suit.jpg",
     },
     {
       id: "anb-3",
       company: "E-BUILDER",
       agent: "Smiriti Singh",
-      photoSrc: "/agents/nearby/nearby_agent_3.png",
+      photoSrc: "/broker/jitender_singh_real.jpg",
     },
     {
       id: "anb-4",
       company: "E-BUILDER",
       agent: "Smiriti Singh",
-      photoSrc: "/agents/nearby/nearby_agent_4.png",
+      photoSrc: "/customers/customer_man_laptop.jpg",
     },
     {
       id: "anb-5",
       company: "E-BUILDER",
       agent: "Smiriti Singh",
-      photoSrc: "/agents/nearby/nearby_agent_5.png",
+      photoSrc: "/customers/customer_man_phone.jpg",
     },
   ];
 
@@ -105,6 +105,7 @@ export const AgentNearBy = () => {
                 src={item.photoSrc}
                 alt={item.agent}
                 fill
+                unoptimized
                 className="object-cover object-top"
                 sizes="195px"
               />

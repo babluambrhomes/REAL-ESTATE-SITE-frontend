@@ -49,33 +49,29 @@ export const BuilderFaqSection = () => {
       </div>
 
       {/* Accordion List */}
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {faqs.map((faq, idx) => {
           const isOpen = openIndex === idx;
           return (
             <div
               key={faq.q}
-              className="rounded-xl border border-slate-100 bg-slate-50/50 overflow-hidden transition-colors"
+              className="rounded-2xl border border-slate-200/90 bg-white overflow-hidden transition-all shadow-2xs"
             >
               <button
                 type="button"
                 onClick={() => toggle(idx)}
-                className="w-full p-4 flex items-center justify-between gap-3 text-left cursor-pointer hover:bg-slate-50 transition-colors"
+                className="w-full p-4 sm:p-5 flex items-center justify-between gap-3 text-left cursor-pointer hover:bg-slate-50/50 transition-colors"
               >
                 <span className="text-xs sm:text-[13px] font-bold text-[#0B132B]">
                   {faq.q}
                 </span>
-                <span className="w-6 h-6 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 shrink-0">
-                  {isOpen ? (
-                    <Minus className="w-3.5 h-3.5 text-[#1865F2]" />
-                  ) : (
-                    <Plus className="w-3.5 h-3.5" />
-                  )}
+                <span className="text-xl font-light text-slate-400 shrink-0 leading-none">
+                  {isOpen ? "−" : "+"}
                 </span>
               </button>
 
               {isOpen && (
-                <div className="px-4 pb-4 pt-1 text-xs text-slate-500 font-medium leading-relaxed border-t border-slate-100/80 bg-white">
+                <div className="px-4 sm:px-5 pb-5 pt-0 text-xs text-slate-500 font-medium leading-relaxed bg-white">
                   {faq.a}
                 </div>
               )}

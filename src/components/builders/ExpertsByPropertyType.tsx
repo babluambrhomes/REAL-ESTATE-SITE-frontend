@@ -19,37 +19,37 @@ export const ExpertsByPropertyType = () => {
       id: "pt-1",
       type: "Residential",
       subtitle: "Home buying",
-      image: "/builders/figma_photo_noida.png",
+      image: "/builders/thumb_noida_luxury.png",
     },
     {
       id: "pt-2",
       type: "Commercial",
       subtitle: "Office report",
-      image: "/builders/figma_photo_gurgaon.png",
+      image: "/builders/thumb_gurgaon_chandelier.png",
     },
     {
       id: "pt-3",
       type: "Plot & Land",
       subtitle: "Land investment",
-      image: "/builders/figma_photo_delhi.png",
+      image: "/builders/thumb_delhi_family.png",
     },
     {
       id: "pt-4",
       type: "Rental",
       subtitle: "Find rental Expert",
-      image: "/builders/figma_photo_greaternoida.png",
+      image: "/builders/thumb_greaternoida_metro.png",
     },
     {
       id: "pt-5",
       type: "Investment",
       subtitle: "Find Expert",
-      image: "/builders/figma_photo_ghaziabad.png",
+      image: "/builders/thumb_ghaziabad_investment.png",
     },
     {
       id: "pt-6",
       type: "New project",
       subtitle: "Expert",
-      image: "/builders/figma_photo_faridabad.png",
+      image: "/builders/thumb_faridabad_villa.png",
     },
   ];
 
@@ -111,6 +111,7 @@ export const ExpertsByPropertyType = () => {
                 src={item.image}
                 alt={item.type}
                 fill
+                unoptimized
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="200px"
               />

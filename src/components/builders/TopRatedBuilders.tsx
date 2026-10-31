@@ -129,6 +129,7 @@ export const TopRatedBuilders = () => {
                   src={builder.logoSrc}
                   alt={builder.name}
                   fill
+                  unoptimized
                   className="object-contain"
                   sizes="90px"
                 />

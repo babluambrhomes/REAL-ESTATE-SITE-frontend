@@ -77,7 +77,7 @@ const BlueLocationPinIcon = ({ className = "h-4 w-3.5 shrink-0" }: { className?:
   />
 );
 
-const DiscountBadgeIcon = ({ className = "h-[18px] w-[18px] shrink-0" }: { className?: string }) => (
+const DiscountBadgeIcon = ({ className = "h-[16px] w-[16px] shrink-0" }: { className?: string }) => (
   <Image
     src="/icon/discount_badge.png"
     alt="Discount"
@@ -226,7 +226,7 @@ export const PropertyCard = (props: Property) => {
     const rawPrice = price ? price.replace("Cr", "").trim() : "₹1.25";
 
     return (
-      <div className="group relative flex flex-col lg:flex-row rounded-[32px] sm:rounded-[36px] border border-slate-200/90 bg-white shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08),0_4px_10px_-2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-6px_rgba(24,101,242,0.14),0_6px_14px_-2px_rgba(15,23,42,0.06)] w-full overflow-visible">
+      <div className="group relative flex flex-col lg:flex-row rounded-[32px] sm:rounded-[36px] border border-slate-200/90 bg-white shadow-[0_8px_16px_-6px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_20px_-6px_rgba(24,101,242,0.12)] w-full overflow-visible">
         {/* Top-Right Soft Blue Ambient Gradient Glow (Figma 1:1) */}
         <div className="absolute top-0 right-0 w-[380px] h-[300px] rounded-tr-[36px] bg-[radial-gradient(ellipse_at_top_right,rgba(216,234,255,0.75)_0%,rgba(235,244,255,0.45)_45%,transparent_75%)] pointer-events-none z-0" />
 
@@ -572,7 +572,7 @@ export const PropertyCard = (props: Property) => {
           <div className="mt-3.5 flex items-center justify-between gap-3 pt-2.5 border-t border-slate-100">
             <div className="min-w-0">
               <div className="flex items-baseline">
-                <span className="text-[24px] sm:text-[26px] font-extrabold text-[#0B132B] tracking-tight leading-none">
+                <span className="text-[24px] sm:text-[26px] font-semibold text-[#0B132B] tracking-tight leading-none">
                   {rawPrice}
                 </span>
                 <span className="text-[15px] sm:text-[16px] font-bold text-[#0B132B] ml-0.5">*Cr</span>
@@ -580,9 +580,9 @@ export const PropertyCard = (props: Property) => {
                   {originalPrice || "₹1.58 Cr"}
                 </span>
               </div>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-[11px] text-[#64748B] font-normal">
-                  Get upto 33L Off
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-[11.5px] text-[#64748B] font-normal">
+                  Get upto 33L Off on this property
                 </span>
                 <span className="text-slate-300">·</span>
                 <button
@@ -601,7 +601,7 @@ export const PropertyCard = (props: Property) => {
 
             <Link
               href={propertyUrl}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#1E6BFF] to-[#1865F2] hover:from-[#1865F2] hover:to-[#1250C4] px-7 sm:px-8 py-2.5 sm:py-3 text-[13.5px] font-bold text-white shadow-[0_4px_14px_rgba(24,101,242,0.32)] transition-all hover:gap-2.5 cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#1E6BFF] to-[#1865F2] hover:from-[#1865F2] hover:to-[#1250C4] px-7 sm:px-8 py-2.5 sm:py-3 text-[13.5px] font-medium text-white transition-all hover:gap-2.5 cursor-pointer shrink-0"
             >
               <span>View Details</span>
               <ArrowRight className="h-4 w-4 stroke-[2.5]" />
@@ -648,12 +648,12 @@ export const PropertyCard = (props: Property) => {
     );
   }
 
-  // Vertical Card Layout (Matches Reference Design 1:1: Compact, sleek proportions)
+  // Vertical Card Layout (Matches Screenshot 1 exact design: Compact height, soft blue bottom gradient, gentle shadow, rounded 20px)
   if (layout === "vertical") {
     return (
-      <div className="group flex flex-col justify-between overflow-hidden rounded-[20px] sm:rounded-[22px] border border-slate-200/90 border-b-[#BFDBFE] bg-gradient-to-b from-white via-white via-[65%] to-[#E4ECFD] p-2.5 shadow-[0_4px_24px_rgba(37,99,235,0.12),0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(37,99,235,0.2)] hover:border-[#93C5FD] transition-all duration-300 h-[395px] sm:h-[405px] w-full">
+      <div className="group flex flex-col justify-between rounded-[20px] border border-blue-100/40 bg-gradient-to-b from-white via-white via-[55%] to-[#EEF5FE] p-2.5 sm:p-3 shadow-[0_0_22px_rgba(37,99,235,0.16),0_6px_22px_rgba(37,99,235,0.14)] hover:shadow-[0_0_28px_rgba(37,99,235,0.22),0_8px_26px_rgba(37,99,235,0.18)] transition-all duration-300 w-full">
         {/* Top Image & Floating Badges */}
-        <div className="relative h-[148px] sm:h-[155px] w-full overflow-hidden rounded-[16px] bg-slate-100 shrink-0">
+        <div className="relative h-[155px] sm:h-[162px] w-full overflow-hidden rounded-[14px] bg-slate-100 shrink-0">
           <Image
             src={propertyImage}
             alt={title || "Property"}
@@ -663,15 +663,15 @@ export const PropertyCard = (props: Property) => {
             unoptimized
           />
 
-          <div className="absolute inset-x-0 top-0 flex items-start justify-between p-2 z-10">
+          <div className="absolute inset-x-0 top-0 flex items-start justify-between p-2.5 z-10 pointer-events-none">
             {/* Verified Deal Green Pill Badge (#05A579) */}
-            <span className="flex items-center gap-1 rounded-full bg-[#05A579] px-2.5 py-0.5 text-[8.5px] font-extrabold uppercase tracking-wide text-white shadow-md">
-              <ShieldCheck className="h-2.5 w-2.5 stroke-[2.5]" />
+            <span className="pointer-events-auto flex items-center gap-1 rounded-full bg-[#05A579] px-2 py-0.5 text-[8.5px] font-extrabold uppercase tracking-wide text-white shadow-xs">
+              <ShieldCheck className="h-3 w-3 stroke-[2.5]" />
               <span>{verifiedText || "VERIFIED DEAL"}</span>
             </span>
 
             {/* Top Right 3 Round White Action Buttons */}
-            <div className="flex flex-col items-center gap-1">
+            <div className="pointer-events-auto flex flex-col items-center gap-1">
               <button
                 type="button"
                 aria-label="Wishlist"
@@ -683,7 +683,7 @@ export const PropertyCard = (props: Property) => {
                     setLocalLiked((prev) => !prev);
                   }
                 }}
-                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
+                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-xs hover:shadow-sm transition-transform hover:scale-110 cursor-pointer"
               >
                 {isItemSaved ? (
                   <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
@@ -695,7 +695,7 @@ export const PropertyCard = (props: Property) => {
                 type="button"
                 aria-label="Share"
                 onClick={handleShare}
-                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
+                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-xs hover:shadow-sm transition-transform hover:scale-110 cursor-pointer"
               >
                 <Image
                   src="/icon/card_share_arrow.png"
@@ -714,7 +714,7 @@ export const PropertyCard = (props: Property) => {
                   e.stopPropagation();
                   toast.success("Brochure downloaded / opened!");
                 }}
-                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-sm transition-transform hover:scale-110 cursor-pointer"
+                className="flex h-6.5 w-6.5 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-white shadow-xs hover:shadow-sm transition-transform hover:scale-110 cursor-pointer"
                 title="Download Brochure"
               >
                 <Image
@@ -731,7 +731,7 @@ export const PropertyCard = (props: Property) => {
         </div>
 
         {/* Card Details */}
-        <div className="p-0.5 pt-1.5 flex flex-col justify-between flex-1 min-w-0">
+        <div className="pt-2 flex flex-col justify-between flex-1 min-w-0">
           {/* BHK Pill Tag */}
           <div>
             <div className="inline-block rounded-full bg-[#EEF5FF] border border-[#BFDBFE] px-2.5 py-0.5 text-[10px] sm:text-[10.5px] font-semibold text-[#1865F2] max-w-full truncate">
@@ -751,82 +751,82 @@ export const PropertyCard = (props: Property) => {
                   setContactModalOpen(true);
                 }}
                 aria-label="Contact Agent"
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1865F2] hover:bg-[#1250C4] text-white shadow-md shadow-blue-500/25 transition-transform hover:scale-105 cursor-pointer ml-1"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1865F2] hover:bg-[#1250C4] text-white shadow-sm transition-transform hover:scale-105 cursor-pointer ml-1"
               >
                 <PhoneCall className="h-3.5 w-3.5 text-white" />
               </button>
             </div>
 
             {/* Location */}
-            <p className="mt-0.5 flex items-center gap-1.5 text-[11px] sm:text-[11.5px] text-[#475569] font-medium min-w-0">
-              <BlueLocationPinIcon className="h-[18px] w-[14px] shrink-0" />
+            <p className="mt-0.5 flex items-center gap-1 text-[11px] sm:text-[11.5px] text-[#475569] font-medium min-w-0">
+              <BlueLocationPinIcon className="h-3.5 w-3 shrink-0" />
               <span className="truncate">{location || "Sector 76, Noida"}</span>
             </p>
 
-            {/* 3 Spec Features Box (Matches Reference Design 1:1 with soft blue shadow) */}
-            <div className="mt-1.5 rounded-[10px] border border-[#BFDBFE] bg-gradient-to-b from-[#F8FAFF] to-[#EDF4FE] py-1.5 px-2 shadow-[0_2px_8px_rgba(24,101,242,0.06)]">
-              <div className="flex items-center justify-between gap-0.5">
+            {/* 3 Spec Features Box (Ensuring no truncation on 3,200-4,500 Sq. Ft) */}
+            <div className="mt-1.5 rounded-[9px] border border-[#BFDBFE] bg-gradient-to-b from-[#F8FAFF] to-[#EDF4FE] py-1.5 px-2 shadow-[0_1px_4px_rgba(24,101,242,0.04)]">
+              <div className="flex items-center justify-between gap-1">
                 {/* 1. Sq. Ft */}
-                <div className="flex items-center gap-1 min-w-0 flex-1">
+                <div className="flex items-center gap-1 shrink-0">
                   <Image
                     src="/icon/location.png"
                     alt="Sq. Ft"
-                    width={32}
-                    height={26}
-                    className="w-7 h-6 object-contain shrink-0"
+                    width={28}
+                    height={24}
+                    className="w-6.5 h-5.5 object-contain shrink-0"
                     unoptimized
                   />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[10px] font-bold text-[#0B132B] leading-tight truncate">
+                  <div>
+                    <p className="text-[10px] font-bold text-[#0B132B] leading-tight whitespace-nowrap">
                       {infoChips?.[0]?.value || "3,200-4,500"}
                     </p>
-                    <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 truncate">
+                    <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 whitespace-nowrap">
                       {infoChips?.[0]?.label || "Sq. Ft"}
                     </span>
                   </div>
                 </div>
 
                 {/* Divider 1 */}
-                <div className="h-4 w-[1px] bg-[#93C5FD]/60 shrink-0 mx-0.5" />
+                <div className="h-4.5 w-[1px] bg-[#93C5FD]/60 shrink-0 mx-0.5" />
 
                 {/* 2. Amenities */}
-                <div className="flex items-center gap-1 min-w-0 flex-1 justify-center">
+                <div className="flex items-center gap-1 shrink-0 justify-center">
                   <Image
                     src="/icon/Frame.png"
                     alt="Amenities"
-                    width={26}
-                    height={26}
-                    className="w-6 h-6 object-contain shrink-0"
+                    width={24}
+                    height={24}
+                    className="w-5.5 h-5.5 object-contain shrink-0"
                     unoptimized
                   />
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold text-[#0B132B] leading-tight truncate">
+                  <div>
+                    <p className="text-[10px] font-bold text-[#0B132B] leading-tight whitespace-nowrap">
                       {infoChips?.[1]?.value || "60%"}
                     </p>
-                    <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 truncate">
+                    <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 whitespace-nowrap">
                       {infoChips?.[1]?.label || "Amenites"}
                     </span>
                   </div>
                 </div>
 
                 {/* Divider 2 */}
-                <div className="h-4 w-[1px] bg-[#93C5FD]/60 shrink-0 mx-0.5" />
+                <div className="h-4.5 w-[1px] bg-[#93C5FD]/60 shrink-0 mx-0.5" />
 
                 {/* 3. Ready To Move */}
-                <div className="flex items-center gap-1 min-w-0 flex-1 justify-end">
+                <div className="flex items-center gap-1 shrink-0 justify-end">
                   <Image
                     src="/icon/Group.png"
                     alt="Ready To Move"
-                    width={30}
-                    height={26}
-                    className="w-7 h-6 object-contain shrink-0"
+                    width={26}
+                    height={24}
+                    className="w-6 h-5.5 object-contain shrink-0"
                     unoptimized
                   />
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold text-[#0B132B] leading-tight truncate">
+                  <div>
+                    <p className="text-[10px] font-bold text-[#0B132B] leading-tight whitespace-nowrap">
                       {infoChips?.[2]?.value || "Ready"}
                     </p>
-                    <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 truncate">
+                    <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 whitespace-nowrap">
                       {infoChips?.[2]?.label || "To Move"}
                     </span>
                   </div>
@@ -836,37 +836,44 @@ export const PropertyCard = (props: Property) => {
           </div>
 
           {/* Price, Discount & View Details Button */}
-          <div className="mt-2 flex items-center justify-between gap-1.5 pt-0.5 min-w-0">
+          <div className="mt-3 flex items-center justify-between gap-3 pt-1 min-w-0">
             <div className="min-w-0 flex-1">
-              <div className="flex items-baseline flex-wrap gap-x-1.5 gap-y-0 leading-none">
-                <span className="text-[16px] sm:text-[17px] font-bold text-[#000000] tracking-tight whitespace-nowrap leading-none">
+              <div className="flex items-baseline flex-wrap gap-x-2 gap-y-0 leading-none">
+                <span className="text-[19px] sm:text-[20px] font-bold text-[#000000] tracking-tight whitespace-nowrap leading-none">
                   {price || "₹1.25* Cr"}
                 </span>
                 {originalPrice && (
-                  <span className="text-[10.5px] text-[#94A3B8] line-through font-normal whitespace-nowrap leading-none ml-1">
+                  <span className="text-[12px] sm:text-[12.5px] text-[#8E9BAE] line-through font-normal whitespace-nowrap leading-none">
                     {originalPrice}
                   </span>
                 )}
               </div>
-              <div className="mt-1 min-w-0">
-                <div className="flex items-center gap-1 min-w-0">
-                  <DiscountBadgeIcon className="h-3.5 w-3.5 shrink-0" />
-                  <p className="text-[10px] sm:text-[10.5px] font-bold text-[#05A579] leading-none whitespace-nowrap truncate">
+              <div className="mt-1.5 flex items-center gap-2 min-w-0">
+                <Image
+                  src="/icon/discount_badge.png"
+                  alt="Discount"
+                  width={56}
+                  height={56}
+                  className="w-[28px] h-[28px] sm:w-[30px] sm:h-[30px] object-contain shrink-0"
+                  unoptimized
+                />
+                <div className="min-w-0 flex flex-col justify-center">
+                  <p className="text-[12px] sm:text-[12.5px] font-bold text-[#05A579] leading-tight whitespace-nowrap">
                     Up to 33L off
                   </p>
+                  <span className="block text-[10px] sm:text-[10.5px] text-[#64748B] font-normal leading-tight whitespace-nowrap mt-0.5">
+                    Get upto 13% discount on this property
+                  </span>
                 </div>
-                <span className="block text-[8.5px] text-[#64748B] font-normal mt-0.5 whitespace-nowrap truncate">
-                  Get upto 13% discount on this property
-                </span>
               </div>
             </div>
 
             <Link
               href={propertyUrl}
-              className="inline-flex items-center justify-center gap-1 rounded-[8px] bg-[#1865F2] hover:bg-[#1250C4] px-3.5 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-all hover:gap-1.5 cursor-pointer shrink-0 whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-1.5 h-[42px] sm:h-[44px] rounded-[14px] bg-[#1865F2] hover:bg-[#1250C4] px-4.5 sm:px-5 text-[13px] sm:text-[13.5px] font-bold text-white shadow-xs transition-all hover:gap-2 cursor-pointer shrink-0 whitespace-nowrap"
             >
               <span>View Details</span>
-              <ArrowRight className="h-3 w-3 stroke-[2.5]" />
+              <ArrowRight className="h-4 w-4 stroke-[2.5]" />
             </Link>
           </div>
         </div>

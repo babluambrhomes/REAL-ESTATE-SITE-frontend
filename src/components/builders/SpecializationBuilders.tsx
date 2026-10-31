@@ -149,6 +149,7 @@ export const SpecializationBuilders = () => {
                 src="/builders/omaxe_logo_exact.png"
                 alt="OMAXE - Turning dreams into reality"
                 fill
+                unoptimized
                 className="object-contain p-1.5"
                 sizes="180px"
               />

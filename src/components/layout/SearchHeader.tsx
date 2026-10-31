@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { HeaderSelect } from './HeaderSelect'
 import { HeaderSidebar } from './HeaderSidebar'
 import Link from 'next/link'
-import { Bell, Heart, Logs, User, Search, SlidersHorizontal, X, CircleX, TextAlignEnd, Mic, Sparkles } from 'lucide-react'
+import { Mic } from 'lucide-react'
 import { LocationButton } from './LocationButton'
 import { SEARCH_HEADER } from '@/data/headerData'
 import { cn } from '@/lib/utils'
@@ -638,7 +638,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                     {/* Post Property Free Button with Circular Running Gradient Border (#22BC90 & #2563EB) */}
                     <Link
                         href="/post-property"
-                        className="group relative inline-flex items-center justify-center p-[1.5px] rounded-full overflow-hidden bg-[#2563EB] shadow-[0_2px_12px_rgba(34,188,144,0.3),0_2px_8px_rgba(37,99,235,0.2)] hover:shadow-[0_4px_18px_rgba(34,188,144,0.45),0_4px_12px_rgba(37,99,235,0.3)] transition-all duration-200 hover:scale-[1.02] shrink-0 translate-x-1 sm:translate-x-2"
+                        className="group relative inline-flex items-center justify-center p-[1.5px] rounded-full overflow-hidden bg-[#2563EB] transition-all duration-200 hover:scale-[1.02] shrink-0 translate-x-1 sm:translate-x-2"
                     >
                             {/* Animated Slow Circular Gradient Border (Pure Green & Blue Shades) */}
                             <span

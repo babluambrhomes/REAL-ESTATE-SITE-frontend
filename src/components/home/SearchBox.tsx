@@ -296,7 +296,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="flex h-[42px] w-full items-center justify-center gap-1.5 rounded-[12px] bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-4 text-[13.5px] font-medium text-white shadow-[0_3px_10px_rgba(30,80,240,0.25)] transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_4px_14px_rgba(30,80,240,0.3)] cursor-pointer"
+                className="flex h-[42px] w-full items-center justify-center gap-1.5 rounded-[12px] bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-4 text-[13.5px] font-medium text-white transition-all duration-200 hover:scale-[1.01] cursor-pointer"
               >
                 <Search className="h-4 w-4 stroke-[2.2]" />
                 <span>Search</span>

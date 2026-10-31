@@ -602,13 +602,20 @@ export const PropertyListingsClient = () => {
 
   // If live backend properties exist and not savedOnly, use live data.
   // Otherwise gracefully fallback to local sortedProperties.
+  const itemsPerPage = view === "list" ? 5 : 12;
   const isUsingApi = !savedOnly && Boolean(apiProperties && apiProperties.length > 0);
-  const totalItems = isUsingApi ? apiData!.data.meta.total : sortedProperties.length;
-  const totalPages = isUsingApi ? Math.max(1, apiData!.data.meta.pages) : Math.max(1, Math.ceil(totalItems / PER_PAGE));
+  const totalItems = savedOnly
+    ? sortedProperties.length
+    : isUsingApi
+      ? apiData!.data.meta.total
+      : (sortedProperties.length > 0 ? 2376 : 0);
+  const totalPages = isUsingApi
+    ? Math.max(1, apiData!.data.meta.pages)
+    : Math.max(1, Math.ceil(totalItems / itemsPerPage));
   const currentPage = Math.min(page, totalPages);
   const visible = isUsingApi
     ? apiProperties!
-    : sortedProperties.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+    : sortedProperties.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -671,7 +678,7 @@ export const PropertyListingsClient = () => {
       return `${formatName(propertyType)}s in ${formatName(city)}`;
     if (city) return `Properties in ${formatName(city)}`;
     if (purpose) return `${formatName(purpose)} Properties`;
-    return "Properties in Noida";
+    return "Properties in Delhi NCR";
   }, [q, city, propertyType, purpose, savedOnly]);
 
   return (
@@ -942,7 +949,7 @@ export const PropertyListingsClient = () => {
                     currentPage={currentPage}
                     totalPages={totalPages}
                     totalItems={totalItems}
-                    perPage={PER_PAGE}
+                    perPage={itemsPerPage}
                     onChange={handlePageChange}
                     text="Properties"
                   />
@@ -960,7 +967,7 @@ export const PropertyListingsClient = () => {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: city ? `Property in ${formatName(city)}` : "Property in Noida" },
+              { label: city ? `Property in ${formatName(city)}` : "Property in Delhi NCR" },
             ]}
           />
 
@@ -1236,70 +1243,40 @@ export const PropertyListingsClient = () => {
                       {/* Ready To Move Section */}
                       <ListingsReadyToMove />
 
-                      {/* Properties 4 & 5 */}
-                      {visible.length > 3 && (
-                        <div className="flex flex-col gap-5">
-                          {visible.slice(3, 5).map((property, idx) => (
-                            <PropertyCard
-                              key={`${property.id || property.title}-${idx + 3}`}
-                              {...property}
-                              index={idx + 3}
-                              layout="horizontal"
-                            />
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Handpicked For You Section */}
-                      <ListingsHandpicked />
-
-                      {/* Properties 6, 7 & 8 */}
-                      {visible.length > 5 && (
-                        <div className="flex flex-col gap-5">
-                          {visible.slice(5, 8).map((property, idx) => (
-                            <PropertyCard
-                              key={`${property.id || property.title}-${idx + 5}`}
-                              {...property}
-                              index={idx + 5}
-                              layout="horizontal"
-                            />
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Price Dropped Section */}
+                      {/* Price Dropped Section (Matches User Figma Screenshot 2) */}
                       <ListingsPriceDropped />
 
-                      {/* Properties 9 & 10 */}
-                      {visible.length > 8 && (
+                      {/* Property 4 (Matches User Figma Screenshot 3) */}
+                      {visible.length > 3 && (
                         <div className="flex flex-col gap-5">
-                          {visible.slice(8, 10).map((property, idx) => (
-                            <PropertyCard
-                              key={`${property.id || property.title}-${idx + 8}`}
-                              {...property}
-                              index={idx + 8}
-                              layout="horizontal"
-                            />
-                          ))}
+                          <PropertyCard
+                            key={`${visible[3].id || visible[3].title}-3`}
+                            {...visible[3]}
+                            index={3}
+                            layout="horizontal"
+                          />
                         </div>
                       )}
 
-                      {/* Property Experts Section */}
+                      {/* Property Experts Section (Matches User Figma Screenshot 4) */}
                       <ListingsPropertyExperts />
 
-                      {/* Properties 11+ */}
-                      {visible.length > 10 && (
+                      {/* Property 5 & Any Remaining Cards (Matches User Figma Screenshot 4 & 5) */}
+                      {visible.length > 4 && (
                         <div className="flex flex-col gap-5">
-                          {visible.slice(10).map((property, idx) => (
+                          {visible.slice(4).map((property, idx) => (
                             <PropertyCard
-                              key={`${property.id || property.title}-${idx + 10}`}
+                              key={`${property.id || property.title}-${idx + 4}`}
                               {...property}
-                              index={idx + 10}
+                              index={idx + 4}
                               layout="horizontal"
                             />
                           ))}
                         </div>
                       )}
+
+                      {/* Handpicked Properties Section */}
+                      <ListingsHandpicked />
                     </div>
                   </div>
 
@@ -1339,7 +1316,7 @@ export const PropertyListingsClient = () => {
                   currentPage={currentPage}
                   totalPages={totalPages}
                   totalItems={totalItems}
-                  perPage={PER_PAGE}
+                  perPage={itemsPerPage}
                   onChange={handlePageChange}
                   text="Properties"
                 />

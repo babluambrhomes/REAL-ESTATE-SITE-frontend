@@ -176,9 +176,9 @@ export const BuilderProjectsSection = () => {
                 }`}
               >
                 <span
-                  className={`text-[9.5px] font-black uppercase tracking-widest -rotate-90 whitespace-nowrap ${proj.statusColor}`}
+                  className={`text-[9.5px] font-bold -rotate-90 whitespace-nowrap ${proj.statusColor}`}
                 >
-                  {proj.status}
+                  ( {proj.status} )
                 </span>
               </div>
 
@@ -264,8 +264,9 @@ export const BuilderProjectsSection = () => {
 
                   <Link
                     href={`/properties/${encodeURIComponent(proj.title)}`}
-                    className="px-4 py-1.5 bg-[#00B368] hover:bg-[#009b5a] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-[0_3px_10px_rgba(0,179,104,0.3)] transition-all"
+                    className="px-4 py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-[0_3px_10px_rgba(24,101,242,0.3)] transition-all cursor-pointer"
                   >
+                    <span className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-black">1</span>
                     <span>View Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>

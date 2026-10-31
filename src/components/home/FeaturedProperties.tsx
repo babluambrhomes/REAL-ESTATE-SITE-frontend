@@ -113,7 +113,7 @@ export const FeaturedProperties = ({
               spaceBetween: 18,
             },
           }}
-          className="!pb-9 !pt-3 !px-2.5 -mx-2.5"
+          className="!pb-8 !pt-5 !px-2.5 -mx-2.5"
         >
           {safeProperties.map((property, idx) => (
             <SwiperSlide

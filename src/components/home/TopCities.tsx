@@ -119,7 +119,7 @@ export const TopCities = () => {
             <SwiperSlide key={city.name} className="!h-auto">
               <Link
                 href={city.href}
-                className="group flex h-[195px] sm:h-[205px] flex-col justify-between overflow-hidden rounded-[22px] border border-slate-100 bg-white shadow-[0_6px_16px_-4px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.10)]"
+                className="group flex h-[195px] sm:h-[205px] flex-col justify-between overflow-hidden rounded-[22px] border border-[#E2E8F0]/70 bg-white shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_16px_-4px_rgba(21,93,252,0.25)]"
               >
                 {/* 60% Top Image */}
                 <div className="relative h-[60%] w-full overflow-hidden rounded-t-[20px] bg-slate-100">

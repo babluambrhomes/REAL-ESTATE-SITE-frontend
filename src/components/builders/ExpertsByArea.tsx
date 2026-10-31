@@ -111,6 +111,7 @@ export const ExpertsByArea = () => {
                 src={item.image}
                 alt={item.name}
                 fill
+                unoptimized
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="200px"
               />

@@ -125,6 +125,7 @@ export const BuildersNearBy = () => {
                     src={item.logoSrc}
                     alt={item.name}
                     fill
+                    unoptimized
                     className="object-contain"
                     sizes="80px"
                   />

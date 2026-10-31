@@ -4,28 +4,34 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, Send } from "lucide-react";
-import { usePathname } from "next/navigation";
 import toast from "react-hot-toast";
 
 const quickLinks = [
   { label: "Buy Property", href: "/properties" },
   { label: "Rent Property", href: "/properties" },
   { label: "Sell Property", href: "/post-property" },
-  { label: "Explore on Map", href: "/properties?map=true" },
+  { label: "New Projects", href: "/properties?tag=new-launch" },
+  { label: "Commercial", href: "/properties?type=Commercial" },
+  { label: "Plots & Land", href: "/properties?type=Plot" },
+  { label: "Project", href: "/properties" },
+  { label: "Agent", href: "/agents" },
 ];
 
 const resources = [
-  { label: "Compare Homes", href: "/compare" },
-  { label: "All Builders", href: "/allbuilders" },
-  { label: "Group Deals", href: "/group-deal" },
-  { label: "Pricing & Plans", href: "/pricing" },
+  { label: "Investment Guide", href: "/properties" },
+  { label: "EMI Calculator", href: "/properties" },
+  { label: "Area Converter", href: "/properties" },
+  { label: "Price Trends", href: "/properties" },
+  { label: "News & Updates", href: "/properties" },
 ];
 
 const company = [
+  { label: "About Us", href: "/contact" },
   { label: "Contact Us", href: "/contact" },
-  { label: "Pay For Results", href: "/pay-for-results" },
-  { label: "Top Agents", href: "/agents" },
-  { label: "Verified Listings", href: "/properties?verified=true" },
+  { label: "Careers", href: "/contact" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Sitemap", href: "/properties" },
 ];
 
 const FacebookIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
@@ -65,30 +71,41 @@ const XIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
   </svg>
 );
 
+const PinterestIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M12 0a12 12 0 0 0-4.37 23.18c-.06-.55-.11-1.39.02-1.99.12-.54.78-3.32.78-3.32s-.2-.4-.2-.99c0-.93.54-1.63 1.21-1.63.57 0 .85.43.85.95 0 .58-.37 1.44-.56 2.24-.16.68.34 1.23 1 1.23 1.2 0 2.13-1.27 2.13-3.1 0-1.62-1.16-2.76-2.83-2.76-1.93 0-3.06 1.45-3.06 2.94 0 .58.23 1.21.51 1.55.06.07.07.13.05.2-.06.24-.19.78-.22.89-.04.14-.12.17-.28.1-1.04-.48-1.69-2-1.69-3.21 0-2.61 1.9-5.01 5.48-5.01 2.88 0 5.11 2.05 5.11 4.79 0 2.86-1.8 5.16-4.3 5.16-.84 0-1.63-.44-1.9-.96l-.52 1.97c-.19.73-.7 1.64-1.04 2.2A12 12 0 1 0 12 0Z" />
+  </svg>
+);
+
 const socialIcons = [
   {
     label: "Facebook",
     href: "https://facebook.com",
-    icon: <FacebookIcon className="h-5 w-5" />,
+    icon: <FacebookIcon className="h-4.5 w-4.5" />,
   },
   {
     label: "Instagram",
     href: "https://instagram.com",
-    icon: <InstagramIcon className="h-4 w-4" />,
+    icon: <InstagramIcon className="h-4.5 w-4.5" />,
   },
   {
     label: "X",
     href: "https://x.com",
     icon: <XIcon className="h-4 w-4" />,
   },
+  {
+    label: "Pinterest",
+    href: "https://pinterest.com",
+    icon: <PinterestIcon className="h-4.5 w-4.5" />,
+  },
 ];
 
 export const Footer = () => {
-  const pathname = usePathname();
-
-  if (pathname?.startsWith("/portal")) {
-    return null;
-  }
 
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -255,28 +272,28 @@ export const Footer = () => {
             </h4>
             <ul className="mt-4 text-base space-y-2 text-white">
               <li>
-                <h3 className="text-base font-medium text-white">Toll free</h3>
+                <h3 className="text-sm font-normal text-white/80">Toll free</h3>
                 <a
-                  href="tel:1800418389"
-                  className="flex items-center gap-2 transition-colors hover:text-secondary text-sm"
+                  href="tel:3540418389"
+                  className="mt-1 flex items-center gap-2 transition-colors hover:text-white text-sm font-semibold text-white"
                 >
-                  <Phone className="h-4 w-4 shrink-0" />
-                  1800 41 8389
+                  <Phone className="h-4 w-4 shrink-0 text-[#2563EB]" />
+                  3540 41 8389
                 </a>
               </li>
-              <li className="pt-1">
-                <h3 className="text-base font-medium text-white">Email</h3>
+              <li className="pt-2">
+                <h3 className="text-sm font-normal text-white/80">Email</h3>
                 <a
-                  href="mailto:roofin@realestate.com"
-                  className="flex items-center gap-2 transition-colors hover:text-secondary text-sm"
+                  href="mailto:roofin@realstate.com"
+                  className="mt-1 flex items-center gap-2 transition-colors hover:text-white text-sm font-semibold text-white"
                 >
-                  <Mail className="h-4 w-4 shrink-0" />
-                  roofin@realestate.com
+                  <Mail className="h-4 w-4 shrink-0 text-[#2563EB]" />
+                  roofin@realstate.com
                 </a>
               </li>
             </ul>
 
-            <div className="mt-4 flex items-center gap-2.5">
+            <div className="mt-5 flex items-center gap-2.5">
               {socialIcons.map((social) => (
                 <a
                   key={social.label}
@@ -284,7 +301,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/30"
+                  className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white/25 hover:scale-110"
                 >
                   {social.icon}
                 </a>
@@ -294,16 +311,25 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="relative text-white border-t border-white/10">
-        <div className="mx-auto flex max-w-[1440px] w-full font-normal items-center justify-between gap-2 px-6 py-4 text-xs">
-          <p>© 2026 Roofin. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="transition-colors hover:text-secondary">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="transition-colors hover:text-secondary">
-              Terms of Use
-            </Link>
+      {/* Bottom Bar: Copyright & Payment Icons (Exact Screenshot 9) */}
+      <div className="relative text-white border-t border-white/10 bg-black/10">
+        <div className="mx-auto flex max-w-[1440px] w-full font-normal items-center justify-between flex-wrap gap-4 px-6 py-4 text-xs text-white/80">
+          <p>Copyright © 2025 Roofin. All Rights Reserved.</p>
+          
+          {/* Payment Badges Matching Figma Screenshot */}
+          <div className="flex items-center gap-2">
+            <span className="flex items-center justify-center h-6 px-2 rounded-sm bg-white text-[#003087] font-bold text-[10px] shadow-xs">
+              PayPal
+            </span>
+            <span className="flex items-center justify-center h-6 px-2 rounded-sm bg-white text-[#006FCF] font-bold text-[10px] shadow-xs">
+              AMEX
+            </span>
+            <span className="flex items-center justify-center h-6 px-2 rounded-sm bg-white text-[#EB001B] font-bold text-[10px] shadow-xs">
+              MasterCard
+            </span>
+            <span className="flex items-center justify-center h-6 px-2 rounded-sm bg-white text-[#1A1F71] font-bold text-[10px] italic shadow-xs">
+              VISA
+            </span>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Providers } from "@/lib/providers";
 import { Toaster } from "react-hot-toast";

@@ -109,6 +109,7 @@ export const AllPropertyExpertsList = () => {
                   src="/builders/logo_gaurs_verified.png"
                   alt={exp.company}
                   fill
+                  unoptimized
                   className="object-contain"
                   sizes="96px"
                 />

@@ -23,29 +23,20 @@ export const BuilderReviewsSection = () => {
     {
       id: "rev-1",
       name: "Ritik Singh",
-      avatarBg: "bg-purple-600 text-white",
-      date: "10/7/2022 10:27 AM",
-      rating: 5,
+      avatarBg: "bg-[#7C3AED] text-white",
+      date: "10/7/2022 1:10:37 AM",
+      rating: 4,
       comment:
-        "The Property Is Really Nice, I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
+        "The Property Is Really Nice. I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
     },
     {
       id: "rev-2",
-      name: "Aman Sharma",
-      avatarBg: "bg-rose-600 text-white",
-      date: "12/8/2023 2:15 PM",
-      rating: 5,
-      comment:
-        "The construction quality delivered by this developer is top notch. Delivery timelines were on point and amenities match the brochure.",
-    },
-    {
-      id: "rev-3",
-      name: "Pooja Verma",
-      avatarBg: "bg-emerald-600 text-white",
-      date: "04/02/2024 11:45 AM",
+      name: "Ritik Singh",
+      avatarBg: "bg-[#991B1B] text-white",
+      date: "10/7/2022 1:10:37 AM",
       rating: 4,
       comment:
-        "Great experience overall! The clubhouse facilities and children park are very well designed and maintained.",
+        "The Property Is Really Nice. I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
     },
   ]);
 
@@ -206,24 +197,24 @@ export const BuilderReviewsSection = () => {
       <div className="pt-5">
         <div className="flex items-center justify-between mb-4">
           <h4 className="text-xs sm:text-[13px] font-black text-[#0B132B]">
-            All Reviews <span className="text-[#1865F2]">({reviewList.length})</span>
+            ALL Reviews <span className="text-[#1865F2]">({reviewList.length})</span>
           </h4>
-          {reviewList.length > 2 && (
-            <button
-              type="button"
-              onClick={() => setShowAll(!showAll)}
-              className="text-xs font-bold text-[#1865F2] hover:underline cursor-pointer"
-            >
-              {showAll ? "Show Less" : "View All"}
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setShowAll(!showAll)}
+            className="text-xs font-bold text-[#1865F2] hover:underline cursor-pointer"
+          >
+            View All
+          </button>
         </div>
 
         <div className="space-y-4">
-          {displayedReviews.map((rev) => (
+          {displayedReviews.map((rev, index) => (
             <div
               key={rev.id}
-              className="p-4 rounded-xl bg-slate-50/50 border border-slate-100 flex items-start gap-3.5"
+              className={`p-4 rounded-xl bg-white border border-slate-100 flex items-start gap-3.5 shadow-2xs relative ${
+                index === 0 ? "border-r-2 border-r-[#1865F2]" : ""
+              }`}
             >
               <div className={`w-9 h-9 rounded-full ${rev.avatarBg} flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs`}>
                 {rev.name[0]}
@@ -240,8 +231,15 @@ export const BuilderReviewsSection = () => {
                 </div>
 
                 <div className="flex items-center gap-0.5 my-1 text-amber-400">
-                  {[...Array(rev.rating)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-3 h-3 ${
+                        i < rev.rating
+                          ? "fill-amber-400 text-amber-400"
+                          : "text-slate-300 fill-transparent"
+                      }`}
+                    />
                   ))}
                 </div>
 

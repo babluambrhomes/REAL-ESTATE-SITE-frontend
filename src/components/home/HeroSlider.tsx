@@ -232,7 +232,7 @@ export const HeroSlider = () => {
             <ViewMap height="100%" properties={properties.slice(0, 8)} zoomPosition="bottom-right-hero" />
 
             {/* Top Floating Badge: Premium Living */}
-            <div className="absolute top-20 sm:top-24 left-4 z-30 w-[164px] rounded-2xl border border-slate-100/90 bg-white/95 p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
+            <div className="absolute top-20 sm:top-24 left-4 z-30 w-[164px] rounded-2xl border border-slate-100/90 bg-white/95 p-3 backdrop-blur-md">
               <div className="flex items-center gap-2.5">
                 <div className="relative h-[36px] w-[36px] shrink-0">
                   <Image
