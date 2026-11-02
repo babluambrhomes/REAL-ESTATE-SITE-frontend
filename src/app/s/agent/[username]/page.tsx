@@ -95,7 +95,7 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
               : undefined)
           }
           role={sellerData?.headline}
-          avatarUrl={sellerData?.logoUrl || sellerData?.user?.person?.avatarUrl}
+          avatarUrl={sellerData?.logoUrl || sellerData?.user?.person?.avatarUrl || "/broker/jitender_figma_transparent.png"}
           isVerified={sellerData?.verificationStatus === "VERIFIED"}
           followers={sellerData?._count?.followers}
           sellerId={sellerData?.id}

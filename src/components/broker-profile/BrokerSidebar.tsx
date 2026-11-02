@@ -149,7 +149,7 @@ export const BrokerSidebar = () => {
               <Star className="w-3.5 h-3.5 text-slate-300" />
             </div>
             <p className="text-[10px] text-slate-400 font-medium">
-              (230 Total Reviews)
+              (200 Total Reviews)
             </p>
           </div>
         </div>

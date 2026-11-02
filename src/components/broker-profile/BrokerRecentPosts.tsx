@@ -216,13 +216,12 @@ export const BrokerRecentPosts = ({
         </div>
       )}
 
-      {/* Cards Layout: 5-Column Grid on "Post" Tab OR Horizontal Slider on Overview */}
+      {/* Cards Layout: 5-Column Grid matching Figma Screenshot 3 */}
       <div
-        ref={!isFullGrid ? scrollContainerRef : undefined}
         className={
           isFullGrid
             ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-3.5"
-            : "flex items-center gap-3.5 overflow-x-auto no-scrollbar pb-2 pt-1 scroll-smooth"
+            : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3"
         }
       >
         {posts.map((post) => {
@@ -233,21 +232,20 @@ export const BrokerRecentPosts = ({
             <div
               key={post.id}
               onClick={() => setSelectedPost(post)}
-              className={`${
-                isFullGrid ? "w-full" : "w-[185px] sm:w-[195px] shrink-0"
-              } bg-white rounded-[12px] border border-slate-200/90 overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_26px_rgba(24,101,242,0.12)] hover:border-[#1865F2]/40 hover:-translate-y-1 transition-all p-2 sm:p-2.5 flex flex-col justify-between cursor-pointer group`}
+              className="w-full bg-white rounded-[12px] border border-slate-200/90 overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_26px_rgba(24,101,242,0.12)] hover:border-[#1865F2]/40 hover:-translate-y-1 transition-all p-2 sm:p-2.5 flex flex-col justify-between cursor-pointer group"
             >
               {/* Image + Dark Badge */}
-              <div className="relative w-full h-24 sm:h-26 rounded-[8px] overflow-hidden bg-slate-100 mb-2">
+              <div className="relative w-full h-24 sm:h-28 rounded-[8px] overflow-hidden bg-slate-100 mb-2">
                 <Image
                   src={post.image}
                   alt={post.title}
                   fill
+                  unoptimized
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="200px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[8.5px] font-bold text-white uppercase tracking-tight text-center bg-black/40 backdrop-blur-xs py-0.5 rounded-sm">
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-[8px] sm:text-[8.5px] font-bold text-white uppercase tracking-tight text-center bg-black/50 backdrop-blur-xs py-0.5 rounded-sm truncate">
                   {post.badge}
                 </div>
               </div>

@@ -56,25 +56,26 @@ export const BrokerHighlightsRow = () => {
 
   return (
     <div className="w-full bg-white rounded-[20px] border border-[#D8E6FC] shadow-[0_6px_24px_rgba(24,101,242,0.04)] p-4 sm:p-5 mt-5 font-poppins overflow-x-auto no-scrollbar">
-      <div className="flex items-center divide-x divide-slate-100 min-w-[820px] lg:min-w-0 justify-between">
+      <div className="flex items-center divide-x divide-slate-100 min-w-[840px] lg:min-w-0 justify-between">
         {highlights.map((item) => (
           <div
             key={item.id}
             className="flex-1 flex flex-col items-center justify-center text-center px-2 py-1 first:pl-0 last:pr-0"
           >
-            <div className="w-11 h-11 rounded-full bg-[#EBF4FE] flex items-center justify-center mb-2 shrink-0 shadow-[0_2px_8px_rgba(24,101,242,0.06)] relative overflow-hidden">
+            <div className="w-12 h-12 rounded-full bg-[#EBF4FE] flex items-center justify-center mb-2.5 shrink-0 shadow-[0_2px_8px_rgba(24,101,242,0.06)] relative overflow-hidden">
               <Image
                 src={item.iconSrc}
                 alt={item.label}
-                width={22}
-                height={22}
+                width={26}
+                height={26}
+                unoptimized
                 className="object-contain"
               />
             </div>
-            <p className="text-[13px] sm:text-[13.5px] font-black text-[#0B132B] tracking-tight leading-tight">
+            <p className="text-[13px] sm:text-[14px] font-black text-[#0B132B] tracking-tight leading-tight">
               {item.value}
             </p>
-            <p className="text-[10px] sm:text-[10.5px] text-slate-500 font-medium leading-tight mt-0.5 max-w-[125px] truncate">
+            <p className="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-tight mt-1 max-w-[130px] truncate">
               {item.label}
             </p>
           </div>
