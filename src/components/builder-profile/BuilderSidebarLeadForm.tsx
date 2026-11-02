@@ -132,7 +132,7 @@ export const BuilderSidebarLeadForm = () => {
           <div className="w-3.5 h-3.5 rounded-full bg-[#F37021] flex items-center justify-center text-white text-[7px] font-black shrink-0">
             i
           </div>
-          <span className="text-[10px] font-black text-[#F37021] tracking-tight">ICICI BANK</span>
+          <span className="text-[10px] font-black text-[#F37021] tracking-tight">ICICI Bank</span>
         </div>
       ),
     },
@@ -144,6 +144,28 @@ export const BuilderSidebarLeadForm = () => {
             <div className="w-1.5 h-1.5 bg-[#ED232A]" />
           </div>
           <span className="text-[10px] font-black text-[#004C8F] tracking-tight">HDFC BANK</span>
+        </div>
+      ),
+    },
+    {
+      name: "Bank of Baroda",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 rounded-full bg-[#F26522] flex items-center justify-center text-white text-[7px] font-black shrink-0">
+            BOB
+          </div>
+          <span className="text-[10px] font-black text-[#F26522] tracking-tight">Bank of Baroda</span>
+        </div>
+      ),
+    },
+    {
+      name: "PNB",
+      logo: (
+        <div className="flex items-center gap-1.5">
+          <div className="w-3.5 h-3.5 rounded-xs bg-[#A20A3C] flex items-center justify-center text-white text-[7px] font-black shrink-0">
+            PNB
+          </div>
+          <span className="text-[10px] font-black text-[#A20A3C] tracking-tight">PNB Housing</span>
         </div>
       ),
     },
@@ -173,7 +195,7 @@ export const BuilderSidebarLeadForm = () => {
 
   return (
     <div className="w-full space-y-4 font-poppins">
-      {/* 1. Card: Interested in this builder ? */}
+      {/* 1. Card: Interested In This Builder ? */}
       <div id="builder-lead-form" className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
         {isSubmitted ? (
           <div className="text-center py-2">
@@ -188,12 +210,12 @@ export const BuilderSidebarLeadForm = () => {
               Thank You, {lastSubmittedLead?.name || "Valued Buyer"}!
             </h4>
             <p className="text-xs text-slate-500 font-medium mt-1.5 leading-relaxed">
-              Your request for <span className="font-bold text-[#0B132B]">{lastSubmittedLead?.project}</span> has been forwarded to ATS Infrastructure official sales desk.
+              Your request for <span className="font-bold text-[#0B132B]">{lastSubmittedLead?.project}</span> has been forwarded to ReverseEXP official sales desk.
             </p>
             <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 my-3 text-left">
               <div className="flex items-center gap-2 text-xs font-medium text-slate-700">
                 <Building2 className="w-4 h-4 text-[#1865F2] shrink-0" />
-                <span>Assigned: ATS Corporate Advisor</span>
+                <span>Assigned: ReverseEXP Corporate Advisor</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
                 You will receive exclusive floor plans & VIP pricing on <span className="font-bold text-slate-700">{lastSubmittedLead?.mobile}</span> within 2 hours.
@@ -219,8 +241,8 @@ export const BuilderSidebarLeadForm = () => {
           </div>
         ) : (
           <>
-            <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B]">
-              Interested in this builder ?
+            <h3 className="text-sm sm:text-[15px] font-black text-[#1865F2] tracking-tight">
+              Interested In This Builder ?
             </h3>
             <p className="text-[11px] text-slate-500 font-medium mt-1 leading-relaxed">
               Get Expert Guidance For Your Ideal Home Purchase Today.
@@ -316,7 +338,7 @@ export const BuilderSidebarLeadForm = () => {
 
       {/* 2. Card: Bank Approvals */}
       <div className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
-        <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B] mb-3">
+        <h3 className="text-sm sm:text-[15px] font-black text-[#1865F2] tracking-tight mb-3">
           Bank Approvals
         </h3>
 
@@ -345,14 +367,14 @@ export const BuilderSidebarLeadForm = () => {
       <PropertyEmiCalculatorModal
         isOpen={showEmiModal}
         onClose={() => setShowEmiModal(false)}
-        propertyTitle={lastSubmittedLead?.project || "ATS Infrastructure Projects"}
-        propertyLocation="Sector 150 / 128, Noida Expressway"
-        initialPrice="₹1.50 Cr"
+        propertyTitle={lastSubmittedLead?.project || "ReverseEXP Projects"}
+        propertyLocation="Sector 103, Noida Extension"
+        initialPrice="₹1.25 Cr"
       />
 
       {/* 3. Card: Company Portfolio (Donut Chart) */}
       <div className="bg-white rounded-[24px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_6px_25px_rgba(0,0,0,0.04)]">
-        <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B] mb-3">
+        <h3 className="text-sm sm:text-[15px] font-black text-[#1865F2] tracking-tight mb-3">
           Company Portfolio
         </h3>
 

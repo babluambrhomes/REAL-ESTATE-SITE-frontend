@@ -18,7 +18,7 @@ export const BuilderConstructionProgress = () => {
 
       {/* Top 78% Pill + Completed Green Progress Bar */}
       <div className="flex items-center gap-4 mb-6">
-        <span className="px-3.5 py-1 rounded-full bg-[#EBF5FF] text-[#1865F2] text-xs font-black shadow-2xs shrink-0">
+        <span className="px-4 py-1 rounded-full bg-white border border-[#BFDBFE] text-[#1865F2] text-xs font-black shadow-2xs shrink-0">
           78%
         </span>
         <div className="flex-1">

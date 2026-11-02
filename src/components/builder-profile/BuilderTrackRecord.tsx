@@ -70,22 +70,26 @@ export const BuilderTrackRecord = () => {
       <div className="overflow-x-auto no-scrollbar">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-slate-100 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
-              <th className="pb-3 font-extrabold text-slate-500">Project</th>
-              <th className="pb-3 font-extrabold text-slate-500">Promised Date</th>
-              <th className="pb-3 font-extrabold text-slate-500">Delivered Date</th>
-              <th className="pb-3 font-extrabold text-right text-slate-500">Status</th>
+            <tr className="bg-[#EEF4FF] rounded-xl text-slate-700 font-bold text-xs">
+              <th className="py-3 px-4 font-black text-[#0B132B] rounded-l-xl">Project</th>
+              <th className="py-3 px-4 font-black text-[#0B132B]">Promised Date</th>
+              <th className="py-3 px-4 font-black text-[#0B132B]">Delivered Date</th>
+              <th className="py-3 px-4 font-black text-[#0B132B] rounded-r-xl">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-50">
+          <tbody className="divide-y divide-slate-100">
             {records.map((r) => (
               <tr key={r.id} className="hover:bg-slate-50/70 transition-colors">
-                <td className="py-3.5 font-bold text-[#0B132B]">{r.project}</td>
-                <td className="py-3.5 text-slate-500 font-medium">{r.promisedDate}</td>
-                <td className="py-3.5 text-slate-500 font-medium">{r.deliveredDate}</td>
-                <td className="py-3.5 text-right">
+                <td className="py-3 px-4 font-bold text-[#0B132B]">{r.project}</td>
+                <td className="py-3 px-4 text-[#1865F2] font-semibold">{r.promisedDate}</td>
+                <td className="py-3 px-4 text-[#0B132B] font-medium">{r.deliveredDate}</td>
+                <td className="py-3 px-4">
                   <span
-                    className={`inline-block px-3 py-1 rounded-full text-[10.5px] font-bold ${r.statusClass}`}
+                    className={`inline-block px-3.5 py-1 rounded-full text-[10.5px] font-bold ${
+                      r.status === "Early" || r.status.toLowerCase().includes("on time")
+                        ? "bg-[#D1FAE5] text-[#059669]"
+                        : "bg-[#FEF3C7] text-[#D97706]"
+                    }`}
                   >
                     {r.status}
                   </span>
@@ -96,18 +100,18 @@ export const BuilderTrackRecord = () => {
         </table>
       </div>
 
-      {/* On-Time Delivery Progress Metric */}
+      {/* On-Time Delivery Progress Metric (Exact Figma 1:1) */}
       <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
-        <span className="text-xs font-bold text-[#0B132B] whitespace-nowrap">
-          On-time Delivery
+        <span className="text-xs sm:text-[13px] font-bold text-[#0B132B] whitespace-nowrap">
+          On- time Delivery
         </span>
-        <div className="flex-1 max-w-lg h-2.5 rounded-full bg-slate-100 overflow-hidden">
+        <div className="flex-1 max-w-xl h-2.5 rounded-full bg-slate-100 overflow-hidden">
           <div
-            className="h-full bg-[#00B368] rounded-full transition-all duration-1000"
+            className="h-full bg-[#10B981] rounded-full transition-all duration-1000"
             style={{ width: "95%" }}
           />
         </div>
-        <span className="text-sm font-black text-[#00B368]">95%</span>
+        <span className="text-lg sm:text-xl font-black text-[#10B981]">95%</span>
       </div>
     </div>
   );

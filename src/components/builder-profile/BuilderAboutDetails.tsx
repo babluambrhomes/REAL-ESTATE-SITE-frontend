@@ -40,46 +40,69 @@ export const BuilderAboutDetails = () => {
         ReverseEXP Pvt. Ltd. is A RERA-Verified Real Estate Developer Known For Quality Construction, Transparent Dealings, And Timely Project Delivery. The Company Has Delivered Multiple Residential And Commercial Projects Across Prime Locations And Continues To Build Modern Communities With A Strong Focus On Customer Satisfaction And Long-Term Value.
       </p>
 
-      {/* 4 Feature Grid Boxes */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 my-5">
-        {highlights.map((h) => {
-          const IconComp = h.icon;
-          return (
-            <div
-              key={h.title}
-              className="p-3.5 rounded-xl border border-slate-200/80 bg-white flex items-center gap-3 shadow-2xs"
-            >
-              <div className={`w-9 h-9 rounded-xl ${h.color} flex items-center justify-center shrink-0`}>
-                <IconComp className="w-4.5 h-4.5 stroke-[2.5]" />
+      {/* 4 Feature Grid Boxes (Figma 1:1: 3 cards top row, 1 card centered below) */}
+      <div className="my-5 space-y-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+          {highlights.slice(0, 3).map((h) => {
+            const IconComp = h.icon;
+            return (
+              <div
+                key={h.title}
+                className="p-3.5 rounded-2xl border border-slate-200/80 bg-white flex items-center gap-3 shadow-2xs"
+              >
+                <div className={`w-9 h-9 rounded-xl ${h.color} flex items-center justify-center shrink-0`}>
+                  <IconComp className="w-4.5 h-4.5 stroke-[2.5]" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-xs font-black text-[#0B132B]">{h.title}</h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-0.5 truncate">
+                    {h.sub}
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <h4 className="text-xs font-black text-[#0B132B]">{h.title}</h4>
-                <p className="text-[10px] text-slate-400 font-medium mt-0.5 truncate">
-                  {h.sub}
-                </p>
+            );
+          })}
+        </div>
+
+        {/* 4th Card Centered */}
+        <div className="flex justify-center">
+          {highlights.slice(3, 4).map((h) => {
+            const IconComp = h.icon;
+            return (
+              <div
+                key={h.title}
+                className="w-full sm:w-[350px] p-3.5 rounded-2xl border border-slate-200/80 bg-white flex items-center gap-3 shadow-2xs"
+              >
+                <div className={`w-9 h-9 rounded-xl ${h.color} flex items-center justify-center shrink-0`}>
+                  <IconComp className="w-4.5 h-4.5 stroke-[2.5]" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-xs font-black text-[#0B132B]">{h.title}</h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-0.5 truncate">
+                    {h.sub}
+                  </p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       {/* Contact Links */}
-      <div className="flex flex-wrap items-center gap-6 pt-3 border-t border-slate-100 text-xs font-bold text-[#1865F2]">
+      <div className="flex flex-wrap items-center gap-8 pt-3 border-t border-slate-100 text-xs font-bold text-[#1865F2]">
         <a
-          href="mailto:Sales@reverseexp.com"
-          className="flex items-center gap-2 hover:underline"
+          href="mailto:Sales@Reverseexp.Com"
+          className="hover:underline flex items-center gap-1.5"
         >
-          <Mail className="w-3.5 h-3.5" />
-          <span>Sales@reverseexp.com</span>
+          <span>Sales@Reverseexp.Com</span>
         </a>
         <a
           href="https://www.Reverseexp.com"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-2 hover:underline"
+          className="hover:underline flex items-center gap-1.5"
         >
-          <Globe className="w-3.5 h-3.5" />
-          <span>www.Reverseexp.com</span>
+          <span>Www.Reverseexp.Com</span>
         </a>
       </div>
     </div>

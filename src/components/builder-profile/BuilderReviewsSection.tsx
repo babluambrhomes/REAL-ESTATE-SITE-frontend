@@ -209,15 +209,19 @@ export const BuilderReviewsSection = () => {
         </div>
 
         <div className="space-y-4">
-          {displayedReviews.map((rev, index) => (
+          {displayedReviews.map((rev) => (
             <div
               key={rev.id}
-              className={`p-4 rounded-xl bg-white border border-slate-100 flex items-start gap-3.5 shadow-2xs relative ${
-                index === 0 ? "border-r-2 border-r-[#1865F2]" : ""
-              }`}
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 flex items-start gap-4 shadow-2xs relative border-r-4 border-r-[#1865F2]"
             >
-              <div className={`w-9 h-9 rounded-full ${rev.avatarBg} flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs`}>
-                {rev.name[0]}
+              <div className={`w-10 h-10 rounded-full ${rev.avatarBg} flex items-center justify-center shrink-0 shadow-2xs`}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-5 h-5 text-white"
+                >
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
               </div>
 
               <div className="flex-1 min-w-0">

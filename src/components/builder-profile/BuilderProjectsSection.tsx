@@ -169,17 +169,25 @@ export const BuilderProjectsSection = () => {
                 </div>
               </div>
 
-              {/* Vertical Ribbon (Placed between or on right according to position) */}
+              {/* Vertical Ribbon (Placed between or on right according to position - Exact Figma 1:1) */}
               <div
-                className={`hidden lg:flex items-center justify-center w-7 shrink-0 ${
-                  proj.imagePosition === "right" ? "md:order-2 border-r border-slate-100 bg-slate-50/50" : "md:order-3 border-l border-slate-100 bg-slate-50/50"
+                className={`hidden lg:flex items-center justify-center w-8 shrink-0 py-3 ${
+                  proj.imagePosition === "right" ? "md:order-2" : "md:order-3"
                 }`}
               >
-                <span
-                  className={`text-[9.5px] font-bold -rotate-90 whitespace-nowrap ${proj.statusColor}`}
-                >
-                  ( {proj.status} )
-                </span>
+                <div className="h-full flex items-center justify-center px-1">
+                  <span
+                    className={`text-[9.5px] font-bold -rotate-90 whitespace-nowrap tracking-wider py-2 px-3 rounded-full border ${
+                      proj.status === "Under Construction"
+                        ? "text-[#10B981] border-[#10B981]/40 bg-emerald-50/50"
+                        : proj.status === "Ready to move"
+                        ? "text-[#EF4444] border-[#EF4444]/40 bg-rose-50/50"
+                        : "text-[#00D1FF] border-[#00D1FF]/40 bg-cyan-50/50"
+                    }`}
+                  >
+                    ( {proj.status} )
+                  </span>
+                </div>
               </div>
 
               {/* Content Center */}
@@ -194,7 +202,7 @@ export const BuilderProjectsSection = () => {
                     {proj.units.map((unit) => (
                       <span
                         key={unit}
-                        className="px-2.5 py-0.5 rounded-full bg-[#1865F2] text-white text-[10px] font-bold shadow-2xs"
+                        className="px-3 py-0.5 rounded-full bg-[#1865F2] text-white text-[10.5px] font-bold shadow-2xs"
                       >
                         {unit}
                       </span>
@@ -211,22 +219,24 @@ export const BuilderProjectsSection = () => {
                   </p>
 
                   {/* Pricing Row with Discount */}
-                  <div className="flex items-center gap-2.5 mt-2 flex-wrap">
+                  <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="text-[11px] font-medium text-slate-400 line-through">
                       {proj.mrp}
                     </span>
                     <span className="text-base sm:text-lg font-black text-[#0B132B]">
                       {proj.price}
                     </span>
-                    <span className="px-2 py-0.5 rounded-md bg-[#00D1FF] text-white text-[10px] font-black uppercase shadow-2xs">
-                      {proj.discount}
+                    <span className="px-2 py-0.5 rounded-md bg-[#00D1FF] text-white text-[10px] font-black tracking-tight flex items-center gap-0.5 shadow-2xs">
+                      <span>%</span>
+                      <span>{proj.discount}</span>
                     </span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-500 font-medium line-clamp-2 mt-2 leading-relaxed">
-                    {proj.description}
-                  </p>
+                  <div className="flex items-center justify-between text-xs text-slate-500 font-medium mt-2 leading-relaxed">
+                    <p className="line-clamp-1">{proj.description}</p>
+                    <span className="text-slate-400 text-[10px] ml-1 shrink-0">▼</span>
+                  </div>
                 </div>
 
                 {/* Bottom Stats Bar & View Details CTA */}
@@ -258,15 +268,17 @@ export const BuilderProjectsSection = () => {
                     </button>
                     <span className="flex items-center gap-1 text-slate-400">
                       <Eye className="w-3.5 h-3.5" />
-                      <span>Views</span>
+                      <span>views</span>
                     </span>
                   </div>
 
                   <Link
                     href={`/properties/${encodeURIComponent(proj.title)}`}
-                    className="px-4 py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-[0_3px_10px_rgba(24,101,242,0.3)] transition-all cursor-pointer"
+                    className="px-4 py-1.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-lg flex items-center gap-2 shadow-[0_3px_10px_rgba(24,101,242,0.3)] transition-all cursor-pointer"
                   >
-                    <span className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-black">1</span>
+                    <span className="w-4 h-4 rounded-full bg-[#10B981] text-white flex items-center justify-center text-[10px] font-black">
+                      1
+                    </span>
                     <span>View Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>

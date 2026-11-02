@@ -37,7 +37,7 @@ export const BuilderFaqSection = () => {
     <div className="w-full bg-white rounded-[22px] border border-slate-200/90 p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] font-poppins">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base sm:text-lg font-black text-[#0B132B]">
+        <h3 className="text-base sm:text-lg font-black text-[#1865F2] tracking-tight">
           FAQS
         </h3>
         <button

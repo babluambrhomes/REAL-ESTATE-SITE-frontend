@@ -126,14 +126,14 @@ export const BuilderTrustAndStats = () => {
           
           {/* Top: Location Presence Chips */}
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
-            <h3 className="text-sm sm:text-[15px] font-black text-[#0B132B]">
+            <h3 className="text-sm sm:text-[15px] font-black text-[#1865F2] tracking-tight">
               Location Presence
             </h3>
             <div className="flex flex-wrap items-center gap-2">
               {locations.map((loc) => (
                 <span
                   key={loc}
-                  className="px-3 py-1 bg-[#F0F6FF] text-[#1865F2] border border-[#D5E6FA] rounded-full text-[11px] font-bold transition-colors cursor-pointer hover:bg-blue-100"
+                  className="px-3.5 py-1 bg-white text-[#1865F2] border border-[#BFDBFE] rounded-full text-[11px] font-bold transition-colors cursor-pointer hover:bg-blue-50/50 shadow-2xs"
                 >
                   {loc}
                 </span>
@@ -141,26 +141,26 @@ export const BuilderTrustAndStats = () => {
             </div>
           </div>
 
-          {/* Bottom: 5 Key Metric Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {/* Bottom: 5 Key Metric Columns with Vertical Dividers (Exact Figma 1:1) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 pt-1">
             {stats.map((st) => {
               const IconComp = st.icon;
               return (
                 <div
                   key={st.id}
-                  className="bg-white rounded-2xl p-3 border border-slate-100 flex flex-col items-center text-center transition-all hover:-translate-y-0.5 hover:shadow-sm shadow-2xs"
+                  className="p-3 sm:px-2 lg:px-3 flex flex-col items-center text-center transition-all hover:-translate-y-0.5"
                 >
                   {/* Circular Icon Badge */}
-                  <div className={`w-11 h-11 rounded-full ${st.bgColor} flex items-center justify-center mb-2 shadow-2xs`}>
+                  <div className={`w-11 h-11 rounded-full ${st.bgColor} flex items-center justify-center mb-2.5 shadow-2xs`}>
                     <IconComp className="w-5 h-5" />
                   </div>
-                  <span className="text-lg sm:text-xl font-black text-[#0B132B] tracking-tight">
+                  <span className="text-xl sm:text-2xl font-black text-[#1865F2] tracking-tight">
                     {st.val}
                   </span>
-                  <span className="text-[9.5px] font-black text-[#0B132B] leading-tight mt-1 uppercase tracking-wider">
+                  <span className="text-[10px] sm:text-[10.5px] font-black text-[#0B132B] leading-tight mt-1 uppercase tracking-tight">
                     {st.label}
                   </span>
-                  <span className="text-[9px] text-slate-400 font-medium mt-0.5 truncate w-full">
+                  <span className="text-[10px] text-slate-400 font-medium mt-0.5 truncate w-full">
                     {st.sub}
                   </span>
                 </div>

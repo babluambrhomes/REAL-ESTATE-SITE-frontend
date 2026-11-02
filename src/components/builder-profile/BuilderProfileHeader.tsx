@@ -56,13 +56,13 @@ export const BuilderProfileHeader = ({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
 
-        {/* + Add Cover Page Button */}
+        {/* + Add Cover Page Button (Figma 1:1) */}
         <button
           type="button"
           onClick={() =>
             toast.success("Cover image upload is available in your Builder Dashboard.")
           }
-          className="absolute right-4 sm:right-6 bottom-4 px-3.5 py-1.5 rounded-lg bg-sky-500/90 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md backdrop-blur-xs transition-all cursor-pointer border border-sky-400/40"
+          className="absolute right-4 sm:right-6 bottom-4 px-4 py-1.5 rounded-lg bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer border border-blue-400/30"
         >
           <Plus className="w-3.5 h-3.5 text-white stroke-[3]" />
           <span>Add Cover page</span>
@@ -98,14 +98,14 @@ export const BuilderProfileHeader = ({
               </span>
             </div>
 
-            {/* Blue Target / Verified Badge at bottom-right of logo */}
+            {/* Blue Target / Orbit Badge at bottom-right of logo */}
             <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white border-2 border-white shadow-md flex items-center justify-center">
               <div className="w-5 h-5 rounded-full bg-[#1865F2] flex items-center justify-center text-white">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="3"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   className="w-3 h-3"
@@ -144,7 +144,7 @@ export const BuilderProfileHeader = ({
               <span className="text-slate-300">•</span>
               <span className="flex items-center gap-1.5 text-slate-600">
                 <Award className="w-3 h-3 text-[#1865F2]" />
-                {projectsCount}
+                25+ Project delivered
               </span>
               <span className="text-slate-300">•</span>
               <span className="flex items-center gap-1.5 text-slate-600">
@@ -155,7 +155,7 @@ export const BuilderProfileHeader = ({
           </div>
         </div>
 
-        {/* Right: Actions (Contact Builder, WhatsApp, Schedule Visit) */}
+        {/* Right: Actions (Contact Builder, WhatsApp, Schedule Visit - Exact Figma 1:1) */}
         <div className="flex flex-col items-center lg:items-end gap-2.5 w-full sm:w-auto shrink-0">
           <div className="flex items-center gap-2.5 w-full sm:w-auto">
             {/* Contact Builder */}
@@ -172,18 +172,18 @@ export const BuilderProfileHeader = ({
             <button
               type="button"
               onClick={handleWhatsApp}
-              className="flex-1 sm:flex-none px-5 py-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(37,211,102,0.3)] transition-all cursor-pointer"
+              className="flex-1 sm:flex-none px-5 py-2.5 bg-[#00B368] hover:bg-[#009b5a] text-white text-xs sm:text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(0,179,104,0.3)] transition-all cursor-pointer"
             >
               <MessageCircle className="w-3.5 h-3.5" />
               <span>WhatsApp</span>
             </button>
           </div>
 
-          {/* Schedule Visit (Centered below) */}
+          {/* Schedule Visit (Exact Figma 1:1: White background, blue border, blue text) */}
           <button
             type="button"
             onClick={handleScrollToForm}
-            className="w-full px-6 py-2 bg-[#F0F6FF] hover:bg-[#E2EFFF] text-[#1865F2] border border-[#BFDBFE] text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="w-full px-6 py-2.5 bg-white hover:bg-blue-50/50 text-[#1865F2] border border-[#1865F2] text-xs sm:text-[13px] font-bold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs"
           >
             <Calendar className="w-3.5 h-3.5 text-[#1865F2]" />
             <span>Schedule Visit</span>
