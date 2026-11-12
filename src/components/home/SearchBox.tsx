@@ -21,6 +21,14 @@ const {
   propertyTypeOptions,
 } = SEARCH_BOX;
 
+const RENT_BUDGET_OPTIONS: OptionType[] = [
+  { value: "under-15k", label: "Under ₹15,000" },
+  { value: "15k-30k", label: "₹15,000 - ₹30,000" },
+  { value: "30k-50k", label: "₹30,000 - ₹50,000" },
+  { value: "50k-1l", label: "₹50,000 - ₹1 Lakh" },
+  { value: "above-1l", label: "Above ₹1 Lakh" },
+];
+
 /* Custom Tab Mask Icon Helper that renders PNG masks in currentColor (white when active, slate grey when inactive) */
 const TabMaskIcon = ({ src, className }: { src: string; className?: string }) => (
   <span
@@ -198,7 +206,10 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                 <button
                   key={tab.value}
                   type="button"
-                  onClick={() => setActiveTab(tab.value)}
+                  onClick={() => {
+                    setActiveTab(tab.value);
+                    setSelectedBudget(null);
+                  }}
                   className={cn(
                     "flex items-center gap-1 sm:gap-1.5 cursor-pointer rounded-full transition-all duration-200 shrink-0",
                     isActive
@@ -245,13 +256,20 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
             {/* 2. LOCALITY */}
             <div className="w-full">
               <label className="mb-1 block text-[10.5px] sm:text-[11px] font-normal uppercase tracking-[0.78px] text-[#021431] leading-tight">
-                LOCALITY
+                {activeTab === "agent" ? "AGENT / AREA" : "LOCALITY"}
               </label>
               <div className="relative">
                 <input
                   value={locality}
                   onChange={(e) => setLocality(e.target.value)}
-                  placeholder="Select Locality"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSearch();
+                  }}
+                  placeholder={
+                    activeTab === "agent"
+                      ? "Search Agent or Area"
+                      : "Select Locality"
+                  }
                   className="h-[42px] w-full rounded-[12px] border border-[#E2E8F0] bg-[#F8FAFC] pl-3.5 pr-8 text-[13px] font-normal text-slate-900 outline-none transition-colors placeholder:text-[#334155] hover:border-[#1865F2] focus:border-[#1865F2] focus:ring-1 focus:ring-blue-100"
                 />
               </div>
@@ -264,7 +282,11 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
               </label>
               <Select<OptionType, false>
                 instanceId="search-budget-select"
-                options={budgetOptions}
+                options={
+                  activeTab === "rent" || activeTab === "pg"
+                    ? RENT_BUDGET_OPTIONS
+                    : budgetOptions
+                }
                 styles={searchBoxSelectStyles}
                 value={selectedBudget}
                 onChange={(option) => setSelectedBudget(option)}
@@ -299,7 +321,7 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
                 className="flex h-[42px] w-full items-center justify-center gap-1.5 rounded-[12px] bg-gradient-to-r from-[#1865F2] via-[#2A52EE] to-[#3E38E0] px-4 text-[13.5px] font-medium text-white transition-all duration-200 hover:scale-[1.01] cursor-pointer"
               >
                 <Search className="h-4 w-4 stroke-[2.2]" />
-                <span>Search</span>
+                <span>{activeTab === "agent" ? "Find Agents" : "Search"}</span>
               </button>
             </div>
           </div>

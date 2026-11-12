@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { X, Search, FileEdit, Eye, BookmarkCheck, SlidersHorizontal, Headphones, LogOut } from 'lucide-react';
 import type { HeaderSidebarProps } from '@/types';
 import { HEADER_SIDEBAR } from '@/data/headerData';
@@ -13,6 +14,7 @@ import { useWishlist } from '@/lib/wishlist';
 import toast from 'react-hot-toast';
 
 export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((s) => s.auth);
   const { count: wishlistCount } = useWishlist();
@@ -41,12 +43,15 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
 
   const handleSearchPropertyCode = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!propertyCode.trim()) {
+    const query = propertyCode.trim();
+    if (!query) {
       toast.error('Please enter a property code');
       return;
     }
-    toast.success(`Searching property: ${propertyCode.trim()}`);
+    const cleanQuery = query.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    toast.success(`Opening property ${query}...`);
     onClose();
+    router.push(`/properties/${cleanQuery || query}`);
   };
 
   const savedCountStr =
@@ -308,6 +313,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
                 src="/common/query_illustrations.png"
                 alt="Looking to sell or rent"
                 fill
+                sizes="120px"
                 className="object-contain"
               />
             </div>

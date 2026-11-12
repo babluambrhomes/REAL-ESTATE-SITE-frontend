@@ -326,6 +326,12 @@ export const PropertyListingsClient = () => {
         if (budget === "1-1.5cr" && (val < 100 || val > 150)) return false;
         if (budget === "1.5-3cr" && (val < 150 || val > 300)) return false;
         if (budget === "above-3cr" && val < 300) return false;
+        // Rental budget presets
+        if (budget === "under-15k" && val > 0.15) return false;
+        if (budget === "15k-30k" && (val < 0.15 || val > 0.3)) return false;
+        if (budget === "30k-50k" && (val < 0.3 || val > 0.5)) return false;
+        if (budget === "50k-1l" && (val < 0.5 || val > 1.0)) return false;
+        if (budget === "above-1l" && val < 1.0) return false;
       }
 
       // Filter by Min/Max Price from slider (supports INR rupees or Lakhs)

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface AgentNearByItem {
@@ -95,18 +96,19 @@ export const AgentNearBy = () => {
         className="flex items-center gap-4 overflow-x-auto no-scrollbar pb-2 scroll-smooth"
       >
         {agents.map((item) => (
-          <div
+          <Link
             key={item.id}
-            className="w-[185px] sm:w-[195px] shrink-0 bg-white rounded-[18px] border border-slate-100 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_26px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all"
+            href="/s/agent/jitender-singh"
+            className="w-[185px] sm:w-[195px] shrink-0 bg-white rounded-[18px] border border-slate-100 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_26px_rgba(24,101,242,0.12)] hover:-translate-y-1 transition-all block cursor-pointer group"
           >
             {/* Top Portrait Photo */}
-            <div className="w-full h-44 relative bg-slate-100">
+            <div className="w-full h-44 relative bg-slate-100 overflow-hidden">
               <Image
                 src={item.photoSrc}
                 alt={item.agent}
                 fill
                 unoptimized
-                className="object-cover object-top"
+                className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                 sizes="195px"
               />
             </div>
@@ -125,7 +127,7 @@ export const AgentNearBy = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

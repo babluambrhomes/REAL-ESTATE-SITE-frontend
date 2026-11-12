@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { SlidersHorizontal, Heart, Share2, Eye, ArrowRight, Star, MapPin } from "lucide-react";
+import { SlidersHorizontal, Heart, Share2, Eye, ArrowRight, Zap, MapPin } from "lucide-react";
 import toast from "react-hot-toast";
+import { useWishlist } from "@/lib/wishlist";
 
 interface ProjectItem {
   id: string;
@@ -16,24 +17,38 @@ interface ProjectItem {
   discount: string;
   description: string;
   image: string;
-  status: "Under Construction" | "Ready to move" | "Upcoming";
+  status: "Under Construction" | "Ready to Move" | "Upcoming";
   statusColor: string;
   imagePosition: "left" | "right";
+  badgeType: "zap" | "star";
   likes: number;
 }
 
 export const BuilderProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
-  const [likedProjectIds, setLikedProjectIds] = useState<Record<string, boolean>>({});
+  const { isSaved, toggle: toggleWishlist } = useWishlist();
 
-  const toggleLike = (id: string, title: string) => {
-    setLikedProjectIds((prev) => {
-      const isLiked = !prev[id];
-      toast.success(
-        isLiked ? `Saved "${title}" to your favorites!` : `Removed from favorites`
-      );
-      return { ...prev, [id]: isLiked };
+  const toggleLike = (proj: ProjectItem) => {
+    const isCurrentlySaved = isSaved(proj.id || proj.title);
+    toggleWishlist(proj.id || proj.title, {
+      id: proj.id,
+      title: proj.title,
+      location: proj.location,
+      price: proj.price,
+      originalPrice: proj.mrp,
+      images: [proj.image],
+      chips: proj.units,
+      verifiedText: "BUILDER VERIFIED",
+      phone: "+91 98765 43210",
+      city: "Noida",
+      type: "Apartment",
+      beds: proj.units[0] || "3 BHK",
     });
+    toast.success(
+      isCurrentlySaved
+        ? `Removed "${proj.title}" from your wishlist`
+        : `Saved "${proj.title}" to your wishlist!`
+    );
   };
 
   const handleShare = (title: string) => {
@@ -51,49 +66,52 @@ export const BuilderProjectsSection = () => {
     {
       id: "max-estate-1",
       title: "The Terraces at Max Estate 361",
-      location: "Sector 103, Noida Ext",
+      location: "Sector 103 , Noida Ext",
       units: ["3 BHK Apartments", "4 BHK Apartments"],
       mrp: "MRP ₹1.58 Cr",
       price: "₹1.25*Cr",
-      discount: "13% OFF!",
+      discount: "13 % OFF!",
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, smart automation, club access and panoramic greens.",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, smart automation, club access and panoramic greens...",
       image: "/builders/builder_cover_modern_building.jpg",
       status: "Under Construction",
-      statusColor: "text-[#10B981]",
+      statusColor: "text-[#10B981] border-[#10B981]",
       imagePosition: "left",
+      badgeType: "zap",
       likes: 72,
     },
     {
       id: "max-estate-2",
       title: "The Terraces at Max Estate 361",
-      location: "Sector 103, Noida Ext",
+      location: "Sector 103 , Noida Ext",
       units: ["3 BHK Apartments", "4 BHK Apartments"],
       mrp: "MRP ₹1.58 Cr",
       price: "₹1.25*Cr",
-      discount: "13% OFF!",
+      discount: "13 % OFF!",
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, private terrace deck and premium Italian marble.",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, private terrace deck and premium Italian marble...",
       image: "/images/properties/night-tower-figma.jpg",
-      status: "Ready to move",
-      statusColor: "text-[#EF4444]",
+      status: "Ready to Move",
+      statusColor: "text-[#EF4444] border-[#EF4444]",
       imagePosition: "right",
+      badgeType: "star",
       likes: 72,
     },
     {
       id: "max-estate-3",
       title: "The Terraces at Max Estate 361",
-      location: "Sector 103, Noida Ext",
+      location: "Sector 103 , Noida Ext",
       units: ["3 BHK Apartments", "4 BHK Apartments"],
       mrp: "MRP ₹1.58 Cr",
       price: "₹1.25*Cr",
-      discount: "13% OFF!",
+      discount: "13 % OFF!",
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, lush landscaped central garden and 3-tier security.",
+        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular kitchen, lush landscaped central garden and 3-tier security...",
       image: "/images/properties/ambr-aspire-figma.jpg",
       status: "Upcoming",
-      statusColor: "text-[#EF4444]",
+      statusColor: "text-[#10B981] border-[#10B981]",
       imagePosition: "left",
+      badgeType: "zap",
       likes: 72,
     },
   ];
@@ -101,7 +119,11 @@ export const BuilderProjectsSection = () => {
   const filteredProjects =
     activeFilter === "All"
       ? projects
-      : projects.filter((p) => p.status === activeFilter);
+      : projects.filter(
+          (p) =>
+            p.status.toLowerCase() === activeFilter.toLowerCase() ||
+            (activeFilter === "Ready to move" && p.status === "Ready to Move")
+        );
 
   return (
     <div className="w-full space-y-4 font-poppins">
@@ -119,10 +141,10 @@ export const BuilderProjectsSection = () => {
                 key={tab}
                 type="button"
                 onClick={() => setActiveFilter(tab)}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                className={`px-5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-[#1865F2] text-white shadow-[0_3px_10px_rgba(24,101,242,0.3)]"
-                    : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50"
+                    ? "bg-[#1865F2] text-white shadow-sm"
+                    : "bg-white text-slate-700 border border-slate-300 hover:bg-slate-50"
                 }`}
               >
                 {tab}
@@ -132,7 +154,7 @@ export const BuilderProjectsSection = () => {
 
           <button
             type="button"
-            className="px-4 py-1.5 rounded-full text-xs font-bold bg-white text-[#1865F2] border border-[#BFDBFE] flex items-center gap-1.5 hover:bg-blue-50/50 shadow-2xs cursor-pointer"
+            className="px-5 py-1.5 rounded-full text-xs font-bold bg-white text-[#1865F2] border border-[#BFDBFE] flex items-center gap-1.5 hover:bg-blue-50/50 shadow-2xs cursor-pointer"
           >
             <SlidersHorizontal className="w-3.5 h-3.5 text-[#1865F2]" />
             <span>Filter</span>
@@ -146,11 +168,11 @@ export const BuilderProjectsSection = () => {
           return (
             <div
               key={proj.id}
-              className="group relative bg-white rounded-[24px] border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(24,101,242,0.08)] hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col md:flex-row items-stretch"
+              className="group relative bg-white rounded-[20px] border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(24,101,242,0.08)] hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col md:flex-row items-center p-3 sm:p-4 gap-4"
             >
-              {/* Image Block */}
+              {/* Image Block with Inner Rounded Radius (Exact Figma 1:1) */}
               <div
-                className={`relative w-full md:w-[250px] lg:w-[270px] h-[190px] md:h-auto shrink-0 overflow-hidden ${
+                className={`relative w-full md:w-[250px] lg:w-[270px] h-[190px] shrink-0 rounded-[16px] overflow-hidden ${
                   proj.imagePosition === "right" ? "md:order-3" : "md:order-1"
                 }`}
               >
@@ -158,51 +180,54 @@ export const BuilderProjectsSection = () => {
                   src={proj.image}
                   alt={proj.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 rounded-[16px]"
                   sizes="(max-width: 768px) 100vw, 270px"
                 />
-                {/* Popular Star Badge */}
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B132B]/90 backdrop-blur-xs text-white text-[9.5px] font-black tracking-wider uppercase flex items-center gap-1 shadow-sm">
-                  <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                  <span>POPULAR</span>
-                  <span className="text-amber-400">✦</span>
+                
+                {/* Popular Badge (Figma 1:1: zap on left or star on right) */}
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B132B]/90 backdrop-blur-xs text-white text-[9.5px] font-black tracking-wider uppercase flex items-center gap-1.5 shadow-sm">
+                  {proj.badgeType === "zap" ? (
+                    <>
+                      <Zap className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      <span>POPULAR</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>POPULAR</span>
+                      <span className="text-amber-400 font-bold">✦</span>
+                    </>
+                  )}
                 </div>
               </div>
 
-              {/* Vertical Ribbon (Placed between or on right according to position - Exact Figma 1:1) */}
+              {/* Vertical Ribbon (Exact Figma 1:1: Pill without parentheses) */}
               <div
-                className={`hidden lg:flex items-center justify-center w-8 shrink-0 py-3 ${
+                className={`hidden lg:flex items-center justify-center shrink-0 self-stretch px-1 ${
                   proj.imagePosition === "right" ? "md:order-2" : "md:order-3"
                 }`}
               >
-                <div className="h-full flex items-center justify-center px-1">
+                <div className="h-full flex items-center justify-center">
                   <span
-                    className={`text-[9.5px] font-bold -rotate-90 whitespace-nowrap tracking-wider py-2 px-3 rounded-full border ${
-                      proj.status === "Under Construction"
-                        ? "text-[#10B981] border-[#10B981]/40 bg-emerald-50/50"
-                        : proj.status === "Ready to move"
-                        ? "text-[#EF4444] border-[#EF4444]/40 bg-rose-50/50"
-                        : "text-[#00D1FF] border-[#00D1FF]/40 bg-cyan-50/50"
-                    }`}
+                    className={`text-[10px] font-bold -rotate-90 whitespace-nowrap tracking-wider py-1.5 px-3 rounded-full border ${proj.statusColor} bg-white shadow-2xs`}
                   >
-                    ( {proj.status} )
+                    {proj.status}
                   </span>
                 </div>
               </div>
 
               {/* Content Center */}
               <div
-                className={`flex-1 p-4 sm:p-5 flex flex-col justify-between ${
+                className={`flex-1 flex flex-col justify-between py-1 min-w-0 ${
                   proj.imagePosition === "right" ? "md:order-1" : "md:order-2"
                 }`}
               >
                 <div>
                   {/* Unit Tags */}
-                  <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
                     {proj.units.map((unit) => (
                       <span
                         key={unit}
-                        className="px-3 py-0.5 rounded-full bg-[#1865F2] text-white text-[10.5px] font-bold shadow-2xs"
+                        className="px-3 py-1 rounded-full bg-[#1865F2] text-white text-[11px] font-semibold shadow-2xs"
                       >
                         {unit}
                       </span>
@@ -210,7 +235,7 @@ export const BuilderProjectsSection = () => {
                   </div>
 
                   {/* Title & Location */}
-                  <h3 className="text-base sm:text-[17px] font-black text-[#0B132B] tracking-tight group-hover:text-[#1865F2] transition-colors">
+                  <h3 className="text-base sm:text-[17px] font-bold text-[#0B132B] tracking-tight group-hover:text-[#1865F2] transition-colors">
                     {proj.title}
                   </h3>
                   <p className="text-xs font-medium text-slate-500 mt-0.5 flex items-center gap-1">
@@ -220,42 +245,42 @@ export const BuilderProjectsSection = () => {
 
                   {/* Pricing Row with Discount */}
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
-                    <span className="text-[11px] font-medium text-slate-400 line-through">
+                    <span className="text-xs font-normal text-slate-400 line-through">
                       {proj.mrp}
                     </span>
-                    <span className="text-base sm:text-lg font-black text-[#0B132B]">
+                    <span className="text-lg sm:text-xl font-black text-[#0B132B]">
                       {proj.price}
                     </span>
-                    <span className="px-2 py-0.5 rounded-md bg-[#00D1FF] text-white text-[10px] font-black tracking-tight flex items-center gap-0.5 shadow-2xs">
+                    <span className="px-2.5 py-0.5 rounded-md bg-[#00D1FF] text-white text-[10.5px] font-black tracking-tight flex items-center gap-1 shadow-2xs">
                       <span>%</span>
                       <span>{proj.discount}</span>
                     </span>
                   </div>
 
                   {/* Description */}
-                  <div className="flex items-center justify-between text-xs text-slate-500 font-medium mt-2 leading-relaxed">
+                  <div className="flex items-center justify-between text-xs text-slate-500 font-normal mt-2 leading-relaxed">
                     <p className="line-clamp-1">{proj.description}</p>
                     <span className="text-slate-400 text-[10px] ml-1 shrink-0">▼</span>
                   </div>
                 </div>
 
                 {/* Bottom Stats Bar & View Details CTA */}
-                <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-100 gap-2">
-                  <div className="flex items-center gap-4 text-[11px] font-medium text-slate-500">
+                <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 gap-2">
+                  <div className="flex items-center gap-4 text-xs font-medium text-slate-500">
                     <button
                       type="button"
-                      onClick={() => toggleLike(proj.id, proj.title)}
+                      onClick={() => toggleLike(proj)}
                       className={`flex items-center gap-1 transition-colors cursor-pointer ${
-                        likedProjectIds[proj.id] ? "text-rose-500 font-bold" : "hover:text-rose-500"
+                        isSaved(proj.id || proj.title) ? "text-rose-500 font-bold" : "hover:text-rose-500"
                       }`}
                     >
                       <Heart
                         className={`w-3.5 h-3.5 ${
-                          likedProjectIds[proj.id] ? "fill-rose-500 text-rose-500" : ""
+                          isSaved(proj.id || proj.title) ? "fill-rose-500 text-rose-500" : ""
                         }`}
                       />
                       <span>
-                        {proj.likes + (likedProjectIds[proj.id] ? 1 : 0)} Like
+                        {proj.likes + (isSaved(proj.id || proj.title) ? 1 : 0)} Like
                       </span>
                     </button>
                     <button

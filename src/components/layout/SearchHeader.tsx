@@ -53,9 +53,15 @@ const formatBudget = (val: number, isMax = false) => {
 interface SearchHeaderProps {
     hasAnnouncement?: boolean;
     className?: string;
+    variant?: "default" | "compare";
 }
 
-export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeaderProps) => {
+export const SearchHeader = ({
+    hasAnnouncement = false,
+    className,
+    variant = "default",
+}: SearchHeaderProps) => {
+    const isCompare = variant === "compare";
     const router = useRouter();
     const { isAuthenticated, user } = useAppSelector((state) => state.auth);
     const selectedCity = useAppSelector((state) => state.location.selectedCity);
@@ -289,18 +295,21 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                             priority
                         />
                     </Link>
-                    <Image
-                        src="/banner/Line 82.svg"
-                        alt="Divider"
-                        width={1}
-                        height={37}
-                        className="hidden sm:block h-[37px] w-[1px] shrink-0 select-none self-center"
-                        unoptimized
-                    />
+                    {!isCompare && (
+                        <Image
+                            src="/banner/Line 82.svg"
+                            alt="Divider"
+                            width={1}
+                            height={37}
+                            className="hidden sm:block h-[37px] w-[1px] shrink-0 select-none self-center"
+                            unoptimized
+                        />
+                    )}
                 </div>
 
                 {/* 2. Middle Search Bar */}
-                <div className="flex gap-1.5 sm:gap-2.5 lg:gap-3 text-sm items-center flex-1 min-w-0">
+                {!isCompare && (
+                    <div className="flex gap-1.5 sm:gap-2.5 lg:gap-3 text-sm items-center flex-1 min-w-0">
                     <div ref={filterRef} className="relative flex-1 min-w-0">
                         <div className="rounded-full border border-gray-300/80 bg-white shadow-2xs flex items-center hover:border-gray-400 transition-colors h-[40px] sm:h-[45px] pl-1.5 sm:pl-2 pr-0 py-0 overflow-hidden">
                             {/* City Selector */}
@@ -526,7 +535,10 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                         )}
 
                     </div>
+                    </div>
+                )}
 
+                {!isCompare && (
                     <div ref={logsRef} className="relative hidden md:flex items-center shrink-0">
                         <button
                             onClick={() => setLogsOpen(prev => !prev)}
@@ -561,8 +573,10 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                             </div>
                         )}
                     </div>
+                )}
 
-                    {/* Thin vertical divider matching SimpleHeader */}
+                {/* Thin vertical divider matching SimpleHeader */}
+                {!isCompare && (
                     <Image
                         src="/banner/Line 82.svg"
                         alt="Divider"
@@ -571,6 +585,7 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                         className="hidden sm:block h-[37px] w-[1px] shrink-0 select-none self-center"
                         unoptimized
                     />
+                )}
 
                     <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
                         {/* Wishlist Heart */}
@@ -684,7 +699,6 @@ export const SearchHeader = ({ hasAnnouncement = false, className }: SearchHeade
                             </span>
                         </Link>
                     </div>
-                </div>
         </header>
 
         {/* Global Navigation Sidebar Drawer */}

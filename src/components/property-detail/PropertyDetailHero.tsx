@@ -230,19 +230,17 @@ export const PropertyDetailHero = ({
             />
           </div>
 
-          {/* Top-Left DOWNLOAD BROCHURE Ribbon Badge with 3D Folded Ribbon Corner */}
-          <div className="absolute top-6 -left-3 z-30 flex flex-col items-start drop-shadow-md">
+          {/* Top-Left DOWNLOAD BROCHURE Badge (Matches Figma 1:1) */}
+          <div className="absolute top-6 left-0 z-30">
             <button
               type="button"
               onClick={() => setIsBrochureOpen(true)}
-              className="flex items-center gap-2 pl-4 pr-3.5 py-2 rounded-r-lg bg-[#0B132B] text-white text-[11px] font-bold tracking-wider uppercase shadow-xl cursor-pointer hover:bg-slate-900 transition-all hover:scale-102"
+              className="flex items-center gap-2.5 bg-black hover:bg-neutral-900 text-white text-[12px] font-black uppercase tracking-wider pl-4 pr-3.5 py-2.5 rounded-r-[10px] shadow-md cursor-pointer transition-colors"
               title="Download verified property brochure"
             >
               <span>DOWNLOAD BROCHURE</span>
-              <Download size={14} className="text-white stroke-[2.5]" />
+              <Download size={15} className="text-white stroke-[2.8]" />
             </button>
-            {/* 3D Folded Ribbon Triangle under the protruding left tab matching Figma */}
-            <div className="w-0 h-0 border-t-[9px] border-t-[#0074E8] border-l-[12px] border-l-transparent" />
           </div>
 
           {/* Top-Right Floating Interaction Badges */}

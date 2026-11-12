@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SimpleHeader } from "@/components/layout/SimpleHeader";
+import { SearchHeader } from "@/components/layout/SearchHeader";
 import { GroupDealBanner } from "@/components/home/GroupDealBanner";
 import {
   Users,
@@ -69,6 +69,24 @@ export default function GroupDealPage() {
         claimedAt: new Date().toISOString(),
       };
       localStorage.setItem("roofin_claimed_offers", JSON.stringify([newVoucher, ...existingOffers]));
+
+      // Also persist to roofin_enquiries for user dashboard sync
+      const existingEnquiries = JSON.parse(localStorage.getItem("roofin_enquiries") || "[]");
+      const groupEnquiry = {
+        id: `enq-deal-${Date.now()}`,
+        propertyTitle: `Aspire Silicon City - ${formData.unitType}`,
+        propertyLocation: "Sector 76, Noida",
+        dealerName: "Roofin Group Buying Desk",
+        date: new Date().toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+        message: `Group Deal Slot Claimed (Code: ${voucherCode}) - 15% Developer Tier Discount Reserved`,
+        status: "Slot Confirmed",
+        propertyId: "1",
+      };
+      localStorage.setItem("roofin_enquiries", JSON.stringify([groupEnquiry, ...existingEnquiries]));
     } catch {}
 
     setSubmitted(true);
@@ -76,8 +94,9 @@ export default function GroupDealPage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
-      {/* 1. Header */}
-      <SimpleHeader />
+      {/* 1. Global Common Navbar */}
+      <SearchHeader />
+      <div className="h-[68px] sm:h-[75px]" />
 
       {/* 2. Breadcrumb Navigation */}
       <nav aria-label="Breadcrumb" className="mx-auto max-w-[1440px] px-4 sm:px-8 pt-5 pb-2">

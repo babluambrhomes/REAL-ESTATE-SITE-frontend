@@ -87,6 +87,38 @@ export const ClaimOfferModal = ({ isOpen, onClose }: ClaimOfferModalProps) => {
     const code = `ROOFIN-${Math.floor(1000 + Math.random() * 9000)}-${selectedOffer.toUpperCase().slice(0, 4)}`;
     const chosenOffer = availableOffers.find((o) => o.id === selectedOffer);
 
+    // Always persist to localStorage for profile and dashboard
+    try {
+      const stored = JSON.parse(localStorage.getItem("roofin_claimed_offers") || "[]");
+      stored.unshift({
+        id: `offer-${Date.now()}`,
+        code,
+        title: chosenOffer?.title || "Special Deal Offer",
+        discount: chosenOffer?.badge || "Claimed Offer",
+        validUntil: "31 Dec 2026",
+        offerId: selectedOffer,
+        offerTitle: chosenOffer?.title,
+        name: name.trim(),
+        mobile: mobile.trim(),
+        claimedAt: new Date().toISOString(),
+      });
+      localStorage.setItem("roofin_claimed_offers", JSON.stringify(stored));
+
+      // Also persist to enquiries
+      const enqs = JSON.parse(localStorage.getItem("roofin_enquiries") || "[]");
+      enqs.unshift({
+        id: `enq-offer-${Date.now()}`,
+        propertyTitle: `Offer: ${chosenOffer?.title || "Special Deal"}`,
+        propertyLocation: "Delhi NCR",
+        dealerName: "Roofin Offers Desk",
+        date: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+        message: `Claimed ${chosenOffer?.title} (Code: ${code})`,
+        status: "Active Voucher",
+        propertyId: "1",
+      });
+      localStorage.setItem("roofin_enquiries", JSON.stringify(enqs));
+    } catch {}
+
     try {
       await apiClient.post("/enquiries", {
         name: name.trim(),
@@ -95,19 +127,7 @@ export const ClaimOfferModal = ({ isOpen, onClose }: ClaimOfferModalProps) => {
         message: `Claimed Offer: ${chosenOffer?.title || selectedOffer} [Code: ${code}]`,
       });
     } catch {
-      // Local fallback
-      try {
-        const stored = JSON.parse(localStorage.getItem("roofin_claimed_offers") || "[]");
-        stored.push({
-          code,
-          offerId: selectedOffer,
-          offerTitle: chosenOffer?.title,
-          name: name.trim(),
-          mobile: mobile.trim(),
-          date: new Date().toISOString(),
-        });
-        localStorage.setItem("roofin_claimed_offers", JSON.stringify(stored));
-      } catch {}
+      // Backend error ignored gracefully
     }
 
     setIsSubmitting(false);

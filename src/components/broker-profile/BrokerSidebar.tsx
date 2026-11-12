@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import {
   ShieldCheck,
   Star,
@@ -10,9 +12,54 @@ import {
   Award,
   Users,
   CheckCircle2,
+  X,
+  FileCheck,
 } from "lucide-react";
 
 export const BrokerSidebar = () => {
+  const [showCertModal, setShowCertModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [ratingInput, setRatingInput] = useState(5);
+  const [reviewName, setReviewName] = useState("");
+  const [reviewText, setReviewText] = useState("");
+  const [reviewsList, setReviewsList] = useState([
+    {
+      id: "rev-1",
+      name: "Ritik Singh",
+      rating: 5,
+      date: "10/7/2026",
+      comment:
+        "The Property Is Really Nice. I'm Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.",
+    },
+  ]);
+
+  const handleChat = () => {
+    window.open(
+      "https://wa.me/919876543210?text=Hi%20Jitender%20Singh,%20I%20am%20interested%20in%20properties%20listed%20on%20Roofin.",
+      "_blank"
+    );
+  };
+
+  const handleReviewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!reviewName.trim() || !reviewText.trim()) {
+      toast.error("Please enter your name and review");
+      return;
+    }
+    const newRev = {
+      id: `rev-${Date.now()}`,
+      name: reviewName.trim(),
+      rating: ratingInput,
+      date: new Date().toLocaleDateString("en-IN"),
+      comment: reviewText.trim(),
+    };
+    setReviewsList([newRev, ...reviewsList]);
+    setShowReviewModal(false);
+    setReviewName("");
+    setReviewText("");
+    toast.success("Thank you! Your review has been submitted.");
+  };
+
   return (
     <aside className="w-full space-y-4 font-poppins">
       
@@ -23,6 +70,7 @@ export const BrokerSidebar = () => {
         </h3>
         <button
           type="button"
+          onClick={handleChat}
           className="w-full py-3.5 bg-[#10B981] hover:bg-[#059669] text-white text-xs sm:text-[13.5px] font-black rounded-[6px] transition-all shadow-md cursor-pointer flex items-center justify-center gap-1.5"
         >
           <span>Chat with Jitender Singh</span>
@@ -114,6 +162,7 @@ export const BrokerSidebar = () => {
             </h4>
             <button
               type="button"
+              onClick={() => setShowCertModal(true)}
               className="text-[11.5px] font-bold text-[#1865F2] hover:underline flex items-center gap-0.5 cursor-pointer mt-0.5"
             >
               <span>View Certificate</span>
@@ -131,6 +180,7 @@ export const BrokerSidebar = () => {
           </h4>
           <button
             type="button"
+            onClick={() => setShowReviewModal(true)}
             className="text-[10.5px] font-bold text-[#1865F2] hover:underline cursor-pointer"
           >
             Write Review
@@ -149,7 +199,7 @@ export const BrokerSidebar = () => {
               <Star className="w-3.5 h-3.5 text-slate-300" />
             </div>
             <p className="text-[10px] text-slate-400 font-medium">
-              (200 Total Reviews)
+              ({200 + reviewsList.length - 1} Total Reviews)
             </p>
           </div>
         </div>
@@ -188,39 +238,39 @@ export const BrokerSidebar = () => {
           </div>
         </div>
 
-        {/* Ritik Singh Verified Review Snippet */}
-        <div className="pt-2 border-t border-slate-100 space-y-1.5 text-left">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-[#8B5CF6] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
-              R
-            </div>
-            <div className="min-w-0">
-              <p className="text-[11px] font-black text-[#0B132B]">Ritik Singh</p>
-              <div className="flex items-center gap-1">
-                <div className="flex items-center text-amber-400">
-                  <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                  <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                  <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                  <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                  <Star className="w-2.5 h-2.5 text-slate-300" />
+        {/* Reviews List */}
+        <div className="space-y-3 pt-2 border-t border-slate-100">
+          {reviewsList.slice(0, 2).map((rev) => (
+            <div key={rev.id} className="space-y-1.5 text-left">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-[#8B5CF6] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  {rev.name.charAt(0).toUpperCase()}
                 </div>
-                <span className="text-[9px] text-slate-400">10/7/2022 1:10:37 AM</span>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-black text-[#0B132B] truncate">{rev.name}</p>
+                  <div className="flex items-center gap-1">
+                    <div className="flex items-center text-amber-400">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-2.5 h-2.5 ${
+                            i < rev.rating
+                              ? "fill-amber-400 text-amber-400"
+                              : "text-slate-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[9px] text-slate-400">{rev.date}</span>
+                  </div>
+                </div>
               </div>
+
+              <p className="text-[9.5px] text-slate-500 font-medium leading-relaxed">
+                {rev.comment}
+              </p>
             </div>
-          </div>
-
-          <p className="text-[9.5px] text-slate-500 font-medium leading-relaxed">
-            The Property Is Really Nice. I&apos;m Staying Here Now, And My Experience Has Been Great. The Rooms Are Clean, The Surroundings Are Peaceful, And Everything Is Well Maintained.
-          </p>
-
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="text-[10px] font-bold text-[#1865F2] hover:underline cursor-pointer"
-            >
-              View All
-            </button>
-          </div>
+          ))}
         </div>
 
       </div>
@@ -290,6 +340,191 @@ export const BrokerSidebar = () => {
         </div>
 
       </div>
+
+      {/* 6. RERA Certificate Modal */}
+      {showCertModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setShowCertModal(false)}
+        >
+          <div
+            className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 sm:p-7 border border-slate-200 animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowCertModal(false)}
+              aria-label="Close"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+              <div className="w-12 h-12 rounded-xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center justify-center text-[#10B981] shrink-0">
+                <FileCheck className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-[#0B132B]">
+                  Official RERA Certificate
+                </h3>
+                <p className="text-xs text-slate-500 font-medium">
+                  Verified Real Estate Agent Registration
+                </p>
+              </div>
+            </div>
+
+            <div className="my-5 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5 text-xs">
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
+                <span className="font-semibold text-slate-500">Agent Name:</span>
+                <span className="font-bold text-slate-900">Jitender Singh</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
+                <span className="font-semibold text-slate-500">RERA Registration No:</span>
+                <span className="font-bold text-[#1865F2]">UPRERAAGT12894</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
+                <span className="font-semibold text-slate-500">Issuing Authority:</span>
+                <span className="font-bold text-slate-900">Uttar Pradesh RERA</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
+                <span className="font-semibold text-slate-500">Valid Through:</span>
+                <span className="font-bold text-emerald-600">31-Dec-2029 (Active)</span>
+              </div>
+              <div className="flex justify-between py-1">
+                <span className="font-semibold text-slate-500">Operating Territory:</span>
+                <span className="font-bold text-slate-900">Noida, Greater Noida, Yamuna Expressway</span>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-emerald-600">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>100% Background & KYC Verified</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCertModal(false);
+                  toast.success("Certificate details verified!");
+                }}
+                className="px-5 py-2.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-xl transition-all shadow-md cursor-pointer"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 7. Write Review Modal */}
+      {showReviewModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setShowReviewModal(false)}
+        >
+          <div
+            className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 sm:p-7 border border-slate-200 animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowReviewModal(false)}
+              aria-label="Close"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <h3 className="text-base sm:text-lg font-black text-[#0B132B]">
+              Write a Review
+            </h3>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">
+              Share your experience with Jitender Singh
+            </p>
+
+            <form onSubmit={handleReviewSubmit} className="space-y-4 mt-5">
+              {/* Star Rating Selector */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                  Rating
+                </label>
+                <div className="flex items-center gap-1.5">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setRatingInput(star)}
+                      className="cursor-pointer hover:scale-110 transition-transform"
+                    >
+                      <Star
+                        className={`w-6 h-6 ${
+                          star <= ratingInput
+                            ? "fill-amber-400 text-amber-400"
+                            : "text-slate-300"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                  <span className="text-xs font-bold text-slate-600 ml-2">
+                    {ratingInput} of 5 Stars
+                  </span>
+                </div>
+              </div>
+
+              {/* Name input */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  Your Full Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Rahul Sharma"
+                  value={reviewName}
+                  onChange={(e) => setReviewName(e.target.value)}
+                  className="w-full px-4 py-2.5 text-xs text-slate-900 border border-slate-200 rounded-xl focus:border-[#1865F2] outline-none"
+                />
+              </div>
+
+              {/* Comment text */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  Your Review / Feedback
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Tell us about the property assistance, promptness, and site visit experience..."
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                  className="w-full px-4 py-2.5 text-xs text-slate-900 border border-slate-200 rounded-xl focus:border-[#1865F2] outline-none resize-none"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowReviewModal(false)}
+                  className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 bg-[#1865F2] hover:bg-[#1250C4] text-white text-xs font-bold rounded-xl shadow-md transition-all cursor-pointer"
+                >
+                  Submit Review
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </aside>
   );

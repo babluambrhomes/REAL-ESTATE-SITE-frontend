@@ -39,7 +39,6 @@ import {
 import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
 import { SearchHeader } from "@/components/layout/SearchHeader";
-import { Footer } from "@/components/layout/Footer";
 import { PropertyCard } from "@/components/card/PropertyCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { updateUser } from "@/store/slice/authSlice";
@@ -134,11 +133,18 @@ export default function UserProfilePage() {
   const { user: currentUser, isAuthenticated } = useAppSelector((state) => state.auth);
   const { savedIds, count: wishlistCount, clearAll: clearWishlist } = useWishlist();
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // If user visits /u/me or their own ID, treat as self dashboard
   const isSelf =
-    userId === "me" ||
-    (currentUser?.id && String(currentUser.id) === String(userId)) ||
-    (!userId && isAuthenticated);
+    isMounted &&
+    (userId === "me" ||
+      (currentUser?.id && String(currentUser.id) === String(userId)) ||
+      (!userId && isAuthenticated));
 
   const [activeTab, setActiveTab] = useState<ActiveTabType>("saved");
 
@@ -600,6 +606,24 @@ export default function UserProfilePage() {
     }
   };
 
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-poppins">
+        <SearchHeader />
+        <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8 animate-pulse">
+          <div className="h-44 sm:h-52 rounded-2xl bg-slate-200" />
+          <div className="flex flex-col sm:flex-row items-center sm:items-end gap-5 -mt-12 sm:-mt-14 px-2 sm:px-6">
+            <div className="w-28 sm:w-36 h-28 sm:h-36 rounded-2xl bg-slate-300 border-4 border-white shadow-xl" />
+            <div className="space-y-2 flex-1 pb-4">
+              <div className="h-7 w-48 bg-slate-200 rounded-lg" />
+              <div className="h-4 w-32 bg-slate-200 rounded" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-poppins">
       {/* 1. Global Header */}
@@ -971,8 +995,8 @@ export default function UserProfilePage() {
             {/* If Wishlist has items */}
             {savedPropertiesList.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {savedPropertiesList.map((property) => (
-                  <PropertyCard key={property.id} {...property} layout="vertical" />
+                {savedPropertiesList.map((property, idx) => (
+                  <PropertyCard key={property.id ? String(property.id) : `saved-${idx}`} {...property} layout="vertical" />
                 ))}
               </div>
             ) : (
@@ -1025,13 +1049,13 @@ export default function UserProfilePage() {
 
             {siteVisits.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {siteVisits.map((visit) => {
+                {siteVisits.map((visit, idx) => {
                   const isConfirmed = visit.status === "Confirmed";
                   const isCancelled = visit.status === "Cancelled";
 
                   return (
                     <div
-                      key={visit.id}
+                      key={visit.id ? `${visit.id}-${idx}` : `visit-${idx}`}
                       className="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col justify-between"
                     >
                       <div className="p-5 sm:p-6 space-y-4">
@@ -1071,6 +1095,7 @@ export default function UserProfilePage() {
                               src={visit.propertyImage}
                               alt={visit.propertyTitle}
                               fill
+                              sizes="80px"
                               className="object-cover"
                             />
                           </div>
@@ -1199,9 +1224,9 @@ export default function UserProfilePage() {
             </div>
 
             <div className="space-y-4">
-              {enquiries.map((enq) => (
+              {enquiries.map((enq, idx) => (
                 <div
-                  key={enq.id}
+                  key={enq.id ? `${enq.id}-${idx}` : `enq-${idx}`}
                   className="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
                 >
                   <div className="space-y-1.5 flex-1 min-w-0">
@@ -1285,9 +1310,9 @@ export default function UserProfilePage() {
 
             {claimedOffers.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {claimedOffers.map((offer) => (
+                {claimedOffers.map((offer, idx) => (
                   <div
-                    key={offer.id}
+                    key={offer.id ? `${offer.id}-${idx}` : `offer-${idx}`}
                     className="relative overflow-hidden rounded-3xl border border-blue-200/90 bg-gradient-to-b from-white via-white to-blue-50/40 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
                   >
                     <div className="space-y-3">
@@ -1376,9 +1401,9 @@ export default function UserProfilePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {myListings.map((listing) => (
+              {myListings.map((listing, idx) => (
                 <div
-                  key={listing.id}
+                  key={listing.id ? `${listing.id}-${idx}` : `listing-${idx}`}
                   className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between"
                 >
                   <div className="p-5 sm:p-6 space-y-4">
@@ -1395,6 +1420,7 @@ export default function UserProfilePage() {
                           src={listing.image}
                           alt={listing.title}
                           fill
+                          sizes="96px"
                           className="object-cover"
                         />
                       </div>

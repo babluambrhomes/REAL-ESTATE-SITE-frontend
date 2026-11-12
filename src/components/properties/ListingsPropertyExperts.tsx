@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PropertyExpert {
@@ -137,8 +138,9 @@ export const ListingsPropertyExperts = () => {
         className="flex items-center gap-6 overflow-x-auto scrollbar-none pb-2 pt-1 scroll-smooth"
       >
         {PROPERTY_EXPERTS.map((expert, idx) => (
-          <div
+          <Link
             key={`${expert.id}-${idx}`}
+            href="/s/agent/jitender-singh"
             className="flex flex-col items-center shrink-0 cursor-pointer group w-[130px] sm:w-[140px]"
           >
             {/* Circular Avatar */}
@@ -159,7 +161,7 @@ export const ListingsPropertyExperts = () => {
             <p className="text-[12.5px] sm:text-[13px] text-[#2563EB] font-medium text-center mt-0.5 truncate w-full">
               {expert.role}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

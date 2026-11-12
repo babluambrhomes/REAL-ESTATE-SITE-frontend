@@ -14,8 +14,6 @@ import { BrokerAboutSection } from "@/components/broker-profile/BrokerAboutSecti
 import { BrokerSidebar } from "@/components/broker-profile/BrokerSidebar";
 import { apiClient } from "@/lib/axios";
 
-import { Footer } from "@/components/layout/Footer";
-
 interface AgentProfilePageProps {
   params: Promise<{ username: string }>;
 }

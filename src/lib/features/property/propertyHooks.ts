@@ -31,6 +31,7 @@ export function useSearchSuggestionsQuery(params?: { q?: string; city?: string }
     queryKey: PROPERTY_QUERY_KEYS.suggestions(params),
     queryFn: () => propertyApi.getSuggestions(params),
     staleTime: 1000 * 60 * 10, // 10 minutes cache
+    retry: false,
   });
 }
 

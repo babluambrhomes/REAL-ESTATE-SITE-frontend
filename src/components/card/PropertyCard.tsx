@@ -202,11 +202,8 @@ export const PropertyCard = (props: Property) => {
   };
 
   const propertyImage = getImageUrl(images[0]);
-  const propertyUrl = props.slug
-    ? `/properties/${props.slug}`
-    : id
-    ? `/properties/${id}`
-    : `/properties/${encodeURIComponent(title || "details")}`;
+  const propertySlug = props.slug || (id ? String(id) : title ? title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") : "1");
+  const propertyUrl = `/properties/${propertySlug}`;
 
   const handleShare = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -444,7 +441,7 @@ export const PropertyCard = (props: Property) => {
                     {infoChips?.[1]?.value || "60%"}
                   </p>
                   <span className="text-[10.5px] text-[#64748B] font-normal block leading-tight mt-0.5 whitespace-nowrap">
-                    {infoChips?.[1]?.label || "Amenites"}
+                    {infoChips?.[1]?.label || "Amenities"}
                   </span>
                 </div>
               </div>
@@ -804,7 +801,7 @@ export const PropertyCard = (props: Property) => {
                       {infoChips?.[1]?.value || "60%"}
                     </p>
                     <span className="text-[8px] text-[#64748B] font-normal block leading-tight mt-0.5 whitespace-nowrap">
-                      {infoChips?.[1]?.label || "Amenites"}
+                      {infoChips?.[1]?.label || "Amenities"}
                     </span>
                   </div>
                 </div>
@@ -899,6 +896,19 @@ export const PropertyCard = (props: Property) => {
           propertyTitle={title}
           propertyLocation={location}
           initialPrice={price}
+        />
+
+        <PropertyMapModal
+          isOpen={mapModalOpen}
+          onClose={() => setMapModalOpen(false)}
+          property={{
+            id,
+            title,
+            location,
+            city: props.city,
+            price,
+            image: propertyImage,
+          }}
         />
       </div>
     );

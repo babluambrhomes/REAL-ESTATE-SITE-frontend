@@ -23,6 +23,38 @@ export const ContactFormSection = () => {
 
     setIsSubmitting(true);
     try {
+      const newEnquiry = {
+        id: `enq-${Date.now()}`,
+        propertyTitle: "General Support & Inquiry",
+        propertyLocation: "Roofin Headquarters, Sector 62, Noida",
+        dealerName: "Roofin Advisory Desk",
+        date: new Date().toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+        message: formData.message.trim() || "General Customer Support Request",
+        status: "Open",
+        propertyId: "1",
+      };
+      const existing = JSON.parse(localStorage.getItem("roofin_enquiries") || "[]");
+      localStorage.setItem("roofin_enquiries", JSON.stringify([newEnquiry, ...existing]));
+
+      // Update user profile info
+      const userProfile = JSON.parse(localStorage.getItem("roofin_user_profile") || "{}");
+      localStorage.setItem(
+        "roofin_user_profile",
+        JSON.stringify({
+          ...userProfile,
+          name: formData.name.trim() || userProfile.name,
+          email: formData.email.trim() || userProfile.email,
+        })
+      );
+    } catch (err) {
+      console.warn("Could not write to localStorage:", err);
+    }
+
+    try {
       await fetch("/api/v1/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -184,15 +216,15 @@ export const ContactFormSection = () => {
                 <div className="w-8 h-8 rounded-full border border-blue-200 text-[#1865F2] flex items-center justify-center shrink-0">
                   <MapPin className="w-4 h-4" />
                 </div>
-                <span>838 Cantt Sialkot, pakistan</span>
+                <span>Tower B, Sector 62, Noida, Uttar Pradesh 201309</span>
               </div>
 
               <div className="flex items-center gap-3.5 text-xs sm:text-[13.5px] font-medium text-slate-700">
                 <div className="w-8 h-8 rounded-full border border-blue-200 text-[#1865F2] flex items-center justify-center shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
-                <a href="tel:97998889787" className="hover:text-[#1865F2] transition-colors">
-                  979-988-89787
+                <a href="tel:919876543210" className="hover:text-[#1865F2] transition-colors">
+                  +91 98765 43210
                 </a>
               </div>
 
@@ -200,8 +232,8 @@ export const ContactFormSection = () => {
                 <div className="w-8 h-8 rounded-full border border-blue-200 text-[#1865F2] flex items-center justify-center shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>
-                <a href="mailto:abcd123@gmail.com" className="hover:text-[#1865F2] transition-colors">
-                  abcd123@gmail.com
+                <a href="mailto:support@roofin.com" className="hover:text-[#1865F2] transition-colors">
+                  support@roofin.com
                 </a>
               </div>
             </div>

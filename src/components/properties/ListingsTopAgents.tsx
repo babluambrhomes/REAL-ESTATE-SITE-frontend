@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { Star } from "lucide-react";
 
@@ -82,9 +83,10 @@ export const ListingsTopAgents = () => {
       {/* 6 Agents Row - Clean 6-col grid on md/lg/xl, scroll on mobile */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4 md:gap-4.5 w-full">
         {AGENTS.map((agent) => (
-          <div
+          <Link
             key={agent.id}
-            className="group relative flex flex-col items-center transition-transform duration-200 hover:-translate-y-1 w-full"
+            href="/s/agent/jitender-singh"
+            className="group relative flex flex-col items-center transition-transform duration-200 hover:-translate-y-1 w-full cursor-pointer"
           >
             {/* Photo Card Container with relative positioning */}
             <div className="relative w-full aspect-[1/1] max-w-[195px]">
@@ -117,7 +119,7 @@ export const ListingsTopAgents = () => {
             {/* Info below photo */}
             <div className="mt-2.5 w-full text-center flex flex-col items-center">
               {/* Role */}
-              <p className="text-[12px] font-medium text-[#1865F2] leading-tight truncate w-full">
+              <p className="text-[12px] font-medium text-[#1865F2] leading-tight truncate w-full group-hover:underline">
                 {agent.role}
               </p>
 
@@ -143,7 +145,7 @@ export const ListingsTopAgents = () => {
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

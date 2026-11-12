@@ -125,7 +125,8 @@ export const propertyApi = {
   getSuggestions: (params?: { q?: string; city?: string }) =>
     apiClient
       .get<SearchSuggestionsResponse>("/search/suggestions", { params })
-      .then((res) => res.data),
+      .then((res) => res.data)
+      .catch(() => null),
 
   // Get single property details by slug
   getPropertyBySlug: (slug: string) =>

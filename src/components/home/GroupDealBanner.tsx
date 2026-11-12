@@ -22,6 +22,7 @@ import {
   Calendar,
   Sparkles,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 export const GroupDealBanner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,8 +36,38 @@ export const GroupDealBanner = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) return;
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      toast.error("Please enter your name and phone number");
+      return;
+    }
     setIsSubmitting(true);
+
+    try {
+      const newEnquiry = {
+        id: `deal-${Date.now()}`,
+        propertyTitle: "Exclusive Group Deal: Aspire Silicon City",
+        propertyLocation: "Sector 76, Noida",
+        dealerName: "Roofin Corporate Group Desk",
+        date: new Date().toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+        message: `Group Deal Registered for ${formData.name.trim()}, Phone: ${formData.phone.trim()}`,
+        status: "Deal Reserved",
+        propertyId: "deal-1",
+      };
+      const existing = JSON.parse(
+        localStorage.getItem("roofin_enquiries") || "[]"
+      );
+      localStorage.setItem(
+        "roofin_enquiries",
+        JSON.stringify([newEnquiry, ...existing])
+      );
+    } catch (err) {
+      console.warn("Could not save deal enquiry to localStorage:", err);
+    }
+
     try {
       await fetch("/api/v1/enquiries", {
         method: "POST",
@@ -53,6 +84,7 @@ export const GroupDealBanner = () => {
     } finally {
       setIsSubmitting(false);
       setFormSubmitted(true);
+      toast.success("Group deal registered successfully!");
     }
   };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchHeader } from "@/components/layout/SearchHeader";
 import { PostPropertyTopAnnouncement } from "@/components/post-property/PostPropertyTopAnnouncement";
 import { CompareHero } from "@/components/compare/CompareHero";
@@ -12,6 +12,8 @@ import { CompareByBuilder } from "@/components/compare/CompareByBuilder";
 import { CompareLikedPairs, ComparePair } from "@/components/compare/CompareLikedPairs";
 import { CompareModal } from "@/components/compare/CompareModal";
 import { ComparePropertyPickerModal } from "@/components/compare/ComparePropertyPickerModal";
+import { FloatingCompareBar } from "@/components/compare/FloatingCompareBar";
+import { useCompare } from "@/lib/compare";
 import { properties as allProperties } from "@/data/properties";
 import { Property } from "@/types";
 
@@ -19,6 +21,7 @@ import { useRouter } from "next/navigation";
 
 export default function ComparePage() {
   const router = useRouter();
+  const { comparedList, toggle: toggleCompare, remove: removeCompared, clearAll } = useCompare();
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [isPickerModalOpen, setIsPickerModalOpen] = useState(false);
 
@@ -62,11 +65,18 @@ export default function ComparePage() {
     },
   ]);
 
+  useEffect(() => {
+    if (comparedList.length > 0) {
+      setComparedProperties(comparedList);
+    }
+  }, [comparedList]);
+
   const handleAddProperty = () => {
     setIsPickerModalOpen(true);
   };
 
   const handleSelectProperty = (newProp: Property) => {
+    toggleCompare(newProp);
     setComparedProperties((prev) => {
       if (prev.some((p) => p.title === newProp.title)) return prev;
       if (prev.length >= 3) {
@@ -78,6 +88,10 @@ export default function ComparePage() {
   };
 
   const handleRemoveProperty = (indexToRemove: number) => {
+    const target = comparedProperties[indexToRemove];
+    if (target) {
+      removeCompared(target.id || target.title);
+    }
     setComparedProperties((prev) => prev.filter((_, idx) => idx !== indexToRemove));
   };
 
@@ -173,8 +187,14 @@ export default function ComparePage() {
         selectedIds={comparedProperties.map((p) => p.title)}
         selectedProperties={comparedProperties}
         onRemoveProperty={handleRemoveProperty}
-        onReset={() => setComparedProperties([])}
+        onReset={() => {
+          clearAll();
+          setComparedProperties([]);
+        }}
       />
+
+      {/* 12. Floating Compare Dock Bar */}
+      <FloatingCompareBar onOpenCompareModal={() => setIsCompareModalOpen(true)} />
     </main>
   );
 }

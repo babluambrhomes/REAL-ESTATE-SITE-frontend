@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin } from "lucide-react";
 
-interface PriceDroppedItem {
-  id: number;
+export interface PriceDroppedItem {
+  id: number | string;
+  slug?: string;
   title: string;
   location: string;
   oldPrice: string;
@@ -13,82 +15,95 @@ interface PriceDroppedItem {
   image: string;
 }
 
-const LEFT_COLUMN_ITEMS: PriceDroppedItem[] = [
+export const LEFT_COLUMN_ITEMS: PriceDroppedItem[] = [
   {
-    id: 1,
+    id: "the-terraces-at-max-estate",
+    slug: "the-terraces-at-max-estate",
     title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
+    location: "Sector 103, Noida Ext",
     oldPrice: "₹1.35 Cr",
     newPrice: "₹1.25 Cr",
     saveAmount: "₹10L",
     image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=85",
   },
   {
-    id: 2,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "ats-pristine-150",
+    slug: "ats-pristine-150",
+    title: "ATS Pristine Tower B",
+    location: "Sector 150, Noida",
+    oldPrice: "₹1.80 Cr",
+    newPrice: "₹1.65 Cr",
+    saveAmount: "₹15L",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=85",
   },
   {
-    id: 3,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "nbcc-aspire-silicon",
+    slug: "nbcc-aspire-silicon",
+    title: "NBCC Aspire Silicon City",
+    location: "Sector 76, Central Noida",
+    oldPrice: "₹1.42 Cr",
+    newPrice: "₹1.28 Cr",
+    saveAmount: "₹14L",
     image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=600&q=85",
   },
   {
-    id: 4,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "stellar-one-kp",
+    slug: "stellar-one-kp",
+    title: "Stellar One Luxury Suites",
+    location: "Knowledge Park, Gr. Noida",
+    oldPrice: "₹92 Lakh",
+    newPrice: "₹82.5 Lakh",
+    saveAmount: "₹9.5L",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=85",
   },
 ];
 
-const RIGHT_COLUMN_ITEMS: PriceDroppedItem[] = [
+export const RIGHT_COLUMN_ITEMS: PriceDroppedItem[] = [
   {
-    id: 5,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "ats-knightsbridge-exp",
+    slug: "ats-knightsbridge-exp",
+    title: "ATS Knightsbridge Grand",
+    location: "Sector 124, Noida Expressway",
+    oldPrice: "₹2.70 Cr",
+    newPrice: "₹2.45 Cr",
+    saveAmount: "₹25L",
     image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=85",
   },
   {
-    id: 6,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "purvanchal-royal-city",
+    slug: "purvanchal-royal-city",
+    title: "Purvanchal Royal City",
+    location: "Chi V, Greater Noida",
+    oldPrice: "₹1.50 Cr",
+    newPrice: "₹1.35 Cr",
+    saveAmount: "₹15L",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=85",
   },
   {
-    id: 7,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "gaur-yamuna-city",
+    slug: "gaur-yamuna-city",
+    title: "Gaur Yamuna Lakeview",
+    location: "Yamuna Expressway, Gr. Noida",
+    oldPrice: "₹75 Lakh",
+    newPrice: "₹65.4 Lakh",
+    saveAmount: "₹9.6L",
     image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=85",
   },
   {
-    id: 8,
-    title: "The Terraces at Max Estate",
-    location: "Sector 103 , Noida Ext",
-    oldPrice: "₹1.35 Cr",
-    newPrice: "₹1.25 Cr",
-    saveAmount: "₹10L",
+    id: "m3m-capital-dwarka",
+    slug: "m3m-capital-dwarka",
+    title: "M3M Capital Golf Residences",
+    location: "Sector 113, Dwarka Expressway",
+    oldPrice: "₹2.10 Cr",
+    newPrice: "₹1.88 Cr",
+    saveAmount: "₹22L",
     image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=85",
   },
+];
+
+export const ALL_PRICE_DROPPED_ITEMS: PriceDroppedItem[] = [
+  ...LEFT_COLUMN_ITEMS,
+  ...RIGHT_COLUMN_ITEMS,
 ];
 
 export const ListingsPriceDropped = () => {
@@ -109,8 +124,9 @@ export const ListingsPriceDropped = () => {
         {/* Left Column Box */}
         <div className="rounded-[22px] border border-slate-200/90 bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] space-y-4 sm:space-y-5">
           {LEFT_COLUMN_ITEMS.map((item, idx) => (
-            <div
+            <Link
               key={`${item.id}-${idx}`}
+              href={`/properties/${item.slug || item.id}`}
               className="flex items-center justify-between gap-3 group cursor-pointer"
             >
               <div className="flex items-center gap-3.5 min-w-0">
@@ -151,15 +167,16 @@ export const ListingsPriceDropped = () => {
                   {item.saveAmount}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         {/* Right Column Box */}
         <div className="rounded-[22px] border border-slate-200/90 bg-white p-5 sm:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] space-y-4 sm:space-y-5">
           {RIGHT_COLUMN_ITEMS.map((item, idx) => (
-            <div
+            <Link
               key={`${item.id}-${idx}`}
+              href={`/properties/${item.slug || item.id}`}
               className="flex items-center justify-between gap-3 group cursor-pointer"
             >
               <div className="flex items-center gap-3.5 min-w-0">
@@ -200,7 +217,7 @@ export const ListingsPriceDropped = () => {
                   {item.saveAmount}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

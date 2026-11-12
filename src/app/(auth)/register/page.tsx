@@ -6,17 +6,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { Eye, EyeOff, Mail, Phone } from "lucide-react";
-import { Eye, EyeOff, Phone } from "lucide-react";
+import { Eye, EyeOff, Mail, Phone } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { clearOtpState } from "@/store/slice/authSlice";
 import { useRegisterMutation } from "@/lib/features/auth/authMutations";
 import { authApi } from "@/lib/features/auth/authApi";
 import {
-  // registerEmailSchema,
-
+  registerEmailSchema,
   registerPhoneSchema,
-  // type RegisterEmailForm,
+  type RegisterEmailForm,
   type RegisterPhoneForm,
 } from "@/lib/features/auth/schemas";
 import toast from "react-hot-toast";
@@ -48,24 +46,24 @@ export default function RegisterForm() {
   const [mode, setMode] = useState<RegisterMode>("phone");
   const [showOptionalEmail, setShowOptionalEmail] = useState(false);
   const [email, setEmail] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
 
-  // const emailForm = useForm<RegisterEmailForm>({
-  //   resolver: zodResolver(registerEmailSchema),
-  // });
+  const emailForm = useForm<RegisterEmailForm>({
+    resolver: zodResolver(registerEmailSchema),
+  });
 
   const phoneForm = useForm<RegisterPhoneForm>({
     resolver: zodResolver(registerPhoneSchema),
   });
 
-  // const onEmailRegister = (data: RegisterEmailForm) => {
-  //   registerMutation.mutate(data, {
-  //     onSuccess: () => {
-  //       toast.success("Account created! Verify your email.");
-  //     },
-  //   });
-  // };
+  const onEmailRegister = (data: RegisterEmailForm) => {
+    registerMutation.mutate(data, {
+      onSuccess: () => {
+        toast.success("Account created successfully!");
+      },
+    });
+  };
 
   const onPhoneRegister = (data: RegisterPhoneForm) => {
     const phone = `${countryCode}${data.phone}`;
@@ -237,25 +235,23 @@ export default function RegisterForm() {
             </p>
           </div>
 
-
-
-          {/* {mode === "email" && (
+          {mode === "email" && (
             <form
               onSubmit={emailForm.handleSubmit(onEmailRegister)}
               className="mt-6 space-y-2"
             >
-              <div className="">
+              <div>
                 <label
                   htmlFor="firstName"
                   className="text-sm font-medium text-gray-900"
                 >
-                  Name
+                  Full Name
                 </label>
                 <div className="relative">
                   <input
                     id="firstName"
-                    placeholder="Rahul"
-                    className={`${inputBase} `}
+                    placeholder="Rahul Sharma"
+                    className={inputBase}
                     {...emailForm.register("firstName")}
                   />
                 </div>
@@ -266,7 +262,7 @@ export default function RegisterForm() {
                 )}
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <label htmlFor="email" className="text-sm font-medium text-gray-900">
                   Email
                 </label>
@@ -286,14 +282,14 @@ export default function RegisterForm() {
               </div>
 
               <div className="space-y-1">
-                <div className="flex justify-between items-end ">
+                <div className="flex justify-between items-end">
                   <label
-                  htmlFor="password"
-                  className="text-sm font-medium text-gray-900"
-                >
-                  Password
-                </label>
-                <span className="text-[10px] text-primary">8+ chars, Aa, 1, & @</span>
+                    htmlFor="password"
+                    className="text-sm font-medium text-gray-900"
+                  >
+                    Password
+                  </label>
+                  <span className="text-[10px] text-primary">8+ chars, Aa, 1, & @</span>
                 </div>
                 <div className="relative">
                   <input
@@ -331,12 +327,12 @@ export default function RegisterForm() {
                 Register Now
               </PrimaryButton>
             </form>
-          )} */}
+          )}
 
           {mode === "phone" && (
             <form
               onSubmit={phoneForm.handleSubmit(onPhoneRegister)}
-              className="mt-6 space-y-2"
+              className="mt-2 space-y-2"
             >
               <div >
                 <label
@@ -415,44 +411,20 @@ export default function RegisterForm() {
 
           <GoogleAuth AuthType='REGISTER' />
 
-
-          {/* <button
-            type="button"
-            onClick={() => setMode(mode === "phone" ? "email" : "phone")}
-            className="mt-3 relative inline-flex w-full items-center justify-center gap-2 rounded-md  bg-black px-4 py-2 text-[12px] font-medium text-white transition-colors  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-          >
-            {mode === "phone" ? (
-              <>
-                <span className="relative">
-                  <Mail className="h-4 w-4" />
-                  <span className="absolute -right-1 top-1 -translate-x-1/2 -translate-y-1/2 bg-white h-1.5 w-1.5 rounded-4xl" />
-                </span>
-                With Email
-              </>
-            ) : (
-              <>
-                <span className="relative">
-                  <Phone className="h-4 w-4" />
-                  <span className="absolute -right-1 top-1 -translate-x-1/2 -translate-y-1/2 bg-white h-1.5 w-1.5 rounded-4xl" />
-                </span>
-                With Phone
-              </>
-            )}
-          </button> */}
-
-          <p className="mt-2 text-left text-[12px] text-gray-600">
-            By Clicking you agree to <Link
-              href="/login"
+          <p className="mt-4 text-left text-[12px] text-gray-600">
+            By Clicking you agree to{" "}
+            <Link
+              href="/terms"
               className="font-medium text-primary hover:text-primary/80"
             >
               Terms
-            </Link>
-            <span className="mx-1 text-primary">and</span>
+            </Link>{" "}
+            and{" "}
             <Link
-              href="/login"
+              href="/privacy"
               className="font-medium text-primary hover:text-primary/80"
             >
-              Conditions
+              Privacy Policy
             </Link>
           </p>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SimpleHeader } from "@/components/layout/SimpleHeader";
+import { SearchHeader } from "@/components/layout/SearchHeader";
 import { PostPropertyTopAnnouncement } from "@/components/post-property/PostPropertyTopAnnouncement";
 import { CompareResultsHeader } from "@/components/compare/results/CompareResultsHeader";
 import { CompareSeeDifferenceBar } from "@/components/compare/results/CompareSeeDifferenceBar";
@@ -109,8 +109,8 @@ export default function CompareSideBySidePage() {
         <PostPropertyTopAnnouncement onClose={() => setShowAnnouncement(false)} />
       )}
 
-      {/* 2. SimpleHeader with Compare Variant matching Figma exactly */}
-      <SimpleHeader variant="compare" hasAnnouncement={showAnnouncement} />
+      {/* 2. Unified SearchHeader with Compare Variant matching Figma */}
+      <SearchHeader variant="compare" hasAnnouncement={showAnnouncement} />
 
       {/* 3. Main Compare Title & 3 Comparison Slots (Property 1 = Property 2 = Add Another Property) */}
       <CompareResultsHeader

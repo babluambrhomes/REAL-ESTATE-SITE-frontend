@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { useWishlist } from "@/lib/wishlist";
 
 interface CompoundUnit {
   id: string;
@@ -171,15 +172,27 @@ const COMPOUND_UNITS: CompoundUnit[] = [
 
 export const CompoundProperties = () => {
   const swiperRef = useRef<SwiperType | null>(null);
-  const [savedIds, setSavedIds] = useState<Record<string, boolean>>({});
+  const { isSaved, toggle } = useWishlist();
 
-  const toggleSave = (id: string, title: string) => {
-    setSavedIds((prev) => {
-      const isSaved = !prev[id];
-      toast.success(
-        isSaved ? `Saved "${title}" to your favorites!` : `Removed from favorites`
-      );
-      return { ...prev, [id]: isSaved };
+  const handleToggleSave = (
+    id: string,
+    title: string,
+    price: string,
+    image: string,
+    location = "Greater Noida"
+  ) => {
+    toggle(id, {
+      id,
+      title,
+      location,
+      city: "Greater Noida",
+      type: "Apartment",
+      beds: "3 BHK",
+      price,
+      images: [image],
+      chips: ["3 BHK Luxury"],
+      phone: "+91 9876543210",
+      verifiedText: "VERIFIED DEAL",
     });
   };
 
@@ -265,13 +278,13 @@ export const CompoundProperties = () => {
                       aria-label="Save Property"
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleSave(unit.big.id, unit.big.title);
+                        handleToggleSave(unit.big.id, unit.big.title, unit.big.price, unit.big.image, unit.big.location);
                       }}
                       className="absolute top-2 right-2 z-20 flex h-6 w-6 items-center justify-center text-white/90 drop-shadow-sm cursor-pointer hover:scale-110 transition-transform"
                     >
                       <Heart
                         className={`h-4 w-4 transition-colors ${
-                          savedIds[unit.big.id]
+                          isSaved(unit.big.id)
                             ? "fill-rose-500 text-rose-500"
                             : "text-white"
                         }`}
@@ -368,13 +381,13 @@ export const CompoundProperties = () => {
                           aria-label="Save Property"
                           onClick={(e) => {
                             e.stopPropagation();
-                            toggleSave(mini.id, mini.title);
+                            handleToggleSave(mini.id, mini.title, mini.price, mini.image);
                           }}
                           className="absolute top-1 right-1 z-20 flex h-4.5 w-4.5 items-center justify-center text-white/90 drop-shadow-sm cursor-pointer hover:scale-110 transition-transform"
                         >
                           <Heart
                             className={`h-3 w-3 transition-colors ${
-                              savedIds[mini.id]
+                              isSaved(mini.id)
                                 ? "fill-rose-500 text-rose-500"
                                 : "text-white"
                             }`}

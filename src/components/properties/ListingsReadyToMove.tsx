@@ -2,71 +2,81 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface ReadyToMoveItem {
-  id: number;
+export interface ReadyToMoveItem {
+  id: number | string;
+  slug?: string;
   title: string;
   location: string;
   price: string;
   image: string;
 }
 
-const READY_TO_MOVE_ITEMS: ReadyToMoveItem[] = [
+export const READY_TO_MOVE_ITEMS: ReadyToMoveItem[] = [
   {
-    id: 1,
-    title: "Green Villa 2",
+    id: "green-villa-2-greater-noida",
+    slug: "green-villa-2-greater-noida",
+    title: "Green Villa 2 Luxury Duplex",
     location: "Sector 16B, Greater Noida",
     price: "₹ 1 - 1.58 Cr",
     image: "/images/properties/rtm-clean-1.png",
   },
   {
-    id: 2,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "ace-starlit-expressway",
+    slug: "ace-starlit-expressway",
+    title: "Ace Starlit Residences",
+    location: "Sector 152, Noida Expressway",
+    price: "₹ 1.85 - 2.40 Cr",
     image: "/images/properties/rtm-clean-2.png",
   },
   {
-    id: 3,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "godrej-tropical-isle",
+    slug: "godrej-tropical-isle",
+    title: "Godrej Tropical Isle",
+    location: "Sector 146, Noida",
+    price: "₹ 2.10 - 3.25 Cr",
     image: "/images/properties/rtm-clean-3.png",
   },
   {
-    id: 4,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "mahagun-medalleo-107",
+    slug: "mahagun-medalleo-107",
+    title: "Mahagun Medalleo Suites",
+    location: "Sector 107, Noida",
+    price: "₹ 3.40 - 5.10 Cr",
     image: "/images/properties/rtm-clean-4.png",
   },
   {
-    id: 5,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "prateek-canary-115",
+    slug: "prateek-canary-115",
+    title: "Prateek Canary Sky Villas",
+    location: "Sector 115, Noida",
+    price: "₹ 1.75 - 2.80 Cr",
     image: "/images/properties/rtm-clean-1.png",
   },
   {
-    id: 6,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "gulshan-dynasty-144",
+    slug: "gulshan-dynasty-144",
+    title: "Gulshan Dynasty Suites",
+    location: "Sector 144, Noida Expressway",
+    price: "₹ 4.50 - 6.20 Cr",
     image: "/images/properties/rtm-clean-2.png",
   },
   {
-    id: 7,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "eldeco-live-greens",
+    slug: "eldeco-live-greens",
+    title: "Eldeco Live Greens",
+    location: "Sector PI 1, Greater Noida",
+    price: "₹ 1.15 - 1.65 Cr",
     image: "/images/properties/rtm-clean-3.png",
   },
   {
-    id: 8,
-    title: "Green Villa 2",
-    location: "Sector 16B, Greater Noida",
-    price: "₹ 1 - 1.58 Cr",
+    id: "tata-destination-150",
+    slug: "tata-destination-150",
+    title: "Tata Eureka Park",
+    location: "Sector 150, Noida",
+    price: "₹ 95 L - 1.45 Cr",
     image: "/images/properties/rtm-clean-4.png",
   },
 ];
@@ -136,9 +146,10 @@ export const ListingsReadyToMove = () => {
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {READY_TO_MOVE_ITEMS.map((item, idx) => (
-            <div
+            <Link
               key={`${item.id}-${idx}`}
-              className="flex-shrink-0 w-[200px] sm:w-[225px] md:w-[240px] cursor-pointer group/card"
+              href={`/properties/${item.slug || item.id}`}
+              className="flex-shrink-0 w-[200px] sm:w-[225px] md:w-[240px] cursor-pointer group/card block"
             >
               {/* Image Container with Exact Blue Border Frame matching Figma */}
               <div className="relative aspect-[3/4] w-full rounded-2xl border-[2px] border-[#2563EB] bg-white p-1.5 shadow-sm transition-all duration-300 group-hover/card:shadow-md group-hover/card:scale-[1.01]">
@@ -155,7 +166,7 @@ export const ListingsReadyToMove = () => {
 
               {/* Text info below matching Figma */}
               <div className="mt-3 text-center">
-                <h4 className="text-[15.5px] font-medium text-[#0B132B] truncate leading-tight">
+                <h4 className="text-[15.5px] font-medium text-[#0B132B] truncate leading-tight group-hover/card:text-[#1865F2] transition-colors">
                   {item.title}
                 </h4>
                 <p className="text-[12px] text-[#64748B] font-medium truncate mt-1 leading-tight">
@@ -165,7 +176,7 @@ export const ListingsReadyToMove = () => {
                   {item.price}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

@@ -148,19 +148,16 @@ export const BrokerHeroSection = ({
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 w-full lg:w-auto">
             {/* Broker Avatar (Overlaps top banner) - Exact Figma frame with blue border & orbit star badge */}
             <div className="relative -mt-24 sm:-mt-32 shrink-0 z-20">
-              {/* Outer Frosted Halo matching Figma media_1793599294823.png */}
-              <div className="rounded-[38px] p-2 sm:p-2.5 bg-white/25 backdrop-blur-md shadow-[0_10px_35px_rgba(24,101,242,0.18)] border border-white/40">
-                <div className="relative w-[165px] h-[160px] sm:w-[195px] sm:h-[188px]">
-                  <Image
-                    src={avatarUrl || "/broker/jitender_figma_transparent.png"}
-                    alt={name}
-                    fill
-                    priority
-                    unoptimized
-                    className="object-contain"
-                    sizes="200px"
-                  />
-                </div>
+              <div className="relative w-[150px] h-[150px] sm:w-[185px] sm:h-[185px] drop-shadow-[0_12px_28px_rgba(24,101,242,0.18)]">
+                <Image
+                  src="/broker/jitender_full_frame_figma.png"
+                  alt={name}
+                  fill
+                  priority
+                  unoptimized
+                  className="object-contain"
+                  sizes="200px"
+                />
               </div>
             </div>
 
@@ -279,7 +276,7 @@ export const BrokerHeroSection = ({
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
               </div>
-              <span className="font-extrabold text-[#1865F2] text-sm sm:text-[16px]">4.5/5</span>
+              <span className="font-extrabold text-[#0B132B] text-sm sm:text-[16px]">4.5/5</span>
               <span className="text-slate-500 text-xs sm:text-[14px] font-medium">(320 Verified Reviews)</span>
             </div>
 
@@ -289,13 +286,13 @@ export const BrokerHeroSection = ({
               <span>Operating in: <span className="font-semibold text-slate-800">Noida, Greater Noida, Ghaziabad</span></span>
             </div>
 
-            {/* Action CTA Buttons: Gradient Contact Broker & Outline Request Callback */}
+            {/* Action CTA Buttons: Exact Figma Solid Green Contact Broker & Outline Request Callback */}
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-2">
               <a
                 href={`tel:${phone.replace(/\s+/g, "")}`}
-                className="px-6 sm:px-7 py-3 bg-gradient-to-r from-[#1865F2] via-[#0E88DA] to-[#00B488] hover:opacity-95 text-white text-xs sm:text-[14px] font-bold rounded-xl flex items-center gap-2 shadow-[0_4px_16px_rgba(24,101,242,0.35)] transition-all cursor-pointer"
+                className="px-6 sm:px-7 py-3 bg-[#00BA7A] hover:bg-[#009E67] text-white text-xs sm:text-[14px] font-bold rounded-xl flex items-center gap-2 shadow-[0_4px_16px_rgba(0,186,122,0.3)] transition-all cursor-pointer"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4 fill-white text-white" />
                 <span>Contact Broker</span>
               </a>
 
@@ -329,13 +326,13 @@ export const BrokerHeroSection = ({
                     /10
                   </span>
                 </div>
-                <span className="text-[11px] sm:text-xs font-black text-[#10B981] tracking-widest uppercase">
+                <span className="text-[11px] sm:text-xs font-black text-[#00BA7A] tracking-widest uppercase">
                   EXCELLENT
                 </span>
               </div>
 
               {/* Solid Green Progress Line */}
-              <div className="w-full h-[3px] bg-[#10B981] rounded-full my-3.5" />
+              <div className="w-full h-[3.5px] bg-[#00BA7A] rounded-full my-3.5" />
 
               {/* 6 Verification Points (3 columns x 2 rows) */}
               <div className="grid grid-cols-3 gap-x-3 sm:gap-x-4 gap-y-2.5 text-[11px] sm:text-[12px] font-bold text-[#0B132B]">

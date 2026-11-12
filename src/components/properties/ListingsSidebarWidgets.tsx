@@ -682,7 +682,7 @@ export const ListingsSidebarWidgets = () => {
 
         {/* View Profile Button Linking to Broker Profile */}
         <Link
-          href="/broker/2"
+          href="/s/agent/jitender-singh"
           className="mt-3.5 flex w-full items-center justify-center rounded-xl border border-[#FF385C] bg-white hover:bg-rose-50/60 py-2.5 text-[12px] font-medium text-[#FF385C] transition-all cursor-pointer shadow-2xs"
         >
           View Profile

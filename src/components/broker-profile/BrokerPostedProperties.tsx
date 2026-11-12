@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import {
   MapPin,
   Heart,
@@ -13,6 +14,7 @@ import {
   Zap,
   Check,
 } from "lucide-react";
+import { useWishlist } from "@/lib/wishlist";
 
 interface BrokerPostedPropertiesProps {
   title?: string;
@@ -23,40 +25,20 @@ export const BrokerPostedProperties = ({
   title = "Properties Listed",
   limit,
 }: BrokerPostedPropertiesProps = {}) => {
+  const { isSaved, toggle: toggleWishlist } = useWishlist();
   const [likes, setLikes] = useState<Record<string, number>>({
     "prop-1": 72,
-    "prop-2": 72,
-    "prop-3": 72,
-    "prop-4": 72,
+    "prop-2": 85,
+    "prop-3": 64,
+    "prop-4": 91,
   });
-  const [userLiked, setUserLiked] = useState<Record<string, boolean>>({});
   const [expandedDesc, setExpandedDesc] = useState<Record<string, boolean>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const toggleLike = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    setUserLiked((prev) => {
-      const isLiked = !prev[id];
-      setLikes((likePrev) => ({
-        ...likePrev,
-        [id]: !isLiked ? (likePrev[id] || 1) - 1 : (likePrev[id] || 0) + 1,
-      }));
-      return { ...prev, [id]: isLiked };
-    });
-  };
-
-  const handleShare = (e: React.MouseEvent, id: string) => {
-    e.stopPropagation();
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(`${window.location.origin}/properties#${id}`);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2500);
-    }
-  };
 
   const properties = [
     {
       id: "prop-1",
+      numericId: "1",
       title: "The Terraces at Max Estate 361",
       location: "Sector 103 , Noida Ext",
       mrp: "₹1.58 Cr",
@@ -73,53 +55,97 @@ export const BrokerPostedProperties = ({
     },
     {
       id: "prop-2",
-      title: "The Terraces at Max Estate 361",
-      location: "Sector 103 , Noida Ext",
-      mrp: "₹1.58 Cr",
-      price: "₹1.25 *Cr",
-      discount: "13 % OFF!",
+      numericId: "2",
+      title: "Godrej Tropical Isle Luxury Floors",
+      location: "Sector 146, Noida Expressway",
+      mrp: "₹2.20 Cr",
+      price: "₹1.85 *Cr",
+      discount: "16 % OFF!",
       tags: [
         { label: "3 BHK Apartments", isPrimary: true },
         { label: "4 BHK Apartments", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
+        "Island-themed luxury with concierge service, panoramic greenery...",
       image: "/builders/figma_photo_delhi.png",
       isImageLeft: false, // Image on right
     },
     {
       id: "prop-3",
-      title: "The Terraces at Max Estate 361",
-      location: "Sector 103 , Noida Ext",
-      mrp: "₹1.58 Cr",
-      price: "₹1.25 *Cr",
-      discount: "13 % OFF!",
+      numericId: "3",
+      title: "ATS Knightsbridge Signature Suites",
+      location: "Sector 124, Noida Expressway",
+      mrp: "₹3.50 Cr",
+      price: "₹2.95 *Cr",
+      discount: "15 % OFF!",
       tags: [
-        { label: "3 BHK Apartments", isPrimary: true },
-        { label: "4 BHK Apartments", isPrimary: false },
+        { label: "4 BHK Apartments", isPrimary: true },
+        { label: "Penthouse", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
+        "Exclusive ultra-luxury towers with 35,000 sq ft private clubhouse...",
       image: "/images/properties/compound-nbcc-figma.png",
       isImageLeft: true,
     },
     {
       id: "prop-4",
-      title: "The Terraces at Max Estate 361",
-      location: "Sector 103 , Noida Ext",
-      mrp: "₹1.58 Cr",
-      price: "₹1.25 *Cr",
-      discount: "13 % OFF!",
+      numericId: "4",
+      title: "Mahagun Medalleo Royal Mansions",
+      location: "Sector 107, Noida Expressway",
+      mrp: "₹2.80 Cr",
+      price: "₹2.40 *Cr",
+      discount: "14 % OFF!",
       tags: [
         { label: "3 BHK Apartments", isPrimary: true },
         { label: "4 BHK Apartments", isPrimary: false },
       ],
       description:
-        "Comes with 4bedrooms, 4bedrooms, 4balconies with modular...",
+        "Royal heritage architecture with Italian marble and smart home automations...",
       image: "/builders/figma_photo_delhi.png",
       isImageLeft: false, // Image on right
     },
   ];
+
+  const handleToggleWishlist = (e: React.MouseEvent, prop: (typeof properties)[0]) => {
+    e.stopPropagation();
+    const currentlySaved = isSaved(prop.numericId);
+    toggleWishlist(prop.numericId, {
+      id: prop.numericId,
+      title: prop.title,
+      price: prop.price,
+      originalPrice: prop.mrp,
+      location: prop.location,
+      images: [prop.image],
+      verifiedText: "VERIFIED DEAL",
+      chips: [prop.tags[0]?.label || "3 BHK"],
+      phone: "+91 98765 43210",
+      city: "Noida",
+      type: "Apartment",
+      beds: prop.tags[0]?.label || "3 BHK",
+    });
+
+    setLikes((prev) => ({
+      ...prev,
+      [prop.id]: currentlySaved ? Math.max(0, (prev[prop.id] || 1) - 1) : (prev[prop.id] || 0) + 1,
+    }));
+
+    if (currentlySaved) {
+      toast.success("Removed from your saved properties");
+    } else {
+      toast.success("Saved to your shortlist! View in your profile.");
+    }
+  };
+
+  const handleShare = (e: React.MouseEvent, prop: (typeof properties)[0]) => {
+    e.stopPropagation();
+    const shareUrl = `${window.location.origin}/properties/${prop.numericId}`;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl);
+      setCopiedId(prop.id);
+      toast.success("Property link copied to clipboard!");
+      setTimeout(() => setCopiedId(null), 2500);
+    }
+  };
 
   const displayProperties = limit ? properties.slice(0, limit) : properties;
 
@@ -149,7 +175,7 @@ export const BrokerPostedProperties = ({
       {/* Alternating Property Cards */}
       <div className="space-y-4 sm:space-y-5">
         {displayProperties.map((prop) => {
-          const isLiked = !!userLiked[prop.id];
+          const isLiked = isSaved(prop.numericId);
           const isExpanded = !!expandedDesc[prop.id];
 
           return (
@@ -282,7 +308,7 @@ export const BrokerPostedProperties = ({
                       {/* Like */}
                       <button
                         type="button"
-                        onClick={(e) => toggleLike(e, prop.id)}
+                        onClick={(e) => handleToggleWishlist(e, prop)}
                         className="flex items-center gap-1.5 hover:text-red-500 transition-colors cursor-pointer"
                       >
                         <Heart
@@ -298,7 +324,7 @@ export const BrokerPostedProperties = ({
                       {/* Share */}
                       <button
                         type="button"
-                        onClick={(e) => handleShare(e, prop.id)}
+                        onClick={(e) => handleShare(e, prop)}
                         className="flex items-center gap-1.5 hover:text-[#1865F2] transition-colors cursor-pointer text-[#0B132B]"
                       >
                         <Send className="w-4 h-4 text-[#1865F2]" />
@@ -314,11 +340,11 @@ export const BrokerPostedProperties = ({
 
                     {/* View Details Pill Button */}
                     <Link
-                      href="/properties"
+                      href={`/properties/${prop.numericId}`}
                       className="px-4 py-2 bg-[#1865F2] hover:bg-[#1250C4] text-white font-bold text-xs sm:text-[13px] rounded-full flex items-center gap-2 transition-all shadow-md shrink-0 cursor-pointer"
                     >
                       <span className="w-5 h-5 rounded-full bg-[#00D26A] text-white flex items-center justify-center text-[10.5px] font-black shadow-2xs">
-                        1
+                        {prop.numericId}
                       </span>
                       <span>View Details</span>
                       <ArrowRight className="w-3.5 h-3.5" />

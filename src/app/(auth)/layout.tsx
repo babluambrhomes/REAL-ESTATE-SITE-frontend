@@ -31,10 +31,10 @@ export default function AuthLayout({
           <div className="flex items-center gap-4">
             <Image
               src="/layout/logo.png"
-              alt="AmbrHomes"
+              alt="Roofin"
               width={80}
-              sizes="(max-width: 768px) 100vw, 33vw"
               height={50}
+              style={{ width: "auto", height: "auto" }}
             />
           </div>
           <div className="flex gap-6 text-sm items-center">
