@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Providers } from "@/lib/providers";
 import { Toaster } from "react-hot-toast";
-import { Footer } from "@/components/layout/Footer";
+import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className="min-h-full font-poppins bg-white text-slate-900">
         <Providers>
           {children}
-          <Footer />
+          <ConditionalFooter />
           <Toaster
             position="top-right"
             toastOptions={{

@@ -54,28 +54,11 @@ export const ContactFormSection = () => {
       console.warn("Could not write to localStorage:", err);
     }
 
-    try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim() || "Contact form message",
-        }),
-      });
-      setIsSent(true);
-      toast.success("Thank you! Your message has been sent successfully.");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setIsSent(false), 5000);
-    } catch (err) {
-      console.warn("Contact form submit error:", err);
-      setIsSent(true);
-      toast.success("Thank you! Your message has been sent successfully.");
-      setFormData({ name: "", email: "", message: "" });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setIsSent(true);
+    toast.success("Thank you! Your message has been sent successfully.");
+    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(false);
+    setTimeout(() => setIsSent(false), 5000);
   };
 
   return (

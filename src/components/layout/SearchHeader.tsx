@@ -12,7 +12,6 @@ import { SEARCH_HEADER } from '@/data/headerData'
 import { cn } from '@/lib/utils'
 import { useWishlist } from '@/lib/wishlist'
 import { useAppSelector } from '@/store/hooks'
-import { propertyApi } from '@/lib/features/property/propertyApi'
 
 const {
     locations: LOCATIONS,
@@ -80,23 +79,8 @@ export const SearchHeader = ({
         setIsMounted(true);
     }, []);
 
-    const [liveLocations, setLiveLocations] = useState<string[]>(LOCATIONS);
-    const [liveTypes, setLiveTypes] = useState<string[]>(PROPERTY_TYPES);
-
-    useEffect(() => {
-        propertyApi.getSuggestions({ city: selectedCity?.value })
-            .then((res) => {
-                if (res?.data?.cities && res.data.cities.length > 0) {
-                    const dynamicCities = res.data.cities.map((c) => c.city).filter(Boolean);
-                    setLiveLocations((prev) => Array.from(new Set([...prev, ...dynamicCities])));
-                }
-                if (res?.data?.propertyTypes && res.data.propertyTypes.length > 0) {
-                    const dynamicTypes = res.data.propertyTypes.map((t) => t.type).filter(Boolean);
-                    setLiveTypes((prev) => Array.from(new Set([...prev, ...dynamicTypes])));
-                }
-            })
-            .catch(() => {});
-    }, [selectedCity]);
+    const [liveLocations] = useState<string[]>(LOCATIONS);
+    const [liveTypes] = useState<string[]>(PROPERTY_TYPES);
 
     const [filters, setFilters] = useState<FilterState>({
         locations: [],

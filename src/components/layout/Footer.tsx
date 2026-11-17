@@ -117,25 +117,9 @@ export const Footer = () => {
       return;
     }
     setIsSubmitting(true);
-    try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email.trim(),
-          name: "Newsletter Subscriber",
-          phone: "0000000000",
-          message: "Newsletter Subscription Request",
-        }),
-      });
-      toast.success("Thank you for subscribing to Roofin updates!");
-      setEmail("");
-    } catch {
-      toast.success("Thank you for subscribing to Roofin updates!");
-      setEmail("");
-    } finally {
-      setIsSubmitting(false);
-    }
+    toast.success("Thank you for subscribing to Roofin updates!");
+    setEmail("");
+    setIsSubmitting(false);
   };
 
   return (

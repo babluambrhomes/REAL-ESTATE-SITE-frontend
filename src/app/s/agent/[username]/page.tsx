@@ -12,8 +12,6 @@ import { BrokerRecentPosts } from "@/components/broker-profile/BrokerRecentPosts
 import { BrokerVideosSection } from "@/components/broker-profile/BrokerVideosSection";
 import { BrokerAboutSection } from "@/components/broker-profile/BrokerAboutSection";
 import { BrokerSidebar } from "@/components/broker-profile/BrokerSidebar";
-import { apiClient } from "@/lib/axios";
-
 interface AgentProfilePageProps {
   params: Promise<{ username: string }>;
 }
@@ -22,21 +20,7 @@ export default function AgentProfilePage({ params }: AgentProfilePageProps) {
   const { username } = use(params);
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const [activeTab, setActiveTab] = useState("overview");
-  const [sellerData, setSellerData] = useState<any>(null);
-
-  useEffect(() => {
-    if (!username) return;
-    apiClient
-      .get(`/sellers/${username}`)
-      .then((res) => {
-        if (res.data?.data) {
-          setSellerData(res.data.data);
-        }
-      })
-      .catch(() => {
-        // Fallback gracefully to default Figma mock data
-      });
-  }, [username]);
+  const [sellerData] = useState<any>(null);
 
   return (
     <div className="min-h-screen flex flex-col font-poppins bg-[#F8FAFC]">

@@ -24,9 +24,6 @@ import { PropertyContactModal } from "./PropertyContactModal";
 import { PropertyMapModal } from "./PropertyMapModal";
 import { PropertyEmiCalculatorModal } from "@/components/properties/PropertyEmiCalculatorModal";
 
-const API_BASE_URL = "/api/v1";
-
-// Custom Spec Icons using user's high-resolution Figma exported assets
 const AreaBlueprintIcon = ({ className }: { className?: string }) => (
   <div className={cn("flex h-8 w-9 sm:h-8.5 sm:w-9.5 shrink-0 items-center justify-center", className)}>
     <Image
@@ -197,8 +194,7 @@ export const PropertyCard = (props: Property) => {
     if (imagePath.startsWith("http://") || imagePath.startsWith("https://") || imagePath.startsWith("/")) {
       return imagePath;
     }
-    const cleanBase = API_BASE_URL.replace(/\/api\/v1\/?$/, "");
-    return `${cleanBase}${imagePath.startsWith("/") ? "" : "/"}${imagePath}`;
+    return `/${imagePath}`;
   };
 
   const propertyImage = getImageUrl(images[0]);

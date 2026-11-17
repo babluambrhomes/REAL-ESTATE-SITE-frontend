@@ -45,7 +45,6 @@ import { updateUser } from "@/store/slice/authSlice";
 import { useWishlist, getSavedPropertiesData } from "@/lib/wishlist";
 import { properties, fastSellingProperties, handpickedProperties } from "@/data/properties";
 import type { Property } from "@/types";
-import { apiClient } from "@/lib/axios";
 
 type ActiveTabType = "saved" | "visits" | "enquiries" | "offers" | "listings" | "settings";
 
@@ -206,26 +205,6 @@ export default function UserProfilePage() {
           propertyInterest: "Apartments / Flats",
           bio: currentUser.person?.bio || "Passionate real estate enthusiast looking for dream investments in NCR.",
         });
-      }
-
-      // Fetch live user profile from backend API
-      if (isAuthenticated) {
-        apiClient
-          .get("/users/profile")
-          .then((res: any) => {
-            const u = res?.data?.data || res?.data;
-            if (u) {
-              setProfileForm((prev) => ({
-                ...prev,
-                firstName: u.person?.firstName || prev.firstName,
-                lastName: u.person?.lastName || prev.lastName,
-                email: u.email || prev.email,
-                phone: u.phone || u.person?.phone || prev.phone,
-                city: u.person?.city || prev.city,
-              }));
-            }
-          })
-          .catch(() => {});
       }
     } catch {}
 
@@ -488,17 +467,6 @@ export default function UserProfilePage() {
         },
       })
     );
-
-    // Call live backend PUT /users/profile
-    try {
-      await apiClient.put("/users/profile", {
-        firstName: profileForm.firstName,
-        lastName: profileForm.lastName,
-        city: profileForm.city,
-      });
-    } catch (err: any) {
-      console.log("Profile update live deferred to local state:", err?.response?.data?.message || err?.message);
-    }
 
     try {
       localStorage.setItem(

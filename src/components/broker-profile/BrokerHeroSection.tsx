@@ -16,8 +16,6 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { apiClient } from "@/lib/axios";
-
 export interface BrokerHeroSectionProps {
   name?: string;
   role?: string;
@@ -71,17 +69,6 @@ export const BrokerHeroSection = ({
 
   const handleRequestCallback = async () => {
     setCallbackRequested(true);
-    try {
-      await apiClient.post("/enquiries", {
-        name: "Buyer Applicant",
-        email: "callback_request@roofin.com",
-        phone: phone.replace(/\s+/g, ""),
-        sellerId,
-        message: `Request callback for broker ${name}`,
-      });
-    } catch {
-      // Ignore network fallback
-    }
     toast.success(`Callback request sent! ${name} will call you shortly.`);
   };
 

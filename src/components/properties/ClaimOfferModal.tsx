@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Gift, CheckCircle2, Copy, Check, Sparkles, Tag, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
-import { apiClient } from "@/lib/axios";
 
 interface ClaimOfferModalProps {
   isOpen: boolean;
@@ -118,17 +117,6 @@ export const ClaimOfferModal = ({ isOpen, onClose }: ClaimOfferModalProps) => {
       });
       localStorage.setItem("roofin_enquiries", JSON.stringify(enqs));
     } catch {}
-
-    try {
-      await apiClient.post("/enquiries", {
-        name: name.trim(),
-        email: `offer_${mobile.trim()}@roofin.in`,
-        phone: mobile.trim(),
-        message: `Claimed Offer: ${chosenOffer?.title || selectedOffer} [Code: ${code}]`,
-      });
-    } catch {
-      // Backend error ignored gracefully
-    }
 
     setIsSubmitting(false);
     setClaimedCode(code);

@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
 import { setAuth } from "@/store/slice/authSlice";
 import { useAppDispatch } from "@/store/hooks";
+import { authApi } from "@/lib/features/auth/authApi";
 
 const DEFAULT_RESEND_DELAY = 30;
 
@@ -83,15 +84,14 @@ export function VerifyOtpForm({
   setIsPending(true);
 
   try {
-    const response = await axiosInstance.post(apiUrl, {
+    const res: any = await authApi.verifyOtp({
       identifier,
       code: data.code,
       purpose: purpose as VerifyOtpRequest["purpose"],
     });
 
-    const authData = response.data?.data;
+    const authData = res?.data;
 
-    // Private OTP verification returns fresh auth tokens
     if (
       authData?.user &&
       authData?.accessToken &&

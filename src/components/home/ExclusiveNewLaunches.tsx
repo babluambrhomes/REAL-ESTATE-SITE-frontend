@@ -229,61 +229,13 @@ interface ExclusiveNewLaunchesProps {
   projects?: Property[];
 }
 
-const API_BASE_URL = "/api/v1";
-
 export const ExclusiveNewLaunches = ({
   projects: initialProjects,
 }: ExclusiveNewLaunchesProps) => {
-  const [apiProjects, setApiProjects] = useState<Property[]>([]);
   const [activeLocality, setActiveLocality] = useState<string>("sec-150");
   const [localityOffset, setLocalityOffset] = useState<number>(0);
 
   const swiperRef = useRef<SwiperType | null>(null);
-
-  useEffect(() => {
-    if (initialProjects && initialProjects.length > 0) {
-      return;
-    }
-    const fetchNewLaunches = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/properties?category=New%20Launch&limit=10`, {
-          cache: "no-store",
-        });
-        if (response.ok) {
-          const json = await response.json();
-          const items = json.data?.data || json.data || [];
-          if (Array.isArray(items) && items.length > 0) {
-            const mapped: Property[] = items
-              .filter((p: any) => p.images?.length > 0 || p.featuredImage)
-              .map((p: any) => ({
-                id: p.id || p._id,
-                title: p.title || "Luxury Residential Project",
-                location: p.location || `${p.city || "Noida"}, ${p.state || "UP"}`,
-                city: p.city || "Noida",
-                type: p.type || "Apartment",
-                beds: p.beds ? `${p.beds} BHK` : "3 BHK",
-                price: p.price ? (typeof p.price === "number" ? `₹ ${p.price.toLocaleString("en-IN")}*` : p.price) : "₹ 1.25 Cr*",
-                verifiedText: "NEW LAUNCH",
-                images: p.images?.length
-                  ? p.images
-                  : p.featuredImage
-                  ? [p.featuredImage]
-                  : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"],
-                chips: p.chips || ["3 BHK Apartment", "4 BHK Apartment"],
-                phone: p.phone || "+91 9876543210",
-                category: "New Launch",
-              }));
-            if (mapped.length > 0) {
-              setApiProjects(mapped);
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching new launches:", err);
-      }
-    };
-    fetchNewLaunches();
-  }, [initialProjects]);
 
   // Sequence of Properties starting with active locality on the LEFT and next locality on the RIGHT
   const currentProperties = useMemo(() => {
@@ -309,11 +261,10 @@ export const ExclusiveNewLaunches = ({
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
     ];
     if (!imagePath) return backupList[fallbackIndex % backupList.length];
-    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://") || imagePath.startsWith("/")) {
       return imagePath;
     }
-    const cleanBase = API_BASE_URL.replace(/\/api\/v1\/?$/, "");
-    return `${cleanBase}${imagePath.startsWith("/") ? "" : "/"}${imagePath}`;
+    return `/${imagePath}`;
   };
 
   // 5 Visible Primary Localities in strict order + 3 Stacked Localities behind the "More" deck

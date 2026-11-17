@@ -50,8 +50,6 @@ import { useWishlist } from "@/lib/wishlist";
 import { useCompare } from "@/lib/compare";
 import { FloatingCompareBar } from "@/components/compare/FloatingCompareBar";
 import { CompareModal } from "@/components/compare/CompareModal";
-import { usePropertyDetailQuery } from "@/lib/features/property/propertyHooks";
-import { mapApiPropertyToUi } from "@/lib/features/property/propertyAdapter";
 import { properties } from "@/data/properties";
 import { ALL_PRICE_DROPPED_ITEMS } from "@/components/properties/ListingsPriceDropped";
 import { READY_TO_MOVE_ITEMS } from "@/components/properties/ListingsReadyToMove";
@@ -418,19 +416,7 @@ export default function PropertyDetailsPage() {
     return decodedParam.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   }, [decodedParam]);
 
-  // Live Backend Query integration for Property Details
-  const { data: apiDetailData } = usePropertyDetailQuery(slugifiedParam || decodedParam);
-  const liveApiProperty = useMemo(() => {
-    if (!apiDetailData?.data) return null;
-    return mapApiPropertyToUi(apiDetailData.data);
-  }, [apiDetailData]);
-
   const property: Property = useMemo(() => {
-    // 0. Live Backend Data (if exists)
-    if (liveApiProperty) {
-      return liveApiProperty;
-    }
-
     // 1. Direct match on id
     let matched = allProperties.find(
       (p) =>
@@ -512,7 +498,7 @@ export default function PropertyDetailsPage() {
     }
 
     return matched || allProperties[0] || properties[0];
-  }, [allProperties, decodedParam, slugifiedParam, rawParam, liveApiProperty]);
+  }, [allProperties, decodedParam, slugifiedParam, rawParam]);
 
   const currentIndex = useMemo(() => {
     const idx = allProperties.findIndex((p) => p.id === property.id || p.slug === property.slug);
@@ -576,14 +562,6 @@ export default function PropertyDetailsPage() {
       const existing = JSON.parse(localStorage.getItem("roofin_enquiries") || "[]");
       existing.unshift(newEnquiry);
       localStorage.setItem("roofin_enquiries", JSON.stringify(existing));
-    } catch {}
-
-    try {
-      fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEnquiry),
-      }).catch(() => {});
     } catch {}
 
     toast.success("Enquiry sent to dealer successfully! An agent will call you shortly.");

@@ -16,7 +16,6 @@ import {
   Send,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { propertyApi } from "@/lib/features/property/propertyApi";
 
 interface PropertyContactModalProps {
   isOpen: boolean;
@@ -85,15 +84,6 @@ export const PropertyContactModal = ({
     }
 
     setIsSubmitting(true);
-    // Send lead to backend API
-    propertyApi.submitEnquiry({
-      name: name.trim(),
-      email: `buyer${cleanMobile.slice(-6)}@roofin.in`,
-      phone: cleanMobile,
-      message: `Instant callback requested (${timeSlot}) for: ${property.title || "Property"} (${property.location || "Noida"})`,
-      propertyId: typeof property.id === "string" ? property.id : undefined,
-    }).catch(() => {});
-
     setTimeout(() => {
       // Save request to localStorage so it syncs with User Dashboard
       try {

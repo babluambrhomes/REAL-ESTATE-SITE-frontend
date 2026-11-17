@@ -42,9 +42,6 @@ import { useWishlist, getSavedPropertiesData } from "@/lib/wishlist";
 import { useCompare } from "@/lib/compare";
 import { FloatingCompareBar } from "@/components/compare/FloatingCompareBar";
 import { CompareModal } from "@/components/compare/CompareModal";
-import { useSearchPropertiesQuery } from "@/lib/features/property/propertyHooks";
-import { mapApiPropertyToUi } from "@/lib/features/property/propertyAdapter";
-import type { SearchPropertiesParams } from "@/lib/features/property/propertyApi";
 
 const PropertyCardSkeleton = ({ layout = "list" }: { layout?: "grid" | "list" }) => {
   if (layout === "grid") {
@@ -531,97 +528,13 @@ export const PropertyListingsClient = () => {
     return list;
   }, [filteredProperties, selectedSort]);
 
-  // 3. Live Backend API Query integration
-  const searchApiParams = useMemo<SearchPropertiesParams>(() => {
-    const params: SearchPropertiesParams = {
-      page,
-      limit: PER_PAGE,
-    };
-    if (q) params.q = q;
-    if (city) params.city = city.replace(/-/g, " ");
-    if (locality) params.locality = locality;
-    if (propertyType) {
-      const lower = propertyType.toLowerCase();
-      if (lower.includes("villa")) params.propertyType = "VILLA";
-      else if (lower.includes("house")) params.propertyType = "HOUSE";
-      else if (lower.includes("apartment") || lower.includes("flat")) params.propertyType = "APARTMENT";
-      else if (lower.includes("floor") || lower.includes("builder")) params.propertyType = "BUILDER_FLOOR";
-      else if (lower.includes("studio") || lower.includes("rk")) params.propertyType = "STUDIO";
-      else if (lower.includes("penthouse")) params.propertyType = "PENTHOUSE";
-      else if (lower.includes("plot") || lower.includes("land")) params.propertyType = "PLOT";
-      else if (lower.includes("shop")) params.propertyType = "COMMERCIAL_SHOP";
-      else if (lower.includes("office")) params.propertyType = "COMMERCIAL_OFFICE";
-      else if (lower.includes("commercial")) params.propertyType = "COMMERCIAL_BUILDING";
-      else {
-        const upper = propertyType.toUpperCase().replace(/[-\s/]/g, "_");
-        const validTypes = ["APARTMENT", "HOUSE", "VILLA", "BUILDER_FLOOR", "PENTHOUSE", "STUDIO", "PLOT", "COMMERCIAL_SHOP", "COMMERCIAL_OFFICE"];
-        if (validTypes.includes(upper)) params.propertyType = upper;
-      }
-    }
-    if (purpose) {
-      params.transactionType = purpose.toLowerCase() === "rent" ? "RENT" : "SALE";
-    }
-
-    if (selectedSort.value === "price-low") params.sort = "price_asc";
-    else if (selectedSort.value === "price-high") params.sort = "price_desc";
-    else if (selectedSort.value === "popular") params.sort = "popular";
-    else params.sort = "newest";
-
-    if (budget) {
-      if (budget === "under-30l") params.maxPrice = 3000000;
-      else if (budget === "30-50l") { params.minPrice = 3000000; params.maxPrice = 5000000; }
-      else if (budget === "50-75l") { params.minPrice = 5000000; params.maxPrice = 7500000; }
-      else if (budget === "75l-1cr") { params.minPrice = 7500000; params.maxPrice = 10000000; }
-      else if (budget === "1-1.5cr") { params.minPrice = 10000000; params.maxPrice = 15000000; }
-      else if (budget === "1.5-3cr") { params.minPrice = 15000000; params.maxPrice = 30000000; }
-      else if (budget === "above-3cr") params.minPrice = 30000000;
-    }
-
-    if (minPrice) {
-      const num = Number(minPrice);
-      params.minPrice = num > 10000 ? num : num * 100000;
-    }
-    if (maxPrice) {
-      const num = Number(maxPrice);
-      params.maxPrice = num > 10000 ? num : num * 100000;
-    }
-
-    if (bhk) {
-      const allowedDigits = bhk.split(",").map((s) => s.replace(/\D/g, "")).filter(Boolean);
-      if (allowedDigits.length === 1 && ["1", "2", "3", "4", "5", "6", "7", "8"].includes(allowedDigits[0])) {
-        params.bhk = allowedDigits[0];
-      } else if (allowedDigits.length > 0) {
-        const num = parseInt(allowedDigits[0]);
-        if (!isNaN(num)) params.bedrooms = num;
-      }
-    }
-
-    return params;
-  }, [page, q, city, locality, propertyType, purpose, selectedSort, budget, bhk, minPrice, maxPrice]);
-
-  const { data: apiData, isLoading: isApiLoading } = useSearchPropertiesQuery(searchApiParams);
-
-  const apiProperties = useMemo(() => {
-    if (!apiData?.data?.data || apiData.data.data.length === 0) return null;
-    return apiData.data.data.map(mapApiPropertyToUi);
-  }, [apiData]);
-
-  // If live backend properties exist and not savedOnly, use live data.
-  // Otherwise gracefully fallback to local sortedProperties.
+  // Pure Frontend Mode: local sortedProperties without backend calls
+  const isApiLoading = false;
   const itemsPerPage = view === "list" ? 5 : 12;
-  const isUsingApi = !savedOnly && Boolean(apiProperties && apiProperties.length > 0);
-  const totalItems = savedOnly
-    ? sortedProperties.length
-    : isUsingApi
-      ? apiData!.data.meta.total
-      : (sortedProperties.length > 0 ? 2376 : 0);
-  const totalPages = isUsingApi
-    ? Math.max(1, apiData!.data.meta.pages)
-    : Math.max(1, Math.ceil(totalItems / itemsPerPage));
+  const totalItems = savedOnly ? sortedProperties.length : 2376;
+  const totalPages = Math.max(1, Math.ceil(sortedProperties.length / itemsPerPage));
   const currentPage = Math.min(page, totalPages);
-  const visible = isUsingApi
-    ? apiProperties!
-    : sortedProperties.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const visible = sortedProperties.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);

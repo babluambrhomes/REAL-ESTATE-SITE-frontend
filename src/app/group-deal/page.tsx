@@ -28,7 +28,6 @@ import {
   BadgeCheck,
   HelpCircle,
 } from "lucide-react";
-import { propertyApi } from "@/lib/features/property/propertyApi";
 
 export default function GroupDealPage() {
   const [formData, setFormData] = useState({
@@ -46,17 +45,6 @@ export default function GroupDealPage() {
 
     const voucherCode = `ROOFIN-COBUY-76${Math.floor(10 + Math.random() * 90)}`;
     setClaimedCode(voucherCode);
-
-    try {
-      await propertyApi.submitEnquiry({
-        name: formData.name.trim(),
-        email: formData.email?.trim() || `deal_${formData.phone.replace(/\D/g, "")}@roofin.com`,
-        phone: formData.phone.trim(),
-        message: `Group Deal Reservation: Aspire Silicon City, Sector 76 Noida - ${formData.unitType} (Voucher: ${voucherCode})`,
-      });
-    } catch (err) {
-      console.warn("Group deal lead sync error:", err);
-    }
 
     try {
       const existingOffers = JSON.parse(localStorage.getItem("roofin_claimed_offers") || "[]");

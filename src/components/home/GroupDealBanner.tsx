@@ -68,24 +68,9 @@ export const GroupDealBanner = () => {
       console.warn("Could not save deal enquiry to localStorage:", err);
     }
 
-    try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email?.trim() || `deal_${formData.phone.replace(/\D/g, "")}@roofin.com`,
-          phone: formData.phone.trim(),
-          message: "Exclusive Group Deal Registration: Aspire Silicon City, Sector 76 Noida (4BHK + S)",
-        }),
-      });
-    } catch (err) {
-      console.warn("Group deal enquiry backend sync:", err);
-    } finally {
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-      toast.success("Group deal registered successfully!");
-    }
+    setIsSubmitting(false);
+    setFormSubmitted(true);
+    toast.success("Group deal registered successfully!");
   };
 
   const handleCloseModal = () => {

@@ -76,30 +76,15 @@ export const BuilderSidebarLeadForm = () => {
       console.warn("Could not save to localStorage:", err);
     }
 
-    try {
-      await fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim() || `builder_lead_${mobile.replace(/\D/g, "")}@roofin.com`,
-          phone: mobile.trim(),
-          message: `Builder Lead - Budget: ${budget || "Any"}, Project: ${chosenProject}, Builder: ATS Infrastructure`,
-        }),
-      });
-    } catch (err) {
-      console.warn("Builder enquiry backend error (handled gracefully):", err);
-    } finally {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setLastSubmittedLead(leadData);
-      toast.success("Enquiry sent! The builder will contact you shortly.");
-      setName("");
-      setMobile("");
-      setEmail("");
-      setBudget("");
-      setProject("");
-    }
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setLastSubmittedLead(leadData);
+    toast.success("Enquiry sent! The builder will contact you shortly.");
+    setName("");
+    setMobile("");
+    setEmail("");
+    setBudget("");
+    setProject("");
   };
 
   const banks = [

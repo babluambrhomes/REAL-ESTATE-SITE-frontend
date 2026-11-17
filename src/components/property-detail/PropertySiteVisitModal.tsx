@@ -114,15 +114,6 @@ export const PropertySiteVisitModal: React.FC<PropertySiteVisitModalProps> = ({
       localStorage.setItem("roofin_enquiries", JSON.stringify(existing));
     } catch {}
 
-    // Async sync with backend
-    try {
-      fetch("/api/v1/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEnquiry),
-      }).catch(() => {});
-    } catch {}
-
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);

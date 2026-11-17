@@ -102,8 +102,6 @@ const popularList = [
   "2 BHK under 1 Cr",
 ];
 
-import { useSearchSuggestionsQuery } from "@/lib/features/property/propertyHooks";
-
 export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("buy");
@@ -113,57 +111,8 @@ export const SearchBox = forwardRef<HTMLDivElement>((_props, ref) => {
   const dispatch = useAppDispatch();
   const selectedCity = useAppSelector((state) => state.location.selectedCity);
 
-  const { data: suggestionsData } = useSearchSuggestionsQuery();
-
-  // Merge live backend cities with existing LocationList
-  const dynamicCityOptions = useMemo<OptionType[]>(() => {
-    const liveCities = suggestionsData?.data?.cities;
-    if (!liveCities || liveCities.length === 0) return LocationList;
-
-    const countMap = new Map<string, number>();
-    liveCities.forEach((c) => countMap.set(c.city.toLowerCase(), c.count));
-
-    const mapped = LocationList.map((loc) => {
-      const count = countMap.get(loc.value.toLowerCase()) || countMap.get(loc.label.toLowerCase());
-      return {
-        ...loc,
-        label: count ? `${loc.label} (${count})` : loc.label,
-      };
-    });
-
-    liveCities.forEach((c) => {
-      const cleanVal = c.city.toLowerCase().replace(/\s+/g, "-");
-      const exists = mapped.some(
-        (m) => m.value.toLowerCase() === cleanVal || m.label.toLowerCase().startsWith(c.city.toLowerCase())
-      );
-      if (!exists) {
-        mapped.push({
-          value: cleanVal,
-          label: `${c.city} (${c.count})`,
-        });
-      }
-    });
-
-    return mapped;
-  }, [suggestionsData]);
-
-  // Merge live backend property types with existing propertyTypeOptions
-  const dynamicTypeOptions = useMemo<OptionType[]>(() => {
-    const liveTypes = suggestionsData?.data?.propertyTypes;
-    if (!liveTypes || liveTypes.length === 0) return propertyTypeOptions;
-
-    const countMap = new Map<string, number>();
-    liveTypes.forEach((t) => countMap.set(t.type.toUpperCase(), t.count));
-
-    return propertyTypeOptions.map((opt) => {
-      const upper = opt.value.toUpperCase().replace(/-/g, "_");
-      const count = countMap.get(upper);
-      return {
-        ...opt,
-        label: count ? `${opt.label} (${count})` : opt.label,
-      };
-    });
-  }, [suggestionsData]);
+  const dynamicCityOptions = LocationList;
+  const dynamicTypeOptions = propertyTypeOptions;
 
   const handleSearch = () => {
     if (activeTab === "agent") {
