@@ -576,6 +576,7 @@ export default function PropertyDetailsPage() {
     }
   };
 
+ 
   return (
     <div className="min-h-screen bg-white font-poppins text-[#0B132B]">
       {/* ──────────────────────────────────────────────────────────────────────── */}
