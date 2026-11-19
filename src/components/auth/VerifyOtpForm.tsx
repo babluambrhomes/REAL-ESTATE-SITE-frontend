@@ -7,12 +7,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { verifyOtpSchema, type VerifyOtpForm as VerifyOtpFormType } from "@/lib/features/auth/schemas";
 import type { VerifyOtpRequest, VerifyOtpFormProps } from "@/types";
-import { axiosInstance } from "@/lib/axios";
 import toast from "react-hot-toast";
 import { PrimaryButton } from "@/components/button/PrimaryButton";
-import { setAuth } from "@/store/slice/authSlice";
-import { useAppDispatch } from "@/store/hooks";
-import { authApi } from "@/lib/features/auth/authApi";
+import { useVerifyOtpMutation } from "@/lib/features/auth/authMutations";
 
 const DEFAULT_RESEND_DELAY = 30;
 
@@ -39,7 +36,6 @@ function getErrorMessage(error: unknown, fallback: string): string {
 export function VerifyOtpForm({
   identifier,
   purpose,
-  apiUrl,
   onSuccess,
   onResend,
   resendDelay = DEFAULT_RESEND_DELAY,
@@ -48,7 +44,7 @@ export function VerifyOtpForm({
   const [otp, setOtp] = useState("");
   const [seconds, setSeconds] = useState(resendDelay);
   const [isPending, setIsPending] = useState(false);
-  const dispatch = useAppDispatch();
+  const verifyMutation = useVerifyOtpMutation();
 
   const purposeLabel = getPurposeLabel(purpose);
 
@@ -80,34 +76,23 @@ export function VerifyOtpForm({
     }
   };
 
- const onSubmit = async (data: VerifyOtpFormType) => {
-  setIsPending(true);
-
-  try {
-    const res: any = await authApi.verifyOtp({
-      identifier,
-      code: data.code,
-      purpose: purpose as VerifyOtpRequest["purpose"],
-    });
-
-    const authData = res?.data;
-
-    if (
-      authData?.user &&
-      authData?.accessToken &&
-      authData?.refreshToken
-    ) {
-      dispatch(setAuth(authData));
-    }
-
-    toast.success("Verified successfully");
-    onSuccess?.();
-  } catch (error) {
-    toast.error(getErrorMessage(error, "OTP verification failed"));
-  } finally {
-    setIsPending(false);
-  }
-};
+  const onSubmit = (data: VerifyOtpFormType) => {
+    setIsPending(true);
+    verifyMutation.mutate(
+      {
+        identifier,
+        code: data.code,
+        purpose: purpose as VerifyOtpRequest["purpose"],
+      },
+      {
+        onSuccess: () => {
+          toast.success("Verified successfully");
+          onSuccess?.();
+        },
+        onSettled: () => setIsPending(false),
+      }
+    );
+  };
 
   const formattedTime = `00:${seconds.toString().padStart(2, "0")}`;
 

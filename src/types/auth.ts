@@ -136,9 +136,10 @@ export interface RefreshResponse {
 }
 
 export interface ApiError {
-  statusCode: number;
+  statusCode?: number;
   message: string;
   success: false;
+  data: unknown;
   code?: string;
 }
 
@@ -152,7 +153,6 @@ export interface GoogleAuthProps {
 export interface VerifyOtpFormProps {
   identifier: string;
   purpose: string;
-  apiUrl: string;
   onSuccess?: () => void;
   onResend?: () => Promise<void> | void;
   resendDelay?: number;

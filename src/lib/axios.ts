@@ -1,24 +1,26 @@
-import axios from "axios";
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 import type { AppDispatch, RootState } from "@/store/store";
 
-const BASE_URL = "/api/v1/auth";
-const API_V1_URL = "/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, "");
 
-export const axiosInstance = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+if (!API_BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_BASE_URL is not set");
+}
 
 export const apiClient = axios.create({
-  baseURL: API_V1_URL,
+  baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+const REFRESH_URL = "/auth/refresh";
+
+const isRefreshRequest = (config: { url?: string } | undefined) =>
+  config?.url === REFRESH_URL;
+
+type RetryConfig = InternalAxiosRequestConfig & { _retry?: boolean };
 
 type StoreRef = { getState: () => RootState; dispatch: AppDispatch };
 
@@ -46,7 +48,9 @@ function processQueue(error: unknown, token: string | null = null) {
   failedQueue = [];
 }
 
-const attachAuthHeader = (config: any) => {
+const attachAuthHeader = (config: InternalAxiosRequestConfig) => {
+  if (isRefreshRequest(config)) return config;
+
   const state = storeRef?.getState();
   const token =
     state?.auth?.accessToken || state?.auth?.verificationToken;
@@ -56,11 +60,18 @@ const attachAuthHeader = (config: any) => {
   return config;
 };
 
-axiosInstance.interceptors.request.use(attachAuthHeader, (error) => Promise.reject(error));
 apiClient.interceptors.request.use(attachAuthHeader, (error) => Promise.reject(error));
 
-const handleResponseError = async (error: any) => {
-  const originalRequest = error.config;
+const handleResponseError = async (error: AxiosError<{ code?: string }>) => {
+  const originalRequest = error.config as RetryConfig | undefined;
+
+  if (!originalRequest) {
+    return Promise.reject(error);
+  }
+
+  if (isRefreshRequest(originalRequest)) {
+    return Promise.reject(error);
+  }
 
   if (
     error.response?.status === 401 &&
@@ -73,7 +84,7 @@ const handleResponseError = async (error: any) => {
       })
         .then((token) => {
           originalRequest.headers.Authorization = `Bearer ${token}`;
-          return axios(originalRequest);
+          return apiClient(originalRequest);
         })
         .catch((err) => Promise.reject(err));
     }
@@ -89,9 +100,9 @@ const handleResponseError = async (error: any) => {
         throw new Error("No refresh token available");
       }
 
-      const { data } = await axios.post(`${BASE_URL}/refresh`, {
-        refreshToken,
-      });
+      const { data } = await apiClient.post<{
+        data: { accessToken: string; refreshToken: string };
+      }>(REFRESH_URL, { refreshToken });
 
       const { accessToken, refreshToken: newRefreshToken } = data.data;
 
@@ -103,7 +114,7 @@ const handleResponseError = async (error: any) => {
       processQueue(null, accessToken);
 
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-      return axios(originalRequest);
+      return apiClient(originalRequest);
     } catch (refreshError) {
       processQueue(refreshError, null);
       storeRef?.dispatch({ type: "auth/logout" });
@@ -119,5 +130,4 @@ const handleResponseError = async (error: any) => {
   return Promise.reject(error);
 };
 
-axiosInstance.interceptors.response.use((response) => response, handleResponseError);
 apiClient.interceptors.response.use((response) => response, handleResponseError);

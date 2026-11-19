@@ -58,12 +58,12 @@ export default function LoginForm() {
   const onEmailLogin = (data: LoginEmailForm) => {
     loginMutation.mutate(data, {
       onSuccess: (result) => {
-        if (result.message?.toLowerCase().includes("otp")) {
-          toast.success("OTP sent! Verify to continue.");
+        if ("verificationToken" in result.data && result.data.verificationToken) {
+          toast.success(result.message || "OTP sent! Verify to continue.");
           return;
         }
 
-        toast.success("Logged in successfully");
+        toast.success(result.message || "Logged in successfully");
         router.push("/");
       },
     });
@@ -74,13 +74,12 @@ export default function LoginForm() {
       { phone: `${countryCode}${data.phone}` },
       {
         onSuccess: (result) => {
-          if (result.message?.toLowerCase().includes("otp")) {
-            toast.success("OTP sent! Verify to continue.");
+          if ("verificationToken" in result.data && result.data.verificationToken) {
+            toast.success(result.message || "OTP sent! Verify to continue.");
             return;
           }
 
-
-          toast.success("Logged in successfully");
+          toast.success(result.message || "Logged in successfully");
           router.push("/");
         },
       }
@@ -96,7 +95,6 @@ export default function LoginForm() {
       <VerifyOtpForm
         identifier={otpIdentifier}
         purpose={otpPurpose}
-        apiUrl="/private-otp-verify"
         imgUrl="/auth/otp.png"
         onSuccess={() => {
           dispatch(clearOtpState());

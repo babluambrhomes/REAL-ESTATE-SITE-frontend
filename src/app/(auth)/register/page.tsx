@@ -59,8 +59,8 @@ export default function RegisterForm() {
 
   const onEmailRegister = (data: RegisterEmailForm) => {
     registerMutation.mutate(data, {
-      onSuccess: () => {
-        toast.success("Account created successfully!");
+      onSuccess: (result) => {
+        toast.success(result.message || "Account created successfully!");
       },
     });
   };
@@ -73,8 +73,8 @@ export default function RegisterForm() {
         phone,
       },
       {
-        onSuccess: () => {
-          toast.success("Account created! Verify your phone.");
+        onSuccess: (result) => {
+          toast.success(result.message || "Account created! Verify your phone.");
         },
       }
     );
@@ -110,7 +110,6 @@ export default function RegisterForm() {
       <VerifyOtpForm
         identifier={otpIdentifier}
         purpose={otpPurpose}
-        apiUrl="/private-otp-verify"
         imgUrl="/auth/otp.png"
         onSuccess={() => {
           dispatch(clearOtpState());
@@ -200,7 +199,6 @@ export default function RegisterForm() {
       <VerifyOtpForm
         identifier={otpIdentifier}
         purpose={otpPurpose}
-        apiUrl="/private-otp-verify"
         imgUrl="/auth/otp.png"
         onSuccess={() => {
           dispatch(clearOtpState());

@@ -9,6 +9,7 @@ import type { HeaderSidebarProps } from '@/types';
 import { HEADER_SIDEBAR } from '@/data/headerData';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { logout } from '@/store/slice/authSlice';
+import { authApi } from '@/lib/features/auth/authApi';
 import { useWishlist } from '@/lib/wishlist';
 import toast from 'react-hot-toast';
 
@@ -31,9 +32,14 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
 
   const userContact = user?.phone || user?.email || 'Signed in account';
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      const result = await authApi.logout();
+      toast.success(result.message || 'Logged out successfully');
+    } catch {
+      toast.error('Logged out locally. Server logout failed.');
+    }
     dispatch(logout());
-    toast.success('Logged out successfully');
     onClose();
   };
 

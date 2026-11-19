@@ -1,10 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { authApi } from "./authApi";
-import { setAuth, setRequiresOtp, setOtpState, setVerificationToken, clearAuth } from "@/store/slice/authSlice";
+import {
+  setAuth,
+  setRequiresOtp,
+  setOtpState,
+  setVerificationToken,
+} from "@/store/slice/authSlice";
 import { useAppDispatch } from "@/store/hooks";
-import type { AuthSuccessResponse, OtpSentResponse, ApiError } from "@/types";
 import type {
+  AuthSuccessResponse,
+  OtpSentResponse,
+  ApiError,
   RegisterRequest,
   LoginRequest,
   VerifyOtpRequest,
@@ -75,12 +82,10 @@ export function useRegisterMutation() {
 
         const identifier = variables.phone || variables.email || "";
 
-        // Keep tokens received from backend
         if (result.data) {
           dispatch(setAuth(result.data));
         }
 
-        // Then show OTP screen
         dispatch(setOtpState({ identifier, purpose }));
         dispatch(setRequiresOtp(true));
       } else if (result.data) {
