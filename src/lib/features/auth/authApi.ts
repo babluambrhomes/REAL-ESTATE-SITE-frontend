@@ -15,6 +15,13 @@ import type {
 import { apiClient } from "@/lib/axios";
 
 export const authApi = {
+  getWorkspaces: () =>
+    apiClient
+      .get<{
+        data: { workspaces: unknown[]; activeWorkspaceId: string | null };
+      }>("/auth/workspaces")
+      .then((r) => r.data.data),
+
   register: (data: RegisterRequest) =>
     apiClient
       .post<AuthSuccessResponse>("/auth/register", data)

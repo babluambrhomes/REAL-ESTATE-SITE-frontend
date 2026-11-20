@@ -2,6 +2,8 @@ import type { User } from "./auth";
 
 export interface AuthState {
   user: User | null;
+  workspaces: unknown[];
+  activeWorkspaceId: string | null;
   accessToken: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;

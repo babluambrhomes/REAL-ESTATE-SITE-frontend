@@ -1,5 +1,41 @@
 import { apiClient } from "@/lib/axios";
 
+export type SellerType = "INDIVIDUAL" | "ORGANIZATION";
+
+export const SUBMIT_URL = {
+  INDIVIDUAL: "/sellers/become-seller",
+  ORGANIZATION: "/organizations",
+} as const;
+
+export interface OnboardCategory {
+  value: string;
+  label: string;
+  slug: string;
+  description: string | null;
+  imageUrl: string | null;
+}
+
+export interface OnboardMeta {
+  sellerType: SellerType;
+  eligibility: {
+    canBecomeIndividualSeller: boolean;
+    canCreateOrganization: boolean;
+    reason: string | null;
+  };
+  categories: OnboardCategory[];
+}
+
+export type IndividualOnboardPayload = {
+  categoryId: string;
+};
+
+export type OrganizationOnboardPayload = {
+  name: string;
+  categoryId: string;
+};
+
+export type OnboardPayload = IndividualOnboardPayload | OrganizationOnboardPayload;
+
 export interface SellerOrganization {
   name: string;
   description?: string;
@@ -12,7 +48,7 @@ export interface SellerOrganization {
 
 export interface SellerProfile {
   id: string;
-  sellerType: "INDIVIDUAL" | "ORGANIZATION";
+  sellerType: SellerType;
   name?: string;
   slug?: string;
   headline?: string;
@@ -41,7 +77,7 @@ export interface SellerProfile {
 }
 
 export interface BecomeSellerInput {
-  sellerType: "INDIVIDUAL" | "ORGANIZATION";
+  sellerType: SellerType;
   name?: string;
   panNumber?: string;
   aadhaarNumber?: string;
@@ -59,27 +95,31 @@ export interface BecomeSellerInput {
 }
 
 export const sellerApi = {
-  // Get seller categories
   getCategories: () =>
     apiClient.get("/sellers/categories").then((res) => res.data),
 
-  // Apply to become a seller
+  getOnboardMeta: (sellerType: SellerType) =>
+    apiClient
+      .get<{ data: OnboardMeta }>("/sellers/onboarding-fields", {
+        params: { sellerType },
+      })
+      .then((res) => res.data.data),
+
+  submitOnboard: (sellerType: SellerType, payload: OnboardPayload) =>
+    apiClient.post(SUBMIT_URL[sellerType], payload).then((res) => res.data),
+
   becomeSeller: (data: BecomeSellerInput) =>
     apiClient.post("/sellers/become-seller", data).then((res) => res.data),
 
-  // Get current logged-in seller profile
   getMyProfile: () =>
     apiClient.get<{ success: boolean; data: SellerProfile }>("/sellers/me").then((res) => res.data),
 
-  // Update current seller profile
   updateMyProfile: (data: Partial<SellerProfile>) =>
     apiClient.put("/sellers/me", data).then((res) => res.data),
 
-  // Update seller vanity slug
   updateMySlug: (slug: string) =>
     apiClient.patch("/sellers/me/slug", { slug }).then((res) => res.data),
 
-  // Upload seller logo
   updateLogo: (formData: FormData) =>
     apiClient
       .put("/sellers/me/logo", formData, {
@@ -87,7 +127,6 @@ export const sellerApi = {
       })
       .then((res) => res.data),
 
-  // Upload seller banner cover
   updateCover: (formData: FormData) =>
     apiClient
       .put("/sellers/me/cover", formData, {
@@ -95,11 +134,9 @@ export const sellerApi = {
       })
       .then((res) => res.data),
 
-  // Get public seller/builder/broker profile by slug
   getPublicProfile: (slug: string) =>
     apiClient.get(`/sellers/${slug}`).then((res) => res.data),
 
-  // KYC documents
   getKycDocuments: () =>
     apiClient.get("/sellers/kyc/documents").then((res) => res.data),
 
