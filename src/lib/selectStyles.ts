@@ -29,7 +29,7 @@ export const headerSelectStyles: StylesConfig<
   placeholder: (base) => ({
     ...base,
     color: '#1865F2',
-    fontWeight: 600,
+    fontWeight: 500,
     fontSize: '14.5px',
     letterSpacing: '-0.01em',
     whiteSpace: 'nowrap',
@@ -38,7 +38,7 @@ export const headerSelectStyles: StylesConfig<
   singleValue: (base) => ({
     ...base,
     color: '#1865F2',
-    fontWeight: 600,
+    fontWeight: 500,
     fontSize: '14.5px',
     letterSpacing: '-0.01em',
     whiteSpace: 'nowrap',

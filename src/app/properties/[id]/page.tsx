@@ -841,7 +841,7 @@ export default function PropertyDetailsPage() {
                     setIsVideoOpen(true);
                   }}
                   className={cn(
-                    "relative h-20 sm:h-24 rounded-[14px] overflow-hidden bg-slate-900 border cursor-pointer group transition-all",
+                    "relative h-40 sm:h-48 rounded-[14px] overflow-hidden bg-slate-900 border cursor-pointer group transition-all",
                     activeImageIndex === 0 ? "border-[#1865F2] ring-2 ring-[#1865F2]/40" : "border-slate-200"
                   )}
                 >
@@ -862,7 +862,7 @@ export default function PropertyDetailsPage() {
                 <div
                   onClick={() => setActiveImageIndex(1 % images.length)}
                   className={cn(
-                    "relative h-20 sm:h-24 rounded-[14px] overflow-hidden bg-slate-100 border cursor-pointer group transition-all",
+                    "relative h-40 sm:h-48 rounded-[14px] overflow-hidden bg-slate-100 border cursor-pointer group transition-all",
                     activeImageIndex === 1 ? "border-[#1865F2] ring-2 ring-[#1865F2]/40" : "border-slate-200"
                   )}
                 >
@@ -877,7 +877,7 @@ export default function PropertyDetailsPage() {
                 {/* 3. Video Tour with Play Button */}
                 <div
                   onClick={() => setIsVideoOpen(true)}
-                  className="relative h-20 sm:h-24 rounded-[14px] overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group"
+                  className="relative h-40 sm:h-48 rounded-[14px] overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group"
                 >
                   <Image
                     src={images[2] || images[0]}
@@ -895,7 +895,7 @@ export default function PropertyDetailsPage() {
                 {/* 4. +28 Photos Overlay */}
                 <div
                   onClick={() => setIsGalleryOpen(true)}
-                  className="relative h-20 sm:h-24 rounded-[14px] overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group"
+                  className="relative h-40 sm:h-48 rounded-[14px] overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group"
                 >
                   <Image
                     src={images[3] || images[0]}

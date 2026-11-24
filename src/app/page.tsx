@@ -7,6 +7,7 @@ import { SimpleHeader } from "@/components/layout/SimpleHeader";
 import { SearchHeader } from "@/components/layout/SearchHeader";
 import { useAppSelector } from "@/store/hooks";
 import { LazySection } from "@/components/common/LazySection";
+import { cn } from "@/lib/utils";
 
 // Statically imported for immediate above-the-fold first paint
 import { HeroSlider } from "@/components/home/HeroSlider";
@@ -69,9 +70,12 @@ export default function Home() {
     let ticking = false;
 
     const checkPosition = () => {
-      if (!searchBoxRef.current) return;
-      const rect = searchBoxRef.current.getBoundingClientRect();
-      const shouldShow = rect.bottom <= 0;
+      const scrollY = window.scrollY;
+      let shouldShow = scrollY > 400;
+      if (searchBoxRef.current) {
+        const rect = searchBoxRef.current.getBoundingClientRect();
+        shouldShow = rect.bottom <= 80 || scrollY > 400;
+      }
       setShowSearchHeader((prev) => (prev !== shouldShow ? shouldShow : prev));
       ticking = false;
     };
@@ -96,22 +100,26 @@ export default function Home() {
   return (
     <>
       {/* Top Floating Simple Header */}
-      <div
-        className={`transition-opacity duration-300 ${
-          showSearchHeader ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
-        <SimpleHeader />
-      </div>
+      <SimpleHeader
+        isScrolled={showSearchHeader}
+        className={cn(
+          "transition-all duration-650 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          showSearchHeader
+            ? "pointer-events-none invisible"
+            : "pointer-events-auto visible"
+        )}
+      />
 
       {/* Scrolled Search Header */}
-      <div
-        className={`transition-opacity duration-300 ${
-          showSearchHeader ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <SearchHeader />
-      </div>
+      <SearchHeader
+        isScrolled={showSearchHeader}
+        className={cn(
+          "transition-all duration-650 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          showSearchHeader
+            ? "translate-y-0 opacity-100 pointer-events-auto visible"
+            : "-translate-y-full opacity-0 pointer-events-none invisible"
+        )}
+      />
 
       <main className="min-h-screen bg-white">
         {/* 1. Hero Section (Immediate) */}

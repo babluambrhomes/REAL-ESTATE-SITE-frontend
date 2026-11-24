@@ -173,7 +173,7 @@ export const PostPropertyHub = () => {
               y={cy - 52}
               fill="#00B368"
               fontSize="24"
-              fontWeight="800"
+              fontWeight="500"
               fontFamily="inherit"
               textAnchor="middle"
               letterSpacing="-0.02em"
@@ -187,7 +187,7 @@ export const PostPropertyHub = () => {
               y={cy - 22}
               fill="#00B368"
               fontSize="24"
-              fontWeight="800"
+              fontWeight="500"
               fontFamily="inherit"
               textAnchor="middle"
               letterSpacing="-0.02em"
@@ -290,7 +290,7 @@ export const PostPropertyHub = () => {
                 y="90"
                 fill="#0F172A"
                 fontSize="16"
-                fontWeight="700"
+                fontWeight="500"
                 fontFamily="inherit"
                 textAnchor="middle"
               >
@@ -317,7 +317,7 @@ export const PostPropertyHub = () => {
                 y="144"
                 fill="#0F172A"
                 fontSize="15.5"
-                fontWeight="700"
+                fontWeight="500"
                 fontFamily="inherit"
                 textAnchor="middle"
               >
@@ -328,7 +328,7 @@ export const PostPropertyHub = () => {
                 y="165"
                 fill="#0F172A"
                 fontSize="15.5"
-                fontWeight="700"
+                fontWeight="500"
                 fontFamily="inherit"
                 textAnchor="middle"
               >
@@ -355,7 +355,7 @@ export const PostPropertyHub = () => {
                 y="242"
                 fill="#0F172A"
                 fontSize="16"
-                fontWeight="700"
+                fontWeight="500"
                 fontFamily="inherit"
                 textAnchor="middle"
               >
@@ -382,7 +382,7 @@ export const PostPropertyHub = () => {
                 y="328"
                 fill="#0F172A"
                 fontSize="16"
-                fontWeight="700"
+                fontWeight="500"
                 fontFamily="inherit"
                 textAnchor="middle"
               >
@@ -409,7 +409,7 @@ export const PostPropertyHub = () => {
                 y="406"
                 fill="#0F172A"
                 fontSize="16"
-                fontWeight="700"
+                fontWeight="500"
                 fontFamily="inherit"
                 textAnchor="middle"
               >
