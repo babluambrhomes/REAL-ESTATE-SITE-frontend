@@ -644,7 +644,7 @@ export const PropertyCard = (props: Property) => {
   // Vertical Card Layout (Matches Screenshot 1 exact design: Compact height, soft blue bottom gradient, gentle shadow, rounded 20px)
   if (layout === "vertical") {
     return (
-      <div className="group flex flex-col justify-between rounded-[20px] border border-blue-100/40 bg-gradient-to-b from-white via-white via-[55%] to-[#EEF5FE] p-2.5 sm:p-3 shadow-[0_0_22px_rgba(37,99,235,0.16),0_6px_22px_rgba(37,99,235,0.14)] hover:shadow-[0_0_28px_rgba(37,99,235,0.22),0_8px_26px_rgba(37,99,235,0.18)] transition-all duration-300 w-full">
+      <div className="group flex flex-col justify-between rounded-[20px] border border-blue-100/40 bg-gradient-to-b from-white via-white via-[55%] to-[#EEF5FE] p-2.5 sm:p-3 transition-all duration-300 w-full">
         {/* Top Image & Floating Badges */}
         <div className="relative h-[155px] sm:h-[162px] w-full overflow-hidden rounded-[14px] bg-slate-100 shrink-0">
           <Image
@@ -829,45 +829,48 @@ export const PropertyCard = (props: Property) => {
           </div>
 
           {/* Price, Discount & View Details Button */}
-          <div className="mt-3 flex items-center justify-between gap-3 pt-1 min-w-0">
-            <div className="min-w-0 flex-1">
-              <div className="flex items-baseline flex-wrap gap-x-2 gap-y-0 leading-none">
-                <span className="text-[19px] sm:text-[20px] font-bold text-[#000000] tracking-tight whitespace-nowrap leading-none">
+          <div className="mt-2.5 pt-2 border-t border-slate-100/90 min-w-0">
+            {/* Top Row: Price on left, View Details Button on right */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-baseline flex-wrap gap-x-1.5 gap-y-0.5 leading-none">
+                <span className="text-[17px] sm:text-[18px] font-medium text-[#000000] tracking-tight whitespace-nowrap leading-none">
                   {price || "₹1.25* Cr"}
                 </span>
                 {originalPrice && (
-                  <span className="text-[12px] sm:text-[12.5px] text-[#8E9BAE] line-through font-normal whitespace-nowrap leading-none">
+                  <span className="text-[11px] sm:text-[11.5px] text-[#8E9BAE] line-through font-normal whitespace-nowrap leading-none">
                     {originalPrice}
                   </span>
                 )}
               </div>
-              <div className="mt-1.5 flex items-center gap-2 min-w-0">
-                <Image
-                  src="/icon/discount_badge.png"
-                  alt="Discount"
-                  width={56}
-                  height={56}
-                  className="w-[28px] h-[28px] sm:w-[30px] sm:h-[30px] object-contain shrink-0"
-                  unoptimized
-                />
-                <div className="min-w-0 flex flex-col justify-center">
-                  <p className="text-[12px] sm:text-[12.5px] font-bold text-[#05A579] leading-tight whitespace-nowrap">
-                    Up to 33L off
-                  </p>
-                  <span className="block text-[10px] sm:text-[10.5px] text-[#64748B] font-normal leading-tight whitespace-nowrap mt-0.5">
-                    Get upto 13% discount on this property
-                  </span>
-                </div>
-              </div>
+
+              <Link
+                href={propertyUrl}
+                className="inline-flex items-center justify-center gap-1 h-[30px] sm:h-[32px] rounded-[10px] bg-[#1865F2] hover:bg-[#1250C4] px-3 text-[11.5px] sm:text-[12px] font-medium text-white shadow-xs transition-all hover:gap-1.5 cursor-pointer shrink-0 whitespace-nowrap"
+              >
+                <span>View Details</span>
+                <ArrowRight className="h-3 w-3 stroke-[2.5]" />
+              </Link>
             </div>
 
-            <Link
-              href={propertyUrl}
-              className="inline-flex items-center justify-center gap-1.5 h-[42px] sm:h-[44px] rounded-[14px] bg-[#1865F2] hover:bg-[#1250C4] px-4.5 sm:px-5 text-[13px] sm:text-[13.5px] font-bold text-white shadow-xs transition-all hover:gap-2 cursor-pointer shrink-0 whitespace-nowrap"
-            >
-              <span>View Details</span>
-              <ArrowRight className="h-4 w-4 stroke-[2.5]" />
-            </Link>
+            {/* Bottom Row: Full-width Discount Badge & Offer Details (100% visible, never overlapping) */}
+            <div className="mt-1.5 flex items-center gap-1.5 min-w-0">
+              <Image
+                src="/icon/discount_badge.png"
+                alt="Discount"
+                width={56}
+                height={56}
+                className="w-[22px] h-[22px] sm:w-[24px] sm:h-[24px] object-contain shrink-0"
+                unoptimized
+              />
+              <div className="min-w-0 flex flex-col justify-center">
+                <p className="text-[11px] sm:text-[11.5px] font-medium text-[#05A579] leading-tight">
+                  Up to 33L off
+                </p>
+                <span className="block text-[9.5px] sm:text-[10px] text-[#64748B] font-normal leading-tight mt-0.5">
+                  Get upto 13% discount on this property
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 

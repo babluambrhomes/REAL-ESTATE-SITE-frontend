@@ -8,11 +8,20 @@
   --color-black: #000000;
   --font-sans: var(--font-poppins), sans-serif;
   --font-poppins: var(--font-poppins), sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
   --font-weight-semibold: 500;
+  --font-weight-bold: 500;
+  --font-weight-extrabold: 500;
+  --font-weight-black: 500;
 }
 
 *, *::before, *::after {
   font-family: var(--font-poppins), sans-serif !important;
+}
+
+b, strong, h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
 }
 
 html {

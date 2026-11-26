@@ -85,7 +85,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 border-[#00D1FF] p-0.5 bg-white">
+                    <div className="relative">
                       {user?.person?.avatarUrl ? (
                         <Image
                           src={user.person.avatarUrl}
@@ -405,13 +405,13 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
           </Link>
 
           {/* 7. Download Roofin app Card */}
-          <div className="rounded-2xl bg-[#EBF2FE] p-3.5 flex items-center justify-between gap-3 shadow-2xs">
+          {/* <div className="rounded-2xl bg-[#EBF2FE] p-3.5 flex items-center justify-between gap-3 shadow-2xs">
             <div className="space-y-2">
               <h5 className="text-xs font-black text-slate-900 leading-tight">
                 Download Roofin app
               </h5>
               <div className="space-y-1.5">
-                {/* App Store Badge */}
+                
                 <a
                   href="#"
                   className="flex items-center gap-2 px-2.5 py-1 bg-black text-white rounded-md hover:bg-slate-800 transition-colors w-[130px] shadow-2xs"
@@ -425,7 +425,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
                   </div>
                 </a>
 
-                {/* Google Play Badge */}
+                
                 <a
                   href="#"
                   className="flex items-center gap-2 px-2.5 py-1 bg-black text-white rounded-md hover:bg-slate-800 transition-colors w-[130px] shadow-2xs"
@@ -441,7 +441,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
               </div>
             </div>
 
-            {/* Crisp QR Code */}
+          
             <div className="w-[70px] h-[70px] rounded-xl bg-white p-1.5 border border-slate-200/90 shadow-xs flex items-center justify-center shrink-0">
               <svg className="w-full h-full text-slate-900" viewBox="0 0 100 100" fill="currentColor">
                 <rect x="2" y="2" width="28" height="28" rx="3" fill="#0B132B" />
@@ -468,7 +468,7 @@ export const HeaderSidebar = ({ open, onClose }: HeaderSidebarProps) => {
                 <rect x="74" y="74" width="16" height="16" fill="#0B132B" />
               </svg>
             </div>
-          </div>
+          </div> */}
 
           {/* 8. Social Links ("Fallow on") */}
           <div className="space-y-2 pt-1">
