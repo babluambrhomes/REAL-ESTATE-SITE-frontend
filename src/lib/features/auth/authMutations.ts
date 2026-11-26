@@ -6,15 +6,16 @@ import {
   setRequiresOtp,
   setOtpState,
   setVerificationToken,
+  clearOtpState,
 } from "@/store/slice/authSlice";
 import { useAppDispatch } from "@/store/hooks";
 import type {
-  AuthSuccessResponse,
-  OtpSentResponse,
+  AuthResponse,
   ApiError,
   RegisterRequest,
   LoginRequest,
   VerifyOtpRequest,
+  PublicVerifyOtpRequest,
   ForgotPasswordRequest,
   ResetPasswordRequest,
 } from "@/types";
@@ -25,13 +26,11 @@ function getErrorMessage(error: unknown, fallback: string): string {
   return axiosError.response?.data?.message || fallback;
 }
 
-function isOtpSentResponse(
-  response: AuthSuccessResponse | OtpSentResponse
-): response is OtpSentResponse {
-  return (
-    response.message?.toLowerCase().includes("otp") ||
-    response.message?.toLowerCase().includes("verify")
-  );
+function getVerificationToken(response: AuthResponse): string | null {
+  const data = response.data;
+  return "verificationToken" in data && data.verificationToken
+    ? data.verificationToken
+    : null;
 }
 
 export function useLoginMutation() {
@@ -40,22 +39,18 @@ export function useLoginMutation() {
   return useMutation({
     mutationFn: (data: LoginRequest) => authApi.login(data),
     onSuccess: (result, variables) => {
-      if (isOtpSentResponse(result)) {
-        const identifier = variables.email || variables.phone || "";
+      const verificationToken = getVerificationToken(result);
 
-        if ("verificationToken" in result.data && result.data.verificationToken) {
-          dispatch(setVerificationToken(result.data.verificationToken));
-        }
-
+      if (verificationToken) {
+        dispatch(setVerificationToken(verificationToken));
         dispatch(
           setOtpState({
-            identifier,
-            purpose: "PHONE_VERIFICATION",
+            identifier: variables.phone || variables.email || "",
+            purpose: variables.phone ? "PHONE_VERIFICATION" : "EMAIL_VERIFICATION",
           })
         );
-
         dispatch(setRequiresOtp(true));
-      } else if (result.data) {
+      } else if ("accessToken" in result.data && result.data.accessToken) {
         dispatch(setAuth(result.data));
       }
     },
@@ -72,23 +67,18 @@ export function useRegisterMutation() {
     mutationFn: (data: RegisterRequest) => authApi.register(data),
     onSuccess: (result, variables) => {
       const isGoogleAuth = !!variables.FbTokenId || !!variables.accessToken;
-      const requiresVerification =
-        !isGoogleAuth && (result.message?.toLowerCase().includes("otp") ?? false);
+      const verificationToken = getVerificationToken(result);
 
-      if (requiresVerification) {
-        const purpose = variables.phone
-          ? "PHONE_VERIFICATION"
-          : "EMAIL_VERIFICATION";
-
-        const identifier = variables.phone || variables.email || "";
-
-        if (result.data) {
-          dispatch(setAuth(result.data));
-        }
-
-        dispatch(setOtpState({ identifier, purpose }));
+      if (!isGoogleAuth && verificationToken) {
+        dispatch(setVerificationToken(verificationToken));
+        dispatch(
+          setOtpState({
+            identifier: variables.phone || variables.email || "",
+            purpose: variables.phone ? "PHONE_VERIFICATION" : "EMAIL_VERIFICATION",
+          })
+        );
         dispatch(setRequiresOtp(true));
-      } else if (result.data) {
+      } else if ("accessToken" in result.data && result.data.accessToken) {
         dispatch(setAuth(result.data));
       }
     },
@@ -106,8 +96,18 @@ export function useVerifyOtpMutation() {
     onSuccess: (result) => {
       if (result.data) {
         dispatch(setAuth(result.data));
+        dispatch(clearOtpState());
       }
     },
+    onError: (error) => {
+      toast.error(getErrorMessage(error, "OTP verification failed"));
+    },
+  });
+}
+
+export function useVerifyPublicOtpMutation() {
+  return useMutation({
+    mutationFn: (data: PublicVerifyOtpRequest) => authApi.verifyPublicOtp(data),
     onError: (error) => {
       toast.error(getErrorMessage(error, "OTP verification failed"));
     },
@@ -127,7 +127,7 @@ export function useResetPasswordMutation() {
   return useMutation({
     mutationFn: (data: ResetPasswordRequest) => authApi.resetPassword(data),
     onError: (error) => {
-      toast.error(getErrorMessage(error, "Password reset failed"));
+      toast.error(getErrorMessage(error, "Failed to reset password"));
     },
   });
 }

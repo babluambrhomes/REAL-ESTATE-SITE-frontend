@@ -19,7 +19,6 @@ export interface LoginRequest {
 }
 
 export interface VerifyOtpRequest {
-  identifier: string;
   code: string;
   purpose:
     | "EMAIL_VERIFICATION"
@@ -29,6 +28,8 @@ export interface VerifyOtpRequest {
     | "LOGIN_PASSWORDLESS"
     | "ACCOUNT_DELETION";
 }
+
+export type PublicVerifyOtpRequest = VerifyOtpRequest & { identifier: string };
 
 export interface RefreshRequest {
   refreshToken: string;
@@ -107,15 +108,22 @@ export interface AuthSuccessResponse {
   success: true;
 }
 
-/**
- * Phone login OTP response.
- * Backend returns verificationToken before OTP verification.
- */
+export type RegisterResponse = AuthSuccessResponse | OtpSentResponse;
 
+export type AuthResponse = AuthSuccessResponse | OtpSentResponse;
+
+/**
+ * OTP-first response for phone/email signup and login.
+ * Bearer verificationToken is used with /auth/private-otp-verify.
+ */
 export interface OtpSentResponse {
   statusCode: number;
   data: {
-    verificationToken: string | null;
+    message?: string;
+    requiresOtp?: boolean;
+    verificationToken: string;
+    status?: "PENDING" | "ACTIVE" | "SUSPENDED" | "DEACTIVATED";
+    user?: Partial<User> | null;
   };
   message: string;
   success: true;

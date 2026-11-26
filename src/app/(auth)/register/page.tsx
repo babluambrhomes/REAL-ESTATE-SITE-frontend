@@ -37,17 +37,17 @@ export default function RegisterForm() {
   const otpIdentifier = useAppSelector((s) => s.auth.otpIdentifier);
   const otpPurpose = useAppSelector((s) => s.auth.otpPurpose);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.replace("/");
-    }
-  }, [isAuthenticated, router]);
-
   const [mode, setMode] = useState<RegisterMode>("phone");
   const [showOptionalEmail, setShowOptionalEmail] = useState(false);
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+91");
+
+  useEffect(() => {
+    if (isAuthenticated && !requiresOtp && !showOptionalEmail) {
+      router.replace("/");
+    }
+  }, [isAuthenticated, requiresOtp, showOptionalEmail, router]);
 
   const emailForm = useForm<RegisterEmailForm>({
     resolver: zodResolver(registerEmailSchema),
@@ -194,20 +194,6 @@ export default function RegisterForm() {
     );
   }
 
-  if (requiresOtp && otpIdentifier && otpPurpose) {
-    return (
-      <VerifyOtpForm
-        identifier={otpIdentifier}
-        purpose={otpPurpose}
-        imgUrl="/auth/otp.png"
-        onSuccess={() => {
-          dispatch(clearOtpState());
-          router.push("/contactupdate");
-        }}
-      />
-    );
-  }
-
   return (
     <div
       className="relative flex w-full  flex-col-reverse items-center justify-center gap-8 lg:flex-row lg:items-center"
@@ -229,7 +215,7 @@ export default function RegisterForm() {
               Welcome to Roofin
             </h1>
             <p className="mt-1.5 text-[12px] text-black">
-              India's trusted property platform for buyers, sellers, builders, and agents.
+              India&apos;s trusted property platform for buyers, sellers, builders, and agents.
             </p>
           </div>
 

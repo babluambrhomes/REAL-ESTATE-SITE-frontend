@@ -38,10 +38,10 @@ export default function LoginForm() {
   const otpPurpose = useAppSelector((s) => s.auth.otpPurpose);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !requiresOtp) {
       router.replace("/");
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, requiresOtp, router]);
 
   const [mode, setMode] = useState<LoginMode>("phone");
   const [showPassword, setShowPassword] = useState(false);

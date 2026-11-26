@@ -39,7 +39,7 @@ export function VerifyOtpForm({
   onSuccess,
   onResend,
   resendDelay = DEFAULT_RESEND_DELAY,
-  imgUrl='/auth/otp.png'
+  imgUrl='/auth/otp.png',
 }: VerifyOtpFormProps) {
   const [otp, setOtp] = useState("");
   const [seconds, setSeconds] = useState(resendDelay);
@@ -80,7 +80,6 @@ export function VerifyOtpForm({
     setIsPending(true);
     verifyMutation.mutate(
       {
-        identifier,
         code: data.code,
         purpose: purpose as VerifyOtpRequest["purpose"],
       },
@@ -118,6 +117,7 @@ export function VerifyOtpForm({
               <span className="text-primary hover:text-primary/80">
                 {purposeLabel}
               </span>
+              {identifier ? ` - ${identifier}` : ""}
             </p>
           </div>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">

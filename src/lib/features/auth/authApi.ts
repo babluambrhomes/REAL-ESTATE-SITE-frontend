@@ -1,14 +1,16 @@
 import type {
   RegisterRequest,
+  RegisterResponse,
   LoginRequest,
+  AuthResponse,
   VerifyOtpRequest,
+  PublicVerifyOtpRequest,
   RefreshRequest,
   ForgotPasswordRequest,
   ResetPasswordRequest,
   UpdateContactRequest,
   UpdatePasswordRequest,
   AuthSuccessResponse,
-  OtpSentResponse,
   MessageResponse,
   RefreshResponse,
 } from "@/types";
@@ -24,17 +26,22 @@ export const authApi = {
 
   register: (data: RegisterRequest) =>
     apiClient
-      .post<AuthSuccessResponse>("/auth/register", data)
+      .post<RegisterResponse>("/auth/register", data)
       .then((r) => r.data),
 
   login: (data: LoginRequest) =>
     apiClient
-      .post<AuthSuccessResponse | OtpSentResponse>("/auth/login", data)
+      .post<AuthResponse>("/auth/login", data)
       .then((r) => r.data),
 
   verifyOtp: (data: VerifyOtpRequest) =>
     apiClient
-      .post<AuthSuccessResponse | MessageResponse>("/auth/private-otp-verify", data)
+      .post<AuthSuccessResponse>("/auth/private-otp-verify", data)
+      .then((r) => r.data),
+
+  verifyPublicOtp: (data: PublicVerifyOtpRequest) =>
+    apiClient
+      .post<MessageResponse>("/auth/public-otp-verify", data)
       .then((r) => r.data),
 
   refresh: (data: RefreshRequest) =>
